@@ -24,6 +24,26 @@ raylib.CloseWindow
 ```
 ![VBScript Hello World](https://github.com/Algia71/raylib-COM/blob/master/Images/hello-world-vbs.png?raw=true)
 
+## Hello World (JScript)
+
+```JScript
+// Hello world
+//
+raylib = new ActiveXObject("RayLib");
+colorBg = raylib.CreateColor(245, 245, 245, 255); // RAYWHITE
+colorFg = raylib.CreateColor(112, 31, 126, 255); // DARKPURPLE
+raylib.SetTargetFPS(60);
+raylib.InitWindow(850, 200, "Hello RayLib from JScript");
+while (!raylib.WindowShouldClose()) {
+	raylib.BeginDrawing();
+	raylib.ClearBackground(colorBg);
+	raylib.DrawText("Hello, World!", 300, 80, 40, colorFg);
+	raylib.EndDrawing();
+}
+raylib.CloseWindow();
+```
+![VBScript Hello World](https://github.com/Algia71/raylib-COM/blob/master/Images/hello-world-js.png?raw=true)
+
 ## Status
 *The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
 
