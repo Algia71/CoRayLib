@@ -1,0 +1,26 @@
+# A Windows COM raylib wrapper
+
+This is a [Windows Component Object Model (COM)](https://en.wikipedia.org/wiki/Component_Object_Model) **wrapper** of the [raylib](https://github.com/raysan5/raylib) library.
+
+Through this wrapper, **raylib** functions and structures can be used by any **Windows COM client**, such as [Windows Script Host (WSH)](https://en.wikipedia.org/wiki/Windows_Script_Host) and [Visual Basic For Applications (VBA)](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications). For instance, you can write [VBScript](https://en.wikipedia.org/wiki/VBScript) and [JScript](https://en.wikipedia.org/wiki/JScript) programs (.vbs and .js text files) to create graphical animations / games / ... with raylib.
+
+## Status
+*The wrapper covers only a (small) part of the full raylib APIs. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
+
+## raylib version
+I wrapped **raylib version 6.0** (23 April 2026). raylib.lib binary files (debug and release versions) are included precompiled within the project.
+
+## Visual Studio version
+Project files were made with the Community Version **2022** (64-bit, v143), version 17.14.37 (July 2026).
+
+# How to build
+It should be simple: open the solution in Visual Studio, choose **Debug** or **Release** and press **F7**. Please ensure that the **x64** platform is selected. The final output of the build process is the **CoRayLib.dll** located in the `x64\Debug` or `x64\Release` folder.
+
+# How to install
+Copy **CoRayLib.dll** to a local directory (e.g. `C:\coraylib`), open a terminal with administrative privileges (e.g. **Windows PowerShell**) and then run the command `regsvr32 c:\coraylib\CoRayLib.dll` .
+
+# How to test
+Double click on one of the .vbs or .js scripts provided in the Scripts folder.  
+
+# How to uninstall
+Open a terminal with administrative privileges (e.g. **Windows PowerShell**) and run the command `regsvr32 /u c:\coraylib\CoRayLib.dll` . Then simply delete **CoRayLib.dll**. 
