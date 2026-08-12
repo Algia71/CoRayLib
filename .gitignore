@@ -17,8 +17,6 @@
 mono_crash.*
 
 # Build results
-!RayLib/x64/Debug/raylib.lib
-!RayLib/x64/Release/raylib.lib
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

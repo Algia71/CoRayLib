@@ -113,7 +113,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>CoRayLib.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)RayLib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)RayLib\lib_$(Configuration)_$(Platform)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;winmm.lib;comsuppwd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -132,7 +132,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>CoRayLib.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)RayLib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)RayLib\lib_$(Configuration)_$(Platform)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;winmm.lib;comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
