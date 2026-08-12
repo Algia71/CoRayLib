@@ -4,6 +4,23 @@ This is a [Windows Component Object Model (COM)](https://en.wikipedia.org/wiki/C
 
 Through this wrapper, **raylib** functions and structures can be used by any **Windows COM client**, such as [Windows Script Host (WSH)](https://en.wikipedia.org/wiki/Windows_Script_Host) and [Visual Basic For Applications (VBA)](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications). For instance, you can write [VBScript](https://en.wikipedia.org/wiki/VBScript) and [JScript](https://en.wikipedia.org/wiki/JScript) programs (.vbs and .js text files) to create graphical animations / games / ... with raylib.
 
+## Hello World (VBScript)
+
+    ' Hello world
+    '
+    Set raylib = CreateObject("RayLib")
+    Set colorBg = raylib.CreateColor(245, 245, 245, 255) 'RAYWHITE
+    Set colorFg = raylib.CreateColor(112, 31, 126, 255) 'DARKPURPLE
+    raylib.SetTargetFPS 60
+    raylib.InitWindow 800, 600, "Hello RayLib from VBScript"
+    While Not raylib.WindowShouldClose
+    	raylib.BeginDrawing
+    	raylib.ClearBackground colorBg
+    	raylib.DrawText "Hello, World!", 280, 280, 40, colorFg
+    	raylib.EndDrawing
+    Wend
+    raylib.CloseWindow
+
 ## Status
 *The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
 
