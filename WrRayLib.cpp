@@ -1,0 +1,814 @@
+// WrRayLib.cpp
+//
+
+#include "WrRayLib.h"
+#include <raylib.h>
+
+
+// non-RayLib transformation functions (helpers)
+
+static inline Color wr2rl_color(
+	WrRayLibColor color
+)
+{
+	return { color.r, color.g, color.b, color.a };
+}
+
+static inline Vector2 wr2rl_vector2(
+	WrRayLibVector2 vector
+)
+{
+	return { vector.x, vector.y };
+}
+
+static inline Vector3 wr2rl_vector3(
+	WrRayLibVector3 vector
+)
+{
+	return { vector.x, vector.y, vector.z };
+}
+
+static inline Vector4 wr2rl_vector4(
+	WrRayLibVector4 vector
+)
+{
+	return { vector.x, vector.y, vector.z, vector.w };
+}
+
+static inline Rectangle wr2rl_rect(
+	WrRayLibRectangle rect
+)
+{
+	return { rect.x, rect.y, rect.width, rect.height };
+}
+
+static inline WrRayLibVector2 rl2wr_vector2(
+	Vector2 vector
+)
+{
+	return { vector.x, vector.y };
+}
+
+
+
+// Window-related functions
+
+void WrRayLib::InitWindow(
+	int width,
+	int height,
+	const char* title
+)
+{
+	::InitWindow(width, height, title);
+}
+void WrRayLib::CloseWindow(
+	void
+)
+{
+	::CloseWindow();
+}
+bool WrRayLib::WindowShouldClose(
+	void
+)
+{
+	return ::WindowShouldClose();
+}
+bool WrRayLib::IsWindowReady(
+	void
+)
+{
+	return ::IsWindowReady();
+}
+bool WrRayLib::IsWindowFullscreen(
+	void
+)
+{
+	return ::IsWindowFullscreen();
+}
+bool WrRayLib::IsWindowHidden(
+	void
+)
+{
+	return ::IsWindowHidden();
+}
+bool WrRayLib::IsWindowMinimized(
+	void
+)
+{
+	return ::IsWindowMinimized();
+}
+bool WrRayLib::IsWindowMaximized(
+	void
+)
+{
+	return ::IsWindowMaximized();
+}
+bool WrRayLib::IsWindowFocused(
+	void
+)
+{
+	return ::IsWindowFocused();
+}
+bool WrRayLib::IsWindowResized(
+	void
+)
+{
+	return ::IsWindowResized();
+}
+
+int WrRayLib::GetScreenWidth(
+	void
+)
+{
+	return ::GetScreenWidth();
+}
+int WrRayLib::GetScreenHeight(
+	void
+)
+{
+	return ::GetScreenHeight();
+}
+int WrRayLib::GetRenderWidth(
+	void
+)
+{
+	return ::GetRenderWidth();
+}
+int WrRayLib::GetRenderHeight(
+	void
+)
+{
+	return ::GetRenderHeight();
+}
+int WrRayLib::GetMonitorCount(
+	void
+)
+{
+	return ::GetMonitorCount();
+}
+int WrRayLib::GetCurrentMonitor(
+	void
+)
+{
+	return ::GetCurrentMonitor();
+}
+
+
+// Cursor-related functions
+
+void WrRayLib::ShowCursor(
+	void
+)
+{
+	::ShowCursor();
+}
+void WrRayLib::HideCursor(
+	void
+)
+{
+	::HideCursor();
+}
+bool WrRayLib::IsCursorHidden(
+	void
+)
+{
+	return ::IsCursorHidden();
+}
+void WrRayLib::EnableCursor(
+	void
+)
+{
+	::EnableCursor();
+}
+void WrRayLib::DisableCursor(
+	void
+)
+{
+	::DisableCursor();
+}
+bool WrRayLib::IsCursorOnScreen(
+	void
+)
+{
+	return ::IsCursorOnScreen();
+}
+
+// Drawing-related functions
+
+void WrRayLib::ClearBackground(
+	WrRayLibColor color
+)
+{
+	::ClearBackground(
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::BeginDrawing(
+	void
+)
+{
+	::BeginDrawing();
+}
+void WrRayLib::EndDrawing(
+	void
+)
+{
+	::EndDrawing();
+}
+
+
+// Timing-related functions
+
+void WrRayLib::SetTargetFPS(
+	int fps
+)
+{
+	::SetTargetFPS(fps);
+}
+float WrRayLib::GetFrameTime(
+	void
+)
+{
+	return ::GetFrameTime();
+}
+double WrRayLib::GetTime(
+	void
+)
+{
+	return ::GetTime();
+}
+int WrRayLib::GetFPS(
+	void
+)
+{
+	return ::GetFPS();
+}
+
+
+// Random values generation functions
+
+void WrRayLib::SetRandomSeed(
+	unsigned int seed
+)
+{
+	return ::SetRandomSeed(seed);
+}
+int WrRayLib::GetRandomValue(
+	int min,
+	int max
+)
+{
+	return ::GetRandomValue(min, max);
+}
+
+
+// Input-related functions: keyboard
+
+bool WrRayLib::IsKeyPressed(
+	int key
+)
+{
+	return ::IsKeyPressed(key);
+}
+bool WrRayLib::IsKeyPressedRepeat(
+	int key
+)
+{
+	return ::IsKeyPressedRepeat(key);
+}
+bool WrRayLib::IsKeyDown(
+	int key
+)
+{
+	return ::IsKeyDown(key);
+}
+bool WrRayLib::IsKeyReleased(
+	int key
+)
+{
+	return ::IsKeyReleased(key);
+}
+bool WrRayLib::IsKeyUp(
+	int key
+)
+{
+	return ::IsKeyUp(key);
+}
+int WrRayLib::GetKeyPressed(
+	void
+)
+{
+	return ::GetKeyPressed();
+}
+int WrRayLib::GetCharPressed(
+	void
+)
+{
+	return ::GetCharPressed();
+}
+void WrRayLib::SetExitKey(
+	int key
+)
+{
+	return ::SetExitKey(key);
+}
+
+
+// Input-related functions: mouse
+
+bool WrRayLib::IsMouseButtonPressed(
+	int button
+)
+{
+	return ::IsMouseButtonPressed(button);
+}
+bool WrRayLib::IsMouseButtonDown(
+	int button
+)
+{
+	return ::IsMouseButtonDown(button);
+}
+bool WrRayLib::IsMouseButtonReleased(
+	int button
+)
+{
+	return ::IsMouseButtonReleased(button);
+}
+bool WrRayLib::IsMouseButtonUp(
+	int button
+)
+{
+	return ::IsMouseButtonUp(button);
+}
+int WrRayLib::GetMouseX(
+	void
+)
+{
+	return ::GetMouseX();
+}
+int WrRayLib::GetMouseY(
+	void
+)
+{
+	return ::GetMouseY();
+}
+WrRayLibVector2 WrRayLib::GetMousePosition(
+	void
+)
+{
+	return rl2wr_vector2(::GetMousePosition());
+}
+WrRayLibVector2 WrRayLib::GetMouseDelta(
+	void
+)
+{
+	return rl2wr_vector2(::GetMouseDelta());
+}
+void WrRayLib::SetMousePosition(
+	int x,
+	int y
+)
+{
+	return ::SetMousePosition(x, y);
+}
+void WrRayLib::SetMouseOffset(
+	int offsetX,
+	int offsetY
+)
+{
+	return ::SetMouseOffset(offsetX, offsetY);
+}
+void WrRayLib::SetMouseScale(
+	float scaleX,
+	float scaleY
+)
+{
+	return ::SetMouseScale(scaleX, scaleY);
+}
+float WrRayLib::GetMouseWheelMove(
+	void
+)
+{
+	return ::GetMouseWheelMove();
+}
+WrRayLibVector2 WrRayLib::GetMouseWheelMoveV(
+	void
+)
+{
+	return rl2wr_vector2(::GetMouseWheelMoveV());
+}
+void WrRayLib::SetMouseCursor(
+	int cursor
+)
+{
+	return ::SetMouseCursor(cursor);
+}
+
+
+// Basic shapes drawing functions
+
+void WrRayLib::DrawPixel(
+	int posX,
+	int posY,
+	WrRayLibColor color
+)
+{
+	::DrawPixel(
+		posX,
+		posY,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawPixelV(
+	WrRayLibVector2 position,
+	WrRayLibColor color
+)
+{
+	::DrawPixelV(
+		wr2rl_vector2(position),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawLine(
+	int startPosX,
+	int startPosY,
+	int endPosX,
+	int endPosY,
+	WrRayLibColor color
+)
+{
+	::DrawLine(
+		startPosX,
+		startPosY,
+		endPosX,
+		endPosY,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawLineV(
+	WrRayLibVector2 startPos,
+	WrRayLibVector2 endPos,
+	WrRayLibColor color
+)
+{
+	::DrawLineV(
+		wr2rl_vector2(startPos),
+		wr2rl_vector2(endPos),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawLineEx(
+	WrRayLibVector2 startPos,
+	WrRayLibVector2 endPos,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawLineEx(
+		wr2rl_vector2(startPos),
+		wr2rl_vector2(endPos),
+		thick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCircle(
+	int centerX,
+	int centerY,
+	float radius,
+	WrRayLibColor color
+)
+{
+	::DrawCircle(
+		centerX,
+		centerY,
+		radius,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCircleV(
+	WrRayLibVector2 center,
+	float radius,
+	WrRayLibColor color
+)
+{
+	::DrawCircleV(
+		wr2rl_vector2(center),
+		radius,
+		wr2rl_color(color)
+	);
+}
+
+void WrRayLib::DrawCircleLines(
+	int centerX,
+	int centerY,
+	float radius,
+	WrRayLibColor color
+)
+{
+	::DrawCircleLines(
+		centerX,
+		centerY,
+		radius,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCircleLinesV(
+	WrRayLibVector2 center,
+	float radius,
+	WrRayLibColor color
+)
+{
+	::DrawCircleLinesV(
+		wr2rl_vector2(center),
+		radius,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawEllipse(
+	int centerX,
+	int centerY,
+	float radiusH,
+	float radiusV,
+	WrRayLibColor color
+)
+{
+	::DrawEllipse(
+		centerX,
+		centerY,
+		radiusH,
+		radiusV,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawEllipseV(
+	WrRayLibVector2 center,
+	float radiusH,
+	float radiusV,
+	WrRayLibColor color
+)
+{
+	::DrawEllipseV(
+		wr2rl_vector2(center),
+		radiusH,
+		radiusV,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawEllipseLines(
+	int centerX,
+	int centerY,
+	float radiusH,
+	float radiusV,
+	WrRayLibColor color
+)
+{
+	::DrawEllipseLines(
+		centerX,
+		centerY,
+		radiusH,
+		radiusV,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawEllipseLinesV(
+	WrRayLibVector2 center,
+	float radiusH,
+	float radiusV,
+	WrRayLibColor color
+)
+{
+	::DrawEllipseLinesV(
+		wr2rl_vector2(center),
+		radiusH,
+		radiusV,
+		wr2rl_color(color)
+	);
+}
+
+void WrRayLib::DrawRectangle(
+	int posX,
+	int posY,
+	int width,
+	int height,
+	WrRayLibColor color
+)
+{
+	::DrawRectangle(
+		posX,
+		posY,
+		width,
+		height,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleV(
+	WrRayLibVector2 position,
+	WrRayLibVector2 size,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleV(
+		wr2rl_vector2(position),
+		wr2rl_vector2(size),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleRec(
+	WrRayLibRectangle rec,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleRec(
+		wr2rl_rect(rec),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawTriangle(
+	WrRayLibVector2 v1,
+	WrRayLibVector2 v2,
+	WrRayLibVector2 v3,
+	WrRayLibColor color
+)
+{
+	::DrawTriangle(
+		wr2rl_vector2(v1),
+		wr2rl_vector2(v2),
+		wr2rl_vector2(v3),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawTriangleLines(
+	WrRayLibVector2 v1,
+	WrRayLibVector2 v2,
+	WrRayLibVector2 v3,
+	WrRayLibColor color
+)
+{
+	::DrawTriangleLines(
+		wr2rl_vector2(v1),
+		wr2rl_vector2(v2),
+		wr2rl_vector2(v3),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawPoly(
+	WrRayLibVector2 center,
+	int sides,
+	float radius,
+	float rotation,
+	WrRayLibColor color
+)
+{
+	::DrawPoly(
+		wr2rl_vector2(center),
+		sides,
+		radius,
+		rotation,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawPolyLines(
+	WrRayLibVector2 center,
+	int sides,
+	float radius,
+	float rotation,
+	WrRayLibColor color
+)
+{
+	::DrawPolyLines(
+		wr2rl_vector2(center),
+		sides,
+		radius,
+		rotation,
+		wr2rl_color(color)
+	);
+}
+
+// Basic shapes collision detection functions
+bool WrRayLib::CheckCollisionRecs(
+	WrRayLibRectangle rec1,
+	WrRayLibRectangle rec2
+)
+{
+	return ::CheckCollisionRecs(
+		wr2rl_rect(rec1),
+		wr2rl_rect(rec2)
+	);
+}
+bool WrRayLib::CheckCollisionCircles(
+	WrRayLibVector2 center1,
+	float radius1,
+	WrRayLibVector2 center2,
+	float radius2
+)
+{
+	return ::CheckCollisionCircles(
+		wr2rl_vector2(center1),
+		radius1,
+		wr2rl_vector2(center2),
+		radius2
+	);
+}
+bool WrRayLib::CheckCollisionCircleRec(
+	WrRayLibVector2 center,
+	float radius,
+	WrRayLibRectangle rec
+)
+{
+	return ::CheckCollisionCircleRec(
+		wr2rl_vector2(center),
+		radius,
+		wr2rl_rect(rec)
+	);
+}
+bool WrRayLib::CheckCollisionCircleLine(
+	WrRayLibVector2 center,
+	float radius,
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2
+)
+{
+	return ::CheckCollisionCircleLine(
+		wr2rl_vector2(center),
+		radius,
+		wr2rl_vector2(p1),
+		wr2rl_vector2(p2)
+	);
+}
+bool WrRayLib::CheckCollisionPointRec(
+	WrRayLibVector2 point,
+	WrRayLibRectangle rec
+)
+{
+	return ::CheckCollisionPointRec(
+		wr2rl_vector2(point),
+		wr2rl_rect(rec)
+	);
+}
+bool WrRayLib::CheckCollisionPointCircle(
+	WrRayLibVector2 point,
+	WrRayLibVector2 center,
+	float radius
+)
+{
+	return ::CheckCollisionPointCircle(
+		wr2rl_vector2(point),
+		wr2rl_vector2(center),
+		radius
+	);
+}
+bool WrRayLib::CheckCollisionPointTriangle(
+	WrRayLibVector2 point,
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	WrRayLibVector2 p3
+)
+{
+	return ::CheckCollisionPointTriangle(
+		wr2rl_vector2(point),
+		wr2rl_vector2(p1),
+		wr2rl_vector2(p2),
+		wr2rl_vector2(p3)
+	);
+}
+bool WrRayLib::CheckCollisionPointLine(
+	WrRayLibVector2 point,
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	int threshold
+)
+{
+	return ::CheckCollisionPointLine(
+		wr2rl_vector2(point),
+		wr2rl_vector2(p1),
+		wr2rl_vector2(p2),
+		threshold
+	);
+}
+
+
+// Text drawing functions
+
+void WrRayLib::DrawFPS(
+	int posX,
+	int posY
+)
+{
+	::DrawFPS(posX, posY);
+}
+void WrRayLib::DrawText(
+	const char* text,
+	int posX,
+	int posY,
+	int fontsize,
+	WrRayLibColor color
+)
+{
+	::DrawText(
+		text,
+		posX,
+		posY,
+		fontsize,
+		wr2rl_color(color)
+	);
+}

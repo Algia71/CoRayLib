@@ -1,0 +1,396 @@
+// CoRayLib.idl
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+[
+    object,
+    dual,
+    uuid(3961290B-48A8-4ABD-8F8F-7EC13E936E49),
+    pointer_default(unique)
+]
+interface IRayLibColor : IDispatch
+{
+    [id(1), propget] HRESULT Red([out, retval] long* pval);
+    [id(1), propput] HRESULT Red([in] long val);
+    [id(2), propget] HRESULT Green([out, retval] long* pval);
+    [id(2), propput] HRESULT Green([in] long val);
+    [id(3), propget] HRESULT Blue([out, retval] long* pval);
+    [id(3), propput] HRESULT Blue([in] long val);
+    [id(4), propget] HRESULT Alpha([out, retval] long* pval);
+    [id(4), propput] HRESULT Alpha([in] long val);
+}
+
+[
+    object,
+    dual,
+    uuid(55BECA04-F6BB-4A63-8B7C-D5DC1952A596),
+    pointer_default(unique)
+]
+interface IRayLibVector2 : IDispatch
+{
+    [id(1), propget] HRESULT x([out, retval] float* pval);
+    [id(1), propput] HRESULT x([in] float val);
+    [id(2), propget] HRESULT y([out, retval] float* pval);
+    [id(2), propput] HRESULT y([in] float val);
+}
+
+[
+    object,
+    dual,
+    uuid(BD799537-5792-4130-8E39-3AFE127C534D),
+    pointer_default(unique)
+]
+interface IRayLibVector3 : IDispatch
+{
+    [id(1), propget] HRESULT x([out, retval] float* pval);
+    [id(1), propput] HRESULT x([in] float val);
+    [id(2), propget] HRESULT y([out, retval] float* pval);
+    [id(2), propput] HRESULT y([in] float val);
+    [id(3), propget] HRESULT z([out, retval] float* pval);
+    [id(3), propput] HRESULT z([in] float val);
+}
+
+[
+    object,
+    dual,
+    uuid(743C6255-B2F4-465C-B76C-818843D0ECAC),
+    pointer_default(unique)
+]
+interface IRayLibVector4 : IDispatch
+{
+    [id(1), propget] HRESULT x([out, retval] float* pval);
+    [id(1), propput] HRESULT x([in] float val);
+    [id(2), propget] HRESULT y([out, retval] float* pval);
+    [id(2), propput] HRESULT y([in] float val);
+    [id(3), propget] HRESULT z([out, retval] float* pval);
+    [id(3), propput] HRESULT z([in] float val);
+    [id(4), propget] HRESULT w([out, retval] float* pval);
+    [id(4), propput] HRESULT w([in] float val);
+}
+
+[
+    object,
+    dual,
+    uuid(1D4315C0-5CD8-4796-A81E-C66D5FC60592),
+    pointer_default(unique)
+]
+interface IRayLibRectangle : IDispatch
+{
+    [id(1), propget] HRESULT x([out, retval] float* pval);
+    [id(1), propput] HRESULT x([in] float val);
+    [id(2), propget] HRESULT y([out, retval] float* pval);
+    [id(2), propput] HRESULT y([in] float val);
+    [id(3), propget] HRESULT Width([out, retval] float* pval);
+    [id(3), propput] HRESULT Width([in] float val);
+    [id(4), propget] HRESULT Height([out, retval] float* pval);
+    [id(4), propput] HRESULT Height([in] float val);
+}
+
+[
+    object,
+    dual,
+    uuid(2FC4840E-89C1-4AF9-BF6A-D6D4EA0FDC0B),
+    pointer_default(unique)
+]
+interface IRayLibMatrix : IDispatch
+{
+    [id(1), propget] HRESULT m0([out, retval] float* pval);
+    [id(1), propput] HRESULT m0([in] float val);
+    [id(2), propget] HRESULT m1([out, retval] float* pval);
+    [id(2), propput] HRESULT m1([in] float val);
+    [id(3), propget] HRESULT m2([out, retval] float* pval);
+    [id(3), propput] HRESULT m2([in] float val);
+    [id(4), propget] HRESULT m3([out, retval] float* pval);
+    [id(4), propput] HRESULT m3([in] float val);
+    [id(5), propget] HRESULT m4([out, retval] float* pval);
+    [id(5), propput] HRESULT m4([in] float val);
+    [id(6), propget] HRESULT m5([out, retval] float* pval);
+    [id(6), propput] HRESULT m5([in] float val);
+    [id(7), propget] HRESULT m6([out, retval] float* pval);
+    [id(7), propput] HRESULT m6([in] float val);
+    [id(8), propget] HRESULT m7([out, retval] float* pval);
+    [id(8), propput] HRESULT m7([in] float val);
+    [id(9), propget] HRESULT m8([out, retval] float* pval);
+    [id(9), propput] HRESULT m8([in] float val);
+    [id(10), propget] HRESULT m9([out, retval] float* pval);
+    [id(10), propput] HRESULT m9([in] float val);
+    [id(11), propget] HRESULT m10([out, retval] float* pval);
+    [id(11), propput] HRESULT m10([in] float val);
+    [id(12), propget] HRESULT m11([out, retval] float* pval);
+    [id(12), propput] HRESULT m11([in] float val);
+    [id(13), propget] HRESULT m12([out, retval] float* pval);
+    [id(13), propput] HRESULT m12([in] float val);
+    [id(14), propget] HRESULT m13([out, retval] float* pval);
+    [id(14), propput] HRESULT m13([in] float val);
+    [id(15), propget] HRESULT m14([out, retval] float* pval);
+    [id(15), propput] HRESULT m14([in] float val);
+    [id(16), propget] HRESULT m15([out, retval] float* pval);
+    [id(16), propput] HRESULT m15([in] float val);
+}
+
+[
+    object,
+    dual,
+    uuid(BA8623BB-26BE-4D50-94BE-067C1B6785AC),
+    pointer_default(unique)
+]
+interface IRayLib : IDispatch
+{
+    //////////////////////////////////////////////
+    // Module: RCORE
+
+    // Window-related functions
+    [id(1)] HRESULT InitWindow([in] long width, [in] long height, [in] BSTR title);
+    [id(2)] HRESULT CloseWindow(void);
+    [id(3)] HRESULT WindowShouldClose([out, retval] VARIANT_BOOL* pRetVal);
+    [id(4)] HRESULT IsWindowReady([out, retval] VARIANT_BOOL* pRetVal);
+    [id(5)] HRESULT IsWindowFullscreen([out, retval] VARIANT_BOOL* pRetVal);
+    [id(6)] HRESULT IsWindowHidden([out, retval] VARIANT_BOOL* pRetVal);
+    [id(7)] HRESULT IsWindowMinimized([out, retval] VARIANT_BOOL* pRetVal);
+    [id(8)] HRESULT IsWindowMaximized([out, retval] VARIANT_BOOL* pRetVal);
+    [id(9)] HRESULT IsWindowFocused([out, retval] VARIANT_BOOL* pRetVal);
+    [id(10)] HRESULT IsWindowResized([out, retval] VARIANT_BOOL* pRetVal);
+
+    [id(20)] HRESULT GetScreenWidth([out, retval] long* pReVal);
+    [id(21)] HRESULT GetScreenHeight([out, retval] long* pReVal);
+    [id(22)] HRESULT GetRenderWidth([out, retval] long* pReVal);
+    [id(23)] HRESULT GetRenderHeight([out, retval] long* pReVal);
+    [id(24)] HRESULT GetMonitorCount([out, retval] long* pReVal);
+    [id(25)] HRESULT GetCurrentMonitor([out, retval] long* pReVal);
+
+    // Cursor-related functions
+    [id(60)] HRESULT ShowCursor(void);
+    [id(61)] HRESULT HideCursor(void);
+    [id(62)] HRESULT IsCursorHidden([out, retval] VARIANT_BOOL* pRetVal);
+    [id(63)] HRESULT EnableCursor(void);
+    [id(64)] HRESULT DisableCursor(void);
+    [id(65)] HRESULT IsCursorOnScreen([out, retval] VARIANT_BOOL* pRetVal);
+
+    // Drawing-related functions
+    [id(70)] HRESULT ClearBackground([in] IRayLibColor* color);
+    [id(71)] HRESULT BeginDrawing(void);
+    [id(72)] HRESULT EndDrawing(void);
+
+    // VR stereo config functions for VR simulator
+
+    // Shader management functions
+
+    // Screen-space-related functions
+
+    // Timing-related functions
+    [id(140)] HRESULT SetTargetFPS([in] long fps);
+    [id(141)] HRESULT GetFrameTime([out, retval] float* pRetVal);
+    [id(142)] HRESULT GetTime([out, retval] double* pRetVal);
+    [id(143)] HRESULT GetFPS([out, retval] long* pRetVal);
+
+    // Custom frame control functions
+
+    // Random values generation functions
+    [id(160)] HRESULT SetRandomSeed([in] long seed);
+    [id(161)] HRESULT GetRandomValue([in] long min, [in] long max, [out, retval] long* pRetVal);
+
+    // Misc. functions
+
+    // Logging system
+
+    // Memory management, using internal allocators
+
+    // File system management functions
+
+    // File access custom callbacks
+
+    // Compression/Encoding functionality
+
+    // Automation events functionality
+
+    // Input-related functions: keyboard
+
+    [id(330)] HRESULT IsKeyPressed([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(331)] HRESULT IsKeyPressedRepeat([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(332)] HRESULT IsKeyDown([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(333)] HRESULT IsKeyReleased([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(334)] HRESULT IsKeyUp([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(335)] HRESULT GetKeyPressed([out, retval] long* pRetVal);
+    [id(336)] HRESULT GetCharPressed([out, retval] long* pRetVal);
+    [id(337)] HRESULT SetExitKey([in] long key);
+
+    // Input-related functions: gamepads
+
+    // Input-related functions: mouse
+    [id(360)] HRESULT IsMouseButtonPressed([in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(361)] HRESULT IsMouseButtonDown([in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(362)] HRESULT IsMouseButtonReleased([in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(363)] HRESULT IsMouseButtonUp([in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(364)] HRESULT GetMouseX([out, retval] long* pRetVal);
+    [id(365)] HRESULT GetMouseY([out, retval] long* pRetVal);
+    [id(366)] HRESULT GetMousePosition([out, retval] IRayLibVector2** pRetVal);
+    [id(367)] HRESULT GetMouseDelta([out, retval] IRayLibVector2** pRetVal);
+    [id(368)] HRESULT SetMousePosition([in] long x, [in] long y);
+    [id(369)] HRESULT SetMouseOffset([in] long offsetX, [in] long offsetY);
+    [id(370)] HRESULT SetMouseScale(float scaleX, float scaleY);
+    [id(371)] HRESULT GetMouseWheelMove([out, retval] float* pRetVal);
+    [id(372)] HRESULT GetMouseWheelMoveV([out, retval] IRayLibVector2** pRetVal);
+    [id(373)] HRESULT SetMouseCursor([in] long cursor);
+
+    // Input-related functions: touch
+
+    // Gestures and Touch Handling Functions (Module: rgestures)
+
+    // Camera System Functions (Module: rcamera)
+
+    //////////////////////////////////////////////
+    // Module: RSHAPES
+
+    // Basic shapes drawing functions
+    [id(1010)] HRESULT DrawPixel([in] long posX, [in] long posY, [in] IRayLibColor* color);
+    [id(1011)] HRESULT DrawPixelV([in] IRayLibVector2* position, [in] IRayLibColor* color);
+    [id(1012)] HRESULT DrawLine([in] long startPosX, [in] long startPosY, [in] long endPosX, [in] long endPosY, [in] IRayLibColor* color);
+    [id(1013)] HRESULT DrawLineV([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] IRayLibColor* color);
+    [id(1014)] HRESULT DrawLineEx([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] float thick, [in] IRayLibColor* color);
+
+    [id(1020)] HRESULT DrawCircle([in] long centerX, [in] long centerY, [in] float radius, [in] IRayLibColor* color);
+    [id(1021)] HRESULT DrawCircleV([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* color);
+
+    [id(1030)] HRESULT DrawCircleLines([in] long centerX, [in] long centerY, [in] float radius, [in] IRayLibColor* color);
+    [id(1031)] HRESULT DrawCircleLinesV([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* color);
+
+    [id(1040)] HRESULT DrawEllipse([in] long centerX, [in] long centerY, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
+    [id(1041)] HRESULT DrawEllipseV([in] IRayLibVector2* center, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
+    [id(1042)] HRESULT DrawEllipseLines([in] long centerX, [in] long centerY, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
+    [id(1043)] HRESULT DrawEllipseLinesV([in] IRayLibVector2* center, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
+
+    [id(1050)] HRESULT DrawRectangle([in] long posX, [in] long posY, [in] long width, [in] long height, [in] IRayLibColor* color);
+    [id(1051)] HRESULT DrawRectangleV([in] IRayLibVector2* position, [in] IRayLibVector2* size, [in] IRayLibColor* color);
+    [id(1052)] HRESULT DrawRectangleRec([in] IRayLibRectangle* rec, [in] IRayLibColor* color);
+
+    [id(1060)] HRESULT DrawTriangle([in] IRayLibVector2* v1, [in] IRayLibVector2* v2, [in] IRayLibVector2* v3, [in] IRayLibColor* color);
+    [id(1061)] HRESULT DrawTriangleLines([in] IRayLibVector2* v1, [in] IRayLibVector2* v2, [in] IRayLibVector2* v3, [in] IRayLibColor* color);
+
+    [id(1070)] HRESULT DrawPoly([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
+    [id(1071)] HRESULT DrawPolyLines([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
+
+    // Basic shapes collision detection functions
+    [id(1090)] HRESULT CheckCollisionRecs([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1091)] HRESULT CheckCollisionCircles([in] IRayLibVector2* center1, [in] float radius1, [in] IRayLibVector2* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1092)] HRESULT CheckCollisionCircleRec([in] IRayLibVector2* center, [in] float radius, [in] IRayLibRectangle* rec, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1093)] HRESULT CheckCollisionCircleLine([in] IRayLibVector2* center, [in] float radius, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1094)] HRESULT CheckCollisionPointRec([in] IRayLibVector2* point, [in] IRayLibRectangle* rec, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1095)] HRESULT CheckCollisionPointCircle([in] IRayLibVector2* point, [in] IRayLibVector2* center, [in] float radius, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1096)] HRESULT CheckCollisionPointTriangle([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1097)] HRESULT CheckCollisionPointLine([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] long threshold, [out, retval] VARIANT_BOOL* pRetVal);
+
+
+    //////////////////////////////////////////////
+    // Module: RTEXT
+
+    // Font loading/unloading functions
+
+    // Text drawing functions
+    [id(2020)] HRESULT DrawFPS([in] long posX, [in] long posY);
+    [id(2021)] HRESULT DrawText([in] BSTR text, [in] long posX, [in] long posY, [in] long fontSize, [in] IRayLibColor* color);
+
+    // Text font info functions
+
+
+    //////////////////////////////////////////////
+    // CoRayLib helpers
+    [id(20000)] HRESULT CreateColor([in] long r, [in] long g, [in] long b, [in] long a, [out, retval] IRayLibColor** pRetVal);
+    [id(20001)] HRESULT CreateVector2([in] float x, [in] float y, [out, retval] IRayLibVector2** pRetVal);
+    [id(20002)] HRESULT CreateVector3([in] float x, [in] float y, [in] float z, [out, retval] IRayLibVector3** pRetVal);
+    [id(20003)] HRESULT CreateVector4([in] float x, [in] float y, [in] float z, [in] float w, [out, retval] IRayLibVector4** pRetVal);
+    [id(20004)] HRESULT CreateQuaternion([in] float x, [in] float y, [in] float z, [in] float w, [out, retval] IRayLibVector4** pRetVal);
+    [id(20005)] HRESULT CreateRectangle([in] float x, [in] float y, [in] float width, [in] float height, [out, retval] IRayLibRectangle** pRetVal);
+}
+
+[
+    uuid(b3f77c41-38c5-4093-af2b-2b26510faa19),
+    version(1.0),
+    helpstring("RayLib 1.0 Type Library")
+]
+library RayLib
+{
+    importlib("stdole2.tlb");
+
+    interface IRayLib;
+    interface IRayLibColor;
+    interface IRayLibVector2;
+    interface IRayLibVector3;
+    interface IRayLibVector4;
+    interface IRayLibRectangle;
+    interface IRayLibMatrix;
+
+    [
+        uuid(8C02BF1F-FA49-4796-A634-FB591F749030),
+        helpstring("RayLib Class")
+    ]
+        coclass RayLib
+    {
+        [default] interface IRayLib;
+    };
+
+    [
+        uuid(B47D3FF5-7888-413F-BFCC-2F7550F68D18),
+        helpstring("RayLib.Color Class")
+    ]
+        coclass RayLibColor
+    {
+        [default] interface IRayLibColor;
+    };
+
+    [
+        uuid(09FB8F0F-AB6F-4AB5-9CF6-245CEC13A79B),
+        helpstring("RayLib.Vector2 Class")
+    ]
+        coclass RayLibVector2
+    {
+        [default] interface IRayLibVector2;
+    };
+
+    [
+        uuid(EFFF27AC-9E7D-433C-A2F2-82B0F52478E0),
+        helpstring("RayLib.Vector3 Class")
+    ]
+        coclass RayLibVector3
+    {
+        [default] interface IRayLibVector3;
+    };
+
+    [
+        uuid(A465B353-B852-4A1E-8A7E-910BE28C938E),
+        helpstring("RayLib.Vector4 Class")
+    ]
+        coclass RayLibVector4
+    {
+        [default] interface IRayLibVector4;
+    };
+
+    [
+        uuid(33E72FC4-1739-45ED-A7D4-F1A1821A35CC),
+        helpstring("RayLib.Quaternion Class")
+    ]
+        coclass RayLibQuaternion
+    {
+        [default] interface IRayLibVector4;
+    };
+
+    [
+        uuid(ED51BD5F-B9F8-49C6-A4B7-1AF251DA8CD6),
+        helpstring("RayLib.Rectangle Class")
+    ]
+        coclass RayLibRectangle
+    {
+        [default] interface IRayLibRectangle;
+    };
+
+    [
+        uuid(763865FF-7A3D-427E-9022-1FF9E5C991C6),
+        helpstring("RayLib.Matrix Class")
+    ]
+        coclass RayLibMatrix
+    {
+        [default] interface IRayLibMatrix;
+    };
+};

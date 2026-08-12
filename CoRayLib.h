@@ -1,0 +1,526 @@
+// CoRayLib.h
+//
+
+#ifndef _CORAYLIB_H
+#define _CORAYLIB_H
+
+#include "CoRayLib_h.h"
+#include "WrRayLib.h"
+
+
+class CoRayLib : IRayLib
+{
+    LONG m_cRef;
+    ITypeInfo* m_pTypeInfo;
+
+    static HRESULT co2wr(IRayLibColor* in, WrRayLibColor* out);
+    static HRESULT co2wr(IRayLibVector2* in, WrRayLibVector2* out);
+    static HRESULT co2wr(IRayLibVector3* in, WrRayLibVector3* out);
+    static HRESULT co2wr(IRayLibVector4* in, WrRayLibVector4* out);
+    static HRESULT co2wr(IRayLibRectangle* in, WrRayLibRectangle* out);
+
+public:
+    CoRayLib(HMODULE hModule);
+    ~CoRayLib();
+
+    // IUnknown
+    STDMETHODIMP QueryInterface(
+        REFIID riid,
+        void** ppvObject
+    ) override;
+    STDMETHODIMP_(ULONG) AddRef(
+        void
+    ) override;
+    STDMETHODIMP_(ULONG) Release(
+        void
+    ) override;
+
+    // IDispatch
+    STDMETHODIMP GetTypeInfoCount(
+        UINT* pctinfo
+    ) override;
+    STDMETHODIMP GetTypeInfo(
+        UINT iTInfo,
+        LCID lcid,
+        ITypeInfo** ppTInfo
+    ) override;
+    STDMETHODIMP GetIDsOfNames(
+        REFIID riid,
+        LPOLESTR* rgszNames,
+        UINT cNames,
+        LCID lcid,
+        DISPID* rgDispId
+    ) override;
+    STDMETHODIMP Invoke(
+        DISPID dispIdMember,
+        REFIID riid,
+        LCID lcid, WORD wFlags,
+        DISPPARAMS* pDispParams,
+        VARIANT* pVarResult,
+        EXCEPINFO* pExcepInfo,
+        UINT* puArgErr
+    ) override;
+
+    /////////////////////////////////////////////
+    // IRayLib
+
+    //////////////////////////////////////////////
+    // Module: RCORE
+
+    // Window-related functions
+    STDMETHODIMP InitWindow(
+        long width,
+        long height,
+        BSTR title
+    ) override;
+    STDMETHODIMP CloseWindow(
+        void
+    ) override;
+    STDMETHODIMP WindowShouldClose(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowReady(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowFullscreen(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowHidden(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowMinimized(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowMaximized(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowFocused(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsWindowResized(
+        VARIANT_BOOL* pRetVal
+    ) override;
+
+    STDMETHODIMP GetScreenWidth(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetScreenHeight(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetRenderWidth(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetRenderHeight(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorCount(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetCurrentMonitor(
+        long* pRetVal
+    ) override;
+
+
+    // Cursor-related functions
+    STDMETHODIMP ShowCursor(
+        void
+    ) override;
+    STDMETHODIMP HideCursor(
+        void
+    ) override;
+    STDMETHODIMP IsCursorHidden(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP EnableCursor(
+        void
+    ) override;
+    STDMETHODIMP DisableCursor(
+        void
+    ) override;
+    STDMETHODIMP IsCursorOnScreen(
+        VARIANT_BOOL* pRetVal
+    ) override;
+
+    // Drawing-related functions
+    STDMETHODIMP ClearBackground(
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP BeginDrawing(
+        void
+    ) override;
+    STDMETHODIMP EndDrawing(
+        void
+    ) override;
+
+    // VR stereo config functions for VR simulator
+
+    // Shader management functions
+
+    // Screen-space-related functions
+
+    // Timing-related functions
+    STDMETHODIMP SetTargetFPS(
+        long fps
+    ) override;
+    STDMETHODIMP GetFrameTime(
+        float* pRetVal
+    ) override;
+    STDMETHODIMP GetTime(
+        double* pRetVal
+    ) override;
+    STDMETHODIMP GetFPS(
+        long* pRetVal
+    ) override;
+
+    // Custom frame control functions
+
+    // Random values generation functions
+    STDMETHODIMP SetRandomSeed(
+        long seed
+    ) override;
+    STDMETHODIMP GetRandomValue(
+        long min,
+        long max,
+        long* pRetVal
+    ) override;
+
+    // Misc. functions
+
+    // Logging system
+
+    // Memory management, using internal allocators
+
+    // File system management functions
+
+    // File access custom callbacks
+
+    // Compression/Encoding functionality
+
+    // Automation events functionality
+
+    // Input-related functions: keyboard
+    STDMETHODIMP IsKeyPressed(
+        long key,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsKeyPressedRepeat(
+        long key,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsKeyDown(
+        long key,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsKeyReleased(
+        long key,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsKeyUp(
+        long key,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP GetKeyPressed(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetCharPressed(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP SetExitKey(
+        long key
+    ) override;
+
+    // Input-related functions: gamepads
+
+    // Input-related functions: mouse
+    STDMETHODIMP IsMouseButtonPressed(
+        long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsMouseButtonDown(long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsMouseButtonReleased(
+        long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsMouseButtonUp(
+        long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP GetMouseX(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMouseY(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMousePosition(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetMouseDelta(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP SetMousePosition(
+        long x,
+        long y
+    ) override;
+    STDMETHODIMP SetMouseOffset(
+        long offsetX,
+        long offsetY
+    ) override;
+    STDMETHODIMP SetMouseScale(
+        float scaleX,
+        float scaleY
+    ) override;
+    STDMETHODIMP GetMouseWheelMove(
+        float* pRetVal
+    ) override;
+    STDMETHODIMP GetMouseWheelMoveV(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP SetMouseCursor(
+        long cursor
+    ) override;
+
+    // Input-related functions: touch
+
+    // Gestures and Touch Handling Functions (Module: rgestures)
+
+    // Camera System Functions (Module: rcamera)
+
+    //////////////////////////////////////////////
+    // Module: RSHAPES
+
+    // Basic shapes drawing functions
+    STDMETHODIMP DrawPixel(
+        long posX,
+        long posY,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawPixelV(
+        IRayLibVector2* position,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawLine(
+        long startPosX,
+        long startPosY,
+        long endPosX,
+        long endPosY,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawLineV(
+        IRayLibVector2* startPos,
+        IRayLibVector2* endPos,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawLineEx(
+        IRayLibVector2* startPos,
+        IRayLibVector2* endPos,
+        float thick,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawCircle(
+        long centerX,
+        long centerY,
+        float radius,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawCircleV(
+        IRayLibVector2* center,
+        float radius,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawCircleLines(
+        long centerX,
+        long centerY,
+        float radius,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawCircleLinesV(
+        IRayLibVector2* center,
+        float radius,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawEllipse(
+        long centerX,
+        long centerY,
+        float radiusH,
+        float radiusV,
+        IRayLibColor* color);
+    STDMETHODIMP DrawEllipseV(
+        IRayLibVector2* center,
+        float radiusH,
+        float radiusV,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawEllipseLines(
+        long centerX,
+        long centerY,
+        float radiusH,
+        float radiusV,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawEllipseLinesV(
+        IRayLibVector2* center,
+        float radiusH,
+        float radiusV,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawRectangle(
+        long posX,
+        long posY,
+        long width,
+        long height,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawRectangleV(
+        IRayLibVector2* position,
+        IRayLibVector2* size,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawRectangleRec(
+        IRayLibRectangle* rec,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawTriangle(
+        IRayLibVector2* v1,
+        IRayLibVector2* v2,
+        IRayLibVector2* v3,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawTriangleLines(
+        IRayLibVector2* v1,
+        IRayLibVector2* v2,
+        IRayLibVector2* v3,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawPoly(
+        IRayLibVector2* center,
+        long sides,
+        float radius,
+        float rotation,
+        IRayLibColor* color
+    );
+    STDMETHODIMP DrawPolyLines(
+        IRayLibVector2* center,
+        long sides,
+        float radius,
+        float rotation,
+        IRayLibColor* color
+    );
+    
+    // Basic shapes collision detection functions
+    STDMETHODIMP CheckCollisionRecs(
+        IRayLibRectangle* rec1,
+        IRayLibRectangle* rec2,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionCircles(
+        IRayLibVector2* center1,
+        float radius1,
+        IRayLibVector2* center2,
+        float radius2,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionCircleRec(
+        IRayLibVector2* center,
+        float radius,
+        IRayLibRectangle* rec,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionCircleLine(
+        IRayLibVector2* center,
+        float radius,
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionPointRec(
+        IRayLibVector2* point,
+        IRayLibRectangle* rec,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionPointCircle(
+        IRayLibVector2* point,
+        IRayLibVector2* center,
+        float radius,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionPointTriangle(
+        IRayLibVector2* point,
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        IRayLibVector2* p3,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP CheckCollisionPointLine(
+        IRayLibVector2* point,
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        long threshold,
+        VARIANT_BOOL* pRetVal
+    );
+
+
+    //////////////////////////////////////////////
+    // Module: RTEXT
+
+    // Font loading/unloading functions
+
+    // Text drawing functions
+    STDMETHODIMP DrawFPS(
+        long posX,
+        long posY
+    ) override;
+    STDMETHODIMP DrawText(
+        BSTR text,
+        long posX,
+        long posY,
+        long fontSize,
+        IRayLibColor* color
+    ) override;
+
+
+    //////////////////////////////////////////////
+    // CoRayLib helpers
+    STDMETHODIMP CreateColor(
+        long r,
+        long g,
+        long b,
+        long a,
+        IRayLibColor** pRetVal
+    );
+    STDMETHODIMP CreateVector2(
+        float x,
+        float y,
+        IRayLibVector2** pRetVal
+    );
+    STDMETHODIMP CreateVector3(
+        float x,
+        float y,
+        float z,
+        IRayLibVector3** pRetVal
+    );
+    STDMETHODIMP CreateVector4(
+        float x,
+        float y,
+        float z,
+        float w,
+        IRayLibVector4** pRetVal
+    );
+    STDMETHODIMP CreateQuaternion(
+        float x,
+        float y,
+        float z,
+        float w,
+        IRayLibVector4** pRetVal
+    );
+    STDMETHODIMP CreateRectangle(
+        float x,
+        float y,
+        float width,
+        float height,
+        IRayLibRectangle** pRetVal
+    );
+};
+
+#endif // _CORAYLIB_H

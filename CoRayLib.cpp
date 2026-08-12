@@ -1,0 +1,2068 @@
+// CoRayLib.cpp
+//
+
+#include "CoRayLib.h"
+#include "tlhelper.h"
+#include "comutil.h"
+#include <time.h>
+
+
+inline HRESULT CoRayLib::co2wr(IRayLibColor* in, WrRayLibColor* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    long elem = 0;
+
+    hr = in->get_Red(&elem);
+    if (FAILED(hr)) return hr;
+    out->r = (unsigned char)elem;
+
+    hr = in->get_Green(&elem);
+    if (FAILED(hr)) return hr;
+    out->g = (unsigned char)elem;
+
+    hr = in->get_Blue(&elem);
+    if (FAILED(hr)) return hr;
+    out->b = (unsigned char)elem;
+
+    hr = in->get_Alpha(&elem);
+    if (FAILED(hr)) return hr;
+    out->a = (unsigned char)elem;
+
+    return hr;
+}
+inline HRESULT CoRayLib::co2wr(IRayLibVector2* in, WrRayLibVector2* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    float elem = 0;
+
+    hr = in->get_x(&elem);
+    if (FAILED(hr)) return hr;
+    out->x = elem;
+
+    hr = in->get_y(&elem);
+    if (FAILED(hr)) return hr;
+    out->y = elem;
+
+    return hr;
+}
+inline HRESULT CoRayLib::co2wr(IRayLibVector3* in, WrRayLibVector3* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    float elem = 0;
+
+    hr = in->get_x(&elem);
+    if (FAILED(hr)) return hr;
+    out->x = elem;
+
+    hr = in->get_y(&elem);
+    if (FAILED(hr)) return hr;
+    out->y = elem;
+
+    hr = in->get_z(&elem);
+    if (FAILED(hr)) return hr;
+    out->y = elem;
+
+    return hr;
+}
+inline HRESULT CoRayLib::co2wr(IRayLibVector4* in, WrRayLibVector4* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    float elem = 0;
+
+    hr = in->get_x(&elem);
+    if (FAILED(hr)) return hr;
+    out->x = elem;
+
+    hr = in->get_y(&elem);
+    if (FAILED(hr)) return hr;
+    out->y = elem;
+
+    hr = in->get_z(&elem);
+    if (FAILED(hr)) return hr;
+    out->y = elem;
+
+    hr = in->get_w(&elem);
+    if (FAILED(hr)) return hr;
+    out->w = elem;
+
+    return hr;
+}
+inline HRESULT CoRayLib::co2wr(IRayLibRectangle* in, WrRayLibRectangle* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    float elem = 0;
+
+    hr = in->get_x(&elem);
+    if (FAILED(hr)) return hr;
+    out->x = elem;
+
+    hr = in->get_y(&elem);
+    if (FAILED(hr)) return hr;
+    out->y = elem;
+
+    hr = in->get_Width(&elem);
+    if (FAILED(hr)) return hr;
+    out->width = elem;
+
+    hr = in->get_Height(&elem);
+    if (FAILED(hr)) return hr;
+    out->height = elem;
+
+    return hr;
+}
+
+
+CoRayLib::CoRayLib(HMODULE hModule)
+{
+    m_cRef = 1;
+
+    LoadTypeInfo(
+        hModule,
+        IID_IRayLib,
+        &m_pTypeInfo
+    );
+}
+CoRayLib::~CoRayLib()
+{
+    if (m_pTypeInfo)
+        m_pTypeInfo->Release();
+}
+
+// IUnknown
+STDMETHODIMP CoRayLib::QueryInterface(
+    REFIID riid,
+    void** ppvObject
+)
+{
+    if (!ppvObject)
+        return E_POINTER;
+
+    if (riid == IID_IUnknown) {
+        *ppvObject = static_cast<IRayLib*>(this);
+    }
+    else if (riid == IID_IRayLib) {
+        *ppvObject = static_cast<IRayLib*>(this);
+    }
+    else if (riid == IID_IDispatch) {
+        *ppvObject = static_cast<IDispatch*>(this);
+    }
+    else {
+        *ppvObject = nullptr;
+        return E_NOINTERFACE;
+    }
+
+    AddRef();
+    return S_OK;
+}
+STDMETHODIMP_(ULONG) CoRayLib::AddRef(
+    void
+)
+{
+    return InterlockedIncrement(&m_cRef);
+}
+STDMETHODIMP_(ULONG) CoRayLib::Release(
+    void
+)
+{
+    const ULONG cRef = InterlockedDecrement(&m_cRef);
+    if (cRef == 0)
+        delete this;
+    return cRef;
+}
+
+// IDispatch
+STDMETHODIMP CoRayLib::GetTypeInfoCount(
+    UINT* pctinfo
+)
+{
+    if (!pctinfo)
+        return E_POINTER;
+
+    if (!m_pTypeInfo)
+        return E_ABORT;
+
+    *pctinfo = 1;
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTypeInfo(
+    UINT iTInfo,
+    LCID lcid,
+    ITypeInfo** ppTInfo
+)
+{
+    if (!ppTInfo)
+        return E_POINTER;
+
+    if(!m_pTypeInfo)
+        return E_ABORT;
+
+    *ppTInfo = m_pTypeInfo;
+    (*ppTInfo)->AddRef();
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetIDsOfNames(
+    REFIID riid,
+    LPOLESTR* rgszNames,
+    UINT cNames,
+    LCID lcid,
+    DISPID* rgDispId
+)
+{
+    if (riid != IID_NULL)
+        return DISP_E_UNKNOWNINTERFACE;
+
+    if(!m_pTypeInfo)
+        return E_ABORT;
+
+    return m_pTypeInfo->GetIDsOfNames(
+        rgszNames,
+        cNames,
+        (MEMBERID*)rgDispId
+    );
+}
+STDMETHODIMP CoRayLib::Invoke(
+    DISPID dispIdMember,
+    REFIID riid,
+    LCID lcid, WORD wFlags,
+    DISPPARAMS* pDispParams,
+    VARIANT* pVarResult,
+    EXCEPINFO* pExcepInfo,
+    UINT* puArgErr
+)
+{
+    if (riid != IID_NULL)
+        return DISP_E_UNKNOWNINTERFACE;
+
+    if (!m_pTypeInfo)
+        return E_ABORT;
+
+    return m_pTypeInfo->Invoke(
+        static_cast<IRayLib*>(this),
+        (MEMBERID)dispIdMember,
+        wFlags,
+        pDispParams,
+        pVarResult,
+        pExcepInfo,
+        puArgErr
+    );
+}
+
+/////////////////////////////////////////////
+// IRayLib
+
+// Window-related functions
+
+STDMETHODIMP CoRayLib::InitWindow(
+    long width,
+    long height,
+    BSTR title
+)
+{
+    WrRayLib::InitWindow(
+        (int)width,
+        (int)height,
+        _com_util::ConvertBSTRToString(title)
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CloseWindow(
+    void
+)
+{
+    WrRayLib::CloseWindow();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::WindowShouldClose(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if(WrRayLib::WindowShouldClose())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowReady(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowReady())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowFullscreen(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowFullscreen())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowHidden(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowHidden())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowMinimized(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowMinimized())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowMaximized(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowMaximized())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowFocused(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowFocused())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsWindowResized(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowResized())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+
+
+STDMETHODIMP CoRayLib::GetScreenWidth(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetScreenWidth();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetScreenHeight(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetScreenHeight();
+    
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetRenderWidth(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetRenderWidth();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetRenderHeight(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetRenderHeight();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorCount(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMonitorCount();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetCurrentMonitor(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetCurrentMonitor();
+
+    return S_OK;
+}
+
+
+// Cursor-related functions
+
+STDMETHODIMP CoRayLib::ShowCursor(
+    void
+)
+{
+    WrRayLib::ShowCursor();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::HideCursor(
+    void
+)
+{
+    WrRayLib::HideCursor();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsCursorHidden(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsCursorHidden())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::EnableCursor(
+    void
+)
+{
+    WrRayLib::EnableCursor();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DisableCursor(
+    void
+)
+{
+    WrRayLib::DisableCursor();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsCursorOnScreen(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsCursorOnScreen())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+
+
+// Drawing-related functions
+
+STDMETHODIMP CoRayLib::ClearBackground(
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::ClearBackground(
+        clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::BeginDrawing(
+    void
+)
+{
+    WrRayLib::BeginDrawing();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::EndDrawing(
+    void
+)
+{
+    WrRayLib::EndDrawing();
+
+    return S_OK;
+}
+
+
+// VR stereo config functions for VR simulator
+
+// Shader management functions
+
+// Screen-space-related functions
+
+
+// Timing-related functions
+
+STDMETHODIMP CoRayLib::SetTargetFPS(
+    long fps
+)
+{
+    WrRayLib::SetTargetFPS((int)fps);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetFrameTime(
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetFrameTime();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTime(
+    double* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetTime();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetFPS(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetFPS();
+
+    return S_OK;
+}
+
+
+// Custom frame control functions
+
+// Random values generation functions
+STDMETHODIMP CoRayLib::SetRandomSeed(
+    long seed
+)
+{
+    WrRayLib::SetRandomSeed((unsigned int)seed);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetRandomValue(
+    long min,
+    long max,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetRandomValue((int)min, (int)max);
+
+    return S_OK;
+}
+
+// Misc. functions
+
+// Logging system
+
+// Memory management, using internal allocators
+
+// File system management functions
+
+// File access custom callbacks
+
+// Compression/Encoding functionality
+
+// Automation events functionality
+
+// Input-related functions: keyboard
+STDMETHODIMP CoRayLib::IsKeyPressed(
+    long key,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsKeyPressed((int)key))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsKeyPressedRepeat(
+    long key,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsKeyPressedRepeat((int)key))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsKeyDown(
+    long key,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsKeyDown((int)key))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsKeyReleased(
+    long key,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsKeyReleased((int)key))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsKeyUp(
+    long key,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsKeyUp((int)key))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetKeyPressed(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetKeyPressed();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetCharPressed(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetCharPressed();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetExitKey(
+    long key
+)
+{
+    WrRayLib::SetExitKey((int)key);
+
+    return S_OK;
+}
+
+
+// Input-related functions: gamepads
+
+// Input-related functions: mouse
+STDMETHODIMP CoRayLib::IsMouseButtonPressed(
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsMouseButtonPressed((int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsMouseButtonDown(
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsMouseButtonDown((int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsMouseButtonReleased(
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsMouseButtonReleased((int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsMouseButtonUp(
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsMouseButtonUp((int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMouseX(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMouseX();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMouseY(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMouseY();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMousePosition(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if(SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetMousePosition();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetMouseDelta(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetMouseDelta();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::SetMousePosition(
+    long x,
+    long y
+)
+{
+    WrRayLib::SetMousePosition(x, y);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetMouseOffset(
+    long offsetX,
+    long offsetY
+)
+{
+    WrRayLib::SetMouseOffset(offsetX, offsetY);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetMouseScale(
+    float scaleX,
+    float scaleY
+)
+{
+    WrRayLib::SetMouseScale(scaleX, scaleY);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMouseWheelMove(
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMouseWheelMove();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMouseWheelMoveV(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if(SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetMouseWheelMoveV();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::SetMouseCursor(
+    long cursor
+)
+{
+    WrRayLib::SetMouseCursor((int)cursor);
+
+    return S_OK;
+}
+
+
+// Input-related functions: touch
+
+// Gestures and Touch Handling Functions (Module: rgestures)
+
+// Camera System Functions (Module: rcamera)
+
+//////////////////////////////////////////////
+// Module: RSHAPES
+
+// Basic shapes drawing functions
+STDMETHODIMP CoRayLib::DrawPixel(
+    long posX,
+    long posY,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPixel(
+        (int)posX,
+        (int)posY,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawPixelV(
+    IRayLibVector2* position,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(position, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPixelV(
+        pos,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawLine(
+    long startPosX,
+    long startPosY,
+    long endPosX,
+    long endPosY,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawLine(
+        startPosX,
+        startPosY,
+        endPosX,
+        endPosY,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawLineV(
+    IRayLibVector2* startPos,
+    IRayLibVector2* endPos,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 posStart = { 0 };
+    WrRayLibVector2 posEnd = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(startPos, &posStart);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &posEnd);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawLineV(
+        posStart,
+        posEnd,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawLineEx(
+    IRayLibVector2* startPos,
+    IRayLibVector2* endPos,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 posStart = { 0 };
+    WrRayLibVector2 posEnd = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(startPos, &posStart);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &posEnd);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawLineEx(
+        posStart,
+        posEnd,
+        thick,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawCircle(
+    long centerX,
+    long centerY,
+    float radius,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircle(
+        centerX,
+        centerY,
+        radius,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawCircleV(
+    IRayLibVector2* center,
+    float radius,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircleV(
+        pos,
+        radius,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawCircleLines(
+    long centerX,
+    long centerY,
+    float radius,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircleLines(
+        centerX,
+        centerY,
+        radius,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawCircleLinesV(
+    IRayLibVector2* center,
+    float radius,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircleLinesV(
+        pos,
+        radius,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawEllipse(
+    long centerX,
+    long centerY,
+    float radiusH,
+    float radiusV,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawEllipse(
+        centerX,
+        centerY,
+        radiusH,
+        radiusV,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawEllipseV(
+    IRayLibVector2* center,
+    float radiusH,
+    float radiusV,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawEllipseV(
+        pos,
+        radiusH,
+        radiusV,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawEllipseLines(
+    long centerX,
+    long centerY,
+    float radiusH,
+    float radiusV,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawEllipseLines(
+        centerX,
+        centerY,
+        radiusH,
+        radiusV,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawEllipseLinesV(
+    IRayLibVector2* center,
+    float radiusH,
+    float radiusV,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawEllipseLinesV(
+        pos,
+        radiusH,
+        radiusV,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawRectangle(
+    long posX,
+    long posY,
+    long width,
+    long height,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangle(
+        posX,
+        posY,
+        width,
+        height,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawRectangleV(
+    IRayLibVector2* position,
+    IRayLibVector2* size,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!size)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibVector2 siz = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(position, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(size, &siz);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleV(
+        pos,
+        siz,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawRectangleRec(
+    IRayLibRectangle* rec,
+    IRayLibColor* color
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle rect = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(rec, &rect);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleRec(
+        rect,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawTriangle(
+    IRayLibVector2* v1,
+    IRayLibVector2* v2,
+    IRayLibVector2* v3,
+    IRayLibColor* color
+)
+{
+    if (!v1)
+        return E_POINTER;
+    if (!v2)
+        return E_POINTER;
+    if (!v3)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 vv1 = { 0 };
+    WrRayLibVector2 vv2 = { 0 };
+    WrRayLibVector2 vv3 = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(v1, &vv1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(v2, &vv2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(v3, &vv3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTriangle(
+        vv1,
+        vv2,
+        vv3,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawTriangleLines(
+    IRayLibVector2* v1,
+    IRayLibVector2* v2,
+    IRayLibVector2* v3,
+    IRayLibColor* color
+)
+{
+    if (!v1)
+        return E_POINTER;
+    if (!v2)
+        return E_POINTER;
+    if (!v3)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 vv1 = { 0 };
+    WrRayLibVector2 vv2 = { 0 };
+    WrRayLibVector2 vv3 = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(v1, &vv1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(v2, &vv2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(v3, &vv3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTriangleLines(
+        vv1,
+        vv2,
+        vv3,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawPoly(
+    IRayLibVector2* center,
+    long sides,
+    float radius,
+    float rotation,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPoly(
+        pos,
+        sides,
+        radius,
+        rotation,
+        clr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DrawPolyLines(
+    IRayLibVector2* center,
+    long sides,
+    float radius,
+    float rotation,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPolyLines(
+        pos,
+        sides,
+        radius,
+        rotation,
+        clr
+    );
+
+    return S_OK;
+}
+
+// Basic shapes collision detection functions
+STDMETHODIMP CoRayLib::CheckCollisionRecs(
+    IRayLibRectangle* rec1,
+    IRayLibRectangle* rec2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!rec1)
+        return E_POINTER;
+    if (!rec2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle rect1 = { 0 };
+    WrRayLibRectangle rect2 = { 0 };
+
+    hr = co2wr(rec1, &rect1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(rec2, &rect2);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionRecs(rect1, rect2))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionCircles(
+    IRayLibVector2* center1,
+    float radius1,
+    IRayLibVector2* center2,
+    float radius2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!center1)
+        return E_POINTER;
+    if (!center2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos1 = { 0 };
+    WrRayLibVector2 pos2 = { 0 };
+
+    hr = co2wr(center1, &pos1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(center2, &pos2);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionCircles(pos1, radius1, pos2, radius2))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionCircleRec(
+    IRayLibVector2* center,
+    float radius,
+    IRayLibRectangle* rec,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!rec)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibRectangle rect = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(rec, &rect);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionCircleRec(pos, radius, rect))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionCircleLine(
+    IRayLibVector2* center,
+    float radius,
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibVector2 pp1 = { 0 };
+    WrRayLibVector2 pp2 = { 0 };
+
+    hr = co2wr(center, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p1, &pp1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &pp2);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionCircleLine(pos, radius, pp1, pp2))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionPointRec(
+    IRayLibVector2* point,
+    IRayLibRectangle* rec,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!point)
+        return E_POINTER;
+    if (!rec)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibRectangle rect = { 0 };
+
+    hr = co2wr(point, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(rec, &rect);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionPointRec(pos, rect))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionPointCircle(
+    IRayLibVector2* point,
+    IRayLibVector2* center,
+    float radius,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!point)
+        return E_POINTER;
+    if (!center)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibVector2 cnt = { 0 };
+
+    hr = co2wr(point, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(center, &cnt);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionPointCircle(pos, cnt, radius))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionPointTriangle(
+    IRayLibVector2* point,
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    IRayLibVector2* p3,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!point)
+        return E_POINTER;
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibVector2 pp1 = { 0 };
+    WrRayLibVector2 pp2 = { 0 };
+    WrRayLibVector2 pp3 = { 0 };
+
+    hr = co2wr(point, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p1, &pp1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &pp2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &pp3);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionPointTriangle(pos, pp1, pp2, pp3))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CheckCollisionPointLine(
+    IRayLibVector2* point,
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    long threshold,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!point)
+        return E_POINTER;
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 pos = { 0 };
+    WrRayLibVector2 pp1 = { 0 };
+    WrRayLibVector2 pp2 = { 0 };
+
+    hr = co2wr(point, &pos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p1, &pp1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &pp2);
+    if (FAILED(hr)) return hr;
+
+    if (WrRayLib::CheckCollisionPointLine(pos, pp1, pp2, threshold))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+
+
+//////////////////////////////////////////////
+// Module: RTEXT
+
+// Font loading/unloading functions
+
+
+// Text drawing functions
+
+STDMETHODIMP CoRayLib::DrawFPS(
+    long posX,
+    long posY
+)
+{
+    WrRayLib::DrawFPS((int)posX, (int)posY);
+
+    return S_OK;
+}
+#undef DrawText
+STDMETHODIMP CoRayLib::DrawText(
+    BSTR text,
+    long posX,
+    long posY,
+    long fontSize,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor clr = { 0 };
+
+    hr = co2wr(color, &clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawText(
+        _com_util::ConvertBSTRToString(text),
+        (int)posX,
+        (int)posY,
+        (int)fontSize,
+        clr
+    );
+
+    return S_OK;
+}
+
+//////////////////////////////////////////////
+// CoRayLib helpers
+STDMETHODIMP CoRayLib::CreateColor(
+    long r,
+    long g,
+    long b,
+    long a,
+    IRayLibColor** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_Red(r);
+        (*pRetVal)->put_Green(g);
+        (*pRetVal)->put_Blue(b);
+        (*pRetVal)->put_Alpha(a);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::CreateVector2(
+    float x,
+    float y,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_x(x);
+        (*pRetVal)->put_y(y);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::CreateVector3(
+    float x,
+    float y,
+    float z,
+    IRayLibVector3** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector3,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector3,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_x(x);
+        (*pRetVal)->put_y(y);
+        (*pRetVal)->put_z(z);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::CreateVector4(
+    float x,
+    float y,
+    float z,
+    float w,
+    IRayLibVector4** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector4,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector4,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_x(x);
+        (*pRetVal)->put_y(y);
+        (*pRetVal)->put_z(z);
+        (*pRetVal)->put_w(w);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::CreateQuaternion(
+    float x,
+    float y,
+    float z,
+    float w,
+    IRayLibVector4** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibQuaternion,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector4,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_x(x);
+        (*pRetVal)->put_y(y);
+        (*pRetVal)->put_z(z);
+        (*pRetVal)->put_w(w);
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::CreateRectangle(
+    float x,
+    float y,
+    float width,
+    float height,
+    IRayLibRectangle** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibRectangle,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRectangle,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_x(x);
+        (*pRetVal)->put_y(y);
+        (*pRetVal)->put_Width(width);
+        (*pRetVal)->put_Height(height);
+    }
+
+    return hr;
+}
