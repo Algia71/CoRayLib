@@ -21,6 +21,8 @@ Through this wrapper, **raylib** functions and structures can be used by any **W
     Wend
     raylib.CloseWindow
 
+![VBScript Hello World](https://github.com/Algia71/raylib-COM/blob/master/Images/hello-world-vbs.png?raw=true)
+
 ## Status
 *The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
 
