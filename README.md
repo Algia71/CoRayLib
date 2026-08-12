@@ -23,6 +23,23 @@ Through this wrapper, **raylib** functions and structures can be used by any **W
 
 ![VBScript Hello World](https://github.com/Algia71/raylib-COM/blob/master/Images/hello-world-vbs.png?raw=true)
 
+```VBScript
+' Hello world
+'
+Set raylib = CreateObject("RayLib")
+Set colorBg = raylib.CreateColor(245, 245, 245, 255) 'RAYWHITE
+Set colorFg = raylib.CreateColor(112, 31, 126, 255) 'DARKPURPLE
+raylib.SetTargetFPS 60
+raylib.InitWindow 850, 200, "Hello RayLib from VBScript"
+While Not raylib.WindowShouldClose
+    raylib.BeginDrawing
+    raylib.ClearBackground colorBg
+    raylib.DrawText "Hello, World!", 300, 80, 40, colorFg
+    raylib.EndDrawing
+Wend
+raylib.CloseWindow
+```
+
 ## Status
 *The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
 
