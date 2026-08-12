@@ -5,7 +5,7 @@ This is a [Windows Component Object Model (COM)](https://en.wikipedia.org/wiki/C
 Through this wrapper, **raylib** functions and structures can be used by any **Windows COM client**, such as [Windows Script Host (WSH)](https://en.wikipedia.org/wiki/Windows_Script_Host) and [Visual Basic For Applications (VBA)](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications). For instance, you can write [VBScript](https://en.wikipedia.org/wiki/VBScript) and [JScript](https://en.wikipedia.org/wiki/JScript) programs (.vbs and .js text files) to create graphical animations / games / ... with raylib.
 
 ## Status
-*The wrapper covers only a (small) part of the full raylib APIs. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
+*The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper.*  
 
 ## raylib version
 I wrapped **raylib version 6.0** (23 April 2026). raylib.lib binary files (debug and release versions) are included precompiled within the project.
