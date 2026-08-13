@@ -55,13 +55,13 @@ Project files were made with the Community Version **2022** (64-bit, v143), vers
 
 ## How to...
 ### ...build:
-It should be simple: open the solution in Visual Studio, choose **Debug** or **Release** and press **F7**. Please ensure that the **x64** platform is selected. The final output of the build process is the **CoRayLib.dll** located in the `x64\Debug` or `x64\Release` folder.
+It should be simple: open the solution in Visual Studio, choose **Debug** or **Release** and press **F7**. Please ensure that the **x64** platform is selected. The final output of the build process is the `CoRayLib.dll` located in the `x64\Debug` or `x64\Release` folder.
 
 ### ...install:
-Copy **CoRayLib.dll** to a local directory (e.g. `C:\coraylib`), open a terminal with administrative privileges (e.g. **Windows PowerShell**) and then run the command `regsvr32 c:\coraylib\CoRayLib.dll` .
+Copy `CoRayLib.dll` to a local directory (e.g. `C:\coraylib`), open a terminal with administrative privileges (e.g. **Windows PowerShell**) and then run the command `regsvr32 c:\coraylib\CoRayLib.dll` .
 
 ### ...test:
-Double click on one of the .vbs or .js scripts provided in the Scripts folder.  
+Double click on one of the .vbs or .js scripts provided in the `Scripts` folder.  
 
 ### ...uninstall:
-Open a terminal with administrative privileges (e.g. **Windows PowerShell**) and run the command `regsvr32 /u c:\coraylib\CoRayLib.dll` . Then simply delete **CoRayLib.dll**. 
+Open a terminal with administrative privileges and run the command `regsvr32 /u c:\coraylib\CoRayLib.dll` . Then simply delete `CoRayLib.dll`. 
