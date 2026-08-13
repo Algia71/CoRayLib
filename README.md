@@ -24,7 +24,7 @@ raylib.CloseWindow
 ```
 ![VBScript Hello World](https://github.com/Algia71/raylib-COM/blob/master/Images/hello-world-vbs.png?raw=true)
 
-## Hello World (VBScript)
+## Hello World (JScript)
 
 ```JavaScript
 // Hello world
