@@ -1,7 +1,7 @@
 # A Windows COM raylib wrapper
-![CoRayLib](https://github.com/Algia71/raylib-COM/blob/master/Images/CoRayLib.png?raw=true)
-
 This is a [Windows Component Object Model (COM)](https://en.wikipedia.org/wiki/Component_Object_Model) **wrapper** of the [raylib](https://github.com/raysan5/raylib) library.
+
+![CoRayLib](https://github.com/Algia71/raylib-COM/blob/master/Images/CoRayLib.png?raw=true)
 
 Through this wrapper, **raylib** functions and structures can be used by any **Windows COM client**, such as [Windows Script Host (WSH)](https://en.wikipedia.org/wiki/Windows_Script_Host) and [Visual Basic For Applications (VBA)](https://en.wikipedia.org/wiki/Visual_Basic_for_Applications). For instance, you can write [VBScript](https://en.wikipedia.org/wiki/VBScript) and [JScript](https://en.wikipedia.org/wiki/JScript) programs (.vbs and .js text files) to create graphical animations / games / ... with raylib.
 
