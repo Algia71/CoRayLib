@@ -162,12 +162,21 @@ interface IRayLib : IDispatch
     [id(17)] HRESULT MinimizeWindow(void);
     [id(18)] HRESULT RestoreWindow(void);
 
-    [id(20)] HRESULT GetScreenWidth([out, retval] long* pReVal);
-    [id(21)] HRESULT GetScreenHeight([out, retval] long* pReVal);
-    [id(22)] HRESULT GetRenderWidth([out, retval] long* pReVal);
-    [id(23)] HRESULT GetRenderHeight([out, retval] long* pReVal);
-    [id(24)] HRESULT GetMonitorCount([out, retval] long* pReVal);
-    [id(25)] HRESULT GetCurrentMonitor([out, retval] long* pReVal);
+    [id(21)] HRESULT SetWindowTitle([in] BSTR title);
+    [id(22)] HRESULT SetWindowPosition([in] long x, [in] long y);
+    [id(23)] HRESULT SetWindowMonitor([in] long monitor);
+    [id(24)] HRESULT SetWindowMinSize([in] long width, [in] long height);
+    [id(25)] HRESULT SetWindowMaxSize([in] long width, [in] long height);
+    [id(26)] HRESULT SetWindowSize([in] long width, [in] long height);
+    [id(27)] HRESULT SetWindowOpacity([in] float opacity);
+    [id(28)] HRESULT SetWindowFocused(void);
+//  [id(29)] HRESULT GetWindowHandle([out, retval] * pRetVal);
+    [id(30)] HRESULT GetScreenWidth([out, retval] long* pReVal);
+    [id(31)] HRESULT GetScreenHeight([out, retval] long* pReVal);
+    [id(32)] HRESULT GetRenderWidth([out, retval] long* pReVal);
+    [id(33)] HRESULT GetRenderHeight([out, retval] long* pReVal);
+    [id(34)] HRESULT GetMonitorCount([out, retval] long* pReVal);
+    [id(35)] HRESULT GetCurrentMonitor([out, retval] long* pReVal);
 
     // Cursor-related functions
     [id(60)] HRESULT ShowCursor(void);

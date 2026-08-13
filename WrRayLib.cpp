@@ -164,6 +164,64 @@ void WrRayLib::RestoreWindow(
 	::RestoreWindow();
 }
 
+void WrRayLib::SetWindowTitle(
+	const char* title
+)
+{
+	::SetWindowTitle(title);
+}
+void WrRayLib::SetWindowPosition(
+	int x,
+	int y
+)
+{
+	::SetWindowPosition(x, y);
+}
+void WrRayLib::SetWindowMonitor(
+	int monitor
+)
+{
+	::SetWindowMonitor(monitor);
+}
+void WrRayLib::SetWindowMinSize(
+	int width,
+	int height
+)
+{
+	::SetWindowMinSize(width, height);
+}
+void WrRayLib::SetWindowMaxSize(
+	int width,
+	int height
+)
+{
+	::SetWindowMaxSize(width, height);
+}
+void WrRayLib::SetWindowSize(
+	int width,
+	int height
+)
+{
+	::SetWindowSize(width, height);
+}
+void WrRayLib::SetWindowOpacity(
+	float opacity
+)
+{
+	::SetWindowOpacity(opacity);
+}
+void WrRayLib::SetWindowFocused(
+	void
+)
+{
+	::SetWindowFocused();
+}
+void* WrRayLib::GetWindowHandle(
+	void
+)
+{
+	return ::GetWindowHandle();
+}
 int WrRayLib::GetScreenWidth(
 	void
 )

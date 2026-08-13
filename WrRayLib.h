@@ -71,14 +71,37 @@ public:
 	static void MaximizeWindow(void);
 	static void MinimizeWindow(void);
 	static void RestoreWindow(void);
-
+//	static void SetWindowIcon(Image image);
+//	static void SetWindowIcons(Image* images, int count);
+	static void SetWindowTitle(const char* title);
+	static void SetWindowPosition(int x, int y);
+	static void SetWindowMonitor(int monitor);
+	static void SetWindowMinSize(int width, int height);
+	static void SetWindowMaxSize(int width, int height);
+	static void SetWindowSize(int width, int height);
+	static void SetWindowOpacity(float opacity);
+	static void SetWindowFocused(void);
+	static void* GetWindowHandle(void);
 	static int GetScreenWidth(void);
 	static int GetScreenHeight(void);
 	static int GetRenderWidth(void);
 	static int GetRenderHeight(void);
 	static int GetMonitorCount(void);
 	static int GetCurrentMonitor(void);
-
+//	static Vector2 GetMonitorPosition(int monitor);
+//	static int GetMonitorWidth(int monitor);
+//	static int GetMonitorHeight(int monitor);
+//	static int GetMonitorPhysicalWidth(int monitor);
+//	static int GetMonitorPhysicalHeight(int monitor);
+//	static int GetMonitorRefreshRate(int monitor);
+//	static Vector2 GetWindowPosition(void);
+//	static Vector2 GetWindowScaleDPI(void);
+//	static const char* GetMonitorName(int monitor);
+//	static void SetClipboardText(const char* text);
+//	static const char* GetClipboardText(void);
+//	static Image GetClipboardImage(void);
+//	static void EnableEventWaiting(void);
+//	static void DisableEventWaiting(void);
 
 	// Cursor-related functions
 	static void ShowCursor(void);

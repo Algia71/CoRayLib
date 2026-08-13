@@ -103,28 +103,57 @@ public:
     STDMETHODIMP IsWindowState(
         long flag,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP SetWindowState(
         long flags
-    );
+    ) override;
     STDMETHODIMP ClearWindowState(
         long flags
-    );
+    ) override;
     STDMETHODIMP ToggleFullscreen(
         void
-    );
+    ) override;
     STDMETHODIMP ToggleBorderlessWindowed(
         void
-    );
+    ) override;
     STDMETHODIMP MaximizeWindow(
         void
-    );
+    ) override;
     STDMETHODIMP MinimizeWindow(
         void
-    );
+    ) override;
     STDMETHODIMP RestoreWindow(
         void
-    );
+    ) override;
+
+    STDMETHODIMP SetWindowTitle(
+        BSTR title
+    ) override;
+    STDMETHODIMP SetWindowPosition(
+        long x,
+        long y
+    ) override;
+    STDMETHODIMP SetWindowMonitor(
+        long monitor
+    ) override;
+    STDMETHODIMP SetWindowMinSize(
+        long width,
+        long height
+    ) override;
+    STDMETHODIMP SetWindowMaxSize(
+        long width,
+        long height
+    ) override;
+    STDMETHODIMP SetWindowSize(
+        long width,
+        long height
+    ) override;
+    STDMETHODIMP SetWindowOpacity(
+        float opacity
+    ) override;
+    STDMETHODIMP SetWindowFocused(
+        void
+    ) override;
 
     STDMETHODIMP GetScreenWidth(
         long* pRetVal

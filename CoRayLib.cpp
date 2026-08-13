@@ -410,7 +410,9 @@ STDMETHODIMP CoRayLib::SetWindowState(
     long flags
 )
 {
-    WrRayLib::SetWindowState(flags);
+    WrRayLib::SetWindowState(
+        (unsigned int)flags
+    );
 
     return S_OK;
 }
@@ -418,7 +420,9 @@ STDMETHODIMP CoRayLib::ClearWindowState(
     long flags
 )
 {
-    WrRayLib::ClearWindowState(flags);
+    WrRayLib::ClearWindowState(
+        (unsigned int)flags
+    );
 
     return S_OK;
 }
@@ -426,7 +430,7 @@ STDMETHODIMP CoRayLib::ToggleFullscreen(
     void
 )
 {
-    WrRayLib::RestoreWindow();
+    WrRayLib::ToggleFullscreen();
 
     return S_OK;
 }
@@ -434,7 +438,7 @@ STDMETHODIMP CoRayLib::ToggleBorderlessWindowed(
     void
 )
 {
-    WrRayLib::RestoreWindow();
+    WrRayLib::ToggleBorderlessWindowed();
 
     return S_OK;
 }
@@ -442,7 +446,7 @@ STDMETHODIMP CoRayLib::MaximizeWindow(
     void
 )
 {
-    WrRayLib::RestoreWindow();
+    WrRayLib::MaximizeWindow();
 
     return S_OK;
 }
@@ -450,7 +454,7 @@ STDMETHODIMP CoRayLib::MinimizeWindow(
     void
 )
 {
-    WrRayLib::RestoreWindow();
+    WrRayLib::MinimizeWindow();
 
     return S_OK;
 }
@@ -462,7 +466,92 @@ STDMETHODIMP CoRayLib::RestoreWindow(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::SetWindowTitle(
+    BSTR title
+)
+{
+    WrRayLib::SetWindowTitle(
+        _com_util::ConvertBSTRToString(title)
+    );
 
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowPosition(
+    long x,
+    long y
+)
+{
+    WrRayLib::SetWindowPosition(
+        (int)x,
+        (int)y
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowMonitor(
+    long monitor
+)
+{
+    WrRayLib::SetWindowMonitor(
+        (int)monitor
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowMinSize(
+    long width,
+    long height
+)
+{
+    WrRayLib::SetWindowMinSize(
+        (int)width,
+        (int)height
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowMaxSize(
+    long width,
+    long height
+)
+{
+    WrRayLib::SetWindowMaxSize(
+        (int)width,
+        (int)height
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowSize(
+    long width,
+    long height
+)
+{
+    WrRayLib::SetWindowSize(
+        (int)width,
+        (int)height
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowOpacity(
+    float opacity
+)
+{
+    WrRayLib::SetWindowOpacity(
+        opacity
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowFocused(
+    void
+)
+{
+    WrRayLib::SetWindowFocused();
+
+    return S_OK;
+}
 
 STDMETHODIMP CoRayLib::GetScreenWidth(
     long* pRetVal
@@ -648,7 +737,9 @@ STDMETHODIMP CoRayLib::SetTargetFPS(
     long fps
 )
 {
-    WrRayLib::SetTargetFPS((int)fps);
+    WrRayLib::SetTargetFPS(
+        (int)fps
+    );
 
     return S_OK;
 }
@@ -694,7 +785,9 @@ STDMETHODIMP CoRayLib::SetRandomSeed(
     long seed
 )
 {
-    WrRayLib::SetRandomSeed((unsigned int)seed);
+    WrRayLib::SetRandomSeed(
+        (unsigned int)seed
+    );
 
     return S_OK;
 }
@@ -707,7 +800,10 @@ STDMETHODIMP CoRayLib::GetRandomValue(
     if (!pRetVal)
         return E_POINTER;
 
-    *pRetVal = WrRayLib::GetRandomValue((int)min, (int)max);
+    *pRetVal = WrRayLib::GetRandomValue(
+        (int)min,
+        (int)max
+    );
 
     return S_OK;
 }
@@ -828,7 +924,9 @@ STDMETHODIMP CoRayLib::SetExitKey(
     long key
 )
 {
-    WrRayLib::SetExitKey((int)key);
+    WrRayLib::SetExitKey(
+        (int)key
+    );
 
     return S_OK;
 }
@@ -976,7 +1074,10 @@ STDMETHODIMP CoRayLib::SetMousePosition(
     long y
 )
 {
-    WrRayLib::SetMousePosition(x, y);
+    WrRayLib::SetMousePosition(
+        (int)x,
+        (int)y
+    );
 
     return S_OK;
 }
@@ -985,7 +1086,10 @@ STDMETHODIMP CoRayLib::SetMouseOffset(
     long offsetY
 )
 {
-    WrRayLib::SetMouseOffset(offsetX, offsetY);
+    WrRayLib::SetMouseOffset(
+        (int)offsetX,
+        (int)offsetY
+    );
 
     return S_OK;
 }
@@ -994,7 +1098,10 @@ STDMETHODIMP CoRayLib::SetMouseScale(
     float scaleY
 )
 {
-    WrRayLib::SetMouseScale(scaleX, scaleY);
+    WrRayLib::SetMouseScale(
+        scaleX,
+        scaleY
+    );
 
     return S_OK;
 }
@@ -1122,10 +1229,10 @@ STDMETHODIMP CoRayLib::DrawLine(
     if (FAILED(hr)) return hr;
 
     WrRayLib::DrawLine(
-        startPosX,
-        startPosY,
-        endPosX,
-        endPosY,
+        (int)startPosX,
+        (int)startPosY,
+        (int)endPosX,
+        (int)endPosY,
         clr
     );
 
@@ -1216,8 +1323,8 @@ STDMETHODIMP CoRayLib::DrawCircle(
     if (FAILED(hr)) return hr;
 
     WrRayLib::DrawCircle(
-        centerX,
-        centerY,
+        (int)centerX,
+        (int)centerY,
         radius,
         clr
     );
@@ -1269,8 +1376,8 @@ STDMETHODIMP CoRayLib::DrawCircleLines(
     if (FAILED(hr)) return hr;
 
     WrRayLib::DrawCircleLines(
-        centerX,
-        centerY,
+        (int)centerX,
+        (int)centerY,
         radius,
         clr
     );
@@ -1323,8 +1430,8 @@ STDMETHODIMP CoRayLib::DrawEllipse(
     if (FAILED(hr)) return hr;
 
     WrRayLib::DrawEllipse(
-        centerX,
-        centerY,
+        (int)centerX,
+        (int)centerY,
         radiusH,
         radiusV,
         clr
@@ -1380,8 +1487,8 @@ STDMETHODIMP CoRayLib::DrawEllipseLines(
     if (FAILED(hr)) return hr;
 
     WrRayLib::DrawEllipseLines(
-        centerX,
-        centerY,
+        (int)centerX,
+        (int)centerY,
         radiusH,
         radiusV,
         clr
@@ -1437,8 +1544,8 @@ STDMETHODIMP CoRayLib::DrawRectangle(
     if (FAILED(hr)) return hr;
 
     WrRayLib::DrawRectangle(
-        posX,
-        posY,
+        (int)posX,
+        (int)posY,
         width,
         height,
         clr
@@ -1609,7 +1716,7 @@ STDMETHODIMP CoRayLib::DrawPoly(
 
     WrRayLib::DrawPoly(
         pos,
-        sides,
+        (int)sides,
         radius,
         rotation,
         clr
@@ -1641,7 +1748,7 @@ STDMETHODIMP CoRayLib::DrawPolyLines(
 
     WrRayLib::DrawPolyLines(
         pos,
-        sides,
+        (int)sides,
         radius,
         rotation,
         clr
@@ -1906,7 +2013,7 @@ STDMETHODIMP CoRayLib::CheckCollisionPointLine(
     hr = co2wr(p2, &pp2);
     if (FAILED(hr)) return hr;
 
-    if (WrRayLib::CheckCollisionPointLine(pos, pp1, pp2, threshold))
+    if (WrRayLib::CheckCollisionPointLine(pos, pp1, pp2, (int)threshold))
         *pRetVal = VARIANT_TRUE;
     else
         *pRetVal = VARIANT_FALSE;
@@ -1928,7 +2035,10 @@ STDMETHODIMP CoRayLib::DrawFPS(
     long posY
 )
 {
-    WrRayLib::DrawFPS((int)posX, (int)posY);
+    WrRayLib::DrawFPS(
+        (int)posX,
+        (int)posY
+    );
 
     return S_OK;
 }
