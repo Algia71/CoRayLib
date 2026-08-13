@@ -173,6 +173,53 @@ public:
     STDMETHODIMP GetCurrentMonitor(
         long* pRetVal
     ) override;
+    STDMETHODIMP GetMonitorPosition(
+        long monitor,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorWidth(
+        long monitor,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorHeight(
+        long monitor,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorPhysicalWidth(
+        long monitor,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorPhysicalHeight(
+        long monitor,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorRefreshRate(
+        long monitor,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetWindowPosition(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetWindowScaleDPI(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetMonitorName(
+        long monitor,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP SetClipboardText(
+        BSTR text
+    ) override;
+    STDMETHODIMP GetClipboardText(
+        BSTR* pRetVal
+    ) override;
+
+    STDMETHODIMP EnableEventWaiting(
+        void
+    ) override;
+    STDMETHODIMP DisableEventWaiting(
+        void
+    ) override;
 
 
     // Cursor-related functions
@@ -336,6 +383,23 @@ public:
     ) override;
 
     // Input-related functions: touch
+    STDMETHODIMP GetTouchX(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetTouchY(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetTouchPosition(
+        long index,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetTouchPointId(
+        long index,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetTouchPointCount(
+        long* pRetVal
+    ) override;
 
     // Gestures and Touch Handling Functions (Module: rgestures)
 

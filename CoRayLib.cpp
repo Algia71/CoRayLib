@@ -619,6 +619,213 @@ STDMETHODIMP CoRayLib::GetCurrentMonitor(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::GetMonitorPosition(
+    long monitor,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetMonitorPosition(
+            (int)monitor
+        );
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorWidth(
+    long monitor,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMonitorWidth(
+        (int)monitor
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorHeight(
+    long monitor,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMonitorHeight(
+        (int)monitor
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorPhysicalWidth(
+    long monitor,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMonitorPhysicalWidth(
+        (int)monitor
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorPhysicalHeight(
+    long monitor,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMonitorPhysicalHeight(
+        (int)monitor
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorRefreshRate(
+    long monitor,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMonitorRefreshRate(
+        (int)monitor
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetWindowPosition(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetWindowPosition();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetWindowScaleDPI(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetWindowScaleDPI();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMonitorName(
+    long monitor,
+    BSTR* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::GetMonitorName(
+            (int)monitor
+        )
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetClipboardText(
+    BSTR text
+)
+{
+    WrRayLib::SetClipboardText(
+        _com_util::ConvertBSTRToString(text)
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetClipboardText(
+    BSTR* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::GetClipboardText()
+    );
+
+    return S_OK;
+}
+
+STDMETHODIMP CoRayLib::EnableEventWaiting(
+    void
+)
+{
+    WrRayLib::EnableEventWaiting();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::DisableEventWaiting(
+    void
+)
+{
+    WrRayLib::DisableEventWaiting();
+
+    return S_OK;
+}
 
 
 // Cursor-related functions
@@ -1153,6 +1360,83 @@ STDMETHODIMP CoRayLib::SetMouseCursor(
 
 
 // Input-related functions: touch
+STDMETHODIMP CoRayLib::GetTouchX(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetTouchX();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTouchY(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetTouchY();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTouchPosition(
+    long index,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetTouchPosition(
+            (int)index
+        );
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTouchPointId(
+    long index,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetTouchPointId(
+        (int)index
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTouchPointCount(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetTouchPointCount();
+
+    return S_OK;
+}
+
 
 // Gestures and Touch Handling Functions (Module: rgestures)
 

@@ -88,20 +88,20 @@ public:
 	static int GetRenderHeight(void);
 	static int GetMonitorCount(void);
 	static int GetCurrentMonitor(void);
-//	static Vector2 GetMonitorPosition(int monitor);
-//	static int GetMonitorWidth(int monitor);
-//	static int GetMonitorHeight(int monitor);
-//	static int GetMonitorPhysicalWidth(int monitor);
-//	static int GetMonitorPhysicalHeight(int monitor);
-//	static int GetMonitorRefreshRate(int monitor);
-//	static Vector2 GetWindowPosition(void);
-//	static Vector2 GetWindowScaleDPI(void);
-//	static const char* GetMonitorName(int monitor);
-//	static void SetClipboardText(const char* text);
-//	static const char* GetClipboardText(void);
+	static WrRayLibVector2 GetMonitorPosition(int monitor);
+	static int GetMonitorWidth(int monitor);
+	static int GetMonitorHeight(int monitor);
+	static int GetMonitorPhysicalWidth(int monitor);
+	static int GetMonitorPhysicalHeight(int monitor);
+	static int GetMonitorRefreshRate(int monitor);
+	static WrRayLibVector2 GetWindowPosition(void);
+	static WrRayLibVector2 GetWindowScaleDPI(void);
+	static const char* GetMonitorName(int monitor);
+	static void SetClipboardText(const char* text);
+	static const char* GetClipboardText(void);
 //	static Image GetClipboardImage(void);
-//	static void EnableEventWaiting(void);
-//	static void DisableEventWaiting(void);
+	static void EnableEventWaiting(void);
+	static void DisableEventWaiting(void);
 
 	// Cursor-related functions
 	static void ShowCursor(void);
@@ -151,6 +151,13 @@ public:
 	static float GetMouseWheelMove(void);
 	static WrRayLibVector2 GetMouseWheelMoveV(void);
 	static void SetMouseCursor(int cursor);
+
+	// Input-related functions: touch
+	static int GetTouchX(void);
+	static int GetTouchY(void);
+	static WrRayLibVector2 GetTouchPosition(int index);
+	static int GetTouchPointId(int index);
+	static int GetTouchPointCount(void);
 
 	// Basic shapes drawing functions
 	static void DrawPixel(int posX, int posY, WrRayLibColor color);

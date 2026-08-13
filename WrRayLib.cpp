@@ -258,6 +258,87 @@ int WrRayLib::GetCurrentMonitor(
 {
 	return ::GetCurrentMonitor();
 }
+WrRayLibVector2 WrRayLib::GetMonitorPosition(
+	int monitor
+)
+{
+	return rl2wr_vector2(::GetMonitorPosition(monitor));
+}
+int WrRayLib::GetMonitorWidth(
+	int monitor
+)
+{
+	return ::GetMonitorWidth(monitor);
+}
+int WrRayLib::GetMonitorHeight(
+	int monitor
+)
+{
+	return ::GetMonitorHeight(monitor);
+}
+int WrRayLib::GetMonitorPhysicalWidth(
+	int monitor
+)
+{
+	return ::GetMonitorPhysicalWidth(monitor);
+}
+int WrRayLib::GetMonitorPhysicalHeight(
+	int monitor
+)
+{
+	return ::GetMonitorPhysicalHeight(monitor);
+}
+int WrRayLib::GetMonitorRefreshRate(
+	int monitor
+)
+{
+	return ::GetMonitorRefreshRate(monitor);
+}
+WrRayLibVector2 WrRayLib::GetWindowPosition(
+	void
+)
+{
+	return rl2wr_vector2(::GetWindowPosition());
+}
+WrRayLibVector2 WrRayLib::GetWindowScaleDPI(
+	void
+)
+{
+	return rl2wr_vector2(::GetWindowScaleDPI());
+}
+const char* WrRayLib::GetMonitorName(
+	int monitor
+)
+{
+	return ::GetMonitorName(monitor);
+}
+void WrRayLib::SetClipboardText(
+	const char* text
+)
+{
+	::SetClipboardText(
+		text
+	);
+}
+const char* WrRayLib::GetClipboardText(
+	void
+)
+{
+	return ::GetClipboardText();
+}
+
+void WrRayLib::EnableEventWaiting(
+	void
+)
+{
+	::EnableEventWaiting();
+}
+void WrRayLib::DisableEventWaiting(
+	void
+)
+{
+	::DisableEventWaiting();
+}
 
 
 // Cursor-related functions
@@ -508,6 +589,39 @@ void WrRayLib::SetMouseCursor(
 )
 {
 	return ::SetMouseCursor(cursor);
+}
+
+
+// Input-related functions: touch
+int WrRayLib::GetTouchX(
+	void
+)
+{
+	return ::GetTouchX();
+}
+int WrRayLib::GetTouchY(
+	void
+)
+{
+	return ::GetTouchY();
+}
+WrRayLibVector2 WrRayLib::GetTouchPosition(
+	int index
+)
+{
+	return rl2wr_vector2(::GetTouchPosition(index));
+}
+int WrRayLib::GetTouchPointId(
+	int index
+)
+{
+	return ::GetTouchPointId(index);
+}
+int WrRayLib::GetTouchPointCount(
+	void
+)
+{
+	return ::GetTouchPointCount();
 }
 
 

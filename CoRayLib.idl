@@ -161,7 +161,8 @@ interface IRayLib : IDispatch
     [id(16)] HRESULT MaximizeWindow(void);
     [id(17)] HRESULT MinimizeWindow(void);
     [id(18)] HRESULT RestoreWindow(void);
-
+//	[id(19)] HRESULT SetWindowIcon(Image image);
+//	[id(20)] HRESULT SetWindowIcons(Image* images, int count);
     [id(21)] HRESULT SetWindowTitle([in] BSTR title);
     [id(22)] HRESULT SetWindowPosition([in] long x, [in] long y);
     [id(23)] HRESULT SetWindowMonitor([in] long monitor);
@@ -177,14 +178,28 @@ interface IRayLib : IDispatch
     [id(33)] HRESULT GetRenderHeight([out, retval] long* pReVal);
     [id(34)] HRESULT GetMonitorCount([out, retval] long* pReVal);
     [id(35)] HRESULT GetCurrentMonitor([out, retval] long* pReVal);
+    [id(36)] HRESULT GetMonitorPosition([in] long monitor, [out, retval] IRayLibVector2** pRetVal);
+    [id(37)] HRESULT GetMonitorWidth([in] long monitor, [out, retval] long* pRetVal);
+    [id(38)] HRESULT GetMonitorHeight([in] long monitor, [out, retval] long* pRetVal);
+    [id(39)] HRESULT GetMonitorPhysicalWidth([in] long monitor, [out, retval] long* pRetVal);
+    [id(40)] HRESULT GetMonitorPhysicalHeight([in] long monitor, [out, retval] long* pRetVal);
+    [id(41)] HRESULT GetMonitorRefreshRate([in] long monitor, [out, retval] long* pRetVal);
+    [id(42)] HRESULT GetWindowPosition([out, retval] IRayLibVector2** pRetVal);
+    [id(43)] HRESULT GetWindowScaleDPI([out, retval] IRayLibVector2** pRetVal);
+    [id(44)] HRESULT GetMonitorName([in] long monitor, [out, retval] BSTR* pRetVal);
+    [id(45)] HRESULT SetClipboardText([in] BSTR text);
+    [id(46)] HRESULT GetClipboardText([out, retval] BSTR* pRetVal);
+ //	[id(47)] HRESULT Image GetClipboardImage(void);
+    [id(48)] HRESULT EnableEventWaiting(void);
+    [id(49)] HRESULT DisableEventWaiting(void);
 
     // Cursor-related functions
-    [id(60)] HRESULT ShowCursor(void);
-    [id(61)] HRESULT HideCursor(void);
-    [id(62)] HRESULT IsCursorHidden([out, retval] VARIANT_BOOL* pRetVal);
-    [id(63)] HRESULT EnableCursor(void);
-    [id(64)] HRESULT DisableCursor(void);
-    [id(65)] HRESULT IsCursorOnScreen([out, retval] VARIANT_BOOL* pRetVal);
+    [id(50)] HRESULT ShowCursor(void);
+    [id(51)] HRESULT HideCursor(void);
+    [id(52)] HRESULT IsCursorHidden([out, retval] VARIANT_BOOL* pRetVal);
+    [id(53)] HRESULT EnableCursor(void);
+    [id(54)] HRESULT DisableCursor(void);
+    [id(55)] HRESULT IsCursorOnScreen([out, retval] VARIANT_BOOL* pRetVal);
 
     // Drawing-related functions
     [id(70)] HRESULT ClearBackground([in] IRayLibColor* color);
@@ -224,7 +239,6 @@ interface IRayLib : IDispatch
     // Automation events functionality
 
     // Input-related functions: keyboard
-
     [id(330)] HRESULT IsKeyPressed([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
     [id(331)] HRESULT IsKeyPressedRepeat([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
     [id(332)] HRESULT IsKeyDown([in] long key, [out, retval] VARIANT_BOOL* pRetVal);
@@ -253,6 +267,11 @@ interface IRayLib : IDispatch
     [id(373)] HRESULT SetMouseCursor([in] long cursor);
 
     // Input-related functions: touch
+    [id(374)] HRESULT GetTouchX([out, retval] long* pRetVal);
+    [id(375)] HRESULT GetTouchY([out, retval] long* pRetVal);
+    [id(376)] HRESULT GetTouchPosition([in] long index, [out, retval] IRayLibVector2** pRetVal);
+    [id(377)] HRESULT GetTouchPointId([in] long index, [out, retval] long* pRetVal);
+    [id(378)] HRESULT GetTouchPointCount([out, retval] long* pRetVal);
 
     // Gestures and Touch Handling Functions (Module: rgestures)
 
