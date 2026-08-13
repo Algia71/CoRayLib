@@ -391,6 +391,77 @@ STDMETHODIMP CoRayLib::IsWindowResized(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::IsWindowState(
+    long flag,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsWindowState(flag))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetWindowState(
+    long flags
+)
+{
+    WrRayLib::SetWindowState(flags);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::ClearWindowState(
+    long flags
+)
+{
+    WrRayLib::ClearWindowState(flags);
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::ToggleFullscreen(
+    void
+)
+{
+    WrRayLib::RestoreWindow();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::ToggleBorderlessWindowed(
+    void
+)
+{
+    WrRayLib::RestoreWindow();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::MaximizeWindow(
+    void
+)
+{
+    WrRayLib::RestoreWindow();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::MinimizeWindow(
+    void
+)
+{
+    WrRayLib::RestoreWindow();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::RestoreWindow(
+    void
+)
+{
+    WrRayLib::RestoreWindow();
+
+    return S_OK;
+}
 
 
 STDMETHODIMP CoRayLib::GetScreenWidth(

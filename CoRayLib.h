@@ -100,6 +100,31 @@ public:
     STDMETHODIMP IsWindowResized(
         VARIANT_BOOL* pRetVal
     ) override;
+    STDMETHODIMP IsWindowState(
+        long flag,
+        VARIANT_BOOL* pRetVal
+    );
+    STDMETHODIMP SetWindowState(
+        long flags
+    );
+    STDMETHODIMP ClearWindowState(
+        long flags
+    );
+    STDMETHODIMP ToggleFullscreen(
+        void
+    );
+    STDMETHODIMP ToggleBorderlessWindowed(
+        void
+    );
+    STDMETHODIMP MaximizeWindow(
+        void
+    );
+    STDMETHODIMP MinimizeWindow(
+        void
+    );
+    STDMETHODIMP RestoreWindow(
+        void
+    );
 
     STDMETHODIMP GetScreenWidth(
         long* pRetVal

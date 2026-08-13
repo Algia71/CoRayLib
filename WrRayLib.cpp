@@ -115,6 +115,54 @@ bool WrRayLib::IsWindowResized(
 {
 	return ::IsWindowResized();
 }
+bool WrRayLib::IsWindowState(
+	unsigned int flag
+)
+{
+	return ::IsWindowState(flag);
+}
+void WrRayLib::SetWindowState(
+	unsigned int flags
+)
+{
+	::SetWindowState(flags);
+}
+void WrRayLib::ClearWindowState(
+	unsigned int flags
+)
+{
+	::ClearWindowState(flags);
+}
+void WrRayLib::ToggleFullscreen(
+	void
+)
+{
+	::ToggleFullscreen();
+}
+void WrRayLib::ToggleBorderlessWindowed(
+	void
+)
+{
+	::ToggleBorderlessWindowed();
+}
+void WrRayLib::MaximizeWindow(
+	void
+)
+{
+	::MaximizeWindow();
+}
+void WrRayLib::MinimizeWindow(
+	void
+)
+{
+	::MinimizeWindow();
+}
+void WrRayLib::RestoreWindow(
+	void
+)
+{
+	::RestoreWindow();
+}
 
 int WrRayLib::GetScreenWidth(
 	void

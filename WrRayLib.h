@@ -63,6 +63,14 @@ public:
 	static bool IsWindowMaximized(void);
 	static bool IsWindowFocused(void);
 	static bool IsWindowResized(void);
+	static bool IsWindowState(unsigned int flag);
+	static void SetWindowState(unsigned int flags);
+	static void ClearWindowState(unsigned int flags);
+	static void ToggleFullscreen(void);
+	static void ToggleBorderlessWindowed(void);
+	static void MaximizeWindow(void);
+	static void MinimizeWindow(void);
+	static void RestoreWindow(void);
 
 	static int GetScreenWidth(void);
 	static int GetScreenHeight(void);

@@ -153,6 +153,14 @@ interface IRayLib : IDispatch
     [id(8)] HRESULT IsWindowMaximized([out, retval] VARIANT_BOOL* pRetVal);
     [id(9)] HRESULT IsWindowFocused([out, retval] VARIANT_BOOL* pRetVal);
     [id(10)] HRESULT IsWindowResized([out, retval] VARIANT_BOOL* pRetVal);
+    [id(11)] HRESULT IsWindowState([in] long flag, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(12)] HRESULT SetWindowState([in] long flags);
+    [id(13)] HRESULT ClearWindowState([in] long flags);
+    [id(14)] HRESULT ToggleFullscreen(void);
+    [id(15)] HRESULT ToggleBorderlessWindowed(void);
+    [id(16)] HRESULT MaximizeWindow(void);
+    [id(17)] HRESULT MinimizeWindow(void);
+    [id(18)] HRESULT RestoreWindow(void);
 
     [id(20)] HRESULT GetScreenWidth([out, retval] long* pReVal);
     [id(21)] HRESULT GetScreenHeight([out, retval] long* pReVal);
