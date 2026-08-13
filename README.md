@@ -1,4 +1,5 @@
 # A Windows COM raylib wrapper
+![CoRayLib](https://github.com/Algia71/raylib-COM/blob/master/Images/CoRayLib.png?raw=true)
 
 This is a [Windows Component Object Model (COM)](https://en.wikipedia.org/wiki/Component_Object_Model) **wrapper** of the [raylib](https://github.com/raysan5/raylib) library.
 
