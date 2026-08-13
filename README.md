@@ -33,14 +33,15 @@ I wrapped **raylib version 6.0** (23 April 2026). raylib.lib binary files (debug
 ## Visual Studio version
 Project files were made with the Community Version **2022** (64-bit, v143), version 17.14.37 (July 2026).
 
-# How to build
+# How to...
+## ...build
 It should be simple: open the solution in Visual Studio, choose **Debug** or **Release** and press **F7**. Please ensure that the **x64** platform is selected. The final output of the build process is the **CoRayLib.dll** located in the `x64\Debug` or `x64\Release` folder.
 
-# How to install
+## ...install
 Copy **CoRayLib.dll** to a local directory (e.g. `C:\coraylib`), open a terminal with administrative privileges (e.g. **Windows PowerShell**) and then run the command `regsvr32 c:\coraylib\CoRayLib.dll` .
 
-# How to test
+## ...test
 Double click on one of the .vbs or .js scripts provided in the Scripts folder.  
 
-# How to uninstall
+## ...uninstall
 Open a terminal with administrative privileges (e.g. **Windows PowerShell**) and run the command `regsvr32 /u c:\coraylib\CoRayLib.dll` . Then simply delete **CoRayLib.dll**. 
