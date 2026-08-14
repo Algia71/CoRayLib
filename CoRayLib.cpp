@@ -1140,6 +1140,173 @@ STDMETHODIMP CoRayLib::SetExitKey(
 
 
 // Input-related functions: gamepads
+STDMETHODIMP CoRayLib::IsGamepadAvailable(
+    long gamepad,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsGamepadAvailable((int)gamepad))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGamepadName(
+    long gamepad,
+    BSTR* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::GetGamepadName(
+            (int)gamepad
+        )
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsGamepadButtonPressed(
+    long gamepad,
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsGamepadButtonPressed((int)gamepad, (int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsGamepadButtonDown(
+    long gamepad,
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsGamepadButtonDown((int)gamepad, (int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsGamepadButtonReleased(
+    long gamepad,
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsGamepadButtonReleased((int)gamepad, (int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsGamepadButtonUp(
+    long gamepad,
+    long button,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsGamepadButtonUp((int)gamepad, (int)button))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGamepadButtonPressed(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetGamepadButtonPressed();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGamepadAxisCount(
+    long gamepad,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetGamepadAxisCount(
+        (int)gamepad
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGamepadAxisMovement(
+    long gamepad,
+    long axis,
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetGamepadAxisMovement(
+        (int)gamepad,
+        (int)axis
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetGamepadMappings(
+    BSTR mappings,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::SetGamepadMappings(
+        _com_util::ConvertBSTRToString(mappings)
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetGamepadVibration(
+    long gamepad,
+    float leftMotor,
+    float rightMotor,
+    float duration
+)
+{
+    WrRayLib::SetGamepadVibration(
+        (int)gamepad,
+        leftMotor,
+        rightMotor,
+        duration
+    );
+
+    return S_OK;
+}
+
 
 // Input-related functions: mouse
 STDMETHODIMP CoRayLib::IsMouseButtonPressed(

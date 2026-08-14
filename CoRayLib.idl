@@ -249,6 +249,17 @@ interface IRayLib : IDispatch
     [id(337)] HRESULT SetExitKey([in] long key);
 
     // Input-related functions: gamepads
+    [id(338)] HRESULT IsGamepadAvailable([in] long gamepad, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(339)] HRESULT GetGamepadName([in] long gamepad, [out, retval] BSTR* pRetVal);
+    [id(340)] HRESULT IsGamepadButtonPressed([in] long gamepad, [in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(341)] HRESULT IsGamepadButtonDown([in] long gamepad, [in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(342)] HRESULT IsGamepadButtonReleased([in] long gamepad, [in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(343)] HRESULT IsGamepadButtonUp([in] long gamepad, [in] long button, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(344)] HRESULT GetGamepadButtonPressed([out, retval] long* pRetVal);
+    [id(345)] HRESULT GetGamepadAxisCount([in] long gamepad, [out, retval] long* pRetVal);
+    [id(346)] HRESULT GetGamepadAxisMovement([in] long gamepad, [in] long axis, [out, retval] float* pRetVal);
+    [id(347)] HRESULT SetGamepadMappings([in] BSTR mappings, [out, retval] long* pRetVal);
+    [id(348)] HRESULT SetGamepadVibration([in] long gamepad, [in] float leftMotor, [in] float rightMotor, [in] float duration);
 
     // Input-related functions: mouse
     [id(360)] HRESULT IsMouseButtonPressed([in] long button, [out, retval] VARIANT_BOOL* pRetVal);

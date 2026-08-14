@@ -162,6 +162,17 @@ public:
 	static void SetExitKey(int key);
 
 	// Input-related functions: gamepads
+	static bool IsGamepadAvailable(int gamepad);
+	static const char* GetGamepadName(int gamepad);
+	static bool IsGamepadButtonPressed(int gamepad, int button);
+	static bool IsGamepadButtonDown(int gamepad, int button);
+	static bool IsGamepadButtonReleased(int gamepad, int button);
+	static bool IsGamepadButtonUp(int gamepad, int button);
+	static int GetGamepadButtonPressed(void);
+	static int GetGamepadAxisCount(int gamepad);
+	static float GetGamepadAxisMovement(int gamepad, int axis);
+	static int SetGamepadMappings(const char* mappings);
+	static void SetGamepadVibration(int gamepad, float leftMotor, float rightMotor, float duration);
 
 	// Input-related functions: mouse
 	static bool IsMouseButtonPressed(int button);

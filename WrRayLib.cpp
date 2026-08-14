@@ -501,6 +501,112 @@ void WrRayLib::SetExitKey(
 }
 
 
+// Input-related functions: gamepads
+
+bool WrRayLib::IsGamepadAvailable(
+	int gamepad
+)
+{
+	return ::IsGamepadAvailable(
+		gamepad
+	);
+}
+const char* WrRayLib::GetGamepadName(
+	int gamepad
+)
+{
+	return ::GetGamepadName(
+		gamepad
+	);
+}
+bool WrRayLib::IsGamepadButtonPressed(
+	int gamepad,
+	int button
+)
+{
+	return ::IsGamepadButtonPressed(
+		gamepad,
+		button
+	);
+}
+bool WrRayLib::IsGamepadButtonDown(
+	int gamepad,
+	int button
+)
+{
+	return ::IsGamepadButtonDown(
+		gamepad,
+		button
+	);
+}
+bool WrRayLib::IsGamepadButtonReleased(
+	int gamepad,
+	int button
+)
+{
+	return ::IsGamepadButtonReleased(
+		gamepad,
+		button
+	);
+}
+bool WrRayLib::IsGamepadButtonUp(
+	int gamepad,
+	int button
+)
+{
+	return ::IsGamepadButtonUp(
+		gamepad,
+		button
+	);
+}
+int WrRayLib::GetGamepadButtonPressed(
+	void
+)
+{
+	return ::GetGamepadButtonPressed();
+}
+int WrRayLib::GetGamepadAxisCount(
+	int gamepad
+)
+{
+	return ::GetGamepadAxisCount(
+		gamepad
+	);
+}
+float WrRayLib::GetGamepadAxisMovement(
+	int gamepad,
+	int axis
+)
+{
+	return ::GetGamepadAxisMovement(
+		gamepad,
+		axis
+	);
+}
+int WrRayLib::SetGamepadMappings(
+	const char* mappings
+)
+{
+	return ::SetGamepadMappings(
+		mappings
+	);
+}
+void WrRayLib::SetGamepadVibration(
+	int gamepad,
+	float leftMotor,
+	float rightMotor,
+	float duration
+)
+{
+	::SetGamepadVibration(
+		gamepad,
+		leftMotor,
+		rightMotor,
+		duration
+	);
+}
+
+
 // Input-related functions: mouse
 
 bool WrRayLib::IsMouseButtonPressed(

@@ -331,6 +331,55 @@ public:
     ) override;
 
     // Input-related functions: gamepads
+    STDMETHODIMP IsGamepadAvailable(
+        long gamepad,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP GetGamepadName(
+        long gamepad,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP IsGamepadButtonPressed(
+        long gamepad,
+        long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsGamepadButtonDown(
+        long gamepad,
+        long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsGamepadButtonReleased(
+        long gamepad,
+        long button,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP IsGamepadButtonUp(
+        long gamepad,
+        long button,
+        VARIANT_BOOL* pRetVal) override;
+    STDMETHODIMP GetGamepadButtonPressed(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetGamepadAxisCount(
+        long gamepad,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetGamepadAxisMovement(
+        long gamepad,
+        long axis,
+        float* pRetVal
+    ) override;
+    STDMETHODIMP SetGamepadMappings(
+        BSTR mappings,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP SetGamepadVibration(
+        long gamepad,
+        float leftMotor,
+        float rightMotor,
+        float duration
+    ) override;
 
     // Input-related functions: mouse
     STDMETHODIMP IsMouseButtonPressed(
