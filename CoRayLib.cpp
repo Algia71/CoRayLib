@@ -1606,6 +1606,128 @@ STDMETHODIMP CoRayLib::GetTouchPointCount(
 
 
 // Gestures and Touch Handling Functions (Module: rgestures)
+STDMETHODIMP CoRayLib::SetGesturesEnabled(
+    long flags
+)
+{
+    WrRayLib::SetGesturesEnabled(
+        (unsigned int)flags
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsGestureDetected(
+    long gesture,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsGestureDetected((unsigned int)gesture))
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGestureDetected(
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+    
+    *pRetVal = WrRayLib::GetGestureDetected();
+    
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGestureHoldDuration(
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetGestureHoldDuration();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGestureDragVector(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetGestureDragVector();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGestureDragAngle(
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetGestureDragAngle();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGesturePinchVector(
+    IRayLibVector2** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    const HRESULT hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        const WrRayLibVector2 v = WrRayLib::GetGesturePinchVector();
+
+        (*pRetVal)->put_x(v.x);
+        (*pRetVal)->put_y(v.y);
+    }
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetGesturePinchAngle(
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetGesturePinchAngle();
+
+    return S_OK;
+}
+
 
 // Camera System Functions (Module: rcamera)
 

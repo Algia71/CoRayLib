@@ -285,6 +285,14 @@ interface IRayLib : IDispatch
     [id(378)] HRESULT GetTouchPointCount([out, retval] long* pRetVal);
 
     // Gestures and Touch Handling Functions (Module: rgestures)
+    [id(379)] HRESULT SetGesturesEnabled([in] long flags);
+    [id(380)] HRESULT IsGestureDetected([in] long gesture, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(381)] HRESULT GetGestureDetected([out, retval] long* pRetVal);
+    [id(382)] HRESULT GetGestureHoldDuration([out, retval] float* pRetVal);
+    [id(383)] HRESULT GetGestureDragVector([out, retval] IRayLibVector2** pRetVal);
+    [id(384)] HRESULT GetGestureDragAngle([out, retval] float* pRetVal);
+    [id(385)] HRESULT GetGesturePinchVector([out, retval] IRayLibVector2** pRetVal);
+    [id(386)] HRESULT GetGesturePinchAngle([out, retval] float* pRetVal);
 
     // Camera System Functions (Module: rcamera)
 

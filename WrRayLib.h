@@ -198,6 +198,14 @@ public:
 	static int GetTouchPointCount(void);
 
 	// Gestures and Touch Handling Functions (Module: rgestures)
+	static void SetGesturesEnabled(unsigned int flags);
+	static bool IsGestureDetected(unsigned int gesture);
+	static int GetGestureDetected(void);
+	static float GetGestureHoldDuration(void);
+	static WrRayLibVector2 GetGestureDragVector(void);
+	static float GetGestureDragAngle(void);
+	static WrRayLibVector2 GetGesturePinchVector(void);
+	static float GetGesturePinchAngle(void);
 
 	// Camera System Functions (Module: rcamera)
 

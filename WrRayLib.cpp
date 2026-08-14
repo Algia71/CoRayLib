@@ -7,42 +7,42 @@
 
 // non-RayLib transformation functions (helpers)
 
-static inline Color wr2rl_color(
+static Color inline wr2rl_color(
 	WrRayLibColor color
 )
 {
 	return { color.r, color.g, color.b, color.a };
 }
 
-static inline Vector2 wr2rl_vector2(
+static Vector2 inline wr2rl_vector2(
 	WrRayLibVector2 vector
 )
 {
 	return { vector.x, vector.y };
 }
 
-static inline Vector3 wr2rl_vector3(
+static Vector3 inline wr2rl_vector3(
 	WrRayLibVector3 vector
 )
 {
 	return { vector.x, vector.y, vector.z };
 }
 
-static inline Vector4 wr2rl_vector4(
+static Vector4 inline wr2rl_vector4(
 	WrRayLibVector4 vector
 )
 {
 	return { vector.x, vector.y, vector.z, vector.w };
 }
 
-static inline Rectangle wr2rl_rect(
+static Rectangle inline wr2rl_rect(
 	WrRayLibRectangle rect
 )
 {
 	return { rect.x, rect.y, rect.width, rect.height };
 }
 
-static inline WrRayLibVector2 rl2wr_vector2(
+static WrRayLibVector2 inline rl2wr_vector2(
 	Vector2 vector
 )
 {
@@ -216,7 +216,7 @@ void WrRayLib::SetWindowFocused(
 {
 	::SetWindowFocused();
 }
-void* WrRayLib::GetWindowHandle(
+void *WrRayLib::GetWindowHandle(
 	void
 )
 {
@@ -728,6 +728,66 @@ int WrRayLib::GetTouchPointCount(
 )
 {
 	return ::GetTouchPointCount();
+}
+
+
+// Gestures and Touch Handling Functions (Module: rgestures)
+
+void WrRayLib::SetGesturesEnabled(
+	unsigned int flags
+)
+{
+	::SetGesturesEnabled(
+		flags
+	);
+}
+bool WrRayLib::IsGestureDetected(
+	unsigned int gesture
+)
+{
+	return ::IsGestureDetected(
+		gesture
+	);
+}
+int WrRayLib::GetGestureDetected(
+	void
+)
+{
+	return ::GetGestureDetected();
+}
+float WrRayLib::GetGestureHoldDuration(
+	void
+)
+{
+	return ::GetGestureHoldDuration();
+}
+WrRayLibVector2 WrRayLib::GetGestureDragVector(
+	void
+)
+{
+	return rl2wr_vector2(
+		::GetGestureDragVector()
+	);
+}
+float WrRayLib::GetGestureDragAngle(
+	void
+)
+{
+	return ::GetGestureDragAngle();
+}
+WrRayLibVector2 WrRayLib::GetGesturePinchVector(
+	void
+)
+{
+	return rl2wr_vector2(
+		::GetGesturePinchVector()
+	);
+}
+float WrRayLib::GetGesturePinchAngle(
+	void
+)
+{
+	return ::GetGesturePinchAngle();
 }
 
 

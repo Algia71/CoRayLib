@@ -451,6 +451,31 @@ public:
     ) override;
 
     // Gestures and Touch Handling Functions (Module: rgestures)
+    STDMETHODIMP SetGesturesEnabled(
+        long flags
+    ) override;
+    STDMETHODIMP IsGestureDetected(
+        long gesture,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP GetGestureDetected(
+        long* pRetVal
+    ) override;
+    STDMETHODIMP GetGestureHoldDuration(
+        float* pRetVal
+    ) override;
+    STDMETHODIMP GetGestureDragVector(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetGestureDragAngle(
+        float* pRetVal
+    ) override;
+    STDMETHODIMP GetGesturePinchVector(
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetGesturePinchAngle(
+        float* pRetVal
+    ) override;
 
     // Camera System Functions (Module: rcamera)
 
