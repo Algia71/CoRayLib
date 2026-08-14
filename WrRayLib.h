@@ -52,6 +52,9 @@ typedef struct tagWrRayLibRectangle
 class WrRayLib
 {
 public:
+
+	/* MODULE: RCORE */
+
 	// Window-related functions
 	static void InitWindow(int width, int height, const char* title);
 	static void CloseWindow(void);
@@ -116,15 +119,37 @@ public:
 	static void BeginDrawing(void);
 	static void EndDrawing(void);
 
+	// VR stereo config functions for VR simulator
+
+	// Shader management functions
+
+	// Screen-space-related functions
+
 	// Timing-related functions
 	static void SetTargetFPS(int fps);
 	static float GetFrameTime(void);
 	static double GetTime(void);
 	static int GetFPS(void);
 
+	// Custom frame control functions
+
 	// Random values generation functions
 	static void SetRandomSeed(unsigned int seed);
 	static int GetRandomValue(int min, int max);
+
+	// Misc. functions
+
+	// Logging system
+
+	// Memory management, using internal allocators
+
+	// File system management functions
+
+	// File access custom callbacks
+
+	// Compression/Encoding functionality
+
+	// Automation events functionality
 
 	// Input-related functions: keyboard
 	static bool IsKeyPressed(int key);
@@ -135,6 +160,8 @@ public:
 	static int GetKeyPressed(void);
 	static int GetCharPressed(void);
 	static void SetExitKey(int key);
+
+	// Input-related functions: gamepads
 
 	// Input-related functions: mouse
 	static bool IsMouseButtonPressed(int button);
@@ -158,6 +185,12 @@ public:
 	static WrRayLibVector2 GetTouchPosition(int index);
 	static int GetTouchPointId(int index);
 	static int GetTouchPointCount(void);
+
+	// Gestures and Touch Handling Functions (Module: rgestures)
+
+	// Camera System Functions (Module: rcamera)
+
+	/* MODULE: RSHAPES */
 
 	// Basic shapes drawing functions
 	static void DrawPixel(int posX, int posY, WrRayLibColor color);
@@ -187,6 +220,10 @@ public:
 	static void DrawPoly(WrRayLibVector2 center, int sides, float radius, float rotation, WrRayLibColor color);
 	static void DrawPolyLines(WrRayLibVector2 center, int sides, float radius, float rotation, WrRayLibColor color);
 
+	// Splines drawing functions
+
+	// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+
 	// Basic shapes collision detection functions
 	static bool CheckCollisionRecs(WrRayLibRectangle rec1, WrRayLibRectangle rec2);
 	static bool CheckCollisionCircles(WrRayLibVector2 center1, float radius1, WrRayLibVector2 center2, float radius2);
@@ -196,10 +233,68 @@ public:
 	static bool CheckCollisionPointCircle(WrRayLibVector2 point, WrRayLibVector2 center, float radius);
 	static bool CheckCollisionPointTriangle(WrRayLibVector2 point, WrRayLibVector2 p1, WrRayLibVector2 p2, WrRayLibVector2 p3);
 	static bool CheckCollisionPointLine(WrRayLibVector2 point, WrRayLibVector2 p1, WrRayLibVector2 p2, int threshold);
+	
+	/* MODULE: RTEXTURES */
+
+	// Image loading functions
+
+	// Image generation functions
+
+	// Image manipulation functions
+
+	// Image drawing functions
+
+	// Texture loading functions
+
+	// Texture configuration functions
+
+	// Texture drawing functions
+
+	// Color/pixel related functions
+
+	/* MODULE: RTEXT */
+
+	// Font loading/unloading functions
 
 	// Text drawing functions
 	static void DrawFPS(int posX, int posY);
 	static void DrawText(const char* text, int posX, int posY, int fontsize, WrRayLibColor color);
+
+	// Text font info functions
+
+	// Text codepoints management functions (unicode characters)
+
+	// Text strings management functions (no UTF-8 strings, only byte chars)
+
+	/* MODULE: RMODELS */
+
+	// Basic geometric 3D shapes drawing functions
+
+	// Model management functions
+
+	// Model drawing functions
+
+	// Mesh management functions
+
+	// Mesh generation functions
+
+	// Material loading/unloading functions
+
+	// Model animations loading/unloading functions
+
+	// Collision detection functions
+
+	/* MODULE: RAUDIO */
+
+	// Audio device management functions
+
+	// Wave/Sound loading/unloading functions
+
+	// Wave/Sound management functions
+
+	// Music management functions
+
+	// AudioStream management functions
 };
 
 #endif // _WRRAYLIB_H

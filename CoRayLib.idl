@@ -13,14 +13,14 @@ import "ocidl.idl";
 ]
 interface IRayLibColor : IDispatch
 {
-    [id(1), propget] HRESULT Red([out, retval] long* pval);
-    [id(1), propput] HRESULT Red([in] long val);
-    [id(2), propget] HRESULT Green([out, retval] long* pval);
-    [id(2), propput] HRESULT Green([in] long val);
-    [id(3), propget] HRESULT Blue([out, retval] long* pval);
-    [id(3), propput] HRESULT Blue([in] long val);
-    [id(4), propget] HRESULT Alpha([out, retval] long* pval);
-    [id(4), propput] HRESULT Alpha([in] long val);
+    [id(1), propget] HRESULT r([out, retval] long* pval);
+    [id(1), propput] HRESULT r([in] long val);
+    [id(2), propget] HRESULT g([out, retval] long* pval);
+    [id(2), propput] HRESULT g([in] long val);
+    [id(3), propget] HRESULT b([out, retval] long* pval);
+    [id(3), propput] HRESULT b([in] long val);
+    [id(4), propget] HRESULT a([out, retval] long* pval);
+    [id(4), propput] HRESULT a([in] long val);
 }
 
 [

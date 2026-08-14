@@ -12,10 +12,10 @@ class CoRayLibColor : IRayLibColor
     LONG m_cRef;
     ITypeInfo* m_pTypeInfo;
 
-    long m_red;
-    long m_green;
-    long m_blue;
-    long m_alpha;
+    long m_r;
+    long m_g;
+    long m_b;
+    long m_a;
 
 public:
 	CoRayLibColor(HMODULE hModule);
@@ -60,28 +60,28 @@ public:
     ) override;
 
     // IRayLibColor
-    STDMETHODIMP get_Red(
+    STDMETHODIMP get_r(
         long* pval
     ) override;
-    STDMETHODIMP put_Red(
+    STDMETHODIMP put_r(
         long val
     ) override;
-    STDMETHODIMP get_Green(
+    STDMETHODIMP get_g(
         long* pval
     ) override;
-    STDMETHODIMP put_Green(
+    STDMETHODIMP put_g(
         long val
     ) override;
-    STDMETHODIMP get_Blue(
+    STDMETHODIMP get_b(
         long* pval
     ) override;
-    STDMETHODIMP put_Blue(
+    STDMETHODIMP put_b(
         long val
     ) override;
-    STDMETHODIMP get_Alpha(
+    STDMETHODIMP get_a(
         long* pval
     ) override;
-    STDMETHODIMP put_Alpha(
+    STDMETHODIMP put_a(
         long val
     ) override;
 };

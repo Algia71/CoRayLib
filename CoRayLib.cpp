@@ -13,19 +13,19 @@ inline HRESULT CoRayLib::co2wr(IRayLibColor* in, WrRayLibColor* out)
     *out = { 0 };
     long elem = 0;
 
-    hr = in->get_Red(&elem);
+    hr = in->get_r(&elem);
     if (FAILED(hr)) return hr;
     out->r = (unsigned char)elem;
 
-    hr = in->get_Green(&elem);
+    hr = in->get_g(&elem);
     if (FAILED(hr)) return hr;
     out->g = (unsigned char)elem;
 
-    hr = in->get_Blue(&elem);
+    hr = in->get_b(&elem);
     if (FAILED(hr)) return hr;
     out->b = (unsigned char)elem;
 
-    hr = in->get_Alpha(&elem);
+    hr = in->get_a(&elem);
     if (FAILED(hr)) return hr;
     out->a = (unsigned char)elem;
 
@@ -2379,10 +2379,10 @@ STDMETHODIMP CoRayLib::CreateColor(
     );
 
     if (SUCCEEDED(hr)) {
-        (*pRetVal)->put_Red(r);
-        (*pRetVal)->put_Green(g);
-        (*pRetVal)->put_Blue(b);
-        (*pRetVal)->put_Alpha(a);
+        (*pRetVal)->put_r(r);
+        (*pRetVal)->put_g(g);
+        (*pRetVal)->put_b(b);
+        (*pRetVal)->put_a(a);
     }
 
     return hr;

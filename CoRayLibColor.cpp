@@ -8,10 +8,10 @@
 CoRayLibColor::CoRayLibColor(HMODULE hModule)
 {
     m_cRef = 1;
-    m_red = 0;
-    m_green = 0;
-    m_blue = 0;
-    m_alpha = 0;
+    m_r = 0;
+    m_g = 0;
+    m_b = 0;
+    m_a = 0;
 
     LoadTypeInfo(
         hModule,
@@ -145,83 +145,83 @@ STDMETHODIMP CoRayLibColor::Invoke(
 }
 
 // IRayLibColor
-STDMETHODIMP CoRayLibColor::get_Red(
+STDMETHODIMP CoRayLibColor::get_r(
     long* pval
 )
 {
     if (!pval)
         return E_POINTER;
 
-    *pval = m_red;
+    *pval = m_r;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::put_Red(
+STDMETHODIMP CoRayLibColor::put_r(
     long val
 )
 {
     if ((val < 0) || (val > 255))
         return E_INVALIDARG;
 
-    m_red = val;
+    m_r = val;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::get_Green(
+STDMETHODIMP CoRayLibColor::get_g(
     long* pval
 )
 {
     if (!pval)
         return E_POINTER;
 
-    *pval = m_green;
+    *pval = m_g;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::put_Green(
+STDMETHODIMP CoRayLibColor::put_g(
     long val
 )
 {
     if ((val < 0) || (val > 255))
         return E_INVALIDARG;
 
-    m_green = val;
+    m_g = val;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::get_Blue(
+STDMETHODIMP CoRayLibColor::get_b(
     long* pval
 )
 {
     if (!pval)
         return E_POINTER;
 
-    *pval = m_blue;
+    *pval = m_b;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::put_Blue(
+STDMETHODIMP CoRayLibColor::put_b(
     long val
 )
 {
     if ((val < 0) || (val > 255))
         return E_INVALIDARG;
 
-    m_blue = val;
+    m_b = val;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::get_Alpha(
+STDMETHODIMP CoRayLibColor::get_a(
     long* pval
 )
 {
     if (!pval)
         return E_POINTER;
 
-    *pval = m_alpha;
+    *pval = m_a;
     return S_OK;
 }
-STDMETHODIMP CoRayLibColor::put_Alpha(
+STDMETHODIMP CoRayLibColor::put_a(
     long val
 )
 {
     if ((val < 0) || (val > 255))
         return E_INVALIDARG;
 
-    m_alpha = val;
+    m_a = val;
     return S_OK;
 }
