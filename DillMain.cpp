@@ -54,6 +54,8 @@ ClassItem classes[] = {
     { L"RayLib.Rectangle",  L"RayLib.Rectangle Class",  CLSID_RayLibRectangle  },
     { L"RayLib.Matrix",     L"RayLib.Matrix Class",     CLSID_RayLibMatrix     },
     { L"RayLib.Camera2D",   L"RayLib.Camera2D Class",   CLSID_RayLibCamera2D   },
+    { L"RayLib.Camera3D",   L"RayLib.Camera3D Class",   CLSID_RayLibCamera3D   },
+    { L"RayLib.Camera",     L"RayLib.Camera Class",     CLSID_RayLibCamera     },
 };
 
 STDAPI DllGetClassObject(
@@ -95,6 +97,12 @@ STDAPI DllGetClassObject(
     }
     else if (rclsid == CLSID_RayLibCamera2D) {
         pFactory = new (std::nothrow) TClassFactory<CoRayLibCamera2D>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibCamera3D) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibCamera3D>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibCamera) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibCamera3D>(g_hModule, &g_cComponents, &g_cServerLocks);
     }
     else {
         return CLASS_E_CLASSNOTAVAILABLE;

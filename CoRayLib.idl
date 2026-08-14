@@ -158,11 +158,11 @@ interface IRayLibCamera2D : IDispatch
 interface IRayLibCamera3D : IDispatch
 {
     [id(1), propget] HRESULT position([out, retval] IRayLibVector3** pval);
-    [id(1), propput] HRESULT position([in] IRayLibVector3* val);
+    [id(1), propputref] HRESULT position([in] IRayLibVector3* val);
     [id(2), propget] HRESULT target([out, retval] IRayLibVector3** pval);
-    [id(2), propput] HRESULT target([in] IRayLibVector3* val);
+    [id(2), propputref] HRESULT target([in] IRayLibVector3* val);
     [id(3), propget] HRESULT up([out, retval] IRayLibVector3** pval);
-    [id(3), propput] HRESULT up([in] IRayLibVector3* val);
+    [id(3), propputref] HRESULT up([in] IRayLibVector3* val);
     [id(4), propget] HRESULT fovy([out, retval] float* pval);
     [id(4), propput] HRESULT fovy([in] float val);
     [id(5), propget] HRESULT projection([out, retval] long* pval);

@@ -16,7 +16,7 @@ class CoRayLibCamera3D : IRayLibCamera3D
     IRayLibVector3* m_target;
     IRayLibVector3* m_up;
     float m_fovy;
-    int m_projection;
+    long m_projection;
 
 public:
     CoRayLibCamera3D(HMODULE hModule);
@@ -64,19 +64,19 @@ public:
     STDMETHODIMP get_position(
         IRayLibVector3** pval
     ) override;
-    STDMETHODIMP put_position(
+    STDMETHODIMP putref_position(
         IRayLibVector3* val
     ) override;
     STDMETHODIMP get_target(
         IRayLibVector3** pval
     ) override;
-    STDMETHODIMP put_target(
+    STDMETHODIMP putref_target(
         IRayLibVector3* val
     ) override;
     STDMETHODIMP get_up(
         IRayLibVector3** pval
     ) override;
-    STDMETHODIMP put_up(
+    STDMETHODIMP putref_up(
         IRayLibVector3* val
     ) override;
     STDMETHODIMP get_fovy(
