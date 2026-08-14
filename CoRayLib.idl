@@ -134,6 +134,44 @@ interface IRayLibMatrix : IDispatch
 [
     object,
     dual,
+    uuid(D1A4E153-B526-4CFA-975C-DE8365B79DD4),
+    pointer_default(unique)
+]
+interface IRayLibCamera2D : IDispatch
+{
+    [id(1), propget] HRESULT offset([out, retval] IRayLibVector2** pval);
+    [id(1), propputref] HRESULT offset([in] IRayLibVector2* val);
+    [id(2), propget] HRESULT target([out, retval] IRayLibVector2** pval);
+    [id(2), propputref] HRESULT target([in] IRayLibVector2* val);
+    [id(3), propget] HRESULT rotation([out, retval] float* pval);
+    [id(3), propput] HRESULT rotation([in] float val);
+    [id(4), propget] HRESULT zoom([out, retval] float* pval);
+    [id(4), propput] HRESULT zoom([in] float val);
+}
+
+[
+    object,
+    dual,
+    uuid(EB66F0C5-719C-4352-B897-2264361832F5),
+    pointer_default(unique)
+]
+interface IRayLibCamera3D : IDispatch
+{
+    [id(1), propget] HRESULT position([out, retval] IRayLibVector3** pval);
+    [id(1), propput] HRESULT position([in] IRayLibVector3* val);
+    [id(2), propget] HRESULT target([out, retval] IRayLibVector3** pval);
+    [id(2), propput] HRESULT target([in] IRayLibVector3* val);
+    [id(3), propget] HRESULT up([out, retval] IRayLibVector3** pval);
+    [id(3), propput] HRESULT up([in] IRayLibVector3* val);
+    [id(4), propget] HRESULT fovy([out, retval] float* pval);
+    [id(4), propput] HRESULT fovy([in] float val);
+    [id(5), propget] HRESULT projection([out, retval] long* pval);
+    [id(5), propput] HRESULT projection([in] long val);
+}
+
+[
+    object,
+    dual,
     uuid(BA8623BB-26BE-4D50-94BE-067C1B6785AC),
     pointer_default(unique)
 ]
@@ -376,6 +414,8 @@ library RayLib
     interface IRayLibVector4;
     interface IRayLibRectangle;
     interface IRayLibMatrix;
+    interface IRayLibCamera2D;
+    interface IRayLibCamera3D;
 
     [
         uuid(8C02BF1F-FA49-4796-A634-FB591F749030),
@@ -447,5 +487,32 @@ library RayLib
         coclass RayLibMatrix
     {
         [default] interface IRayLibMatrix;
+    };
+
+    [
+        uuid(D65CEE32-C161-49AE-878C-DC8899681000),
+        helpstring("RayLib.Camera2D Class")
+    ]
+        coclass RayLibCamera2D
+    {
+        [default] interface IRayLibCamera2D;
+    };
+
+    [
+        uuid(4AD5E4B2-354D-443C-936F-9EBDD623735D),
+        helpstring("RayLib.Camera3D Class")
+    ]
+        coclass RayLibCamera3D
+    {
+        [default] interface IRayLibCamera3D;
+    };
+
+    [
+        uuid(A852FCBB-18EB-4B39-85E5-19F51E96C3BC),
+        helpstring("RayLib.Camera Class")
+    ]
+        coclass RayLibCamera
+    {
+        [default] interface IRayLibCamera3D;
     };
 };

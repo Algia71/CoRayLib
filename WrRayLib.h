@@ -49,6 +49,23 @@ typedef struct tagWrRayLibRectangle
 	float height;
 } WrRayLibRectangle;
 
+typedef struct tagWrRayLibCamera2D
+{
+	WrRayLibVector2 offset;
+	WrRayLibVector2 target;
+	float rotation;
+	float zoom;
+} WrRayLibCamera2D;
+
+typedef struct tagWrRayLibCamera3D
+{
+	WrRayLibVector3 position;
+	WrRayLibVector3 target;
+	WrRayLibVector3 up;
+	float fovy;
+	int projection;
+} WrRayLibCamera3D;
+
 class WrRayLib
 {
 public:

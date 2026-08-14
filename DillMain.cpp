@@ -15,6 +15,8 @@
 #include "CoRayLibVector4.h"
 #include "CoRayLibRectangle.h"
 #include "CoRayLibMatrix.h"
+#include "CoRayLibCamera2D.h"
+#include "CoRayLibCamera3D.h"
 #include "reghelper.h"
 
 
@@ -51,6 +53,7 @@ ClassItem classes[] = {
     { L"RayLib.Quaternion", L"RayLib.Quaternion Class", CLSID_RayLibQuaternion },
     { L"RayLib.Rectangle",  L"RayLib.Rectangle Class",  CLSID_RayLibRectangle  },
     { L"RayLib.Matrix",     L"RayLib.Matrix Class",     CLSID_RayLibMatrix     },
+    { L"RayLib.Camera2D",   L"RayLib.Camera2D Class",   CLSID_RayLibCamera2D   },
 };
 
 STDAPI DllGetClassObject(
@@ -89,6 +92,9 @@ STDAPI DllGetClassObject(
     }
     else if (rclsid == CLSID_RayLibMatrix) {
         pFactory = new (std::nothrow) TClassFactory<CoRayLibMatrix>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibCamera2D) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibCamera2D>(g_hModule, &g_cComponents, &g_cServerLocks);
     }
     else {
         return CLASS_E_CLASSNOTAVAILABLE;

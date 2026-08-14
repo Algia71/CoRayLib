@@ -138,6 +138,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CoRayLib.cpp" />
+    <ClCompile Include="CoRayLibCamera2D.cpp" />
+    <ClCompile Include="CoRayLibCamera3D.cpp" />
     <ClCompile Include="CoRayLibColor.cpp" />
     <ClCompile Include="CoRayLibMatrix.cpp" />
     <ClCompile Include="CoRayLibRectangle.cpp" />
@@ -162,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoRayLib.h" />
+    <ClInclude Include="CoRayLibCamera2D.h" />
+    <ClInclude Include="CoRayLibCamera3D.h" />
     <ClInclude Include="CoRayLibColor.h" />
     <ClInclude Include="CoRayLibMatrix.h" />
     <ClInclude Include="CoRayLibRectangle.h" />
