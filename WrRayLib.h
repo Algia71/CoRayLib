@@ -384,9 +384,15 @@ public:
 
 	// Collision detection functions
 
+
 	/* MODULE: RAUDIO */
 
 	// Audio device management functions
+	static void InitAudioDevice(void);
+	static void CloseAudioDevice(void);
+	static bool IsAudioDeviceReady(void);
+	static void SetMasterVolume(float volume);
+	static float GetMasterVolume(void);
 
 	// Wave/Sound loading/unloading functions
 

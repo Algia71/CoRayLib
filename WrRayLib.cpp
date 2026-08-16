@@ -1452,3 +1452,39 @@ void WrRayLib::DrawText(
 		wr2rl_color(color)
 	);
 }
+
+
+// Audio device management functions
+
+void WrRayLib::InitAudioDevice(
+	void
+)
+{
+	::InitAudioDevice();
+}
+void WrRayLib::CloseAudioDevice(
+	void
+)
+{
+	::CloseAudioDevice();
+}
+bool WrRayLib::IsAudioDeviceReady(
+	void
+)
+{
+	return ::IsAudioDeviceReady();
+}
+void WrRayLib::SetMasterVolume(
+	float volume
+)
+{
+	::SetMasterVolume(
+		volume
+	);
+}
+float WrRayLib::GetMasterVolume(
+	void
+)
+{
+	return ::GetMasterVolume();
+}

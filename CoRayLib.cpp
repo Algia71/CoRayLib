@@ -3078,6 +3078,68 @@ STDMETHODIMP CoRayLib::DrawText(
     return S_OK;
 }
 
+
+//////////////////////////////////////////////
+// Module: RMODELS
+
+
+//////////////////////////////////////////////
+// Module: RAUDIO
+
+// Audio device management functions
+STDMETHODIMP CoRayLib::InitAudioDevice(
+    void
+)
+{
+    WrRayLib::InitAudioDevice();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::CloseAudioDevice(
+    void
+)
+{
+    WrRayLib::CloseAudioDevice();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::IsAudioDeviceReady(
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    if (WrRayLib::IsAudioDeviceReady())
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::SetMasterVolume(
+    float volume
+)
+{
+    WrRayLib::SetMasterVolume(
+        volume
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetMasterVolume(
+    float* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::GetMasterVolume();
+
+    return S_OK;
+}
+
+
 //////////////////////////////////////////////
 // CoRayLib helpers
 STDMETHODIMP CoRayLib::CreateColor(

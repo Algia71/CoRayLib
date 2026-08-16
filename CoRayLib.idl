@@ -406,6 +406,21 @@ interface IRayLib : IDispatch
 
 
     //////////////////////////////////////////////
+    // Module: RMODELS
+
+
+    //////////////////////////////////////////////
+    // Module: RAUDIO
+
+    // Audio device management functions
+    [id(4000)] HRESULT InitAudioDevice(void);
+    [id(4001)] HRESULT CloseAudioDevice(void);
+    [id(4002)] HRESULT IsAudioDeviceReady([out, retval] VARIANT_BOOL* pRetVal);
+    [id(4003)] HRESULT SetMasterVolume([in] float volume);
+    [id(4004)] HRESULT GetMasterVolume([out, retval] float* pRetVal);
+
+
+    //////////////////////////////////////////////
     // CoRayLib helpers
     [id(20000)] HRESULT CreateColor([in] long r, [in] long g, [in] long b, [in] long a, [out, retval] IRayLibColor** pRetVal);
     [id(20001)] HRESULT CreateVector2([in] float x, [in] float y, [out, retval] IRayLibVector2** pRetVal);

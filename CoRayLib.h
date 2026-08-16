@@ -738,6 +738,31 @@ public:
 
 
     //////////////////////////////////////////////
+    // Module: RMODELS
+
+
+    //////////////////////////////////////////////
+    // Module: RAUDIO
+
+    // Audio device management functions
+    STDMETHODIMP InitAudioDevice(
+        void
+    ) override;
+    STDMETHODIMP CloseAudioDevice(
+        void
+    ) override;
+    STDMETHODIMP IsAudioDeviceReady(
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP SetMasterVolume(
+        float volume
+    ) override;
+    STDMETHODIMP GetMasterVolume(
+        float* pRetVal
+    ) override;
+
+
+    //////////////////////////////////////////////
     // CoRayLib helpers
     STDMETHODIMP CreateColor(
         long r,
