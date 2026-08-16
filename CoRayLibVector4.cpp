@@ -15,7 +15,7 @@ CoRayLibVector4::CoRayLibVector4(HMODULE hModule)
 
     LoadTypeInfo(
         hModule,
-        IID_IRayLibVector2,
+        IID_IRayLibVector4,
         &m_pTypeInfo
     );
 }

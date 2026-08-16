@@ -73,16 +73,16 @@ public:
     STDMETHODIMP put_y(
         float val
     ) override;
-    STDMETHODIMP get_Width(
+    STDMETHODIMP get_width(
         float* pval
     ) override;
-    STDMETHODIMP put_Width(
+    STDMETHODIMP put_width(
         float val
     ) override;
-    STDMETHODIMP get_Height(
+    STDMETHODIMP get_height(
         float* pval
     ) override;
-    STDMETHODIMP put_Height(
+    STDMETHODIMP put_height(
         float val
     ) override;
 };

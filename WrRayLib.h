@@ -225,6 +225,8 @@ public:
 	static float GetGesturePinchAngle(void);
 
 	// Camera System Functions (Module: rcamera)
+	static void UpdateCamera(WrRayLibCamera3D* camera, int mode);
+	static void UpdateCameraPro(WrRayLibCamera3D* camera, WrRayLibVector3 movement, WrRayLibVector3 rotation, float zoom);
 
 	/* MODULE: RSHAPES */
 

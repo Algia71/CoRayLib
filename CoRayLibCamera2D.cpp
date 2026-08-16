@@ -41,7 +41,7 @@ STDMETHODIMP CoRayLibCamera2D::QueryInterface(
     if (riid == IID_IUnknown) {
         *ppvObject = static_cast<IRayLibCamera2D*>(this);
     }
-    else if (riid == IID_IRayLibColor) {
+    else if (riid == IID_IRayLibCamera2D) {
         *ppvObject = static_cast<IRayLibCamera2D*>(this);
     }
     else if (riid == IID_IDispatch) {

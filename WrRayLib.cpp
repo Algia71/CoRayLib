@@ -42,6 +42,29 @@ static Rectangle inline wr2rl_rect(
 	return { rect.x, rect.y, rect.width, rect.height };
 }
 
+static void inline wr2rl_camera2D(
+	Camera2D* rl_camera,
+	WrRayLibCamera2D* wr_camera
+)
+{
+	rl_camera->offset = wr2rl_vector2(wr_camera->offset);
+	rl_camera->target = wr2rl_vector2(wr_camera->target);
+	rl_camera->rotation = wr_camera->rotation;
+	rl_camera->zoom = wr_camera->zoom;
+}
+
+static void inline wr2rl_camera3D(
+	Camera3D* rl_camera,
+	WrRayLibCamera3D* wr_camera
+)
+{
+	rl_camera->position = wr2rl_vector3(wr_camera->position);
+	rl_camera->target = wr2rl_vector3(wr_camera->target);
+	rl_camera->up = wr2rl_vector3(wr_camera->up);
+	rl_camera->fovy = wr_camera->fovy;
+	rl_camera->projection = wr_camera->projection;
+}
+
 static WrRayLibVector2 inline rl2wr_vector2(
 	Vector2 vector
 )
@@ -49,6 +72,42 @@ static WrRayLibVector2 inline rl2wr_vector2(
 	return { vector.x, vector.y };
 }
 
+static WrRayLibVector3 inline rl2wr_vector3(
+	Vector3 vector
+)
+{
+	return { vector.x, vector.y, vector.z };
+}
+
+static WrRayLibVector4 inline rl2wr_vector4(
+	Vector4 vector
+)
+{
+	return { vector.x, vector.y, vector.z, vector.w };
+}
+
+static void inline rl2wr_camera2D(
+	WrRayLibCamera2D* wr_camera,
+	Camera2D* rl_camera
+)
+{
+	wr_camera->offset = rl2wr_vector2(rl_camera->offset);
+	wr_camera->target = rl2wr_vector2(rl_camera->target);
+	wr_camera->rotation = rl_camera->rotation;
+	wr_camera->zoom = rl_camera->zoom;
+}
+
+static void inline rl2wr_camera3D(
+	WrRayLibCamera3D* wr_camera,
+	Camera3D* rl_camera
+)
+{
+	wr_camera->position = rl2wr_vector3(rl_camera->position);
+	wr_camera->target = rl2wr_vector3(rl_camera->target);
+	wr_camera->up = rl2wr_vector3(rl_camera->up);
+	wr_camera->fovy = rl_camera->fovy;
+	wr_camera->projection = rl_camera->projection;
+}
 
 
 // Window-related functions
@@ -788,6 +847,58 @@ float WrRayLib::GetGesturePinchAngle(
 )
 {
 	return ::GetGesturePinchAngle();
+}
+
+
+// Camera System Functions (Module: rcamera)
+
+void WrRayLib::UpdateCamera(
+	WrRayLibCamera3D* camera,
+	int mode
+)
+{
+	Camera3D c = { 0 };
+
+	wr2rl_camera3D(
+		&c,
+		camera
+	);
+
+	::UpdateCamera(
+		&c,
+		mode
+	);
+
+	rl2wr_camera3D(
+		camera,
+		&c
+	);
+}
+void WrRayLib::UpdateCameraPro(
+	WrRayLibCamera3D* camera,
+	WrRayLibVector3 movement,
+	WrRayLibVector3 rotation,
+	float zoom
+)
+{
+	Camera3D c = { 0 };
+
+	wr2rl_camera3D(
+		&c,
+		camera
+	);
+
+	::UpdateCameraPro(
+		&c,
+		wr2rl_vector3(movement),
+		wr2rl_vector3(rotation),
+		zoom
+	);
+
+	rl2wr_camera3D(
+		camera,
+		&c
+	);
 }
 
 

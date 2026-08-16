@@ -83,10 +83,10 @@ interface IRayLibRectangle : IDispatch
     [id(1), propput] HRESULT x([in] float val);
     [id(2), propget] HRESULT y([out, retval] float* pval);
     [id(2), propput] HRESULT y([in] float val);
-    [id(3), propget] HRESULT Width([out, retval] float* pval);
-    [id(3), propput] HRESULT Width([in] float val);
-    [id(4), propget] HRESULT Height([out, retval] float* pval);
-    [id(4), propput] HRESULT Height([in] float val);
+    [id(3), propget] HRESULT width([out, retval] float* pval);
+    [id(3), propput] HRESULT width([in] float val);
+    [id(4), propget] HRESULT height([out, retval] float* pval);
+    [id(4), propput] HRESULT height([in] float val);
 }
 
 [
@@ -333,6 +333,8 @@ interface IRayLib : IDispatch
     [id(386)] HRESULT GetGesturePinchAngle([out, retval] float* pRetVal);
 
     // Camera System Functions (Module: rcamera)
+    [id(400)] HRESULT UpdateCamera([in] IRayLibCamera3D* camera, [in] long mode);
+    [id(401)] HRESULT UpdateCameraPro([in] IRayLibCamera3D* camera, [in] IRayLibVector3* movement, [in] IRayLibVector3* rotation, [in] float zoom);
 
     //////////////////////////////////////////////
     // Module: RSHAPES

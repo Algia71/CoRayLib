@@ -14,7 +14,7 @@ CoRayLibVector3::CoRayLibVector3(HMODULE hModule)
 
     LoadTypeInfo(
         hModule,
-        IID_IRayLibVector2,
+        IID_IRayLibVector3,
         &m_pTypeInfo
     );
 }
@@ -36,7 +36,7 @@ STDMETHODIMP CoRayLibVector3::QueryInterface(
     if (riid == IID_IUnknown) {
         *ppvObject = static_cast<IRayLibVector3*>(this);
     }
-    else if (riid == IID_IRayLibVector2) {
+    else if (riid == IID_IRayLibVector3) {
         *ppvObject = static_cast<IRayLibVector3*>(this);
     }
     else if (riid == IID_IDispatch) {

@@ -180,7 +180,7 @@ STDMETHODIMP CoRayLibRectangle::put_y(
     m_y = val;
     return S_OK;
 }
-STDMETHODIMP CoRayLibRectangle::get_Width(
+STDMETHODIMP CoRayLibRectangle::get_width(
     float* pval
 )
 {
@@ -190,14 +190,14 @@ STDMETHODIMP CoRayLibRectangle::get_Width(
     *pval = m_width;
     return S_OK;
 }
-STDMETHODIMP CoRayLibRectangle::put_Width(
+STDMETHODIMP CoRayLibRectangle::put_width(
     float val
 )
 {
     m_width = val;
     return S_OK;
 }
-STDMETHODIMP CoRayLibRectangle::get_Height(
+STDMETHODIMP CoRayLibRectangle::get_height(
     float* pval
 )
 {
@@ -207,7 +207,7 @@ STDMETHODIMP CoRayLibRectangle::get_Height(
     *pval = m_height;
     return S_OK;
 }
-STDMETHODIMP CoRayLibRectangle::put_Height(
+STDMETHODIMP CoRayLibRectangle::put_height(
     float val
 )
 {

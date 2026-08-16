@@ -13,11 +13,19 @@ class CoRayLib : IRayLib
     LONG m_cRef;
     ITypeInfo* m_pTypeInfo;
 
-    static HRESULT co2wr(IRayLibColor* in, WrRayLibColor* out);
-    static HRESULT co2wr(IRayLibVector2* in, WrRayLibVector2* out);
-    static HRESULT co2wr(IRayLibVector3* in, WrRayLibVector3* out);
-    static HRESULT co2wr(IRayLibVector4* in, WrRayLibVector4* out);
-    static HRESULT co2wr(IRayLibRectangle* in, WrRayLibRectangle* out);
+    inline HRESULT co2wr(IRayLibColor* in, WrRayLibColor* out);
+    inline HRESULT co2wr(IRayLibVector2* in, WrRayLibVector2* out);
+    inline HRESULT co2wr(IRayLibVector3* in, WrRayLibVector3* out);
+    inline HRESULT co2wr(IRayLibVector4* in, WrRayLibVector4* out);
+    inline HRESULT co2wr(IRayLibRectangle* in, WrRayLibRectangle* out);
+    inline HRESULT co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out);
+
+    inline HRESULT wr2co(WrRayLibColor* in, IRayLibColor* out);
+    inline HRESULT wr2co(WrRayLibVector2* in, IRayLibVector2* out);
+    inline HRESULT wr2co(WrRayLibVector3* in, IRayLibVector3* out);
+    inline HRESULT wr2co(WrRayLibVector4* in, IRayLibVector4* out);
+    inline HRESULT wr2co(WrRayLibRectangle* in, IRayLibRectangle* out);
+    inline HRESULT wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out);
 
 public:
     CoRayLib(HMODULE hModule);
@@ -478,6 +486,16 @@ public:
     ) override;
 
     // Camera System Functions (Module: rcamera)
+    STDMETHODIMP UpdateCamera(
+        IRayLibCamera3D* camera,
+        long mode
+    ) override;
+    STDMETHODIMP UpdateCameraPro(
+        IRayLibCamera3D* camera,
+        IRayLibVector3* movement,
+        IRayLibVector3* rotation,
+        float zoom
+    ) override;
 
     //////////////////////////////////////////////
     // Module: RSHAPES

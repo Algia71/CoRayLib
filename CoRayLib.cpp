@@ -105,13 +105,165 @@ inline HRESULT CoRayLib::co2wr(IRayLibRectangle* in, WrRayLibRectangle* out)
     if (FAILED(hr)) return hr;
     out->y = elem;
 
-    hr = in->get_Width(&elem);
+    hr = in->get_width(&elem);
     if (FAILED(hr)) return hr;
     out->width = elem;
 
-    hr = in->get_Height(&elem);
+    hr = in->get_height(&elem);
     if (FAILED(hr)) return hr;
     out->height = elem;
+
+    return hr;
+}
+inline HRESULT CoRayLib::co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    IRayLibVector3* velem = NULL;
+    float felem = 0;
+    long lelem = 0;
+
+    hr = in->get_position(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->position);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_target(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->target);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_up(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->up);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_fovy(&felem);
+    if (FAILED(hr)) return hr;
+    out->fovy = felem;
+
+    hr = in->get_projection(&lelem);
+    if (FAILED(hr)) return hr;
+    out->projection = lelem;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(WrRayLibColor* in, IRayLibColor* out)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_r(in->r);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_g(in->g);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_b(in->b);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_a(in->a);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(WrRayLibVector2* in, IRayLibVector2* out)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_x(in->x);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_y(in->y);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(WrRayLibVector3* in, IRayLibVector3* out)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_x(in->x);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_y(in->y);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_z(in->z);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(WrRayLibVector4* in, IRayLibVector4* out)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_x(in->x);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_y(in->y);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_z(in->z);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_w(in->w);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(WrRayLibRectangle* in, IRayLibRectangle* out)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_x(in->x);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_y(in->y);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_width(in->width);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_height(in->height);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out)
+{
+    HRESULT hr = S_OK;
+
+    IRayLibVector3* v = NULL;
+
+    hr = out->get_position(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->position, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->get_target(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->target, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->get_up(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->up, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_fovy(in->fovy);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_projection(in->projection);
+    if (FAILED(hr)) return hr;
 
     return hr;
 }
@@ -1730,6 +1882,71 @@ STDMETHODIMP CoRayLib::GetGesturePinchAngle(
 
 
 // Camera System Functions (Module: rcamera)
+STDMETHODIMP CoRayLib::UpdateCamera(
+    IRayLibCamera3D* camera,
+    long mode
+)
+{
+    if (!camera)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::UpdateCamera(
+        &wr_camera,
+        (int)mode
+    );
+
+    hr = wr2co(&wr_camera, camera);
+    if (FAILED(hr)) return hr;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::UpdateCameraPro(
+    IRayLibCamera3D* camera,
+    IRayLibVector3* movement,
+    IRayLibVector3* rotation,
+    float zoom
+)
+{
+    if (!camera)
+        return E_POINTER;
+    if (!movement)
+        return E_POINTER;
+    if (!rotation)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibCamera3D wr_camera = { 0 };
+    WrRayLibVector3 wr_movement = { 0 };
+    WrRayLibVector3 wr_rotation = { 0 };
+
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(movement, &wr_movement);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(rotation, &wr_rotation);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::UpdateCameraPro(
+        &wr_camera,
+        wr_movement,
+        wr_rotation,
+        zoom
+    );
+
+    hr = wr2co(&wr_camera, camera);
+    if (FAILED(hr)) return hr;
+
+    return S_OK;
+}
+
 
 //////////////////////////////////////////////
 // Module: RSHAPES
@@ -2814,8 +3031,8 @@ STDMETHODIMP CoRayLib::CreateRectangle(
     if (SUCCEEDED(hr)) {
         (*pRetVal)->put_x(x);
         (*pRetVal)->put_y(y);
-        (*pRetVal)->put_Width(width);
-        (*pRetVal)->put_Height(height);
+        (*pRetVal)->put_width(width);
+        (*pRetVal)->put_height(height);
     }
 
     return hr;
