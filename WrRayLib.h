@@ -139,12 +139,42 @@ public:
 	static void EndMode2D(void);
 	static void BeginMode3D(WrRayLibCamera3D camera);
 	static void EndMode3D(void);
+//	static void BeginTextureMode(RenderTexture2D target);
+//	static void EndTextureMode(void);
+//	static void BeginShaderMode(Shader shader);
+//	static void EndShaderMode(void);
+	static void BeginBlendMode(int mode);
+	static void EndBlendMode(void);
+	static void BeginScissorMode(int x, int y, int width, int height);
+	static void EndScissorMode(void);
+//	static void BeginVrStereoMode(VrStereoConfig config);
+//	static void EndVrStereoMode(void);
 
 	// VR stereo config functions for VR simulator
+//	static VrStereoConfig LoadVrStereoConfig(VrDeviceInfo device);
+//	static void UnloadVrStereoConfig(VrStereoConfig config);
 
 	// Shader management functions
+//	static Shader LoadShader(const char* vsFileName, const char* fsFileName);
+//	static Shader LoadShaderFromMemory(const char* vsCode, const char* fsCode);
+//	static bool IsShaderValid(Shader shader);
+//	static int GetShaderLocation(Shader shader, const char* uniformName);
+//	static int GetShaderLocationAttrib(Shader shader, const char* attribName);
+//	static void SetShaderValue(Shader shader, int locIndex, const void* value, int uniformType);
+//	static void SetShaderValueV(Shader shader, int locIndex, const void* value, int uniformType, int count);
+//	static void SetShaderValueMatrix(Shader shader, int locIndex, Matrix mat);
+//	static void SetShaderValueTexture(Shader shader, int locIndex, Texture2D texture);
+//	static void UnloadShader(Shader shader);
 
 	// Screen-space-related functions
+//	static Ray GetScreenToWorldRay(Vector2 position, Camera camera);
+//	static Ray GetScreenToWorldRayEx(Vector2 position, Camera camera, int width, int height);
+//	static Vector2 GetWorldToScreen(Vector3 position, Camera camera);
+//	static Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height);
+//	static Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera);
+//	static Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera);
+//	static Matrix GetCameraMatrix(Camera camera);
+//	static Matrix GetCameraMatrix2D(Camera2D camera);
 
 	// Timing-related functions
 	static void SetTargetFPS(int fps);
@@ -153,18 +183,39 @@ public:
 	static int GetFPS(void);
 
 	// Custom frame control functions
+	static void SwapScreenBuffer(void);
+	static void PollInputEvents(void);
+	static void WaitTime(double seconds);
 
 	// Random values generation functions
 	static void SetRandomSeed(unsigned int seed);
 	static int GetRandomValue(int min, int max);
+//	static int* LoadRandomSequence(unsigned int count, int min, int max);
+//	static void UnloadRandomSequence(int* sequence);
 
 	// Misc. functions
+	static void TakeScreenshot(const char* fileName);
+	static void SetConfigFlags(unsigned int flags);
+	static void OpenURL(const char* url);
 
 	// Logging system
+//	static void SetTraceLogLevel(int logLevel);
+//	static void TraceLog(int logLevel, const char* text, ...);
+//	static void SetTraceLogCallback(TraceLogCallback callback);
 
 	// Memory management, using internal allocators
+//	static void* MemAlloc(unsigned int size);
+//	static void* MemRealloc(void* ptr, unsigned int size);
+//	static void MemFree(void* ptr);
 
 	// File system management functions
+//	static unsigned char* LoadFileData(const char* fileName, int* dataSize);
+//	static void UnloadFileData(unsigned char* data);
+//	static bool SaveFileData(const char* fileName, void* data, int dataSize);
+//	static bool ExportDataAsCode(const unsigned char* data, int dataSize, const char* fileName);
+//	static char* LoadFileText(const char* fileName);
+//	static void UnloadFileText(char* text);
+//	static bool SaveFileText(const char* fileName, const char* text);
 
 	// File access custom callbacks
 
@@ -232,6 +283,7 @@ public:
 	static void UpdateCamera(WrRayLibCamera3D* camera, int mode);
 	static void UpdateCameraPro(WrRayLibCamera3D* camera, WrRayLibVector3 movement, WrRayLibVector3 rotation, float zoom);
 
+
 	/* MODULE: RSHAPES */
 
 	// Basic shapes drawing functions
@@ -275,7 +327,11 @@ public:
 	static bool CheckCollisionPointCircle(WrRayLibVector2 point, WrRayLibVector2 center, float radius);
 	static bool CheckCollisionPointTriangle(WrRayLibVector2 point, WrRayLibVector2 p1, WrRayLibVector2 p2, WrRayLibVector2 p3);
 	static bool CheckCollisionPointLine(WrRayLibVector2 point, WrRayLibVector2 p1, WrRayLibVector2 p2, int threshold);
-	
+//	static bool CheckCollisionPointPoly(WrRayLibVector2 point, const WrRayLibVector2* points, int pointCount);
+//	static bool CheckCollisionLines(WrRayLibVector2 startPos1, WrRayLibVector2 endPos1, WrRayLibVector2 startPos2, WrRayLibVector2 endPos2, WrRayLibVector2* collisionPoint);
+//	static WrRayLibRectangle GetCollisionRec(WrRayLibRectangle rec1, WrRayLibRectangle rec2);
+
+
 	/* MODULE: RTEXTURES */
 
 	// Image loading functions
@@ -294,6 +350,7 @@ public:
 
 	// Color/pixel related functions
 
+
 	/* MODULE: RTEXT */
 
 	// Font loading/unloading functions
@@ -307,6 +364,7 @@ public:
 	// Text codepoints management functions (unicode characters)
 
 	// Text strings management functions (no UTF-8 strings, only byte chars)
+
 
 	/* MODULE: RMODELS */
 

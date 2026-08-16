@@ -248,6 +248,11 @@ interface IRayLib : IDispatch
     [id(75)] HRESULT BeginMode3D([in] IRayLibCamera3D* camera);
     [id(76)] HRESULT EndMode3D(void);
 
+    [id(81)] HRESULT BeginBlendMode([in] long mode);
+    [id(82)] HRESULT EndBlendMode(void);
+    [id(83)] HRESULT BeginScissorMode([in] long x, [in] long y, [in] long width, [in] long height);
+    [id(84)] HRESULT EndScissorMode(void);
+
     // VR stereo config functions for VR simulator
 
     // Shader management functions
@@ -261,12 +266,18 @@ interface IRayLib : IDispatch
     [id(143)] HRESULT GetFPS([out, retval] long* pRetVal);
 
     // Custom frame control functions
+    [id(150)] HRESULT SwapScreenBuffer(void);
+    [id(151)] HRESULT PollInputEvents(void);
+    [id(152)] HRESULT WaitTime([in] double seconds);
 
     // Random values generation functions
     [id(160)] HRESULT SetRandomSeed([in] long seed);
     [id(161)] HRESULT GetRandomValue([in] long min, [in] long max, [out, retval] long* pRetVal);
 
     // Misc. functions
+    [id(170)] HRESULT TakeScreenshot([in] BSTR fileName);
+    [id(171)] HRESULT SetConfigFlags([in] long flags);
+    [id(172)] HRESULT OpenURL([in] BSTR url);
 
     // Logging system
 

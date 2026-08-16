@@ -518,6 +518,40 @@ void WrRayLib::EndMode3D(
 {
 	::EndMode3D();
 }
+void WrRayLib::BeginBlendMode(
+	int mode
+)
+{
+	::BeginBlendMode(
+		mode
+	);
+}
+void WrRayLib::EndBlendMode(
+	void
+)
+{
+	::EndBlendMode();
+}
+void WrRayLib::BeginScissorMode(
+	int x,
+	int y,
+	int width,
+	int height
+)
+{
+	::BeginScissorMode(
+		x,
+		y,
+		width,
+		height
+	);
+}
+void WrRayLib::EndScissorMode(
+	void
+)
+{
+	::EndScissorMode();
+}
 
 
 // Timing-related functions
@@ -548,6 +582,30 @@ int WrRayLib::GetFPS(
 }
 
 
+// Custom frame control functions
+
+void WrRayLib::SwapScreenBuffer(
+	void
+)
+{
+	::SwapScreenBuffer();
+}
+void WrRayLib::PollInputEvents(
+	void
+)
+{
+	::PollInputEvents();
+}
+void WrRayLib::WaitTime(
+	double seconds
+)
+{
+	::WaitTime(
+		seconds
+	);
+}
+
+
 // Random values generation functions
 
 void WrRayLib::SetRandomSeed(
@@ -562,6 +620,34 @@ int WrRayLib::GetRandomValue(
 )
 {
 	return ::GetRandomValue(min, max);
+}
+
+
+// Misc. functions
+
+void WrRayLib::TakeScreenshot(
+	const char* fileName
+)
+{
+	::TakeScreenshot(
+		fileName
+	);
+}
+void WrRayLib::SetConfigFlags(
+	unsigned int flags
+)
+{
+	::SetConfigFlags(
+		flags
+	);
+}
+void WrRayLib::OpenURL(
+	const char* url
+)
+{
+	::OpenURL(
+		url
+	);
 }
 
 

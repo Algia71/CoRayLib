@@ -274,6 +274,21 @@ public:
     STDMETHODIMP EndMode3D(
         void
     ) override;
+    STDMETHODIMP BeginBlendMode(
+        long mode
+    ) override;
+    STDMETHODIMP EndBlendMode(
+        void
+    ) override;
+    STDMETHODIMP BeginScissorMode(
+        long x,
+        long y,
+        long width,
+        long height
+    ) override;
+    STDMETHODIMP EndScissorMode(
+        void
+    ) override;
 
     // VR stereo config functions for VR simulator
 
@@ -296,6 +311,15 @@ public:
     ) override;
 
     // Custom frame control functions
+    STDMETHODIMP SwapScreenBuffer(
+        void
+    ) override;
+    STDMETHODIMP PollInputEvents(
+        void
+    ) override;
+    STDMETHODIMP WaitTime(
+        double seconds
+    ) override;
 
     // Random values generation functions
     STDMETHODIMP SetRandomSeed(
@@ -308,6 +332,15 @@ public:
     ) override;
 
     // Misc. functions
+    HRESULT TakeScreenshot(
+        BSTR fileName
+    ) override;
+    HRESULT SetConfigFlags(
+        long flags
+    ) override;
+    HRESULT OpenURL(
+        BSTR url
+    ) override;
 
     // Logging system
 

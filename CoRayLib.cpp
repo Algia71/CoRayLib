@@ -1154,7 +1154,7 @@ STDMETHODIMP CoRayLib::BeginMode2D(
         wr_camera
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::EndMode2D(
     void
@@ -1184,7 +1184,7 @@ STDMETHODIMP CoRayLib::BeginMode3D(
         wr_camera
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::EndMode3D(
     void
@@ -1194,6 +1194,49 @@ STDMETHODIMP CoRayLib::EndMode3D(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::BeginBlendMode(
+    long mode
+)
+{
+    WrRayLib::BeginBlendMode(
+        (int)mode
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::EndBlendMode(
+    void
+)
+{
+    WrRayLib::EndBlendMode();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::BeginScissorMode(
+    long x,
+    long y,
+    long width,
+    long height
+)
+{
+    WrRayLib::BeginScissorMode(
+        (int)x,
+        (int)y,
+        (int)width,
+        (int)height
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::EndScissorMode(
+    void
+)
+{
+    WrRayLib::EndScissorMode();
+
+    return S_OK;
+}
+
 
 // VR stereo config functions for VR simulator
 
@@ -1251,7 +1294,36 @@ STDMETHODIMP CoRayLib::GetFPS(
 
 // Custom frame control functions
 
+STDMETHODIMP CoRayLib::SwapScreenBuffer(
+    void
+)
+{
+    WrRayLib::SwapScreenBuffer();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::PollInputEvents(
+    void
+)
+{
+    WrRayLib::PollInputEvents();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::WaitTime(
+    double seconds
+)
+{
+    WrRayLib::WaitTime(
+        seconds
+    );
+
+    return S_OK;
+}
+
+
 // Random values generation functions
+
 STDMETHODIMP CoRayLib::SetRandomSeed(
     long seed
 )
@@ -1279,7 +1351,40 @@ STDMETHODIMP CoRayLib::GetRandomValue(
     return S_OK;
 }
 
+
 // Misc. functions
+
+HRESULT CoRayLib::TakeScreenshot(
+    BSTR fileName
+)
+{
+    WrRayLib::TakeScreenshot(
+        _com_util::ConvertBSTRToString(fileName)
+    );
+
+    return S_OK;
+}
+HRESULT CoRayLib::SetConfigFlags(
+    long flags
+)
+{
+    WrRayLib::SetConfigFlags(
+        (unsigned int)flags
+    );
+
+    return S_OK;
+}
+HRESULT CoRayLib::OpenURL(
+    BSTR url
+)
+{
+    WrRayLib::OpenURL(
+        _com_util::ConvertBSTRToString(url)
+    );
+
+    return S_OK;
+}
+
 
 // Logging system
 
