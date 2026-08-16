@@ -18,6 +18,7 @@ class CoRayLib : IRayLib
     inline HRESULT co2wr(IRayLibVector3* in, WrRayLibVector3* out);
     inline HRESULT co2wr(IRayLibVector4* in, WrRayLibVector4* out);
     inline HRESULT co2wr(IRayLibRectangle* in, WrRayLibRectangle* out);
+    inline HRESULT co2wr(IRayLibCamera2D* in, WrRayLibCamera2D* out);
     inline HRESULT co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out);
 
     inline HRESULT wr2co(WrRayLibColor* in, IRayLibColor* out);
@@ -25,6 +26,7 @@ class CoRayLib : IRayLib
     inline HRESULT wr2co(WrRayLibVector3* in, IRayLibVector3* out);
     inline HRESULT wr2co(WrRayLibVector4* in, IRayLibVector4* out);
     inline HRESULT wr2co(WrRayLibRectangle* in, IRayLibRectangle* out);
+    inline HRESULT wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out);
     inline HRESULT wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out);
 
 public:
@@ -258,6 +260,18 @@ public:
         void
     ) override;
     STDMETHODIMP EndDrawing(
+        void
+    ) override;
+    STDMETHODIMP BeginMode2D(
+        IRayLibCamera2D* camera
+    ) override;
+    STDMETHODIMP EndMode2D(
+        void
+    ) override;
+    STDMETHODIMP BeginMode3D(
+        IRayLibCamera3D* camera
+    ) override;
+    STDMETHODIMP EndMode3D(
         void
     ) override;
 

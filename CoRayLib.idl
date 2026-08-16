@@ -243,6 +243,10 @@ interface IRayLib : IDispatch
     [id(70)] HRESULT ClearBackground([in] IRayLibColor* color);
     [id(71)] HRESULT BeginDrawing(void);
     [id(72)] HRESULT EndDrawing(void);
+    [id(73)] HRESULT BeginMode2D([in] IRayLibCamera2D* camera);
+    [id(74)] HRESULT EndMode2D(void);
+    [id(75)] HRESULT BeginMode3D([in] IRayLibCamera3D* camera);
+    [id(76)] HRESULT EndMode3D(void);
 
     // VR stereo config functions for VR simulator
 

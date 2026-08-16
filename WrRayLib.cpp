@@ -53,6 +53,18 @@ static void inline wr2rl_camera2D(
 	rl_camera->zoom = wr_camera->zoom;
 }
 
+static inline Camera2D wr2rl_camera2D(
+	WrRayLibCamera2D camera
+)
+{
+	return {
+		wr2rl_vector2(camera.offset),
+		wr2rl_vector2(camera.target),
+		camera.rotation,
+		camera.zoom
+	};
+}
+
 static void inline wr2rl_camera3D(
 	Camera3D* rl_camera,
 	WrRayLibCamera3D* wr_camera
@@ -63,6 +75,19 @@ static void inline wr2rl_camera3D(
 	rl_camera->up = wr2rl_vector3(wr_camera->up);
 	rl_camera->fovy = wr_camera->fovy;
 	rl_camera->projection = wr_camera->projection;
+}
+
+static inline Camera3D wr2rl_camera3D(
+	WrRayLibCamera3D camera
+)
+{
+	return {
+		wr2rl_vector3(camera.position),
+		wr2rl_vector3(camera.target),
+		wr2rl_vector3(camera.up),
+		camera.fovy,
+		camera.projection
+	};
 }
 
 static WrRayLibVector2 inline rl2wr_vector2(
@@ -460,6 +485,38 @@ void WrRayLib::EndDrawing(
 )
 {
 	::EndDrawing();
+}
+void WrRayLib::BeginMode2D(
+	WrRayLibCamera2D camera
+)
+{
+	::BeginMode2D(
+		wr2rl_camera2D(
+			camera
+		)
+	);
+}
+void WrRayLib::EndMode2D(
+	void
+)
+{
+	::EndMode2D();
+}
+void WrRayLib::BeginMode3D(
+	WrRayLibCamera3D camera
+)
+{
+	::BeginMode3D(
+		wr2rl_camera3D(
+			camera
+		)
+	);
+}
+void WrRayLib::EndMode3D(
+	void
+)
+{
+	::EndMode3D();
 }
 
 

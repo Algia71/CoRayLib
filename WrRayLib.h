@@ -135,6 +135,10 @@ public:
 	static void ClearBackground(WrRayLibColor color);
 	static void BeginDrawing(void);
 	static void EndDrawing(void);
+	static void BeginMode2D(WrRayLibCamera2D camera);
+	static void EndMode2D(void);
+	static void BeginMode3D(WrRayLibCamera3D camera);
+	static void EndMode3D(void);
 
 	// VR stereo config functions for VR simulator
 

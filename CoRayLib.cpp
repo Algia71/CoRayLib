@@ -115,6 +115,34 @@ inline HRESULT CoRayLib::co2wr(IRayLibRectangle* in, WrRayLibRectangle* out)
 
     return hr;
 }
+inline HRESULT CoRayLib::co2wr(IRayLibCamera2D* in, WrRayLibCamera2D* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    IRayLibVector2* velem = NULL;
+    float felem = 0;
+    long lelem = 0;
+
+    hr = in->get_offset(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->offset);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_target(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->target);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_rotation(&felem);
+    if (FAILED(hr)) return hr;
+    out->rotation = felem;
+
+    hr = in->get_zoom(&felem);
+    if (FAILED(hr)) return hr;
+    out->zoom = felem;
+
+    return hr;
+}
 inline HRESULT CoRayLib::co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out)
 {
     HRESULT hr = S_OK;
@@ -234,7 +262,32 @@ inline HRESULT CoRayLib::wr2co(WrRayLibRectangle* in, IRayLibRectangle* out)
 
     return hr;
 }
+inline HRESULT CoRayLib::wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out)
+{
+    HRESULT hr = S_OK;
 
+    IRayLibVector2* v = NULL;
+
+    hr = out->get_offset(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->offset, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->get_target(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->target, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_rotation(in->rotation);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_zoom(in->zoom);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 inline HRESULT CoRayLib::wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out)
 {
     HRESULT hr = S_OK;
@@ -1081,7 +1134,66 @@ STDMETHODIMP CoRayLib::EndDrawing(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::BeginMode2D(
+    IRayLibCamera2D* camera
+)
+{
+    if (!camera)
+        return E_POINTER;
 
+    WrRayLibCamera2D wr_camera = { 0 };
+
+    HRESULT hr = co2wr(
+        camera,
+        &wr_camera
+    );
+    if (FAILED(hr))
+        return hr;
+
+    WrRayLib::BeginMode2D(
+        wr_camera
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::EndMode2D(
+    void
+)
+{
+    WrRayLib::EndMode2D();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::BeginMode3D(
+    IRayLibCamera3D* camera
+)
+{
+    if (!camera)
+        return E_POINTER;
+
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    HRESULT hr = co2wr(
+        camera,
+        &wr_camera
+    );
+    if (FAILED(hr))
+        return hr;
+
+    WrRayLib::BeginMode3D(
+        wr_camera
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::EndMode3D(
+    void
+)
+{
+    WrRayLib::EndMode3D();
+
+    return S_OK;
+}
 
 // VR stereo config functions for VR simulator
 
