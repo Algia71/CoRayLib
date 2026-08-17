@@ -763,6 +763,23 @@ public:
         long* pRetVal
     ) override;
 
+    STDMETHODIMP TextSubtext(
+        BSTR text,
+        long position,
+        long length,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextRemoveSpaces(
+        BSTR text,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP GetTextBetween(
+        BSTR text,
+        BSTR begin,
+        BSTR end,
+        BSTR* pRetVal
+    ) override;
+
     STDMETHODIMP TextFindIndex(
         BSTR text,
         BSTR search,

@@ -412,6 +412,10 @@ interface IRayLib : IDispatch
     [id(2073)] HRESULT TextIsEqual([in] BSTR text1, [in] BSTR text2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(2074)] HRESULT TextLength([in] BSTR text, [out, retval] long* pRetVal);
 
+    [id(2076)] HRESULT TextSubtext([in] BSTR text, [in] long position, [in] long length, [out, retval] BSTR* pRetVal);
+    [id(2077)] HRESULT TextRemoveSpaces([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2078)] HRESULT GetTextBetween([in] BSTR text, [in] BSTR begin, [in] BSTR end, [out, retval] BSTR* pRetVal);
+
     [id(2080)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
     [id(2081)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);
     [id(2082)] HRESULT TextToLower([in] BSTR text, [out, retval] BSTR* pRetVal);

@@ -372,9 +372,9 @@ public:
 	static bool TextIsEqual(const char* text1, const char* text2);
 	static unsigned int TextLength(const char* text);
 //	static const char* TextFormat(const char* text, ...);
-//	static const char* TextSubtext(const char* text, int position, int length);
-//	static const char* TextRemoveSpaces(const char* text);
-//	static char* GetTextBetween(const char* text, const char* begin, const char* end);
+	static const char* TextSubtext(const char* text, int position, int length);
+	static const char* TextRemoveSpaces(const char* text);
+	static char* GetTextBetween(const char* text, const char* begin, const char* end);
 //	static char* TextReplace(const char* text, const char* search, const char* replacement);
 //	static char* TextReplaceAlloc(const char* text, const char* search, const char* replacement);
 //	static char* TextReplaceBetween(const char* text, const char* begin, const char* end, const char* replacement);

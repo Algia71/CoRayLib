@@ -1522,6 +1522,39 @@ unsigned int WrRayLib::TextLength(
 	);
 }
 
+const char* WrRayLib::TextSubtext(
+	const char* text,
+	int position,
+	int length
+)
+{
+	return ::TextSubtext(
+		text,
+		position,
+		length
+	);
+}
+const char* WrRayLib::TextRemoveSpaces(
+	const char* text
+)
+{
+	return ::TextRemoveSpaces(
+		text
+	);
+}
+char* WrRayLib::GetTextBetween(
+	const char* text,
+	const char* begin,
+	const char* end
+)
+{
+	return ::GetTextBetween(
+		text,
+		begin,
+		end
+	);
+}
+
 int WrRayLib::TextFindIndex(
 	const char* text,
 	const char* search

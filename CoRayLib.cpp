@@ -3102,6 +3102,8 @@ STDMETHODIMP CoRayLib::DrawText(
     IRayLibColor* color
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!color)
         return E_POINTER;
 
@@ -3141,6 +3143,8 @@ STDMETHODIMP CoRayLib::MeasureText(
     long* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3161,6 +3165,10 @@ STDMETHODIMP CoRayLib::TextIsEqual(
     VARIANT_BOOL* pRetVal
 )
 {
+    if (!text1)
+        return E_POINTER;
+    if (!text2)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3185,6 +3193,8 @@ STDMETHODIMP CoRayLib::TextLength(
     long* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3197,12 +3207,83 @@ STDMETHODIMP CoRayLib::TextLength(
     return S_OK;
 }
 
+STDMETHODIMP CoRayLib::TextSubtext(
+    BSTR text,
+    long position,
+    long length,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+    
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::TextSubtext(
+            _com_util::ConvertBSTRToString(text),
+            (int)position,
+            (int)length
+        )
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::TextRemoveSpaces(
+    BSTR text,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::TextRemoveSpaces(
+            _com_util::ConvertBSTRToString(text)
+        )
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::GetTextBetween(
+    BSTR text,
+    BSTR begin,
+    BSTR end,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!begin)
+        return E_POINTER;
+    if (!end)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::GetTextBetween(
+            _com_util::ConvertBSTRToString(text),
+            _com_util::ConvertBSTRToString(begin),
+            _com_util::ConvertBSTRToString(end)
+        )
+    );
+
+    return S_OK;
+}
+
 STDMETHODIMP CoRayLib::TextFindIndex(
     BSTR text,
     BSTR search,
     long* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
+    if (!search)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3222,6 +3303,8 @@ STDMETHODIMP CoRayLib::TextToUpper(
     BSTR* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3240,6 +3323,8 @@ STDMETHODIMP CoRayLib::TextToLower(
     BSTR* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3258,6 +3343,8 @@ STDMETHODIMP CoRayLib::TextToPascal(
     BSTR* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3276,6 +3363,8 @@ STDMETHODIMP CoRayLib::TextToSnake(
     BSTR* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3294,6 +3383,8 @@ STDMETHODIMP CoRayLib::TextToCamel(
     BSTR* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3312,6 +3403,8 @@ STDMETHODIMP CoRayLib::TextToInteger(
     long* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
@@ -3328,6 +3421,8 @@ STDMETHODIMP CoRayLib::TextToFloat(
     float* pRetVal
 )
 {
+    if (!text)
+        return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
 
