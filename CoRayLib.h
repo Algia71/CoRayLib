@@ -737,13 +737,48 @@ public:
     ) override;
 
     // Text font info functions
-    HRESULT SetTextLineSpacing(
+    STDMETHODIMP SetTextLineSpacing(
         long spacing
     ) override;
-    HRESULT MeasureText(
+    STDMETHODIMP MeasureText(
         BSTR text,
         long fontSize,
         long* pRetVal
+    ) override;
+
+    // Text strings management functions (no UTF-8 strings, only byte chars)
+    STDMETHODIMP TextFindIndex(
+        BSTR text,
+        BSTR search,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP TextToUpper(
+        BSTR text,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextToLower(
+        BSTR text,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextToPascal(
+        BSTR text,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextToSnake(
+        BSTR text,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextToCamel(
+        BSTR text,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextToInteger(
+        BSTR text,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP TextToFloat(
+        BSTR text,
+        float* pRetVal
     ) override;
 
 

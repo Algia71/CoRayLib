@@ -366,7 +366,14 @@ public:
 	// Text codepoints management functions (unicode characters)
 
 	// Text strings management functions (no UTF-8 strings, only byte chars)
-
+	static int TextFindIndex(const char* text, const char* search);
+	static char* TextToUpper(const char* text);
+	static char* TextToLower(const char* text);
+	static char* TextToPascal(const char* text);
+	static char* TextToSnake(const char* text);
+	static char* TextToCamel(const char* text);
+	static int TextToInteger(const char* text);
+	static float TextToFloat(const char* text);
 
 	/* MODULE: RMODELS */
 

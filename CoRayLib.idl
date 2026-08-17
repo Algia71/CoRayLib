@@ -406,6 +406,16 @@ interface IRayLib : IDispatch
     [id(2040)] HRESULT SetTextLineSpacing([in] long spacing);
     [id(2041)] HRESULT MeasureText([in] BSTR text, [in] long fontSize, [out, retval] long* pRetVal);
 
+    // Text strings management functions (no UTF-8 strings, only byte chars)
+    [id(2070)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
+    [id(2071)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2072)] HRESULT TextToLower([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2073)] HRESULT TextToPascal([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2074)] HRESULT TextToSnake([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2075)] HRESULT TextToCamel([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2076)] HRESULT TextToInteger([in] BSTR text, [out, retval] long* pRetVal);
+    [id(2077)] HRESULT TextToFloat([in] BSTR text, [out, retval] float* pRetVal);
+
 
     //////////////////////////////////////////////
     // Module: RMODELS

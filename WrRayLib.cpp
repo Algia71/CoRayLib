@@ -1476,6 +1476,76 @@ int WrRayLib::MeasureText(
 }
 
 
+// Text strings management functions (no UTF-8 strings, only byte chars)
+
+int WrRayLib::TextFindIndex(
+	const char* text,
+	const char* search
+)
+{
+	return ::TextFindIndex(
+		text,
+		search
+	);
+}
+char* WrRayLib::TextToUpper(
+	const char* text
+)
+{
+	return ::TextToUpper(
+		text
+	);
+}
+char* WrRayLib::TextToLower(
+	const char* text
+)
+{
+	return ::TextToLower(
+		text
+	);
+}
+char* WrRayLib::TextToPascal(
+	const char* text
+)
+{
+	return ::TextToPascal(
+		text
+	);
+}
+char* WrRayLib::TextToSnake(
+	const char* text
+)
+{
+	return ::TextToSnake(
+		text
+	);
+}
+char* WrRayLib::TextToCamel(
+	const char* text
+)
+{
+	return ::TextToCamel(
+		text
+	);
+}
+int WrRayLib::TextToInteger(
+	const char* text
+)
+{
+	return ::TextToInteger(
+		text
+	);
+}
+float WrRayLib::TextToFloat(
+	const char* text
+)
+{
+	return ::TextToFloat(
+		text
+	);
+}
+
+
 // Audio device management functions
 
 void WrRayLib::InitAudioDevice(
