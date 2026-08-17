@@ -313,7 +313,15 @@ public:
 	static void DrawRectangle(int posX, int posY, int width, int height, WrRayLibColor color);
 	static void DrawRectangleV(WrRayLibVector2 position, WrRayLibVector2 size, WrRayLibColor color);
 	static void DrawRectangleRec(WrRayLibRectangle rec, WrRayLibColor color);
-
+	static void DrawRectanglePro(WrRayLibRectangle rec, WrRayLibVector2 origin, float rotation, WrRayLibColor color);
+	static void DrawRectangleGradientV(int posX, int posY, int width, int height, WrRayLibColor top, WrRayLibColor bottom);
+	static void DrawRectangleGradientH(int posX, int posY, int width, int height, WrRayLibColor left, WrRayLibColor right);
+	static void DrawRectangleGradientEx(WrRayLibRectangle rec, WrRayLibColor topLeft, WrRayLibColor bottomLeft, WrRayLibColor bottomRight, WrRayLibColor topRight);
+	static void DrawRectangleLines(int posX, int posY, int width, int height, WrRayLibColor color);
+	static void DrawRectangleLinesEx(WrRayLibRectangle rec, float lineThick, WrRayLibColor color);
+	static void DrawRectangleRounded(WrRayLibRectangle rec, float roundness, int segments, WrRayLibColor color);
+	static void DrawRectangleRoundedLines(WrRayLibRectangle rec, float roundness, int segments, WrRayLibColor color);
+	static void DrawRectangleRoundedLinesEx(WrRayLibRectangle rec, float roundness, int segments, float lineThick, WrRayLibColor color);
 	static void DrawTriangle(WrRayLibVector2 v1, WrRayLibVector2 v2, WrRayLibVector2 v3, WrRayLibColor color);
 	static void DrawTriangleLines(WrRayLibVector2 v1, WrRayLibVector2 v2, WrRayLibVector2 v3, WrRayLibColor color);
 

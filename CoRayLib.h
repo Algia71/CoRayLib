@@ -643,6 +643,66 @@ public:
         IRayLibRectangle* rec,
         IRayLibColor* color
     ) override;
+    STDMETHODIMP DrawRectanglePro(
+        IRayLibRectangle* rec,
+        IRayLibVector2* origin,
+        float rotation,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRectangleGradientV(
+        long posX,
+        long posY,
+        long width,
+        long height,
+        IRayLibColor* top,
+        IRayLibColor* bottom
+    ) override;
+    STDMETHODIMP DrawRectangleGradientH(
+        long posX,
+        long posY,
+        long width,
+        long height,
+        IRayLibColor* left,
+        IRayLibColor* right
+    ) override;
+    STDMETHODIMP DrawRectangleGradientEx(
+        IRayLibRectangle* rec,
+        IRayLibColor* topLeft,
+        IRayLibColor* bottomLeft,
+        IRayLibColor* bottomRight,
+        IRayLibColor* topRight
+    ) override;
+    STDMETHODIMP DrawRectangleLines(
+        long posX,
+        long posY,
+        long width,
+        long height,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRectangleLinesEx(
+        IRayLibRectangle* rec,
+        float lineThick,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRectangleRounded(
+        IRayLibRectangle* rec,
+        float roundness,
+        long segments,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRectangleRoundedLines(
+        IRayLibRectangle* rec,
+        float roundness,
+        long segments,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRectangleRoundedLinesEx(
+        IRayLibRectangle* rec,
+        float roundness,
+        long segments,
+        float lineThick,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawTriangle(
         IRayLibVector2* v1,
         IRayLibVector2* v2,

@@ -2649,6 +2649,303 @@ STDMETHODIMP CoRayLib::DrawRectangleRec(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::DrawRectanglePro(
+    IRayLibRectangle* rec,
+    IRayLibVector2* origin,
+    float rotation,
+    IRayLibColor* color
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!origin)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle wr_rec = { 0 };
+    WrRayLibVector2 wr_vec = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(rec, &wr_rec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(origin, &wr_vec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectanglePro(
+        wr_rec,
+        wr_vec,
+        rotation,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleGradientV(
+    long posX,
+    long posY,
+    long width,
+    long height,
+    IRayLibColor* top,
+    IRayLibColor* bottom
+)
+{
+    if (!top)
+        return E_POINTER;
+    if (!bottom)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_top = { 0 };
+    WrRayLibColor wr_bottom = { 0 };
+
+    hr = co2wr(top, &wr_top);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(bottom, &wr_bottom);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleGradientH(
+        (int)posX,
+        (int)posY,
+        (int)width,
+        (int)height,
+        wr_top,
+        wr_bottom
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleGradientH(
+    long posX,
+    long posY,
+    long width,
+    long height,
+    IRayLibColor* left,
+    IRayLibColor* right
+)
+{
+    if (!left)
+        return E_POINTER;
+    if (!right)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_left = { 0 };
+    WrRayLibColor wr_right = { 0 };
+
+    hr = co2wr(left, &wr_left);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(right, &wr_right);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleGradientH(
+        (int)posX,
+        (int)posY,
+        (int)width,
+        (int)height,
+        wr_left,
+        wr_right
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleGradientEx(
+    IRayLibRectangle* rec,
+    IRayLibColor* topLeft,
+    IRayLibColor* bottomLeft,
+    IRayLibColor* bottomRight,
+    IRayLibColor* topRight
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!topLeft)
+        return E_POINTER;
+    if (!bottomLeft)
+        return E_POINTER;
+    if (!bottomRight)
+        return E_POINTER;
+    if (!topRight)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle wr_rec = { 0 };
+    WrRayLibColor wr_topLeft = { 0 };
+    WrRayLibColor wr_bottomLeft = { 0 };
+    WrRayLibColor wr_bottomRight = { 0 };
+    WrRayLibColor wr_topRight = { 0 };
+
+    hr = co2wr(rec, &wr_rec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(topLeft, &wr_topLeft);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(bottomLeft, &wr_bottomLeft);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(bottomRight, &wr_bottomRight);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(topRight, &wr_topRight);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleGradientEx(
+        wr_rec,
+        wr_topLeft,
+        wr_bottomLeft,
+        wr_bottomRight,
+        wr_topRight
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleLines(
+    long posX,
+    long posY,
+    long width,
+    long height,
+    IRayLibColor* color
+)
+{
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleLines(
+        (int)posX,
+        (int)posY,
+        (int)width,
+        (int)height,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleLinesEx(
+    IRayLibRectangle* rec,
+    float lineThick,
+    IRayLibColor* color
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle wr_rec = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(rec, &wr_rec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleLinesEx(
+        wr_rec,
+        lineThick,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleRounded(
+    IRayLibRectangle* rec,
+    float roundness,
+    long segments,
+    IRayLibColor* color
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle wr_rec = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(rec, &wr_rec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleRounded(
+        wr_rec,
+        roundness,
+        (int)segments,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleRoundedLines(
+    IRayLibRectangle* rec,
+    float roundness,
+    long segments,
+    IRayLibColor* color
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle wr_rec = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(rec, &wr_rec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleRoundedLines(
+        wr_rec,
+        roundness,
+        (int)segments,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRectangleRoundedLinesEx(
+    IRayLibRectangle* rec,
+    float roundness,
+    long segments,
+    float lineThick,
+    IRayLibColor* color
+)
+{
+    if (!rec)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle wr_rec = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(rec, &wr_rec);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRectangleRoundedLinesEx(
+        wr_rec,
+        roundness,
+        (int)segments,
+        lineThick,
+        wr_clr
+    );
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::DrawTriangle(
     IRayLibVector2* v1,
     IRayLibVector2* v2,

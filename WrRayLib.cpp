@@ -1292,6 +1292,144 @@ void WrRayLib::DrawRectangleRec(
 		wr2rl_color(color)
 	);
 }
+void WrRayLib::DrawRectanglePro(
+	WrRayLibRectangle rec,
+	WrRayLibVector2 origin,
+	float rotation,
+	WrRayLibColor color
+)
+{
+	::DrawRectanglePro(
+		wr2rl_rect(rec),
+		wr2rl_vector2(origin),
+		rotation,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleGradientV(
+	int posX,
+	int posY,
+	int width,
+	int height,
+	WrRayLibColor top,
+	WrRayLibColor bottom
+)
+{
+	::DrawRectangleGradientV(
+		posX,
+		posY,
+		width,
+		height,
+		wr2rl_color(top),
+		wr2rl_color(bottom)
+	);
+}
+void WrRayLib::DrawRectangleGradientH(
+	int posX,
+	int posY,
+	int width,
+	int height,
+	WrRayLibColor left,
+	WrRayLibColor right
+)
+{
+	::DrawRectangleGradientH(
+		posX,
+		posY,
+		width,
+		height,
+		wr2rl_color(left),
+		wr2rl_color(right)
+	);
+}
+void WrRayLib::DrawRectangleGradientEx(
+	WrRayLibRectangle rec,
+	WrRayLibColor topLeft,
+	WrRayLibColor bottomLeft,
+	WrRayLibColor bottomRight,
+	WrRayLibColor topRight
+)
+{
+	::DrawRectangleGradientEx(
+		wr2rl_rect(rec),
+		wr2rl_color(topLeft),
+		wr2rl_color(bottomLeft),
+		wr2rl_color(bottomRight),
+		wr2rl_color(topRight)
+	);
+}
+void WrRayLib::DrawRectangleLines(
+	int posX,
+	int posY,
+	int width,
+	int height,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleLines(
+		posX,
+		posY,
+		width,
+		height,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleLinesEx(
+	WrRayLibRectangle rec,
+	float lineThick,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleLinesEx(
+		wr2rl_rect(rec),
+		lineThick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleRounded(
+	WrRayLibRectangle rec,
+	float roundness,
+	int segments,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleRounded(
+		wr2rl_rect(rec),
+		roundness,
+		segments,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleRoundedLines(
+	WrRayLibRectangle rec,
+	float roundness,
+	int segments,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleRoundedLines(
+		wr2rl_rect(rec),
+		roundness,
+		segments,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRectangleRoundedLinesEx(
+	WrRayLibRectangle rec,
+	float roundness,
+	int segments,
+	float lineThick,
+	WrRayLibColor color
+)
+{
+	::DrawRectangleRoundedLinesEx(
+		wr2rl_rect(rec),
+		roundness,
+		segments,
+		lineThick,
+		wr2rl_color(color)
+	);
+}
 void WrRayLib::DrawTriangle(
 	WrRayLibVector2 v1,
 	WrRayLibVector2 v2,

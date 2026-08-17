@@ -390,9 +390,17 @@ interface IRayLib : IDispatch
     [id(1050)] HRESULT DrawRectangle([in] long posX, [in] long posY, [in] long width, [in] long height, [in] IRayLibColor* color);
     [id(1051)] HRESULT DrawRectangleV([in] IRayLibVector2* position, [in] IRayLibVector2* size, [in] IRayLibColor* color);
     [id(1052)] HRESULT DrawRectangleRec([in] IRayLibRectangle* rec, [in] IRayLibColor* color);
-
-    [id(1060)] HRESULT DrawTriangle([in] IRayLibVector2* v1, [in] IRayLibVector2* v2, [in] IRayLibVector2* v3, [in] IRayLibColor* color);
-    [id(1061)] HRESULT DrawTriangleLines([in] IRayLibVector2* v1, [in] IRayLibVector2* v2, [in] IRayLibVector2* v3, [in] IRayLibColor* color);
+    [id(1053)] HRESULT DrawRectanglePro([in] IRayLibRectangle* rec, [in] IRayLibVector2* origin, [in] float rotation, [in] IRayLibColor* color);
+    [id(1054)] HRESULT DrawRectangleGradientV([in] long posX, [in] long posY, [in] long width, [in] long height, [in] IRayLibColor* top, [in] IRayLibColor* bottom);
+    [id(1055)] HRESULT DrawRectangleGradientH([in] long posX, [in] long posY, [in] long width, [in] long height, [in] IRayLibColor* left, [in] IRayLibColor* right);
+    [id(1056)] HRESULT DrawRectangleGradientEx([in] IRayLibRectangle* rec, [in] IRayLibColor* topLeft, [in] IRayLibColor* bottomLeft, [in] IRayLibColor* bottomRight, [in] IRayLibColor* topRight);
+    [id(1057)] HRESULT DrawRectangleLines([in] long posX, [in] long posY, [in] long width, [in] long height, [in] IRayLibColor* color);
+    [id(1058)] HRESULT DrawRectangleLinesEx([in] IRayLibRectangle* rec, [in] float lineThick, [in] IRayLibColor* color);
+    [id(1059)] HRESULT DrawRectangleRounded([in] IRayLibRectangle* rec, [in] float roundness, [in] long segments, [in] IRayLibColor* color);
+    [id(1060)] HRESULT DrawRectangleRoundedLines([in] IRayLibRectangle* rec, [in] float roundness, [in] long segments, [in] IRayLibColor* color);
+    [id(1061)] HRESULT DrawRectangleRoundedLinesEx([in] IRayLibRectangle* rec, [in] float roundness, [in] long segments, [in] float lineThick, [in] IRayLibColor* color);
+    [id(1062)] HRESULT DrawTriangle([in] IRayLibVector2* v1, [in] IRayLibVector2* v2, [in] IRayLibVector2* v3, [in] IRayLibColor* color);
+    [id(1063)] HRESULT DrawTriangleLines([in] IRayLibVector2* v1, [in] IRayLibVector2* v2, [in] IRayLibVector2* v3, [in] IRayLibColor* color);
 
     [id(1070)] HRESULT DrawPoly([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
     [id(1071)] HRESULT DrawPolyLines([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
