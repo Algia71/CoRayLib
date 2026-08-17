@@ -111,6 +111,13 @@ static WrRayLibVector4 inline rl2wr_vector4(
 	return { vector.x, vector.y, vector.z, vector.w };
 }
 
+static WrRayLibRectangle inline rl2wr_rect(
+	Rectangle rec
+)
+{
+	return { rec.x, rec.y, rec.width, rec.height };
+}
+
 static void inline rl2wr_camera2D(
 	WrRayLibCamera2D* wr_camera,
 	Camera2D* rl_camera
@@ -1426,6 +1433,24 @@ bool WrRayLib::CheckCollisionPointLine(
 	);
 }
 
+WrRayLibRectangle WrRayLib::GetCollisionRec(
+	WrRayLibRectangle rec1,
+	WrRayLibRectangle rec2
+)
+{
+	return rl2wr_rect(
+		::GetCollisionRec(
+			wr2rl_rect(
+				rec1
+			),
+			wr2rl_rect(
+				rec2
+			)
+		)
+	);
+}
+
+
 
 // Text drawing functions
 
@@ -1477,6 +1502,25 @@ int WrRayLib::MeasureText(
 
 
 // Text strings management functions (no UTF-8 strings, only byte chars)
+
+bool WrRayLib::TextIsEqual(
+	const char* text1,
+	const char* text2
+)
+{
+	return ::TextIsEqual(
+		text1,
+		text2
+	);
+}
+unsigned int WrRayLib::TextLength(
+	const char* text
+)
+{
+	return ::TextLength(
+		text
+	);
+}
 
 int WrRayLib::TextFindIndex(
 	const char* text,

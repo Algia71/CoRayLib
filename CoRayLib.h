@@ -552,170 +552,176 @@ public:
         long posX,
         long posY,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawPixelV(
         IRayLibVector2* position,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawLine(
         long startPosX,
         long startPosY,
         long endPosX,
         long endPosY,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawLineV(
         IRayLibVector2* startPos,
         IRayLibVector2* endPos,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawLineEx(
         IRayLibVector2* startPos,
         IRayLibVector2* endPos,
         float thick,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawCircle(
         long centerX,
         long centerY,
         float radius,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawCircleV(
         IRayLibVector2* center,
         float radius,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawCircleLines(
         long centerX,
         long centerY,
         float radius,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawCircleLinesV(
         IRayLibVector2* center,
         float radius,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawEllipse(
         long centerX,
         long centerY,
         float radiusH,
         float radiusV,
-        IRayLibColor* color);
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawEllipseV(
         IRayLibVector2* center,
         float radiusH,
         float radiusV,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawEllipseLines(
         long centerX,
         long centerY,
         float radiusH,
         float radiusV,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawEllipseLinesV(
         IRayLibVector2* center,
         float radiusH,
         float radiusV,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawRectangle(
         long posX,
         long posY,
         long width,
         long height,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawRectangleV(
         IRayLibVector2* position,
         IRayLibVector2* size,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawRectangleRec(
         IRayLibRectangle* rec,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawTriangle(
         IRayLibVector2* v1,
         IRayLibVector2* v2,
         IRayLibVector2* v3,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawTriangleLines(
         IRayLibVector2* v1,
         IRayLibVector2* v2,
         IRayLibVector2* v3,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawPoly(
         IRayLibVector2* center,
         long sides,
         float radius,
         float rotation,
         IRayLibColor* color
-    );
+    ) override;
     STDMETHODIMP DrawPolyLines(
         IRayLibVector2* center,
         long sides,
         float radius,
         float rotation,
         IRayLibColor* color
-    );
+    ) override;
     
     // Basic shapes collision detection functions
     STDMETHODIMP CheckCollisionRecs(
         IRayLibRectangle* rec1,
         IRayLibRectangle* rec2,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionCircles(
         IRayLibVector2* center1,
         float radius1,
         IRayLibVector2* center2,
         float radius2,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionCircleRec(
         IRayLibVector2* center,
         float radius,
         IRayLibRectangle* rec,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionCircleLine(
         IRayLibVector2* center,
         float radius,
         IRayLibVector2* p1,
         IRayLibVector2* p2,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionPointRec(
         IRayLibVector2* point,
         IRayLibRectangle* rec,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionPointCircle(
         IRayLibVector2* point,
         IRayLibVector2* center,
         float radius,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionPointTriangle(
         IRayLibVector2* point,
         IRayLibVector2* p1,
         IRayLibVector2* p2,
         IRayLibVector2* p3,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
     STDMETHODIMP CheckCollisionPointLine(
         IRayLibVector2* point,
         IRayLibVector2* p1,
         IRayLibVector2* p2,
         long threshold,
         VARIANT_BOOL* pRetVal
-    );
+    ) override;
+    STDMETHODIMP GetCollisionRec(
+        IRayLibRectangle* rec1,
+        IRayLibRectangle* rec2,
+        IRayLibRectangle** pRetVal
+    ) override;
 
 
     //////////////////////////////////////////////
@@ -747,6 +753,16 @@ public:
     ) override;
 
     // Text strings management functions (no UTF-8 strings, only byte chars)
+    STDMETHODIMP TextIsEqual(
+        BSTR text1,
+        BSTR text2,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP TextLength(
+        BSTR text,
+        long* pRetVal
+    ) override;
+
     STDMETHODIMP TextFindIndex(
         BSTR text,
         BSTR search,

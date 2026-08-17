@@ -392,6 +392,8 @@ interface IRayLib : IDispatch
     [id(1096)] HRESULT CheckCollisionPointTriangle([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [out, retval] VARIANT_BOOL* pRetVal);
     [id(1097)] HRESULT CheckCollisionPointLine([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] long threshold, [out, retval] VARIANT_BOOL* pRetVal);
 
+    [id(1100)] HRESULT GetCollisionRec([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] IRayLibRectangle** pRetVal);
+
 
     //////////////////////////////////////////////
     // Module: RTEXT
@@ -407,14 +409,17 @@ interface IRayLib : IDispatch
     [id(2041)] HRESULT MeasureText([in] BSTR text, [in] long fontSize, [out, retval] long* pRetVal);
 
     // Text strings management functions (no UTF-8 strings, only byte chars)
-    [id(2070)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
-    [id(2071)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2072)] HRESULT TextToLower([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2073)] HRESULT TextToPascal([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2074)] HRESULT TextToSnake([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2075)] HRESULT TextToCamel([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2076)] HRESULT TextToInteger([in] BSTR text, [out, retval] long* pRetVal);
-    [id(2077)] HRESULT TextToFloat([in] BSTR text, [out, retval] float* pRetVal);
+    [id(2073)] HRESULT TextIsEqual([in] BSTR text1, [in] BSTR text2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(2074)] HRESULT TextLength([in] BSTR text, [out, retval] long* pRetVal);
+
+    [id(2080)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
+    [id(2081)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2082)] HRESULT TextToLower([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2083)] HRESULT TextToPascal([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2084)] HRESULT TextToSnake([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2085)] HRESULT TextToCamel([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2086)] HRESULT TextToInteger([in] BSTR text, [out, retval] long* pRetVal);
+    [id(2087)] HRESULT TextToFloat([in] BSTR text, [out, retval] float* pRetVal);
 
 
     //////////////////////////////////////////////

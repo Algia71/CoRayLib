@@ -3027,6 +3027,50 @@ STDMETHODIMP CoRayLib::CheckCollisionPointLine(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::GetCollisionRec(
+    IRayLibRectangle* rec1,
+    IRayLibRectangle* rec2,
+    IRayLibRectangle** pRetVal
+)
+{
+    if (!rec1)
+        return E_POINTER;
+    if (!rec2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRectangle rect1 = { 0 };
+    WrRayLibRectangle rect2 = { 0 };
+
+    hr = co2wr(rec1, &rect1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(rec2, &rect1);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRectangle rectR = WrRayLib::GetCollisionRec(
+        rect1,
+        rect2
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRectangle,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRectangle,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &rectR,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
 
 
 //////////////////////////////////////////////
@@ -3110,6 +3154,48 @@ STDMETHODIMP CoRayLib::MeasureText(
 
 
 // Text strings management functions (no UTF-8 strings, only byte chars)
+
+STDMETHODIMP CoRayLib::TextIsEqual(
+    BSTR text1,
+    BSTR text2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    const bool result = WrRayLib::TextIsEqual(
+        _com_util::ConvertBSTRToString(
+            text1
+        ),
+        _com_util::ConvertBSTRToString(
+            text2
+        )
+    );
+
+    if (result)
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::TextLength(
+    BSTR text,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = (long)WrRayLib::TextLength(
+        _com_util::ConvertBSTRToString(
+            text
+        )
+    );
+
+    return S_OK;
+}
 
 STDMETHODIMP CoRayLib::TextFindIndex(
     BSTR text,

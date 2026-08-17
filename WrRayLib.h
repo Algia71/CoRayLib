@@ -329,7 +329,7 @@ public:
 	static bool CheckCollisionPointLine(WrRayLibVector2 point, WrRayLibVector2 p1, WrRayLibVector2 p2, int threshold);
 //	static bool CheckCollisionPointPoly(WrRayLibVector2 point, const WrRayLibVector2* points, int pointCount);
 //	static bool CheckCollisionLines(WrRayLibVector2 startPos1, WrRayLibVector2 endPos1, WrRayLibVector2 startPos2, WrRayLibVector2 endPos2, WrRayLibVector2* collisionPoint);
-//	static WrRayLibRectangle GetCollisionRec(WrRayLibRectangle rec1, WrRayLibRectangle rec2);
+	static WrRayLibRectangle GetCollisionRec(WrRayLibRectangle rec1, WrRayLibRectangle rec2);
 
 
 	/* MODULE: RTEXTURES */
@@ -366,6 +366,24 @@ public:
 	// Text codepoints management functions (unicode characters)
 
 	// Text strings management functions (no UTF-8 strings, only byte chars)
+//	static char** LoadTextLines(const char* text, int* count);
+//	static void UnloadTextLines(char** text, int lineCount);
+//	static int TextCopy(char* dst, const char* src);
+	static bool TextIsEqual(const char* text1, const char* text2);
+	static unsigned int TextLength(const char* text);
+//	static const char* TextFormat(const char* text, ...);
+//	static const char* TextSubtext(const char* text, int position, int length);
+//	static const char* TextRemoveSpaces(const char* text);
+//	static char* GetTextBetween(const char* text, const char* begin, const char* end);
+//	static char* TextReplace(const char* text, const char* search, const char* replacement);
+//	static char* TextReplaceAlloc(const char* text, const char* search, const char* replacement);
+//	static char* TextReplaceBetween(const char* text, const char* begin, const char* end, const char* replacement);
+//	static char* TextReplaceBetweenAlloc(const char* text, const char* begin, const char* end, const char* replacement);
+//	static char* TextInsert(const char* text, const char* insert, int position);
+//	static char* TextInsertAlloc(const char* text, const char* insert, int position);
+//	static char* TextJoin(char** textList, int count, const char* delimiter);
+//	static char** TextSplit(const char* text, char delimiter, int* count);
+//	static void TextAppend(char* text, const char* append, int* position);
 	static int TextFindIndex(const char* text, const char* search);
 	static char* TextToUpper(const char* text);
 	static char* TextToLower(const char* text);
@@ -374,6 +392,7 @@ public:
 	static char* TextToCamel(const char* text);
 	static int TextToInteger(const char* text);
 	static float TextToFloat(const char* text);
+
 
 	/* MODULE: RMODELS */
 
