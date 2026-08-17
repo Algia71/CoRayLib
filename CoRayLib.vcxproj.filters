@@ -107,6 +107,9 @@
     <None Include="Examples\core\core_input_mouse.vbs">
       <Filter>Examples\core</Filter>
     </None>
+    <None Include="Examples\core\core_window_should_close.vbs">
+      <Filter>Examples\core</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl">
