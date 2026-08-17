@@ -17,6 +17,7 @@
 #include "CoRayLibMatrix.h"
 #include "CoRayLibCamera2D.h"
 #include "CoRayLibCamera3D.h"
+#include "CoRayLibRay.h"
 #include "reghelper.h"
 
 
@@ -56,6 +57,7 @@ ClassItem classes[] = {
     { L"RayLib.Camera2D",   L"RayLib.Camera2D Class",   CLSID_RayLibCamera2D   },
     { L"RayLib.Camera3D",   L"RayLib.Camera3D Class",   CLSID_RayLibCamera3D   },
     { L"RayLib.Camera",     L"RayLib.Camera Class",     CLSID_RayLibCamera     },
+    { L"RayLib.Ray",        L"RayLib.Ray Class",        CLSID_RayLibRay        },
 };
 
 STDAPI DllGetClassObject(
@@ -103,6 +105,9 @@ STDAPI DllGetClassObject(
     }
     else if (rclsid == CLSID_RayLibCamera) {
         pFactory = new (std::nothrow) TClassFactory<CoRayLibCamera3D>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibRay) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibRay>(g_hModule, &g_cComponents, &g_cServerLocks);
     }
     else {
         return CLASS_E_CLASSNOTAVAILABLE;

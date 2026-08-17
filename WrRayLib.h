@@ -397,6 +397,27 @@ public:
 	/* MODULE: RMODELS */
 
 	// Basic geometric 3D shapes drawing functions
+//	static void DrawLine3D(Vector3 startPos, Vector3 endPos, Color color);
+//	static void DrawPoint3D(Vector3 position, Color color);
+//	static void DrawCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color);
+//	static void DrawTriangle3D(Vector3 v1, Vector3 v2, Vector3 v3, Color color);
+//	static void DrawTriangleStrip3D(const Vector3* points, int pointCount, Color color);
+//	static void DrawCube(Vector3 position, float width, float height, float length, Color color);
+//	static void DrawCubeV(Vector3 position, Vector3 size, Color color);
+//	static void DrawCubeWires(Vector3 position, float width, float height, float length, Color color);
+//	static void DrawCubeWiresV(Vector3 position, Vector3 size, Color color);
+//	static void DrawSphere(Vector3 centerPos, float radius, Color color);
+//	static void DrawSphereEx(Vector3 centerPos, float radius, int rings, int slices, Color color);
+//	static void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color);
+//	static void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);
+//	static void DrawCylinderEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
+//	static void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);
+//	static void DrawCylinderWiresEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
+//	static void DrawCapsule(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
+//	static void DrawCapsuleWires(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
+//	static void DrawPlane(Vector3 centerPos, Vector2 size, Color color);
+//	static void DrawRay(Ray ray, Color color);
+//	static void DrawGrid(int slices, float spacing);
 
 	// Model management functions
 

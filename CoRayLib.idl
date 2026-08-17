@@ -172,6 +172,20 @@ interface IRayLibCamera3D : IDispatch
 [
     object,
     dual,
+    uuid(E1EB9824-2B86-4996-900C-946956A567BA),
+    pointer_default(unique)
+]
+interface IRayLibRay : IDispatch
+{
+    [id(1), propget] HRESULT position([out, retval] IRayLibVector3** pval);
+    [id(1), propputref] HRESULT position([in] IRayLibVector3* val);
+    [id(2), propget] HRESULT direction([out, retval] IRayLibVector3** pval);
+    [id(2), propputref] HRESULT direction([in] IRayLibVector3* val);
+}
+
+[
+    object,
+    dual,
     uuid(BA8623BB-26BE-4D50-94BE-067C1B6785AC),
     pointer_default(unique)
 ]
@@ -469,6 +483,7 @@ library RayLib
     interface IRayLibMatrix;
     interface IRayLibCamera2D;
     interface IRayLibCamera3D;
+    interface IRayLibRay;
 
     [
         uuid(8C02BF1F-FA49-4796-A634-FB591F749030),
@@ -567,5 +582,14 @@ library RayLib
         coclass RayLibCamera
     {
         [default] interface IRayLibCamera3D;
+    };
+
+    [
+        uuid(FEC4DDB5-CE85-4062-86DE-8853D9EFC3B2),
+        helpstring("RayLib.Ray Class")
+    ]
+        coclass RayLibRay
+    {
+        [default] interface IRayLibRay;
     };
 };
