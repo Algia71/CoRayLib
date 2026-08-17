@@ -3399,6 +3399,83 @@ STDMETHODIMP CoRayLib::GetCollisionRec(
     return hr;
 }
 
+// Color/pixel related functions
+
+STDMETHODIMP CoRayLib::ColorIsEqual(
+    IRayLibColor* col1,
+    IRayLibColor* col2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!col1)
+        return E_POINTER;
+    if (!col2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color1 = { 0 };
+    WrRayLibColor wr_color2 = { 0 };
+
+    hr = co2wr(col1, &wr_color1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(col2, &wr_color2);
+    if (FAILED(hr)) return hr;
+
+    const bool retVal = WrRayLib::ColorIsEqual(
+        wr_color1,
+        wr_color2
+    );
+
+    if (retVal)
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return hr;
+
+}
+STDMETHODIMP CoRayLib::Fade(
+    IRayLibColor* color,
+    float alpha,
+    IRayLibColor** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::Fade(
+        wr_color,
+        alpha
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        (*pRetVal)->put_r(retVal.r);
+        (*pRetVal)->put_g(retVal.g);
+        (*pRetVal)->put_b(retVal.b);
+        (*pRetVal)->put_a(retVal.a);
+    }
+
+    return hr;
+}
+
 
 //////////////////////////////////////////////
 // Module: RTEXT
@@ -3448,7 +3525,7 @@ STDMETHODIMP CoRayLib::DrawText(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 
 

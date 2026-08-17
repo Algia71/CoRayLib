@@ -100,6 +100,13 @@ static inline Ray wr2rl_ray(
 	};
 }
 
+static WrRayLibColor inline rl2wr_color(
+	Color color
+)
+{
+	return { color.r, color.g, color.b, color.a };
+}
+
 static WrRayLibVector2 inline rl2wr_vector2(
 	Vector2 vector
 )
@@ -1610,6 +1617,31 @@ WrRayLibRectangle WrRayLib::GetCollisionRec(
 	);
 }
 
+
+// Color/pixel related functions
+
+bool WrRayLib::ColorIsEqual(
+	WrRayLibColor col1,
+	WrRayLibColor col2
+)
+{
+	return ::ColorIsEqual(
+		wr2rl_color(col1),
+		wr2rl_color(col2)
+	);
+}
+WrRayLibColor WrRayLib::Fade(
+	WrRayLibColor color,
+	float alpha
+)
+{
+	return rl2wr_color(
+		::Fade(
+			wr2rl_color(color),
+			alpha
+		)
+	);
+}
 
 
 // Text drawing functions

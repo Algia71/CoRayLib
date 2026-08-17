@@ -157,6 +157,7 @@
     <None Include="CoRayLib.def" />
     <None Include="Examples\Bounces.js" />
     <None Include="Examples\Bounces.vbs" />
+    <None Include="Examples\core\core_3d_camera_free.vbs" />
     <None Include="Examples\core\core_3d_camera_mode.js" />
     <None Include="Examples\core\core_3d_camera_mode.vbs" />
     <None Include="Examples\core\core_basic_window.js" />

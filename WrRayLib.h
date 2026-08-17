@@ -363,6 +363,8 @@ public:
 	// Texture drawing functions
 
 	// Color/pixel related functions
+	static bool ColorIsEqual(WrRayLibColor col1, WrRayLibColor col2);
+	static WrRayLibColor Fade(WrRayLibColor color, float alpha);
 
 
 	/* MODULE: RTEXT */

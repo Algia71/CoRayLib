@@ -113,6 +113,9 @@
     <None Include="Examples\core\core_scissor_test.vbs">
       <Filter>Examples\core</Filter>
     </None>
+    <None Include="Examples\core\core_3d_camera_free.vbs">
+      <Filter>Examples\core</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl">

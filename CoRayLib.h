@@ -787,6 +787,18 @@ public:
         IRayLibRectangle** pRetVal
     ) override;
 
+    // Color/pixel related functions
+    STDMETHODIMP ColorIsEqual(
+        IRayLibColor* col1,
+        IRayLibColor* col2,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP Fade(
+        IRayLibColor* color,
+        float alpha,
+        IRayLibColor** pRetVal
+    ) override;
+
 
     //////////////////////////////////////////////
     // Module: RTEXT
