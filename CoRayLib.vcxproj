@@ -154,10 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CoRayLib.def" />
-    <None Include="Scripts\Bounces.js" />
-    <None Include="Scripts\Bounces.vbs" />
-    <None Include="Scripts\Hello.js" />
-    <None Include="Scripts\Hello.vbs" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl" />

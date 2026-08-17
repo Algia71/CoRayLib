@@ -62,10 +62,6 @@
     <None Include="CoRayLib.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="Scripts\Hello.vbs" />
-    <None Include="Scripts\Hello.js" />
-    <None Include="Scripts\Bounces.js" />
-    <None Include="Scripts\Bounces.vbs" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl">
