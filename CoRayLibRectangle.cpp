@@ -15,7 +15,7 @@ CoRayLibRectangle::CoRayLibRectangle(HMODULE hModule)
 
     LoadTypeInfo(
         hModule,
-        IID_IRayLibVector2,
+        IID_IRayLibRectangle,
         &m_pTypeInfo
     );
 }
@@ -37,7 +37,7 @@ STDMETHODIMP CoRayLibRectangle::QueryInterface(
     if (riid == IID_IUnknown) {
         *ppvObject = static_cast<IRayLibRectangle*>(this);
     }
-    else if (riid == IID_IRayLibVector2) {
+    else if (riid == IID_IRayLibRectangle) {
         *ppvObject = static_cast<IRayLibRectangle*>(this);
     }
     else if (riid == IID_IDispatch) {
