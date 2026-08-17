@@ -155,6 +155,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CoRayLib.def" />
+    <None Include="Examples\Bounces.js" />
+    <None Include="Examples\Bounces.vbs" />
+    <None Include="Examples\core\core_3d_camera_mode.js" />
+    <None Include="Examples\core\core_3d_camera_mode.vbs" />
+    <None Include="Examples\core\core_basic_window.js" />
+    <None Include="Examples\core\core_basic_window.vbs" />
+    <None Include="Examples\core\core_input_keys.js" />
+    <None Include="Examples\core\core_input_keys.vbs" />
+    <None Include="Examples\core\core_input_mouse.js" />
+    <None Include="Examples\core\core_input_mouse.vbs" />
+    <None Include="Examples\Hello.js" />
+    <None Include="Examples\Hello.vbs" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl" />

@@ -294,6 +294,7 @@ interface IRayLib : IDispatch
     [id(172)] HRESULT OpenURL([in] BSTR url);
 
     // Logging system
+    [id(173)] HRESULT SetTraceLogLevel([in] long logLevel);
 
     // Memory management, using internal allocators
 
@@ -442,6 +443,15 @@ interface IRayLib : IDispatch
 
     //////////////////////////////////////////////
     // Module: RMODELS
+
+    // Basic geometric 3D shapes drawing functions
+    [id(3005)] HRESULT DrawCube([in] IRayLibVector3* position, [in] float width, [in] float height, [in] float length, [in] IRayLibColor* color);
+    [id(3006)] HRESULT DrawCubeV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
+    [id(3007)] HRESULT DrawCubeWires([in] IRayLibVector3* position, [in] float width, [in] float height, [in] float length, [in] IRayLibColor* color);
+    [id(3008)] HRESULT DrawCubeWiresV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
+
+    [id(3050)] HRESULT DrawRay([in] IRayLibRay* ray, [in] IRayLibColor* color);
+    [id(3051)] HRESULT DrawGrid([in] long slices, [in] float spacing);
 
 
     //////////////////////////////////////////////

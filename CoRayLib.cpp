@@ -63,7 +63,7 @@ inline HRESULT CoRayLib::co2wr(IRayLibVector3* in, WrRayLibVector3* out)
 
     hr = in->get_z(&elem);
     if (FAILED(hr)) return hr;
-    out->y = elem;
+    out->z = elem;
 
     return hr;
 }
@@ -173,6 +173,25 @@ inline HRESULT CoRayLib::co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out)
     hr = in->get_projection(&lelem);
     if (FAILED(hr)) return hr;
     out->projection = lelem;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::co2wr(IRayLibRay* in, WrRayLibRay* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    IRayLibVector3* velem = NULL;
+
+    hr = in->get_position(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->position);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_direction(&velem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(velem, &out->direction);
+    if (FAILED(hr)) return hr;
 
     return hr;
 }
@@ -1354,7 +1373,7 @@ STDMETHODIMP CoRayLib::GetRandomValue(
 
 // Misc. functions
 
-HRESULT CoRayLib::TakeScreenshot(
+STDMETHODIMP CoRayLib::TakeScreenshot(
     BSTR fileName
 )
 {
@@ -1364,7 +1383,7 @@ HRESULT CoRayLib::TakeScreenshot(
 
     return S_OK;
 }
-HRESULT CoRayLib::SetConfigFlags(
+STDMETHODIMP CoRayLib::SetConfigFlags(
     long flags
 )
 {
@@ -1374,7 +1393,7 @@ HRESULT CoRayLib::SetConfigFlags(
 
     return S_OK;
 }
-HRESULT CoRayLib::OpenURL(
+STDMETHODIMP CoRayLib::OpenURL(
     BSTR url
 )
 {
@@ -1387,6 +1406,17 @@ HRESULT CoRayLib::OpenURL(
 
 
 // Logging system
+STDMETHODIMP CoRayLib::SetTraceLogLevel(
+    long logLevel
+)
+{
+    WrRayLib::SetTraceLogLevel(
+        (int)logLevel
+    );
+
+    return S_OK;
+}
+
 
 // Memory management, using internal allocators
 
@@ -3438,6 +3468,184 @@ STDMETHODIMP CoRayLib::TextToFloat(
 
 //////////////////////////////////////////////
 // Module: RMODELS
+
+// Basic geometric 3D shapes drawing functions
+STDMETHODIMP CoRayLib::DrawCube(
+    IRayLibVector3* position,
+    float width,
+    float height,
+    float length,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_pos = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(position, &wr_pos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCube(
+        wr_pos,
+        width,
+        height,
+        length,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCubeV(
+    IRayLibVector3* position,
+    IRayLibVector3* size,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!size)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_pos = { 0 };
+    WrRayLibVector3 wr_siz = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(position, &wr_pos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(size, &wr_siz);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCubeV(
+        wr_pos,
+        wr_siz,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCubeWires(
+    IRayLibVector3* position,
+    float width,
+    float height,
+    float length,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_pos = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(position, &wr_pos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCubeWires(
+        wr_pos,
+        width,
+        height,
+        length,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCubeWiresV(
+    IRayLibVector3* position,
+    IRayLibVector3* size,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!size)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_pos = { 0 };
+    WrRayLibVector3 wr_siz = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(position, &wr_pos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(size, &wr_siz);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCubeWiresV(
+        wr_pos,
+        wr_siz,
+        wr_clr
+    );
+
+    return hr;
+}
+
+STDMETHODIMP CoRayLib::DrawRay(
+    IRayLibRay* ray,
+    IRayLibColor* color
+)
+{
+    if (!ray)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRay wr_ray = { 0 };
+    WrRayLibColor wr_clr = { 0 };
+
+    hr = co2wr(ray, &wr_ray);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_clr);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRay(
+        wr_ray,
+        wr_clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawGrid(
+    long slices,
+    float spacing
+)
+{
+    WrRayLib::DrawGrid(
+        (int)slices,
+        spacing
+    );
+
+    return S_OK;
+}
 
 
 //////////////////////////////////////////////

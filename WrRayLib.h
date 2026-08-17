@@ -66,6 +66,12 @@ typedef struct tagWrRayLibCamera3D
 	int projection;
 } WrRayLibCamera3D;
 
+typedef struct tagWrRayLibRay
+{
+	WrRayLibVector3 position;
+	WrRayLibVector3 direction;
+} WrRayLibRay;
+
 class WrRayLib
 {
 public:
@@ -199,7 +205,7 @@ public:
 	static void OpenURL(const char* url);
 
 	// Logging system
-//	static void SetTraceLogLevel(int logLevel);
+	static void SetTraceLogLevel(int logLevel);
 //	static void TraceLog(int logLevel, const char* text, ...);
 //	static void SetTraceLogCallback(TraceLogCallback callback);
 
@@ -402,10 +408,10 @@ public:
 //	static void DrawCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color);
 //	static void DrawTriangle3D(Vector3 v1, Vector3 v2, Vector3 v3, Color color);
 //	static void DrawTriangleStrip3D(const Vector3* points, int pointCount, Color color);
-//	static void DrawCube(Vector3 position, float width, float height, float length, Color color);
-//	static void DrawCubeV(Vector3 position, Vector3 size, Color color);
-//	static void DrawCubeWires(Vector3 position, float width, float height, float length, Color color);
-//	static void DrawCubeWiresV(Vector3 position, Vector3 size, Color color);
+	static void DrawCube(WrRayLibVector3 position, float width, float height, float length, WrRayLibColor color);
+	static void DrawCubeV(WrRayLibVector3 position, WrRayLibVector3 size, WrRayLibColor color);
+	static void DrawCubeWires(WrRayLibVector3 position, float width, float height, float length, WrRayLibColor color);
+	static void DrawCubeWiresV(WrRayLibVector3 position, WrRayLibVector3 size, WrRayLibColor color);
 //	static void DrawSphere(Vector3 centerPos, float radius, Color color);
 //	static void DrawSphereEx(Vector3 centerPos, float radius, int rings, int slices, Color color);
 //	static void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color);
@@ -416,8 +422,8 @@ public:
 //	static void DrawCapsule(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
 //	static void DrawCapsuleWires(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
 //	static void DrawPlane(Vector3 centerPos, Vector2 size, Color color);
-//	static void DrawRay(Ray ray, Color color);
-//	static void DrawGrid(int slices, float spacing);
+	static void DrawRay(WrRayLibRay ray, WrRayLibColor color);
+	static void DrawGrid(int slices, float spacing);
 
 	// Model management functions
 

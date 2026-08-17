@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{bba3c8b9-fe83-4581-ab5f-2d23fea42d76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Examples\core">
+      <UniqueIdentifier>{9adcd331-aef0-429b-a9e3-a90004028ace}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DillMain.cpp">
@@ -64,6 +70,42 @@
   <ItemGroup>
     <None Include="CoRayLib.def">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="Examples\Bounces.js">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="Examples\Bounces.vbs">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="Examples\Hello.js">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="Examples\Hello.vbs">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="Examples\core\core_3d_camera_mode.js">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_3d_camera_mode.vbs">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_basic_window.js">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_basic_window.vbs">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_input_keys.js">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_input_keys.vbs">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_input_mouse.js">
+      <Filter>Examples\core</Filter>
+    </None>
+    <None Include="Examples\core\core_input_mouse.vbs">
+      <Filter>Examples\core</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

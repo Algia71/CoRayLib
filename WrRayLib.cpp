@@ -90,6 +90,16 @@ static inline Camera3D wr2rl_camera3D(
 	};
 }
 
+static inline Ray wr2rl_ray(
+	WrRayLibRay ray
+)
+{
+	return {
+		wr2rl_vector3(ray.position),
+		wr2rl_vector3(ray.direction),
+	};
+}
+
 static WrRayLibVector2 inline rl2wr_vector2(
 	Vector2 vector
 )
@@ -654,6 +664,18 @@ void WrRayLib::OpenURL(
 {
 	::OpenURL(
 		url
+	);
+}
+
+
+// Logging system
+
+void WrRayLib::SetTraceLogLevel(
+	int logLevel
+)
+{
+	::SetTraceLogLevel(
+		logLevel
 	);
 }
 
@@ -1619,6 +1641,91 @@ float WrRayLib::TextToFloat(
 {
 	return ::TextToFloat(
 		text
+	);
+}
+
+
+// Basic geometric 3D shapes drawing functions
+
+void WrRayLib::DrawCube(
+	WrRayLibVector3 position,
+	float width,
+	float height,
+	float length,
+	WrRayLibColor color
+)
+{
+	::DrawCube(
+		wr2rl_vector3(position),
+		width,
+		height,
+		length,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCubeV(
+	WrRayLibVector3 position,
+	WrRayLibVector3 size,
+	WrRayLibColor color
+)
+{
+	::DrawCubeV(
+		wr2rl_vector3(position),
+		wr2rl_vector3(size),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCubeWires(
+	WrRayLibVector3 position,
+	float width,
+	float height,
+	float length,
+	WrRayLibColor color
+)
+{
+	::DrawCubeWires(
+		wr2rl_vector3(position),
+		width,
+		height,
+		length,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCubeWiresV(
+	WrRayLibVector3 position,
+	WrRayLibVector3 size,
+	WrRayLibColor color
+)
+{
+	::DrawCubeWiresV(
+		wr2rl_vector3(position),
+		wr2rl_vector3(size),
+		wr2rl_color(color)
+	);
+}
+
+void WrRayLib::DrawRay(
+	WrRayLibRay ray,
+	WrRayLibColor color
+)
+{
+	::DrawRay(
+		wr2rl_ray(
+			ray
+		),
+		wr2rl_color(
+			color
+		)
+	);
+}
+void WrRayLib::DrawGrid(
+	int slices,
+	float spacing
+)
+{
+	::DrawGrid(
+		slices,
+		spacing
 	);
 }
 

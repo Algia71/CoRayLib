@@ -20,6 +20,7 @@ class CoRayLib : IRayLib
     inline HRESULT co2wr(IRayLibRectangle* in, WrRayLibRectangle* out);
     inline HRESULT co2wr(IRayLibCamera2D* in, WrRayLibCamera2D* out);
     inline HRESULT co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out);
+    inline HRESULT co2wr(IRayLibRay* in, WrRayLibRay* out);
 
     inline HRESULT wr2co(WrRayLibColor* in, IRayLibColor* out);
     inline HRESULT wr2co(WrRayLibVector2* in, IRayLibVector2* out);
@@ -332,17 +333,20 @@ public:
     ) override;
 
     // Misc. functions
-    HRESULT TakeScreenshot(
+    STDMETHODIMP TakeScreenshot(
         BSTR fileName
     ) override;
-    HRESULT SetConfigFlags(
+    STDMETHODIMP SetConfigFlags(
         long flags
     ) override;
-    HRESULT OpenURL(
+    STDMETHODIMP OpenURL(
         BSTR url
     ) override;
 
     // Logging system
+    STDMETHODIMP SetTraceLogLevel(
+        long logLevel
+    ) override;
 
     // Memory management, using internal allocators
 
@@ -817,6 +821,41 @@ public:
 
     //////////////////////////////////////////////
     // Module: RMODELS
+
+    // Basic geometric 3D shapes drawing functions
+    STDMETHODIMP DrawCube(
+        IRayLibVector3* position,
+        float width,
+        float height,
+        float length,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCubeV(
+        IRayLibVector3* position,
+        IRayLibVector3* size,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCubeWires(
+        IRayLibVector3* position, 
+        float width,
+        float height,
+        float length,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCubeWiresV(
+        IRayLibVector3* position,
+        IRayLibVector3* size,
+        IRayLibColor* color
+    ) override;
+
+    STDMETHODIMP DrawRay(
+        IRayLibRay* ray,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawGrid(
+        long slices,
+        float spacing
+    ) override;
 
 
     //////////////////////////////////////////////
