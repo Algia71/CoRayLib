@@ -360,6 +360,8 @@ public:
 	static void DrawText(const char* text, int posX, int posY, int fontsize, WrRayLibColor color);
 
 	// Text font info functions
+	static void SetTextLineSpacing(int spacing);
+	static int MeasureText(const char* text, int fontSize);
 
 	// Text codepoints management functions (unicode characters)
 

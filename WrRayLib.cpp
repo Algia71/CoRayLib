@@ -1454,6 +1454,28 @@ void WrRayLib::DrawText(
 }
 
 
+// Text font info functions
+
+void WrRayLib::SetTextLineSpacing(
+	int spacing
+)
+{
+	::SetTextLineSpacing(
+		spacing
+	);
+}
+int WrRayLib::MeasureText(
+	const char* text,
+	int fontSize
+)
+{
+	return ::MeasureText(
+		text,
+		fontSize
+	);
+}
+
+
 // Audio device management functions
 
 void WrRayLib::InitAudioDevice(

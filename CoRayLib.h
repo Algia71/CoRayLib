@@ -736,6 +736,16 @@ public:
         IRayLibColor* color
     ) override;
 
+    // Text font info functions
+    HRESULT SetTextLineSpacing(
+        long spacing
+    ) override;
+    HRESULT MeasureText(
+        BSTR text,
+        long fontSize,
+        long* pRetVal
+    ) override;
+
 
     //////////////////////////////////////////////
     // Module: RMODELS

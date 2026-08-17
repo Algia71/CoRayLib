@@ -3079,6 +3079,36 @@ STDMETHODIMP CoRayLib::DrawText(
 }
 
 
+// Text font info functions
+
+HRESULT CoRayLib::SetTextLineSpacing(
+    long spacing
+)
+{
+    WrRayLib::SetTextLineSpacing(
+        spacing
+    );
+
+    return S_OK;
+}
+HRESULT CoRayLib::MeasureText(
+    BSTR text,
+    long fontSize,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = WrRayLib::MeasureText(
+        _com_util::ConvertBSTRToString(text),
+        (int)fontSize
+    );
+
+    return S_OK;
+}
+
+
 //////////////////////////////////////////////
 // Module: RMODELS
 

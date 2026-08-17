@@ -403,6 +403,8 @@ interface IRayLib : IDispatch
     [id(2021)] HRESULT DrawText([in] BSTR text, [in] long posX, [in] long posY, [in] long fontSize, [in] IRayLibColor* color);
 
     // Text font info functions
+    [id(2040)] HRESULT SetTextLineSpacing([in] long spacing);
+    [id(2041)] HRESULT MeasureText([in] BSTR text, [in] long fontSize, [out, retval] long* pRetVal);
 
 
     //////////////////////////////////////////////
