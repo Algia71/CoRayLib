@@ -29,6 +29,7 @@ class CoRayLib : IRayLib
     inline HRESULT wr2co(WrRayLibRectangle* in, IRayLibRectangle* out);
     inline HRESULT wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out);
     inline HRESULT wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out);
+    inline HRESULT wr2co(WrRayLibRay* in, IRayLibRay* out);
 
 public:
     CoRayLib(HMODULE hModule);
@@ -296,6 +297,40 @@ public:
     // Shader management functions
 
     // Screen-space-related functions
+    STDMETHODIMP GetScreenToWorldRay(
+        IRayLibVector2* position,
+        IRayLibCamera3D* camera,
+        IRayLibRay** pRetVal
+    ) override;
+    STDMETHODIMP GetScreenToWorldRayEx(
+        IRayLibVector2* position,
+        IRayLibCamera3D* camera,
+        long width,
+        long height,
+        IRayLibRay** pRetVal
+    ) override;
+    STDMETHODIMP GetWorldToScreen(
+        IRayLibVector3* position,
+        IRayLibCamera3D* camera,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetWorldToScreenEx(
+        IRayLibVector3* position,
+        IRayLibCamera3D* camera,
+        long width,
+        long height,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetWorldToScreen2D(
+        IRayLibVector2* position,
+        IRayLibCamera2D* camera,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetScreenToWorld2D(
+        IRayLibVector2* position,
+        IRayLibCamera2D* camera,
+        IRayLibVector2** pRetVal
+    ) override;
 
     // Timing-related functions
     STDMETHODIMP SetTargetFPS(

@@ -173,12 +173,12 @@ public:
 //	static void UnloadShader(Shader shader);
 
 	// Screen-space-related functions
-//	static Ray GetScreenToWorldRay(Vector2 position, Camera camera);
-//	static Ray GetScreenToWorldRayEx(Vector2 position, Camera camera, int width, int height);
-//	static Vector2 GetWorldToScreen(Vector3 position, Camera camera);
-//	static Vector2 GetWorldToScreenEx(Vector3 position, Camera camera, int width, int height);
-//	static Vector2 GetWorldToScreen2D(Vector2 position, Camera2D camera);
-//	static Vector2 GetScreenToWorld2D(Vector2 position, Camera2D camera);
+	static WrRayLibRay GetScreenToWorldRay(WrRayLibVector2 position, WrRayLibCamera3D camera);
+	static WrRayLibRay GetScreenToWorldRayEx(WrRayLibVector2 position, WrRayLibCamera3D camera, int width, int height);
+	static WrRayLibVector2 GetWorldToScreen(WrRayLibVector3 position, WrRayLibCamera3D camera);
+	static WrRayLibVector2 GetWorldToScreenEx(WrRayLibVector3 position, WrRayLibCamera3D camera, int width, int height);
+	static WrRayLibVector2 GetWorldToScreen2D(WrRayLibVector2 position, WrRayLibCamera2D camera);
+	static WrRayLibVector2 GetScreenToWorld2D(WrRayLibVector2 position, WrRayLibCamera2D camera);
 //	static Matrix GetCameraMatrix(Camera camera);
 //	static Matrix GetCameraMatrix2D(Camera2D camera);
 

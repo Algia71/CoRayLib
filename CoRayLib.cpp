@@ -339,6 +339,26 @@ inline HRESULT CoRayLib::wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out)
 
     return hr;
 }
+inline HRESULT CoRayLib::wr2co(WrRayLibRay* in, IRayLibRay* out)
+{
+    HRESULT hr = S_OK;
+
+    IRayLibVector3* v = NULL;
+
+    hr = out->get_position(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->position, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->get_direction(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->direction, v);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 
 
 CoRayLib::CoRayLib(HMODULE hModule)
@@ -1262,6 +1282,266 @@ STDMETHODIMP CoRayLib::EndScissorMode(
 // Shader management functions
 
 // Screen-space-related functions
+STDMETHODIMP CoRayLib::GetScreenToWorldRay(
+    IRayLibVector2* position,
+    IRayLibCamera3D* camera,
+    IRayLibRay** pRetVal
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRay retVal = WrRayLib::GetScreenToWorldRay(
+        wr_position,
+        wr_camera
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRay,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRay,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetScreenToWorldRayEx(
+    IRayLibVector2* position,
+    IRayLibCamera3D* camera,
+    long width,
+    long height,
+    IRayLibRay** pRetVal
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRay retVal = WrRayLib::GetScreenToWorldRayEx(
+        wr_position,
+        wr_camera,
+        (int)width,
+        (int)height
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRay,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRay,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetWorldToScreen(
+    IRayLibVector3* position,
+    IRayLibCamera3D* camera,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_position = { 0 };
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetWorldToScreen(
+        wr_position,
+        wr_camera
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetWorldToScreenEx(
+    IRayLibVector3* position,
+    IRayLibCamera3D* camera,
+    long width,
+    long height,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_position = { 0 };
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetWorldToScreenEx(
+        wr_position,
+        wr_camera,
+        (int)width,
+        (int)height
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetWorldToScreen2D(
+    IRayLibVector2* position,
+    IRayLibCamera2D* camera,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibCamera2D wr_camera = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetWorldToScreen2D(
+        wr_position,
+        wr_camera
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetScreenToWorld2D(
+    IRayLibVector2* position,
+    IRayLibCamera2D* camera,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibCamera2D wr_camera = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetScreenToWorld2D(
+        wr_position,
+        wr_camera
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibVector2,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
 
 
 // Timing-related functions

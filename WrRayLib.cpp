@@ -158,6 +158,16 @@ static void inline rl2wr_camera3D(
 	wr_camera->projection = rl_camera->projection;
 }
 
+static WrRayLibRay inline rl2wr_ray(
+	Ray ray
+)
+{
+	return {
+		rl2wr_vector3(ray.position),
+		rl2wr_vector3(ray.direction)
+	};
+}
+
 
 // Window-related functions
 
@@ -575,6 +585,90 @@ void WrRayLib::EndScissorMode(
 )
 {
 	::EndScissorMode();
+}
+
+
+// Screen-space-related functions
+
+WrRayLibRay WrRayLib::GetScreenToWorldRay(
+	WrRayLibVector2 position,
+	WrRayLibCamera3D camera
+)
+{
+	return rl2wr_ray(
+		::GetScreenToWorldRay(
+			wr2rl_vector2(position),
+			wr2rl_camera3D(camera)
+		)
+	);
+}
+WrRayLibRay WrRayLib::GetScreenToWorldRayEx(
+	WrRayLibVector2 position,
+	WrRayLibCamera3D camera,
+	int width,
+	int height
+)
+{
+	return rl2wr_ray(
+		::GetScreenToWorldRayEx(
+			wr2rl_vector2(position),
+			wr2rl_camera3D(camera),
+			width,
+			height
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetWorldToScreen(
+	WrRayLibVector3 position,
+	WrRayLibCamera3D camera
+)
+{
+	return rl2wr_vector2(
+		::GetWorldToScreen(
+			wr2rl_vector3(position),
+			wr2rl_camera3D(camera)
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetWorldToScreenEx(
+	WrRayLibVector3 position,
+	WrRayLibCamera3D camera,
+	int width,
+	int height
+)
+{
+	return rl2wr_vector2(
+		::GetWorldToScreenEx(
+			wr2rl_vector3(position),
+			wr2rl_camera3D(camera),
+			width,
+			height
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetWorldToScreen2D(
+	WrRayLibVector2 position,
+	WrRayLibCamera2D camera
+)
+{
+	return rl2wr_vector2(
+		::GetWorldToScreen2D(
+			wr2rl_vector2(position),
+			wr2rl_camera2D(camera)
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetScreenToWorld2D(
+	WrRayLibVector2 position,
+	WrRayLibCamera2D camera
+)
+{
+	return rl2wr_vector2(
+		::GetScreenToWorld2D(
+			wr2rl_vector2(position),
+			wr2rl_camera2D(camera)
+		)
+	);
 }
 
 

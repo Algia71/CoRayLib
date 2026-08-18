@@ -272,6 +272,12 @@ interface IRayLib : IDispatch
     // Shader management functions
 
     // Screen-space-related functions
+    [id(130)] HRESULT GetScreenToWorldRay([in] IRayLibVector2* position, [in] IRayLibCamera3D* camera, [out, retval] IRayLibRay** pRetVal);
+    [id(131)] HRESULT GetScreenToWorldRayEx([in] IRayLibVector2* position, [in] IRayLibCamera3D* camera, [in] long width, [in] long height, [out, retval] IRayLibRay** pRetVal);
+    [id(132)] HRESULT GetWorldToScreen([in] IRayLibVector3* position, [in] IRayLibCamera3D* camera, [out, retval] IRayLibVector2** pRetVal);
+    [id(133)] HRESULT GetWorldToScreenEx([in] IRayLibVector3* position, [in] IRayLibCamera3D* camera, [in] long width, [in] long height, [out, retval] IRayLibVector2** pRetVal);
+    [id(134)] HRESULT GetWorldToScreen2D([in] IRayLibVector2* position, [in] IRayLibCamera2D* camera, [out, retval] IRayLibVector2** pRetVal);
+    [id(135)] HRESULT GetScreenToWorld2D([in] IRayLibVector2* position, [in] IRayLibCamera2D* camera, [out, retval] IRayLibVector2** pRetVal);
 
     // Timing-related functions
     [id(140)] HRESULT SetTargetFPS([in] long fps);
