@@ -292,24 +292,32 @@ public:
 
 	/* MODULE: RSHAPES */
 
+//	static void SetShapesTexture(Texture2D texture, Rectangle source);
+//	static Texture2D GetShapesTexture(void);
+//	static Rectangle GetShapesTextureRectangle(void);
+
 	// Basic shapes drawing functions
 	static void DrawPixel(int posX, int posY, WrRayLibColor color);
 	static void DrawPixelV(WrRayLibVector2 position, WrRayLibColor color);
 	static void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, WrRayLibColor color);
 	static void DrawLineV(WrRayLibVector2 startPos, WrRayLibVector2 endPos, WrRayLibColor color);
 	static void DrawLineEx(WrRayLibVector2 startPos, WrRayLibVector2 endPos, float thick, WrRayLibColor color);
-
+//	static void DrawLineStrip(const Vector2* points, int pointCount, Color color);
+//	static void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color);
+//	static void DrawLineDashed(Vector2 startPos, Vector2 endPos, int dashSize, int spaceSize, Color color);
 	static void DrawCircle(int centerX, int centerY, float radius, WrRayLibColor color);
 	static void DrawCircleV(WrRayLibVector2 center, float radius, WrRayLibColor color);
-
+//	static void DrawCircleGradient(Vector2 center, float radius, Color inner, Color outer);
+//	static void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);
+//	static void DrawCircleSectorLines(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);
 	static void DrawCircleLines(int centerX, int centerY, float radius, WrRayLibColor color);
 	static void DrawCircleLinesV(WrRayLibVector2 center, float radius, WrRayLibColor color);
-
 	static void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, WrRayLibColor color);
 	static void DrawEllipseV(WrRayLibVector2 center, float radiusH, float radiusV, WrRayLibColor color);
 	static void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, WrRayLibColor color);
 	static void DrawEllipseLinesV(WrRayLibVector2 center, float radiusH, float radiusV, WrRayLibColor color);
-
+//	static void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
+//	static void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
 	static void DrawRectangle(int posX, int posY, int width, int height, WrRayLibColor color);
 	static void DrawRectangleV(WrRayLibVector2 position, WrRayLibVector2 size, WrRayLibColor color);
 	static void DrawRectangleRec(WrRayLibRectangle rec, WrRayLibColor color);
@@ -324,13 +332,30 @@ public:
 	static void DrawRectangleRoundedLinesEx(WrRayLibRectangle rec, float roundness, int segments, float lineThick, WrRayLibColor color);
 	static void DrawTriangle(WrRayLibVector2 v1, WrRayLibVector2 v2, WrRayLibVector2 v3, WrRayLibColor color);
 	static void DrawTriangleLines(WrRayLibVector2 v1, WrRayLibVector2 v2, WrRayLibVector2 v3, WrRayLibColor color);
-
+//	static void DrawTriangleFan(const Vector2* points, int pointCount, Color color);
+//	static void DrawTriangleStrip(const Vector2* points, int pointCount, Color color);
 	static void DrawPoly(WrRayLibVector2 center, int sides, float radius, float rotation, WrRayLibColor color);
 	static void DrawPolyLines(WrRayLibVector2 center, int sides, float radius, float rotation, WrRayLibColor color);
+//	static void DrawPolyLinesEx(Vector2 center, int sides, float radius, float rotation, float lineThick, Color color);
 
 	// Splines drawing functions
+//	static void DrawSplineLinear(const Vector2* points, int pointCount, float thick, Color color);
+//	static void DrawSplineBasis(const Vector2* points, int pointCount, float thick, Color color);
+//	static void DrawSplineCatmullRom(const Vector2* points, int pointCount, float thick, Color color);
+//	static void DrawSplineBezierQuadratic(const Vector2* points, int pointCount, float thick, Color color);
+//	static void DrawSplineBezierCubic(const Vector2* points, int pointCount, float thick, Color color);
+//	static void DrawSplineSegmentLinear(Vector2 p1, Vector2 p2, float thick, Color color);
+//	static void DrawSplineSegmentBasis(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float thick, Color color);
+//	static void DrawSplineSegmentCatmullRom(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float thick, Color color);
+//	static void DrawSplineSegmentBezierQuadratic(Vector2 p1, Vector2 c2, Vector2 p3, float thick, Color color);
+//	static void DrawSplineSegmentBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float thick, Color color);
 
 	// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+//	static Vector2 GetSplinePointLinear(Vector2 startPos, Vector2 endPos, float t);
+//	static Vector2 GetSplinePointBasis(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t);
+//	static Vector2 GetSplinePointCatmullRom(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t);
+//	static Vector2 GetSplinePointBezierQuad(Vector2 p1, Vector2 c2, Vector2 p3, float t);
+//	static Vector2 GetSplinePointBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float t);
 
 	// Basic shapes collision detection functions
 	static bool CheckCollisionRecs(WrRayLibRectangle rec1, WrRayLibRectangle rec2);
@@ -374,12 +399,30 @@ public:
 	// Text drawing functions
 	static void DrawFPS(int posX, int posY);
 	static void DrawText(const char* text, int posX, int posY, int fontsize, WrRayLibColor color);
+//	static void DrawTextEx(Font font, const char* text, Vector2 position, float fontSize, float spacing, Color tint);
+//	static void DrawTextPro(Font font, const char* text, Vector2 position, Vector2 origin, float rotation, float fontSize, float spacing, Color tint);
+//	static void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint);
+//	static void DrawTextCodepoints(Font font, const int* codepoints, int codepointCount, Vector2 position, float fontSize, float spacing, Color tint);
 
 	// Text font info functions
 	static void SetTextLineSpacing(int spacing);
 	static int MeasureText(const char* text, int fontSize);
+//	static Vector2 MeasureTextEx(Font font, const char* text, float fontSize, float spacing);
+//	static Vector2 MeasureTextCodepoints(Font font, const int* codepoints, int length, float fontSize, float spacing);
+//	static int GetGlyphIndex(Font font, int codepoint);
+//	static GlyphInfo GetGlyphInfo(Font font, int codepoint);
+//	static Rectangle GetGlyphAtlasRec(Font font, int codepoint);
 
 	// Text codepoints management functions (unicode characters)
+//	static char* LoadUTF8(const int* codepoints, int length);
+//	static void UnloadUTF8(char* text);
+//	static int* LoadCodepoints(const char* text, int* count);
+//	static void UnloadCodepoints(int* codepoints);
+//	static int GetCodepointCount(const char* text);
+//	static int GetCodepoint(const char* text, int* codepointSize);
+//	static int GetCodepointNext(const char* text, int* codepointSize);
+//	static int GetCodepointPrevious(const char* text, int* codepointSize);
+//	static const char* CodepointToUTF8(int codepoint, int* utf8Size);
 
 	// Text strings management functions (no UTF-8 strings, only byte chars)
 //	static char** LoadTextLines(const char* text, int* count);
@@ -436,6 +479,11 @@ public:
 	static void DrawGrid(int slices, float spacing);
 
 	// Model management functions
+//	static Model LoadModel(const char* fileName);
+//	static Model LoadModelFromMesh(Mesh mesh);
+//	static bool IsModelValid(Model model);
+//	static void UnloadModel(Model model);
+//	static BoundingBox GetModelBoundingBox(Model model);
 
 	// Model drawing functions
 
