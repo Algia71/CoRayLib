@@ -144,6 +144,7 @@
     <ClCompile Include="CoRayLibMatrix.cpp" />
     <ClCompile Include="CoRayLibRay.cpp" />
     <ClCompile Include="CoRayLibRectangle.cpp" />
+    <ClCompile Include="CoRayLibTexture.cpp" />
     <ClCompile Include="CoRayLibVector2.cpp" />
     <ClCompile Include="CoRayLibVector3.cpp" />
     <ClCompile Include="CoRayLibVector4.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="CoRayLibMatrix.h" />
     <ClInclude Include="CoRayLibRay.h" />
     <ClInclude Include="CoRayLibRectangle.h" />
+    <ClInclude Include="CoRayLibTexture.h" />
     <ClInclude Include="CoRayLibVector2.h" />
     <ClInclude Include="CoRayLibVector3.h" />
     <ClInclude Include="CoRayLibVector4.h" />

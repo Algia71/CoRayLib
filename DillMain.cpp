@@ -14,6 +14,7 @@
 #include "CoRayLibVector3.h"
 #include "CoRayLibVector4.h"
 #include "CoRayLibRectangle.h"
+#include "CoRayLibTexture.h"
 #include "CoRayLibMatrix.h"
 #include "CoRayLibCamera2D.h"
 #include "CoRayLibCamera3D.h"
@@ -53,6 +54,8 @@ ClassItem classes[] = {
     { L"RayLib.Vector4",    L"RayLib.Vector4 Class",    CLSID_RayLibVector4    },
     { L"RayLib.Quaternion", L"RayLib.Quaternion Class", CLSID_RayLibQuaternion },
     { L"RayLib.Rectangle",  L"RayLib.Rectangle Class",  CLSID_RayLibRectangle  },
+    { L"RayLib.Texture",    L"RayLib.Texture Class",    CLSID_RayLibTexture    },
+    { L"RayLib.Texture2D",  L"RayLib.Texture2D Class",  CLSID_RayLibTexture2D  },
     { L"RayLib.Matrix",     L"RayLib.Matrix Class",     CLSID_RayLibMatrix     },
     { L"RayLib.Camera2D",   L"RayLib.Camera2D Class",   CLSID_RayLibCamera2D   },
     { L"RayLib.Camera3D",   L"RayLib.Camera3D Class",   CLSID_RayLibCamera3D   },
@@ -93,6 +96,12 @@ STDAPI DllGetClassObject(
     }
     else if (rclsid == CLSID_RayLibRectangle) {
         pFactory = new (std::nothrow) TClassFactory<CoRayLibRectangle>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibTexture) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibTexture>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibTexture2D) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibTexture>(g_hModule, &g_cComponents, &g_cServerLocks);
     }
     else if (rclsid == CLSID_RayLibMatrix) {
         pFactory = new (std::nothrow) TClassFactory<CoRayLibMatrix>(g_hModule, &g_cComponents, &g_cServerLocks);
