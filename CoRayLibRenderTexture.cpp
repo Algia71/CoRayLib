@@ -22,6 +22,10 @@ CoRayLibRenderTexture::~CoRayLibRenderTexture()
 {
     if (m_pTypeInfo)
         m_pTypeInfo->Release();
+    if(m_texture)
+        m_texture->Release();
+    if (m_depth)
+        m_depth->Release();
 }
 
 // IUnknown
