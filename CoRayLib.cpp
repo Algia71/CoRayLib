@@ -3920,30 +3920,57 @@ STDMETHODIMP CoRayLib::TextFormat(
     {
         VARIANT v;
         VariantInit(&v);
-        if (pVars[i].vt == VT_BSTR) {
+        if ((pVars[i].vt & VT_TYPEMASK) == VT_BSTR) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_BSTR);
             if (SUCCEEDED(hr))
                 c_args.append(_com_util::ConvertBSTRToString(v.bstrVal));
         }
-        else if (pVars[i].vt == VT_I2) {
+        else if ((pVars[i].vt & VT_TYPEMASK) == VT_I2) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_I2);
             if (SUCCEEDED(hr))
                 c_args.append(v.iVal);
         }
-        else if (pVars[i].vt == VT_I4) {
+        else if ((pVars[i].vt & VT_TYPEMASK) == VT_I4) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_I4);
             if (SUCCEEDED(hr))
                 c_args.append(v.intVal);
         }
-        else if (pVars[i].vt == VT_R4) {
+        else if ((pVars[i].vt & VT_TYPEMASK) == VT_R4) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_R4);
             if (SUCCEEDED(hr))
                 c_args.append(v.fltVal);
         }
-        else if (pVars[i].vt == VT_R8) {
+        else if ((pVars[i].vt & VT_TYPEMASK) == VT_R8) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_R8);
             if (SUCCEEDED(hr))
                 c_args.append(v.dblVal);
+        }
+        else if ((pVars[i].vt & VT_TYPEMASK) == VT_VARIANT) {
+            if ((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_BSTR) {
+                hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_BSTR);
+                if (SUCCEEDED(hr))
+                    c_args.append(_com_util::ConvertBSTRToString(v.bstrVal));
+            }
+            else if ((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_I2) {
+                hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_I2);
+                if (SUCCEEDED(hr))
+                    c_args.append(v.iVal);
+            }
+            else if ((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_I4) {
+                hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_I4);
+                if (SUCCEEDED(hr))
+                    c_args.append(v.intVal);
+            }
+            else if ((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_R4) {
+                hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_R4);
+                if (SUCCEEDED(hr))
+                    c_args.append(v.fltVal);
+            }
+            else if((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_R8) {
+                hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_R8);
+                if (SUCCEEDED(hr))
+                    c_args.append(v.dblVal);
+            }
         }
 
         VariantClear(&v);
