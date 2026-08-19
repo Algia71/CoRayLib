@@ -112,6 +112,22 @@ interface IRayLibTexture : IDispatch
 [
     object,
     dual,
+    uuid(C1A9BAB0-096C-40F7-8C98-761AAE69BD25),
+    pointer_default(unique)
+]
+interface IRayLibRenderTexture : IDispatch
+{
+    [id(1), propget] HRESULT id([out, retval] long* pval);
+    [id(1), propput] HRESULT id([in] long val);
+    [id(2), propget] HRESULT texture([out, retval] IRayLibTexture** pval);
+    [id(2), propputref] HRESULT texture([in] IRayLibTexture* val);
+    [id(3), propget] HRESULT depth([out, retval] IRayLibTexture** pval);
+    [id(3), propputref] HRESULT depth([in] IRayLibTexture* val);
+}
+
+[
+    object,
+    dual,
     uuid(2FC4840E-89C1-4AF9-BF6A-D6D4EA0FDC0B),
     pointer_default(unique)
 ]
@@ -534,6 +550,7 @@ library RayLib
     interface IRayLibCamera3D;
     interface IRayLibRay;
     interface IRayLibTexture;
+    interface IRayLibRenderTexture;
 
     [
         uuid(8C02BF1F-FA49-4796-A634-FB591F749030),
@@ -608,12 +625,30 @@ library RayLib
     };
 
     [
+        uuid(BD474986-F8E3-4EBA-BC23-C74AF876D450),
+        helpstring("RayLib.RenderTexture Class")
+    ]
+        coclass RayLibRenderTexture
+    {
+        [default] interface IRayLibRenderTexture;
+    };
+
+    [
         uuid(7C96E97A-28F4-4499-BD32-E640687D434C),
         helpstring("RayLib.Texture2D Class")
     ]
         coclass RayLibTexture2D
     {
         [default] interface IRayLibTexture;
+    };
+
+    [
+        uuid(7596E3C4-80A0-4827-ABDD-79DD78BFDC15),
+        helpstring("RayLib.RenderTexture2D Class")
+    ]
+        coclass RayLibRenderTexture2D
+    {
+        [default] interface IRayLibRenderTexture;
     };
 
     [

@@ -69,6 +69,9 @@
     <ClCompile Include="CoRayLibTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CoRayLibRenderTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CoRayLib.def">
@@ -175,6 +178,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VarArgList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoRayLibRenderTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

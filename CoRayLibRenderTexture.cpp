@@ -1,33 +1,31 @@
-// CoRayLibTexture.cpp
+// CoRayLibRenderTexture.cpp
 //
 
-#include "CoRayLibTexture.h"
+#include "CoRayLibRenderTexture.h"
 #include "tlhelper.h"
 
 
-CoRayLibTexture::CoRayLibTexture(HMODULE hModule)
+CoRayLibRenderTexture::CoRayLibRenderTexture(HMODULE hModule)
 {
     m_cRef = 1;
     m_id = 0;
-    m_width = 0;
-    m_height = 0;
-    m_mipmaps = 0;
-    m_format = 0;
+    m_texture = nullptr;
+    m_depth = nullptr;
 
     LoadTypeInfo(
         hModule,
-        IID_IRayLibTexture,
+        IID_IRayLibRenderTexture,
         &m_pTypeInfo
     );
 }
-CoRayLibTexture::~CoRayLibTexture()
+CoRayLibRenderTexture::~CoRayLibRenderTexture()
 {
     if (m_pTypeInfo)
         m_pTypeInfo->Release();
 }
 
 // IUnknown
-STDMETHODIMP CoRayLibTexture::QueryInterface(
+STDMETHODIMP CoRayLibRenderTexture::QueryInterface(
     REFIID riid,
     void** ppvObject
 )
@@ -36,10 +34,10 @@ STDMETHODIMP CoRayLibTexture::QueryInterface(
         return E_POINTER;
 
     if (riid == IID_IUnknown) {
-        *ppvObject = static_cast<IRayLibTexture*>(this);
+        *ppvObject = static_cast<IRayLibRenderTexture*>(this);
     }
-    else if (riid == IID_IRayLibTexture) {
-        *ppvObject = static_cast<IRayLibTexture*>(this);
+    else if (riid == IID_IRayLibRenderTexture) {
+        *ppvObject = static_cast<IRayLibRenderTexture*>(this);
     }
     else if (riid == IID_IDispatch) {
         *ppvObject = static_cast<IDispatch*>(this);
@@ -52,13 +50,13 @@ STDMETHODIMP CoRayLibTexture::QueryInterface(
     AddRef();
     return S_OK;
 }
-STDMETHODIMP_(ULONG) CoRayLibTexture::AddRef(
+STDMETHODIMP_(ULONG) CoRayLibRenderTexture::AddRef(
     void
 )
 {
     return InterlockedIncrement(&m_cRef);
 }
-STDMETHODIMP_(ULONG) CoRayLibTexture::Release(
+STDMETHODIMP_(ULONG) CoRayLibRenderTexture::Release(
     void
 )
 {
@@ -69,7 +67,7 @@ STDMETHODIMP_(ULONG) CoRayLibTexture::Release(
 }
 
 // IDispatch
-STDMETHODIMP CoRayLibTexture::GetTypeInfoCount(
+STDMETHODIMP CoRayLibRenderTexture::GetTypeInfoCount(
     UINT* pctinfo
 )
 {
@@ -82,7 +80,7 @@ STDMETHODIMP CoRayLibTexture::GetTypeInfoCount(
     *pctinfo = 1;
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::GetTypeInfo(
+STDMETHODIMP CoRayLibRenderTexture::GetTypeInfo(
     UINT iTInfo,
     LCID lcid,
     ITypeInfo** ppTInfo
@@ -98,7 +96,7 @@ STDMETHODIMP CoRayLibTexture::GetTypeInfo(
     (*ppTInfo)->AddRef();
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::GetIDsOfNames(
+STDMETHODIMP CoRayLibRenderTexture::GetIDsOfNames(
     REFIID riid,
     LPOLESTR* rgszNames,
     UINT cNames,
@@ -118,7 +116,7 @@ STDMETHODIMP CoRayLibTexture::GetIDsOfNames(
         (MEMBERID*)rgDispId
     );
 }
-STDMETHODIMP CoRayLibTexture::Invoke(
+STDMETHODIMP CoRayLibRenderTexture::Invoke(
     DISPID dispIdMember,
     REFIID riid,
     LCID lcid,
@@ -136,7 +134,7 @@ STDMETHODIMP CoRayLibTexture::Invoke(
         return E_ABORT;
 
     return m_pTypeInfo->Invoke(
-        static_cast<IRayLibTexture*>(this),
+        static_cast<IRayLibRenderTexture*>(this),
         (MEMBERID)dispIdMember,
         wFlags,
         pDispParams,
@@ -147,7 +145,7 @@ STDMETHODIMP CoRayLibTexture::Invoke(
 }
 
 // IRayLibColor
-STDMETHODIMP CoRayLibTexture::get_id(
+STDMETHODIMP CoRayLibRenderTexture::get_id(
     long* pval
 )
 {
@@ -157,78 +155,60 @@ STDMETHODIMP CoRayLibTexture::get_id(
     *pval = m_id;
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::put_id(
+STDMETHODIMP CoRayLibRenderTexture::put_id(
     long val
 )
 {
     m_id = val;
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::get_width(
-    long* pval
+STDMETHODIMP CoRayLibRenderTexture::get_texture(
+    IRayLibTexture** pval
 )
 {
     if (!pval)
         return E_POINTER;
 
-    *pval = m_width;
+    *pval = m_texture;
+    if (*pval)
+        (*pval)->AddRef();
+
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::put_width(
-    long val
+STDMETHODIMP CoRayLibRenderTexture::putref_texture(
+    IRayLibTexture* val
 )
 {
-    m_width = val;
+    if (m_texture)
+        m_texture->Release();
+    m_texture = val;
+    if (m_texture)
+        m_texture->AddRef();
+
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::get_height(
-    long* pval
+STDMETHODIMP CoRayLibRenderTexture::get_depth(
+    IRayLibTexture** pval
 )
 {
     if (!pval)
         return E_POINTER;
 
-    *pval = m_height;
-    return S_OK;
-}
-STDMETHODIMP CoRayLibTexture::put_height(
-    long val
-)
-{
-    m_height = val;
-    return S_OK;
-}
-STDMETHODIMP CoRayLibTexture::get_mipmaps(
-    long* pval
-)
-{
-    if (!pval)
-        return E_POINTER;
+    *pval = m_depth;
+    if (*pval)
+        (*pval)->AddRef();
 
-    *pval = m_mipmaps;
     return S_OK;
 }
-STDMETHODIMP CoRayLibTexture::put_mipmaps(
-    long val
+STDMETHODIMP CoRayLibRenderTexture::putref_depth(
+    IRayLibTexture* val
 )
 {
-    m_mipmaps = val;
-    return S_OK;
-}
-STDMETHODIMP CoRayLibTexture::get_format(
-    long* pval
-)
-{
-    if (!pval)
-        return E_POINTER;
+    if (m_depth)
+        m_depth->Release();
+    m_depth = val;
+    if (m_depth)
+        m_depth->AddRef();
 
-    *pval = m_format;
-    return S_OK;
-}
-STDMETHODIMP CoRayLibTexture::put_format(
-    long val
-)
-{
-    m_format = val;
     return S_OK;
 }
