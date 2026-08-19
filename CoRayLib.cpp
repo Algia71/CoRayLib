@@ -5,6 +5,7 @@
 #include "tlhelper.h"
 #include "comutil.h"
 #include <time.h>
+#include "VarArgList.h"
 
 
 inline HRESULT CoRayLib::co2wr(IRayLibColor* in, WrRayLibColor* out)
@@ -3890,7 +3891,78 @@ STDMETHODIMP CoRayLib::TextLength(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::TextFormat(
+    BSTR text,
+    SAFEARRAY* args,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!args)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
 
+    VarArgList c_args;
+
+    HRESULT hr = S_OK;
+    long lbound = 0, ubound = -1;
+    hr = SafeArrayGetLBound(args, 1, &lbound);
+    if (FAILED(hr)) return hr;
+    hr = SafeArrayGetUBound(args, 1, &ubound);
+    if (FAILED(hr)) return hr;
+
+    VARIANT* pVars = nullptr;
+    hr = SafeArrayAccessData(args, (void**)&pVars);
+    if (FAILED(hr)) return hr;
+    for (long i = 0; (i <= ubound - lbound) && SUCCEEDED(hr); ++i)
+    {
+        VARIANT v;
+        VariantInit(&v);
+        if (pVars[i].vt == VT_BSTR) {
+            hr = VariantChangeType(&v, &pVars[i], 0, VT_BSTR);
+            if (SUCCEEDED(hr))
+                c_args.append(_com_util::ConvertBSTRToString(v.bstrVal));
+        }
+        else if (pVars[i].vt == VT_I2) {
+            hr = VariantChangeType(&v, &pVars[i], 0, VT_I2);
+            if (SUCCEEDED(hr))
+                c_args.append(v.iVal);
+        }
+        else if (pVars[i].vt == VT_I4) {
+            hr = VariantChangeType(&v, &pVars[i], 0, VT_I4);
+            if (SUCCEEDED(hr))
+                c_args.append(v.intVal);
+        }
+        else if (pVars[i].vt == VT_R4) {
+            hr = VariantChangeType(&v, &pVars[i], 0, VT_R4);
+            if (SUCCEEDED(hr))
+                c_args.append(v.fltVal);
+        }
+        else if (pVars[i].vt == VT_R8) {
+            hr = VariantChangeType(&v, &pVars[i], 0, VT_R8);
+            if (SUCCEEDED(hr))
+                c_args.append(v.dblVal);
+        }
+
+        VariantClear(&v);
+    }
+    SafeArrayUnaccessData(args);
+
+    char c_buffer[1000];
+
+    vsprintf_s(
+        c_buffer,
+        1000,
+        _com_util::ConvertBSTRToString(text),
+        c_args.get_args()
+    );
+
+    *pRetVal = _com_util::ConvertStringToBSTR(c_buffer);
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::TextSubtext(
     BSTR text,
     long position,

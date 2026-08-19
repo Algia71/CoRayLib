@@ -873,7 +873,11 @@ public:
         BSTR text,
         long* pRetVal
     ) override;
-
+    STDMETHODIMP TextFormat(
+        BSTR text,
+        SAFEARRAY* args,
+        BSTR* pRetVal
+    ) override;
     STDMETHODIMP TextSubtext(
         BSTR text,
         long position,

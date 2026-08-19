@@ -191,6 +191,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="TClassFactory.h" />
     <ClInclude Include="tlhelper.h" />
+    <ClInclude Include="VarArgList.h" />
     <ClInclude Include="WrRayLib.h" />
   </ItemGroup>
   <ItemGroup>

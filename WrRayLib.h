@@ -430,7 +430,7 @@ public:
 //	static int TextCopy(char* dst, const char* src);
 	static bool TextIsEqual(const char* text1, const char* text2);
 	static unsigned int TextLength(const char* text);
-//	static const char* TextFormat(const char* text, ...);
+//*	static const char* TextFormat(const char* text, ...); ==> actually reimplemented from scratch
 	static const char* TextSubtext(const char* text, int position, int length);
 	static const char* TextRemoveSpaces(const char* text);
 	static char* GetTextBetween(const char* text, const char* begin, const char* end);
