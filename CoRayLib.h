@@ -998,39 +998,54 @@ public:
         long b,
         long a,
         IRayLibColor** pRetVal
-    );
+    ) override;
     STDMETHODIMP CreateVector2(
         float x,
         float y,
         IRayLibVector2** pRetVal
-    );
+    ) override;
     STDMETHODIMP CreateVector3(
         float x,
         float y,
         float z,
         IRayLibVector3** pRetVal
-    );
+    ) override;
     STDMETHODIMP CreateVector4(
         float x,
         float y,
         float z,
         float w,
         IRayLibVector4** pRetVal
-    );
+    ) override;
     STDMETHODIMP CreateQuaternion(
         float x,
         float y,
         float z,
         float w,
         IRayLibVector4** pRetVal
-    );
+    ) override;
     STDMETHODIMP CreateRectangle(
         float x,
         float y,
         float width,
         float height,
         IRayLibRectangle** pRetVal
-    );
+    ) override;
+    STDMETHODIMP CreateMatrix(
+        IRayLibMatrix** pRetVal
+    ) override;
+    STDMETHODIMP CreateCamera2D(
+        IRayLibCamera2D** pRetVal
+    ) override;
+    STDMETHODIMP CreateCamera3D(
+        IRayLibCamera3D** pRetVal
+    ) override;
+    STDMETHODIMP CreateTexture(
+        IRayLibTexture** pRetVal
+    ) override;
+    STDMETHODIMP CreateRenderTexture(
+        IRayLibRenderTexture** pRetVal
+    ) override;
 };
 
 #endif // _CORAYLIB_H

@@ -528,6 +528,11 @@ interface IRayLib : IDispatch
     [id(20003)] HRESULT CreateVector4([in] float x, [in] float y, [in] float z, [in] float w, [out, retval] IRayLibVector4** pRetVal);
     [id(20004)] HRESULT CreateQuaternion([in] float x, [in] float y, [in] float z, [in] float w, [out, retval] IRayLibVector4** pRetVal);
     [id(20005)] HRESULT CreateRectangle([in] float x, [in] float y, [in] float width, [in] float height, [out, retval] IRayLibRectangle** pRetVal);
+    [id(20006)] HRESULT CreateMatrix([out, retval] IRayLibMatrix** pRetVal);
+    [id(20007)] HRESULT CreateCamera2D([out, retval] IRayLibCamera2D** pRetVal);
+    [id(20008)] HRESULT CreateCamera3D([out, retval] IRayLibCamera3D** pRetVal);
+    [id(20009)] HRESULT CreateTexture([out, retval] IRayLibTexture** pRetVal);
+    [id(20010)] HRESULT CreateRenderTexture([out, retval] IRayLibRenderTexture** pRetVal);
 }
 
 [

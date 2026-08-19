@@ -4634,3 +4634,88 @@ STDMETHODIMP CoRayLib::CreateRectangle(
 
     return hr;
 }
+STDMETHODIMP CoRayLib::CreateMatrix(
+    IRayLibMatrix** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    return CoCreateInstance(
+        CLSID_RayLibMatrix,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibMatrix,
+        (LPVOID*)pRetVal
+    );
+}
+STDMETHODIMP CoRayLib::CreateCamera2D(
+    IRayLibCamera2D** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    return CoCreateInstance(
+        CLSID_RayLibCamera2D,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibCamera2D,
+        (LPVOID*)pRetVal
+    );
+}
+STDMETHODIMP CoRayLib::CreateCamera3D(
+    IRayLibCamera3D** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    return CoCreateInstance(
+        CLSID_RayLibCamera3D,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibCamera3D,
+        (LPVOID*)pRetVal
+    );
+}
+STDMETHODIMP CoRayLib::CreateTexture(
+    IRayLibTexture** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    return CoCreateInstance(
+        CLSID_RayLibTexture,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibTexture,
+        (LPVOID*)pRetVal
+    );
+}
+STDMETHODIMP CoRayLib::CreateRenderTexture(
+    IRayLibRenderTexture** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = NULL;
+
+    return CoCreateInstance(
+        CLSID_RayLibRenderTexture,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRenderTexture,
+        (LPVOID*)pRetVal
+    );
+}
