@@ -11,14 +11,14 @@ Through this wrapper, **raylib** functions and structures can be used by any **W
 ' Hello world
 '
 Set raylib = CreateObject("RayLib")
-Set colorBg = raylib.CreateColor(245, 245, 245, 255) 'RAYWHITE
-Set colorFg = raylib.CreateColor(112, 31, 126, 255) 'DARKPURPLE
+Set RAYWHITE = raylib.CreateColor(245, 245, 245, 255)
+Set DARKPURPLE = raylib.CreateColor(112, 31, 126, 255)
 raylib.SetTargetFPS 60
 raylib.InitWindow 850, 200, "Hello RayLib from VBScript"
 While Not raylib.WindowShouldClose
     raylib.BeginDrawing
-    raylib.ClearBackground colorBg
-    raylib.DrawText "Hello, World!", 300, 80, 40, colorFg
+    raylib.ClearBackground RAYWHITE
+    raylib.DrawText "Hello, World!", 300, 80, 40, DARKPURPLE
     raylib.EndDrawing
 Wend
 raylib.CloseWindow
@@ -31,14 +31,14 @@ raylib.CloseWindow
 // Hello world
 //
 raylib = new ActiveXObject("RayLib");
-colorBg = raylib.CreateColor(112, 31, 126, 255); // DARKPURPLE
-colorFg = raylib.CreateColor(245, 245, 245, 255); // RAYWHITE
+DARKPURPLE = raylib.CreateColor(112, 31, 126, 255);
+RAYWHITE = raylib.CreateColor(245, 245, 245, 255);
 raylib.SetTargetFPS(60);
 raylib.InitWindow(850, 200, "Hello RayLib from JScript");
 while (!raylib.WindowShouldClose()) {
 	raylib.BeginDrawing();
-	raylib.ClearBackground(colorBg);
-	raylib.DrawText("Hello, World!", 300, 80, 40, colorFg);
+	raylib.ClearBackground(DARKPURPLE);
+	raylib.DrawText("Hello, World!", 300, 80, 40, RAYWHITE);
 	raylib.EndDrawing();
 }
 raylib.CloseWindow();
