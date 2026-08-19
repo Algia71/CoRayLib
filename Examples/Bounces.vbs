@@ -123,7 +123,7 @@ Sub Main
 	Dim balls
 
 	Randomize
-    Set raylib = CreateObject("RayLib")
+	Set raylib = CreateObject("RayLib")
 	Set colorBg = GetRandomColor(raylib)
 
 	Set balls = New BouncingBalls
