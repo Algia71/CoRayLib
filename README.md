@@ -46,7 +46,7 @@ raylib.CloseWindow();
 ![JScript Hello World](https://github.com/Algia71/raylib-COM/blob/master/Images/hello-world-js.png?raw=true)
 
 ### Status
-*The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper. At the moment 203 out of 548 raylib APIs (37%) are wrapped*  
+*The wrapper covers only a (small) part of the full raylib API. According my needs and your feedbacks, I will add more raylib APIs to the wrapper. At the moment 203 out of 548 raylib APIs (37%) are wrapped*.
 
 ### raylib version
 I wrapped **raylib version 6.0** (23 April 2026). `raylib.lib` binary files (debug and release versions) are included precompiled within the project.
