@@ -360,6 +360,60 @@ inline HRESULT CoRayLib::wr2co(WrRayLibRay* in, IRayLibRay* out)
 
     return hr;
 }
+inline HRESULT CoRayLib::wr2co(WrRayLibMatrix* in, IRayLibMatrix* out)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_m0(in->m0);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m1(in->m1);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m2(in->m2);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m3(in->m3);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m4(in->m4);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m5(in->m5);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m6(in->m6);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m7(in->m7);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m8(in->m8);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m9(in->m9);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m10(in->m10);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m11(in->m11);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m12(in->m12);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m13(in->m13);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m14(in->m14);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_m15(in->m15);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 
 
 CoRayLib::CoRayLib(HMODULE hModule)
@@ -1533,6 +1587,76 @@ STDMETHODIMP CoRayLib::GetScreenToWorld2D(
         NULL,
         CLSCTX_INPROC_SERVER,
         IID_IRayLibVector2,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetCameraMatrix(
+    IRayLibCamera3D* camera,
+    IRayLibMatrix** pRetVal
+)
+{
+    if (!camera)
+        return E_POINTER;
+    if(!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibCamera3D wr_camera = { 0 };
+
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibMatrix retVal = WrRayLib::GetCameraMatrix(
+        wr_camera
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibMatrix,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibMatrix,
+        (LPVOID*)pRetVal
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetCameraMatrix2D(
+    IRayLibCamera2D* camera,
+    IRayLibMatrix** pRetVal
+)
+{
+    if (!camera)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibCamera2D wr_camera = { 0 };
+
+    hr = co2wr(camera, &wr_camera);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibMatrix retVal = WrRayLib::GetCameraMatrix2D(
+        wr_camera
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibMatrix,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibMatrix,
         (LPVOID*)pRetVal
     );
 

@@ -30,6 +30,7 @@ class CoRayLib : IRayLib
     inline HRESULT wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out);
     inline HRESULT wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out);
     inline HRESULT wr2co(WrRayLibRay* in, IRayLibRay* out);
+    inline HRESULT wr2co(WrRayLibMatrix* in, IRayLibMatrix* out);
 
 public:
     CoRayLib(HMODULE hModule);
@@ -330,6 +331,14 @@ public:
         IRayLibVector2* position,
         IRayLibCamera2D* camera,
         IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetCameraMatrix(
+        IRayLibCamera3D* camera,
+        IRayLibMatrix** pRetVal
+    ) override;
+    STDMETHODIMP GetCameraMatrix2D(
+        IRayLibCamera2D* camera,
+        IRayLibMatrix** pRetVal
     ) override;
 
     // Timing-related functions

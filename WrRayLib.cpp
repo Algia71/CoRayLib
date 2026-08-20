@@ -158,6 +158,18 @@ static void inline rl2wr_camera3D(
 	wr_camera->projection = rl_camera->projection;
 }
 
+static WrRayLibMatrix rl2wr_matrix(
+	Matrix matrix
+)
+{
+	return {
+		matrix.m0, matrix.m4, matrix.m8, matrix.m12,
+		matrix.m1, matrix.m5, matrix.m9, matrix.m13,
+		matrix.m2, matrix.m6, matrix.m10, matrix.m14,
+		matrix.m3, matrix.m7, matrix.m11, matrix.m15,
+	};
+}
+
 static WrRayLibRay inline rl2wr_ray(
 	Ray ray
 )
@@ -666,6 +678,26 @@ WrRayLibVector2 WrRayLib::GetScreenToWorld2D(
 	return rl2wr_vector2(
 		::GetScreenToWorld2D(
 			wr2rl_vector2(position),
+			wr2rl_camera2D(camera)
+		)
+	);
+}
+WrRayLibMatrix WrRayLib::GetCameraMatrix(
+	WrRayLibCamera3D camera
+)
+{
+	return rl2wr_matrix(
+		::GetCameraMatrix(
+			wr2rl_camera3D(camera)
+		)
+	);
+}
+WrRayLibMatrix WrRayLib::GetCameraMatrix2D(
+	WrRayLibCamera2D camera
+)
+{
+	return rl2wr_matrix(
+		::GetCameraMatrix2D(
 			wr2rl_camera2D(camera)
 		)
 	);

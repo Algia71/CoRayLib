@@ -179,8 +179,8 @@ public:
 	static WrRayLibVector2 GetWorldToScreenEx(WrRayLibVector3 position, WrRayLibCamera3D camera, int width, int height);
 	static WrRayLibVector2 GetWorldToScreen2D(WrRayLibVector2 position, WrRayLibCamera2D camera);
 	static WrRayLibVector2 GetScreenToWorld2D(WrRayLibVector2 position, WrRayLibCamera2D camera);
-//	static Matrix GetCameraMatrix(Camera camera);
-//	static Matrix GetCameraMatrix2D(Camera2D camera);
+	static WrRayLibMatrix GetCameraMatrix(WrRayLibCamera3D camera);
+	static WrRayLibMatrix GetCameraMatrix2D(WrRayLibCamera2D camera);
 
 	// Timing-related functions
 	static void SetTargetFPS(int fps);
