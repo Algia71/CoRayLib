@@ -513,9 +513,11 @@ interface IRayLib : IDispatch
     [id(3007)] HRESULT DrawCubeWires([in] IRayLibVector3* position, [in] float width, [in] float height, [in] float length, [in] IRayLibColor* color);
     [id(3008)] HRESULT DrawCubeWiresV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
     [id(3009)] HRESULT DrawSphere([in] IRayLibVector3* centerPos, [in] float radius, [in] IRayLibColor* color);
-    [id(3010)] HRESULT DrawSphereEx([in] IRayLibVector3* centerPos, [in] float radius, [in] int rings, [in] int slices, [in] IRayLibColor* color);
-    [id(3011)] HRESULT DrawSphereWires([in] IRayLibVector3* centerPos, [in] float radius, [in] int rings, [in] int slices, [in] IRayLibColor* color);
+    [id(3010)] HRESULT DrawSphereEx([in] IRayLibVector3* centerPos, [in] float radius, [in] long rings, [in] long slices, [in] IRayLibColor* color);
+    [id(3011)] HRESULT DrawSphereWires([in] IRayLibVector3* centerPos, [in] float radius, [in] long rings, [in] long slices, [in] IRayLibColor* color);
 
+    [id(3047)] HRESULT DrawCapsule([in] IRayLibVector3* startPos, [in] IRayLibVector3* endPos, [in] float radius, [in] long slices, [in] long rings, [in] IRayLibColor* color);
+    [id(3048)] HRESULT DrawCapsuleWires([in] IRayLibVector3* startPos, [in] IRayLibVector3* endPos, [in] float radius, [in] long slices, [in] long rings, [in] IRayLibColor* color);
     [id(3049)] HRESULT DrawPlane([in] IRayLibVector3* centerPos, [in] IRayLibVector2* size, [in] IRayLibColor* color);
     [id(3050)] HRESULT DrawRay([in] IRayLibRay* ray, [in] IRayLibColor* color);
     [id(3051)] HRESULT DrawGrid([in] long slices, [in] float spacing);

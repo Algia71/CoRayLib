@@ -4693,8 +4693,8 @@ STDMETHODIMP CoRayLib::DrawSphere(
 STDMETHODIMP CoRayLib::DrawSphereEx(
     IRayLibVector3* centerPos,
     float radius,
-    int rings,
-    int slices,
+    long rings,
+    long slices,
     IRayLibColor* color
 )
 {
@@ -4716,8 +4716,8 @@ STDMETHODIMP CoRayLib::DrawSphereEx(
     WrRayLib::DrawSphereEx(
         wr_centerPos,
         radius,
-        rings,
-        slices,
+        (int)rings,
+        (int)slices,
         wr_color
     );
 
@@ -4726,8 +4726,8 @@ STDMETHODIMP CoRayLib::DrawSphereEx(
 STDMETHODIMP CoRayLib::DrawSphereWires(
     IRayLibVector3* centerPos,
     float radius,
-    int rings,
-    int slices,
+    long rings,
+    long slices,
     IRayLibColor* color
 )
 {
@@ -4749,14 +4749,92 @@ STDMETHODIMP CoRayLib::DrawSphereWires(
     WrRayLib::DrawSphereWires(
         wr_centerPos,
         radius,
-        rings,
-        slices,
+        (int)rings,
+        (int)slices,
         wr_color
     );
 
     return hr;
 }
 
+STDMETHODIMP CoRayLib::DrawCapsule(
+    IRayLibVector3* startPos,
+    IRayLibVector3* endPos,
+    float radius,
+    long slices,
+    long rings,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_startPos = { 0 };
+    WrRayLibVector3 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCapsule(
+        wr_startPos,
+        wr_endPos,
+        radius,
+        (int)slices,
+        (int)rings,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCapsuleWires(
+    IRayLibVector3* startPos,
+    IRayLibVector3* endPos,
+    float radius,
+    long slices,
+    long rings,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_startPos = { 0 };
+    WrRayLibVector3 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCapsuleWires(
+        wr_startPos,
+        wr_endPos,
+        radius,
+        (int)slices,
+        (int)rings,
+        wr_color
+    );
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::DrawPlane(
     IRayLibVector3* centerPos,
     IRayLibVector2* size,

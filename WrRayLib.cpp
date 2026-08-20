@@ -2115,6 +2115,42 @@ void WrRayLib::DrawSphereWires(
 	);
 }
 
+void WrRayLib::DrawCapsule(
+	WrRayLibVector3 startPos,
+	WrRayLibVector3 endPos,
+	float radius,
+	int slices,
+	int rings,
+	WrRayLibColor color
+)
+{
+	::DrawCapsule(
+		wr2rl_vector3(startPos),
+		wr2rl_vector3(endPos),
+		radius,
+		slices,
+		rings,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCapsuleWires(
+	WrRayLibVector3 startPos,
+	WrRayLibVector3 endPos,
+	float radius,
+	int slices,
+	int rings,
+	WrRayLibColor color
+)
+{
+	::DrawCapsuleWires(
+		wr2rl_vector3(startPos),
+		wr2rl_vector3(endPos),
+		radius,
+		slices,
+		rings,
+		wr2rl_color(color)
+	);
+}
 void WrRayLib::DrawPlane(
 	WrRayLibVector3 centerPos,
 	WrRayLibVector2 size,

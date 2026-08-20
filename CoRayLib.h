@@ -1005,18 +1005,34 @@ public:
     STDMETHODIMP DrawSphereEx(
         IRayLibVector3* centerPos,
         float radius,
-        int rings,
-        int slices,
+        long rings,
+        long slices,
         IRayLibColor* color
     ) override;
     STDMETHODIMP DrawSphereWires(
         IRayLibVector3* centerPos,
         float radius,
-        int rings,
-        int slices,
+        long rings,
+        long slices,
         IRayLibColor* color
     ) override;
 
+    STDMETHODIMP DrawCapsule(
+        IRayLibVector3* startPos,
+        IRayLibVector3* endPos,
+        float radius,
+        long slices,
+        long rings,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCapsuleWires(
+        IRayLibVector3* startPos,
+        IRayLibVector3* endPos,
+        float radius,
+        long slices,
+        long rings,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawPlane(
         IRayLibVector3* centerPos,
         IRayLibVector2* size,

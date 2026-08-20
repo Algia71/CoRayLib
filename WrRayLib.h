@@ -647,8 +647,8 @@ public:
 //	static void DrawCylinderEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
 //	static void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);
 //	static void DrawCylinderWiresEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
-//	static void DrawCapsule(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
-//	static void DrawCapsuleWires(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
+	static void DrawCapsule(WrRayLibVector3 startPos, WrRayLibVector3 endPos, float radius, int slices, int rings, WrRayLibColor color);
+	static void DrawCapsuleWires(WrRayLibVector3 startPos, WrRayLibVector3 endPos, float radius, int slices, int rings, WrRayLibColor color);
 	static void DrawPlane(WrRayLibVector3 centerPos, WrRayLibVector2 size, WrRayLibColor color);
 	static void DrawRay(WrRayLibRay ray, WrRayLibColor color);
 	static void DrawGrid(int slices, float spacing);
