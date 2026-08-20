@@ -448,6 +448,7 @@ interface IRayLib : IDispatch
 
     [id(1070)] HRESULT DrawPoly([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
     [id(1071)] HRESULT DrawPolyLines([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
+    [id(1072)] HRESULT DrawPolyLinesEx([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] float lineThick, [in] IRayLibColor* color);
 
     // Basic shapes collision detection functions
     [id(1090)] HRESULT CheckCollisionRecs([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] VARIANT_BOOL* pRetVal);

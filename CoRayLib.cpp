@@ -3495,6 +3495,40 @@ STDMETHODIMP CoRayLib::DrawPolyLines(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::DrawPolyLinesEx(
+    IRayLibVector2* center,
+    long sides,
+    float radius,
+    float rotation,
+    float lineThick,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_center = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPolyLinesEx(
+        wr_center,
+        sides,
+        radius,
+        rotation,
+        lineThick,
+        wr_color
+    );
+
+    return hr;
+}
 
 // Basic shapes collision detection functions
 STDMETHODIMP CoRayLib::CheckCollisionRecs(
@@ -3524,7 +3558,7 @@ STDMETHODIMP CoRayLib::CheckCollisionRecs(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionCircles(
     IRayLibVector2* center1,
@@ -3555,7 +3589,7 @@ STDMETHODIMP CoRayLib::CheckCollisionCircles(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionCircleRec(
     IRayLibVector2* center,
@@ -3585,7 +3619,7 @@ STDMETHODIMP CoRayLib::CheckCollisionCircleRec(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionCircleLine(
     IRayLibVector2* center,
@@ -3621,7 +3655,7 @@ STDMETHODIMP CoRayLib::CheckCollisionCircleLine(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionPointRec(
     IRayLibVector2* point,
@@ -3650,7 +3684,7 @@ STDMETHODIMP CoRayLib::CheckCollisionPointRec(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionPointCircle(
     IRayLibVector2* point,
@@ -3680,7 +3714,7 @@ STDMETHODIMP CoRayLib::CheckCollisionPointCircle(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionPointTriangle(
     IRayLibVector2* point,
@@ -3721,7 +3755,7 @@ STDMETHODIMP CoRayLib::CheckCollisionPointTriangle(
     else
         *pRetVal = VARIANT_FALSE;
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::CheckCollisionPointLine(
     IRayLibVector2* point,

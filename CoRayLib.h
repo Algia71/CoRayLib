@@ -773,7 +773,15 @@ public:
         float rotation,
         IRayLibColor* color
     ) override;
-    
+    STDMETHODIMP DrawPolyLinesEx(
+        IRayLibVector2* center,
+        long sides,
+        float radius,
+        float rotation,
+        float lineThick,
+        IRayLibColor* color
+    ) override;
+
     // Basic shapes collision detection functions
     STDMETHODIMP CheckCollisionRecs(
         IRayLibRectangle* rec1,

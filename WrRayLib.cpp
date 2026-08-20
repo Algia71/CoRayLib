@@ -1623,6 +1623,24 @@ void WrRayLib::DrawPolyLines(
 		wr2rl_color(color)
 	);
 }
+void WrRayLib::DrawPolyLinesEx(
+	WrRayLibVector2 center,
+	int sides,
+	float radius,
+	float rotation,
+	float lineThick,
+	WrRayLibColor color
+)
+{
+	::DrawPolyLinesEx(
+		wr2rl_vector2(center),
+		sides,
+		radius,
+		rotation,
+		lineThick,
+		wr2rl_color(color)
+	);
+}
 
 // Basic shapes collision detection functions
 bool WrRayLib::CheckCollisionRecs(

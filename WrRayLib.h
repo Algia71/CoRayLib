@@ -387,7 +387,7 @@ public:
 //	static void DrawTriangleStrip(const Vector2* points, int pointCount, Color color);
 	static void DrawPoly(WrRayLibVector2 center, int sides, float radius, float rotation, WrRayLibColor color);
 	static void DrawPolyLines(WrRayLibVector2 center, int sides, float radius, float rotation, WrRayLibColor color);
-//	static void DrawPolyLinesEx(Vector2 center, int sides, float radius, float rotation, float lineThick, Color color);
+	static void DrawPolyLinesEx(WrRayLibVector2 center, int sides, float radius, float rotation, float lineThick, WrRayLibColor color);
 
 	// Splines drawing functions
 //	static void DrawSplineLinear(const Vector2* points, int pointCount, float thick, Color color);
