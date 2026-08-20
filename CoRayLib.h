@@ -911,6 +911,32 @@ public:
         BSTR end,
         BSTR* pRetVal
     ) override;
+    STDMETHODIMP TextReplace(
+        BSTR text,
+        BSTR search,
+        BSTR replacement,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextReplaceAlloc(
+        BSTR text,
+        BSTR search,
+        BSTR replacement,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextReplaceBetween(
+        BSTR text,
+        BSTR begin,
+        BSTR end,
+        BSTR replacement,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextReplaceBetweenAlloc(
+        BSTR text,
+        BSTR begin,
+        BSTR end,
+        BSTR replacement,
+        BSTR* pRetVal
+    ) override;
 
     STDMETHODIMP TextFindIndex(
         BSTR text,

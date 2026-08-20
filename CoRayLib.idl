@@ -520,15 +520,19 @@ interface IRayLib : IDispatch
     [id(2076)] HRESULT TextSubtext([in] BSTR text, [in] long position, [in] long length, [out, retval] BSTR* pRetVal);
     [id(2077)] HRESULT TextRemoveSpaces([in] BSTR text, [out, retval] BSTR* pRetVal);
     [id(2078)] HRESULT GetTextBetween([in] BSTR text, [in] BSTR begin, [in] BSTR end, [out, retval] BSTR* pRetVal);
+    [id(2079)] HRESULT TextReplace([in] BSTR text, [in] BSTR search, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
+    [id(2080)] HRESULT TextReplaceAlloc([in] BSTR text, [in] BSTR search, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
+    [id(2081)] HRESULT TextReplaceBetween([in] BSTR text, [in] BSTR begin, [in] BSTR end, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
+    [id(2082)] HRESULT TextReplaceBetweenAlloc([in] BSTR text, [in] BSTR begin, [in] BSTR end, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
 
-    [id(2080)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
-    [id(2081)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2082)] HRESULT TextToLower([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2083)] HRESULT TextToPascal([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2084)] HRESULT TextToSnake([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2085)] HRESULT TextToCamel([in] BSTR text, [out, retval] BSTR* pRetVal);
-    [id(2086)] HRESULT TextToInteger([in] BSTR text, [out, retval] long* pRetVal);
-    [id(2087)] HRESULT TextToFloat([in] BSTR text, [out, retval] float* pRetVal);
+    [id(2090)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
+    [id(2091)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2092)] HRESULT TextToLower([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2093)] HRESULT TextToPascal([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2094)] HRESULT TextToSnake([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2095)] HRESULT TextToCamel([in] BSTR text, [out, retval] BSTR* pRetVal);
+    [id(2096)] HRESULT TextToInteger([in] BSTR text, [out, retval] long* pRetVal);
+    [id(2097)] HRESULT TextToFloat([in] BSTR text, [out, retval] float* pRetVal);
 
 
     //////////////////////////////////////////////

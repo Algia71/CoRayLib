@@ -4214,6 +4214,130 @@ STDMETHODIMP CoRayLib::GetTextBetween(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::TextReplace(
+    BSTR text,
+    BSTR search,
+    BSTR replacement,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!search)
+        return E_POINTER;
+    if (!replacement)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::TextReplace(
+            _com_util::ConvertBSTRToString(text),
+            _com_util::ConvertBSTRToString(search),
+            _com_util::ConvertBSTRToString(replacement)
+        )
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::TextReplaceAlloc(
+    BSTR text,
+    BSTR search,
+    BSTR replacement,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!search)
+        return E_POINTER;
+    if (!replacement)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    char* ptr = nullptr;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        ptr = WrRayLib::TextReplaceAlloc(
+            _com_util::ConvertBSTRToString(text),
+            _com_util::ConvertBSTRToString(search),
+            _com_util::ConvertBSTRToString(replacement)
+        )
+    );
+
+    WrRayLib::MemFree(
+        (void*)ptr
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::TextReplaceBetween(
+    BSTR text,
+    BSTR begin,
+    BSTR end,
+    BSTR replacement,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!begin)
+        return E_POINTER;
+    if (!end)
+        return E_POINTER;
+    if (!replacement)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::TextReplaceBetween(
+            _com_util::ConvertBSTRToString(text),
+            _com_util::ConvertBSTRToString(begin),
+            _com_util::ConvertBSTRToString(end),
+            _com_util::ConvertBSTRToString(replacement)
+        )
+    );
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::TextReplaceBetweenAlloc(
+    BSTR text,
+    BSTR begin,
+    BSTR end,
+    BSTR replacement,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!begin)
+        return E_POINTER;
+    if (!end)
+        return E_POINTER;
+    if (!replacement)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    char* ptr = nullptr;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        ptr = WrRayLib::TextReplaceBetweenAlloc(
+            _com_util::ConvertBSTRToString(text),
+            _com_util::ConvertBSTRToString(begin),
+            _com_util::ConvertBSTRToString(end),
+            _com_util::ConvertBSTRToString(replacement)
+        )
+    );
+
+    WrRayLib::MemFree(
+        (void*)ptr
+    );
+
+    return S_OK;
+}
 
 STDMETHODIMP CoRayLib::TextFindIndex(
     BSTR text,

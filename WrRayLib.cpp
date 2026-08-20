@@ -813,6 +813,18 @@ void WrRayLib::SetTraceLogLevel(
 }
 
 
+// Memory management, using internal allocators
+
+void WrRayLib::MemFree(
+	void* ptr
+)
+{
+	::MemFree(
+		ptr
+	);
+}
+
+
 // Input-related functions: keyboard
 
 bool WrRayLib::IsKeyPressed(
@@ -1888,6 +1900,58 @@ char* WrRayLib::GetTextBetween(
 		text,
 		begin,
 		end
+	);
+}
+char* WrRayLib::TextReplace(
+	const char* text,
+	const char* search,
+	const char* replacement
+)
+{
+	return ::TextReplace(
+		text,
+		search,
+		replacement
+	);
+}
+char* WrRayLib::TextReplaceAlloc(
+	const char* text,
+	const char* search,
+	const char* replacement
+)
+{
+	return ::TextReplaceAlloc(
+		text,
+		search,
+		replacement
+	);
+}
+char* WrRayLib::TextReplaceBetween(
+	const char* text,
+	const char* begin,
+	const char* end,
+	const char* replacement
+)
+{
+	return ::TextReplaceBetween(
+		text,
+		begin,
+		end,
+		replacement
+	);
+}
+char* WrRayLib::TextReplaceBetweenAlloc(
+	const char* text,
+	const char* begin,
+	const char* end,
+	const char* replacement
+)
+{
+	return ::TextReplaceBetweenAlloc(
+		text,
+		begin,
+		end,
+		replacement
 	);
 }
 

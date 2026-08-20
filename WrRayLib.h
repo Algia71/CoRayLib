@@ -212,7 +212,7 @@ public:
 	// Memory management, using internal allocators
 //	static void* MemAlloc(unsigned int size);
 //	static void* MemRealloc(void* ptr, unsigned int size);
-//	static void MemFree(void* ptr);
+	static void MemFree(void* ptr);
 
 	// File system management functions
 //	static unsigned char* LoadFileData(const char* fileName, int* dataSize);
@@ -609,10 +609,10 @@ public:
 	static const char* TextSubtext(const char* text, int position, int length);
 	static const char* TextRemoveSpaces(const char* text);
 	static char* GetTextBetween(const char* text, const char* begin, const char* end);
-//	static char* TextReplace(const char* text, const char* search, const char* replacement);
-//	static char* TextReplaceAlloc(const char* text, const char* search, const char* replacement);
-//	static char* TextReplaceBetween(const char* text, const char* begin, const char* end, const char* replacement);
-//	static char* TextReplaceBetweenAlloc(const char* text, const char* begin, const char* end, const char* replacement);
+	static char* TextReplace(const char* text, const char* search, const char* replacement);
+	static char* TextReplaceAlloc(const char* text, const char* search, const char* replacement);
+	static char* TextReplaceBetween(const char* text, const char* begin, const char* end, const char* replacement);
+	static char* TextReplaceBetweenAlloc(const char* text, const char* begin, const char* end, const char* replacement);
 //	static char* TextInsert(const char* text, const char* insert, int position);
 //	static char* TextInsertAlloc(const char* text, const char* insert, int position);
 //	static char* TextJoin(char** textList, int count, const char* delimiter);
