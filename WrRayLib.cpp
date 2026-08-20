@@ -2070,6 +2070,50 @@ void WrRayLib::DrawCubeWiresV(
 		wr2rl_color(color)
 	);
 }
+void WrRayLib::DrawSphere(
+	WrRayLibVector3 centerPos,
+	float radius,
+	WrRayLibColor color
+)
+{
+	::DrawSphere(
+		wr2rl_vector3(centerPos),
+		radius,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawSphereEx(
+	WrRayLibVector3 centerPos,
+	float radius,
+	int rings,
+	int slices,
+	WrRayLibColor color
+)
+{
+	::DrawSphereEx(
+		wr2rl_vector3(centerPos),
+		radius,
+		rings,
+		slices,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawSphereWires(
+	WrRayLibVector3 centerPos,
+	float radius,
+	int rings,
+	int slices,
+	WrRayLibColor color
+)
+{
+	::DrawSphereWires(
+		wr2rl_vector3(centerPos),
+		radius,
+		rings,
+		slices,
+		wr2rl_color(color)
+	);
+}
 
 void WrRayLib::DrawPlane(
 	WrRayLibVector3 centerPos,

@@ -640,9 +640,9 @@ public:
 	static void DrawCubeV(WrRayLibVector3 position, WrRayLibVector3 size, WrRayLibColor color);
 	static void DrawCubeWires(WrRayLibVector3 position, float width, float height, float length, WrRayLibColor color);
 	static void DrawCubeWiresV(WrRayLibVector3 position, WrRayLibVector3 size, WrRayLibColor color);
-//	static void DrawSphere(Vector3 centerPos, float radius, Color color);
-//	static void DrawSphereEx(Vector3 centerPos, float radius, int rings, int slices, Color color);
-//	static void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color);
+	static void DrawSphere(WrRayLibVector3 centerPos, float radius, WrRayLibColor color);
+	static void DrawSphereEx(WrRayLibVector3 centerPos, float radius, int rings, int slices, WrRayLibColor color);
+	static void DrawSphereWires(WrRayLibVector3 centerPos, float radius, int rings, int slices, WrRayLibColor color);
 //	static void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);
 //	static void DrawCylinderEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
 //	static void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);

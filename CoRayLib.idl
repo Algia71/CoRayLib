@@ -512,6 +512,9 @@ interface IRayLib : IDispatch
     [id(3006)] HRESULT DrawCubeV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
     [id(3007)] HRESULT DrawCubeWires([in] IRayLibVector3* position, [in] float width, [in] float height, [in] float length, [in] IRayLibColor* color);
     [id(3008)] HRESULT DrawCubeWiresV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
+    [id(3009)] HRESULT DrawSphere([in] IRayLibVector3* centerPos, [in] float radius, [in] IRayLibColor* color);
+    [id(3010)] HRESULT DrawSphereEx([in] IRayLibVector3* centerPos, [in] float radius, [in] int rings, [in] int slices, [in] IRayLibColor* color);
+    [id(3011)] HRESULT DrawSphereWires([in] IRayLibVector3* centerPos, [in] float radius, [in] int rings, [in] int slices, [in] IRayLibColor* color);
 
     [id(3049)] HRESULT DrawPlane([in] IRayLibVector3* centerPos, [in] IRayLibVector2* size, [in] IRayLibColor* color);
     [id(3050)] HRESULT DrawRay([in] IRayLibRay* ray, [in] IRayLibColor* color);

@@ -4661,6 +4661,101 @@ STDMETHODIMP CoRayLib::DrawCubeWiresV(
 
     return hr;
 }
+STDMETHODIMP CoRayLib::DrawSphere(
+    IRayLibVector3* centerPos,
+    float radius,
+    IRayLibColor* color
+)
+{
+    if (!centerPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_centerPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(centerPos, &wr_centerPos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSphere(
+        wr_centerPos,
+        radius,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawSphereEx(
+    IRayLibVector3* centerPos,
+    float radius,
+    int rings,
+    int slices,
+    IRayLibColor* color
+)
+{
+    if (!centerPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_centerPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(centerPos, &wr_centerPos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSphereEx(
+        wr_centerPos,
+        radius,
+        rings,
+        slices,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawSphereWires(
+    IRayLibVector3* centerPos,
+    float radius,
+    int rings,
+    int slices,
+    IRayLibColor* color
+)
+{
+    if (!centerPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_centerPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(centerPos, &wr_centerPos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSphereWires(
+        wr_centerPos,
+        radius,
+        rings,
+        slices,
+        wr_color
+    );
+
+    return hr;
+}
 
 STDMETHODIMP CoRayLib::DrawPlane(
     IRayLibVector3* centerPos,

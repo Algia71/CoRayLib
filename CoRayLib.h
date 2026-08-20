@@ -997,6 +997,25 @@ public:
         IRayLibVector3* size,
         IRayLibColor* color
     ) override;
+    STDMETHODIMP DrawSphere(
+        IRayLibVector3* centerPos,
+        float radius,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawSphereEx(
+        IRayLibVector3* centerPos,
+        float radius,
+        int rings,
+        int slices,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawSphereWires(
+        IRayLibVector3* centerPos,
+        float radius,
+        int rings,
+        int slices,
+        IRayLibColor* color
+    ) override;
 
     STDMETHODIMP DrawPlane(
         IRayLibVector3* centerPos,
