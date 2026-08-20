@@ -222,6 +222,38 @@ interface IRayLibRay : IDispatch
 [
     object,
     dual,
+    uuid(05F3B287-43B8-4487-A5F1-670511134CFD),
+    pointer_default(unique)
+]
+interface IRayLibBoundingBox : IDispatch
+{
+    [id(1), propget] HRESULT min([out, retval] IRayLibVector3** pval);
+    [id(1), propputref] HRESULT min([in] IRayLibVector3* val);
+    [id(2), propget] HRESULT max([out, retval] IRayLibVector3** pval);
+    [id(2), propputref] HRESULT max([in] IRayLibVector3* val);
+}
+
+[
+    object,
+    dual,
+    uuid(E6DCC358-99F0-4285-B58E-8DC1C4BA1077),
+    pointer_default(unique)
+]
+interface IRayLibRayCollision : IDispatch
+{
+    [id(1), propget] HRESULT hit([out, retval] VARIANT_BOOL* pval);
+    [id(1), propput] HRESULT hit([in] VARIANT_BOOL val);
+    [id(2), propget] HRESULT distance([out, retval] float* pval);
+    [id(2), propput] HRESULT distance([in] float val);
+    [id(3), propget] HRESULT point([out, retval] IRayLibVector3** pval);
+    [id(3), propputref] HRESULT point([in] IRayLibVector3* val);
+    [id(4), propget] HRESULT normal([out, retval] IRayLibVector3** pval);
+    [id(4), propputref] HRESULT normal([in] IRayLibVector3* val);
+}
+
+[
+    object,
+    dual,
     uuid(BA8623BB-26BE-4D50-94BE-067C1B6785AC),
     pointer_default(unique)
 ]
@@ -570,6 +602,8 @@ library RayLib
     interface IRayLibRay;
     interface IRayLibTexture;
     interface IRayLibRenderTexture;
+    interface IRayLibBoundingBox;
+    interface IRayLibRayCollision;
 
     [
         uuid(8C02BF1F-FA49-4796-A634-FB591F749030),
@@ -704,6 +738,24 @@ library RayLib
         coclass RayLibCamera
     {
         [default] interface IRayLibCamera3D;
+    };
+
+    [
+        uuid(DE2DFA2C-F1F7-4FB4-A663-C3BFFC0806ED),
+        helpstring("RayLib.BoundingBox Class")
+    ]
+        coclass RayLibBoundingBox
+    {
+        [default] interface IRayLibBoundingBox;
+    };
+
+    [
+        uuid(66019F59-AA67-4250-8593-32E91A4C2B8B),
+        helpstring("RayLib.RayCollision Class")
+    ]
+        coclass RayLibRayCollision
+    {
+        [default] interface IRayLibRayCollision;
     };
 
     [
