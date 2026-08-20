@@ -374,18 +374,116 @@ public:
 	/* MODULE: RTEXTURES */
 
 	// Image loading functions
+//	static Image LoadImage(const char* fileName);
+//	static Image LoadImageRaw(const char* fileName, int width, int height, int format, int headerSize);
+//	static Image LoadImageAnim(const char* fileName, int* frames);
+//	static Image LoadImageAnimFromMemory(const char* fileType, const unsigned char* fileData, int dataSize, int* frames);
+//	static Image LoadImageFromMemory(const char* fileType, const unsigned char* fileData, int dataSize);
+//	static Image LoadImageFromTexture(Texture2D texture);
+//	static Image LoadImageFromScreen(void);
+//	static bool IsImageValid(Image image);
+//	static void UnloadImage(Image image);
+//	static bool ExportImage(Image image, const char* fileName);
+//	static unsigned char* ExportImageToMemory(Image image, const char* fileType, int* fileSize);
+//	static bool ExportImageAsCode(Image image, const char* fileName);
 
 	// Image generation functions
+//	static Image GenImageColor(int width, int height, Color color);
+//	static Image GenImageGradientLinear(int width, int height, int direction, Color start, Color end);
+//	static Image GenImageGradientRadial(int width, int height, float density, Color inner, Color outer);
+//	static Image GenImageGradientSquare(int width, int height, float density, Color inner, Color outer);
+//	static Image GenImageChecked(int width, int height, int checksX, int checksY, Color col1, Color col2);
+//	static Image GenImageWhiteNoise(int width, int height, float factor);
+//	static Image GenImagePerlinNoise(int width, int height, int offsetX, int offsetY, float scale);
+//	static Image GenImageCellular(int width, int height, int tileSize);
+//	static Image GenImageText(int width, int height, const char* text);
 
 	// Image manipulation functions
+//	static Image ImageCopy(Image image);
+//	static Image ImageFromImage(Image image, Rectangle rec);
+//	static Image ImageFromChannel(Image image, int selectedChannel);
+//	static Image ImageText(const char* text, int fontSize, Color color);
+//	static Image ImageTextEx(Font font, const char* text, float fontSize, float spacing, Color tint);
+//	static void ImageFormat(Image* image, int newFormat);
+//	static void ImageToPOT(Image* image, Color fill);
+//	static void ImageCrop(Image* image, Rectangle crop);
+//	static void ImageAlphaCrop(Image* image, float threshold);
+//	static void ImageAlphaClear(Image* image, Color color, float threshold);
+//	static void ImageAlphaMask(Image* image, Image alphaMask);
+//	static void ImageAlphaPremultiply(Image* image);
+//	static void ImageBlurGaussian(Image* image, int blurSize);
+//	static void ImageKernelConvolution(Image* image, const float* kernel, int kernelSize);
+//	static void ImageResize(Image* image, int newWidth, int newHeight);
+//	static void ImageResizeNN(Image* image, int newWidth, int newHeight);
+//	static void ImageResizeCanvas(Image* image, int newWidth, int newHeight, int offsetX, int offsetY, Color fill);
+//	static void ImageMipmaps(Image* image);
+//	static void ImageDither(Image* image, int rBpp, int gBpp, int bBpp, int aBpp);
+//	static void ImageFlipVertical(Image* image);
+//	static void ImageFlipHorizontal(Image* image);
+//	static void ImageRotate(Image* image, int degrees);
+//	static void ImageRotateCW(Image* image);
+//	static void ImageRotateCCW(Image* image);
+//	static void ImageColorTint(Image* image, Color color);
+//	static void ImageColorInvert(Image* image);
+//	static void ImageColorGrayscale(Image* image);
+//	static void ImageColorContrast(Image* image, float contrast);
+//	static void ImageColorBrightness(Image* image, int brightness);
+//	static void ImageColorReplace(Image* image, Color color, Color replace);
+//	static Color* LoadImageColors(Image image);
+//	static Color* LoadImagePalette(Image image, int maxPaletteSize, int* colorCount);
+//	static void UnloadImageColors(Color* colors);
+//	static void UnloadImagePalette(Color* colors);
+//	static Rectangle GetImageAlphaBorder(Image image, float threshold);
+//	static Color GetImageColor(Image image, int x, int y);
 
 	// Image drawing functions
+//	static void ImageClearBackground(Image* dst, Color color);
+//	static void ImageDrawPixel(Image* dst, int posX, int posY, Color color);
+//	static void ImageDrawPixelV(Image* dst, Vector2 position, Color color);
+//	static void ImageDrawLine(Image* dst, int startPosX, int startPosY, int endPosX, int endPosY, Color color);
+//	static void ImageDrawLineV(Image* dst, Vector2 start, Vector2 end, Color color);
+//	static void ImageDrawLineEx(Image* dst, Vector2 start, Vector2 end, int thick, Color color);
+//	static void ImageDrawCircle(Image* dst, int centerX, int centerY, int radius, Color color);
+//	static void ImageDrawCircleV(Image* dst, Vector2 center, int radius, Color color);
+//	static void ImageDrawCircleLines(Image* dst, int centerX, int centerY, int radius, Color color);
+//	static void ImageDrawCircleLinesV(Image* dst, Vector2 center, int radius, Color color);
+//	static void ImageDrawRectangle(Image* dst, int posX, int posY, int width, int height, Color color);
+//	static void ImageDrawRectangleV(Image* dst, Vector2 position, Vector2 size, Color color);
+//	static void ImageDrawRectangleRec(Image* dst, Rectangle rec, Color color);
+//	static void ImageDrawRectangleLines(Image* dst, Rectangle rec, int thick, Color color);
+//	static void ImageDrawTriangle(Image* dst, Vector2 v1, Vector2 v2, Vector2 v3, Color color);
+//	static void ImageDrawTriangleEx(Image* dst, Vector2 v1, Vector2 v2, Vector2 v3, Color c1, Color c2, Color c3);
+//	static void ImageDrawTriangleLines(Image* dst, Vector2 v1, Vector2 v2, Vector2 v3, Color color);
+//	static void ImageDrawTriangleFan(Image* dst, const Vector2* points, int pointCount, Color color);
+//	static void ImageDrawTriangleStrip(Image* dst, const Vector2* points, int pointCount, Color color);
+//	static void ImageDraw(Image* dst, Image src, Rectangle srcRec, Rectangle dstRec, Color tint);
+//	static void ImageDrawText(Image* dst, const char* text, int posX, int posY, int fontSize, Color color);
+//	static void ImageDrawTextEx(Image* dst, Font font, const char* text, Vector2 position, float fontSize, float spacing, Color tint);
 
 	// Texture loading functions
+//	static Texture2D LoadTexture(const char* fileName);
+//	static Texture2D LoadTextureFromImage(Image image);
+//	static TextureCubemap LoadTextureCubemap(Image image, int layout);
+//	static RenderTexture2D LoadRenderTexture(int width, int height);
+//	static bool IsTextureValid(Texture2D texture);
+//	static void UnloadTexture(Texture2D texture);
+//	static bool IsRenderTextureValid(RenderTexture2D target);
+//	static void UnloadRenderTexture(RenderTexture2D target);
+//	static void UpdateTexture(Texture2D texture, const void* pixels);
+//	static void UpdateTextureRec(Texture2D texture, Rectangle rec, const void* pixels);
 
 	// Texture configuration functions
+//	static void GenTextureMipmaps(Texture2D* texture);
+//	static void SetTextureFilter(Texture2D texture, int filter);
+//	static void SetTextureWrap(Texture2D texture, int wrap);
 
 	// Texture drawing functions
+//	static void DrawTexture(Texture2D texture, int posX, int posY, Color tint);
+//	static void DrawTextureV(Texture2D texture, Vector2 position, Color tint);
+//	static void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
+//	static void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint);
+//	static void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint);
+//	static void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, Rectangle dest, Vector2 origin, float rotation, Color tint);
 
 	// Color/pixel related functions
 	static bool ColorIsEqual(WrRayLibColor col1, WrRayLibColor col2);
@@ -581,12 +679,73 @@ public:
 	static float GetMasterVolume(void);
 
 	// Wave/Sound loading/unloading functions
+//	static Wave LoadWave(const char* fileName);
+//	static Wave LoadWaveFromMemory(const char* fileType, const unsigned char* fileData, int dataSize);
+//	static bool IsWaveValid(Wave wave);
+//	static Sound LoadSound(const char* fileName);
+//	static Sound LoadSoundFromWave(Wave wave);
+//	static Sound LoadSoundAlias(Sound source);
+//	static bool IsSoundValid(Sound sound);
+//	static void UpdateSound(Sound sound, const void* data, int sampleCount);
+//	static void UnloadWave(Wave wave);
+//	static void UnloadSound(Sound sound);
+//	static void UnloadSoundAlias(Sound alias);
+//	static bool ExportWave(Wave wave, const char* fileName);
+//	static bool ExportWaveAsCode(Wave wave, const char* fileName);
 
 	// Wave/Sound management functions
+//	static void PlaySound(Sound sound);
+//	static void StopSound(Sound sound);
+//	static void PauseSound(Sound sound);
+//	static void ResumeSound(Sound sound);
+//	static bool IsSoundPlaying(Sound sound);
+//	static void SetSoundVolume(Sound sound, float volume);
+//	static void SetSoundPitch(Sound sound, float pitch);
+//	static void SetSoundPan(Sound sound, float pan);
+//	static Wave WaveCopy(Wave wave);
+//	static void WaveCrop(Wave* wave, int initFrame, int finalFrame);
+//	static void WaveFormat(Wave* wave, int sampleRate, int sampleSize, int channels);
+//	static float* LoadWaveSamples(Wave wave);
+//	static void UnloadWaveSamples(float* samples);
 
 	// Music management functions
+//	static Music LoadMusicStream(const char* fileName);
+//	static Music LoadMusicStreamFromMemory(const char* fileType, const unsigned char* data, int dataSize);
+//	static bool IsMusicValid(Music music);
+//	static void UnloadMusicStream(Music music);
+//	static void PlayMusicStream(Music music);
+//	static bool IsMusicStreamPlaying(Music music);
+//	static void UpdateMusicStream(Music music);
+//	static void StopMusicStream(Music music);
+//	static void PauseMusicStream(Music music);
+//	static void ResumeMusicStream(Music music);
+//	static void SeekMusicStream(Music music, float position);
+//	static void SetMusicVolume(Music music, float volume);
+//	static void SetMusicPitch(Music music, float pitch);
+//	static void SetMusicPan(Music music, float pan);
+//	static float GetMusicTimeLength(Music music);
+//	static float GetMusicTimePlayed(Music music);
 
 	// AudioStream management functions
+//	static AudioStream LoadAudioStream(unsigned int sampleRate, unsigned int sampleSize, unsigned int channels);
+//	static bool IsAudioStreamValid(AudioStream stream);
+//	static void UnloadAudioStream(AudioStream stream);
+//	static void UpdateAudioStream(AudioStream stream, const void* data, int frameCount);
+//	static bool IsAudioStreamProcessed(AudioStream stream);
+//	static void PlayAudioStream(AudioStream stream);
+//	static void PauseAudioStream(AudioStream stream);
+//	static void ResumeAudioStream(AudioStream stream);
+//	static bool IsAudioStreamPlaying(AudioStream stream);
+//	static void StopAudioStream(AudioStream stream);
+//	static void SetAudioStreamVolume(AudioStream stream, float volume);
+//	static void SetAudioStreamPitch(AudioStream stream, float pitch);
+//	static void SetAudioStreamPan(AudioStream stream, float pan);
+//	static void SetAudioStreamBufferSizeDefault(int size);
+//	static void SetAudioStreamCallback(AudioStream stream, AudioCallback callback);
+//	static void AttachAudioStreamProcessor(AudioStream stream, AudioCallback processor);
+//	static void DetachAudioStreamProcessor(AudioStream stream, AudioCallback processor);
+//	static void AttachAudioMixedProcessor(AudioCallback processor);
+//	static void DetachAudioMixedProcessor(AudioCallback processor);
 };
 
 #endif // _WRRAYLIB_H
