@@ -562,11 +562,15 @@ STDMETHODIMP CoRayLib::InitWindow(
     BSTR title
 )
 {
+    char* lpsz = nullptr;
+
     WrRayLib::InitWindow(
         (int)width,
         (int)height,
-        _com_util::ConvertBSTRToString(title)
+        lpsz = _com_util::ConvertBSTRToString(title)
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -769,9 +773,13 @@ STDMETHODIMP CoRayLib::SetWindowTitle(
     BSTR title
 )
 {
+    char* lpsz = nullptr;
+
     WrRayLib::SetWindowTitle(
-        _com_util::ConvertBSTRToString(title)
+        lpsz = _com_util::ConvertBSTRToString(title)
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -1089,9 +1097,13 @@ STDMETHODIMP CoRayLib::SetClipboardText(
     BSTR text
 )
 {
+    char* lpsz = nullptr;
+
     WrRayLib::SetClipboardText(
-        _com_util::ConvertBSTRToString(text)
+        lpsz = _com_util::ConvertBSTRToString(text)
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -1101,6 +1113,8 @@ STDMETHODIMP CoRayLib::GetClipboardText(
 {
     if (!pRetVal)
         return E_POINTER;
+
+    char* lpsz = nullptr;
 
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::GetClipboardText()
@@ -1782,9 +1796,13 @@ STDMETHODIMP CoRayLib::TakeScreenshot(
     BSTR fileName
 )
 {
+    char* lpsz = nullptr;
+
     WrRayLib::TakeScreenshot(
-        _com_util::ConvertBSTRToString(fileName)
+        lpsz = _com_util::ConvertBSTRToString(fileName)
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -1802,9 +1820,13 @@ STDMETHODIMP CoRayLib::OpenURL(
     BSTR url
 )
 {
+    char* lpsz = nullptr;
+
     WrRayLib::OpenURL(
-        _com_util::ConvertBSTRToString(url)
+        lpsz = _com_util::ConvertBSTRToString(url)
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -2088,9 +2110,13 @@ STDMETHODIMP CoRayLib::SetGamepadMappings(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = WrRayLib::SetGamepadMappings(
-        _com_util::ConvertBSTRToString(mappings)
+        lpsz = _com_util::ConvertBSTRToString(mappings)
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -3956,13 +3982,17 @@ STDMETHODIMP CoRayLib::DrawText(
     hr = co2wr(color, &clr);
     if (FAILED(hr)) return hr;
 
+    char* lpsz = nullptr;
+
     WrRayLib::DrawText(
-        _com_util::ConvertBSTRToString(text),
+        lpsz = _com_util::ConvertBSTRToString(text),
         (int)posX,
         (int)posY,
         (int)fontSize,
         clr
     );
+
+    delete[] lpsz;
 
     return hr;
 }
@@ -3991,10 +4021,14 @@ STDMETHODIMP CoRayLib::MeasureText(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = WrRayLib::MeasureText(
-        _com_util::ConvertBSTRToString(text),
+        lpsz = _com_util::ConvertBSTRToString(text),
         (int)fontSize
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4015,14 +4049,20 @@ STDMETHODIMP CoRayLib::TextIsEqual(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+
     const bool result = WrRayLib::TextIsEqual(
-        _com_util::ConvertBSTRToString(
+        lpsz1 = _com_util::ConvertBSTRToString(
             text1
         ),
-        _com_util::ConvertBSTRToString(
+        lpsz2 = _com_util::ConvertBSTRToString(
             text2
         )
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
 
     if (result)
         *pRetVal = VARIANT_TRUE;
@@ -4041,11 +4081,15 @@ STDMETHODIMP CoRayLib::TextLength(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = (long)WrRayLib::TextLength(
-        _com_util::ConvertBSTRToString(
+        lpsz = _com_util::ConvertBSTRToString(
             text
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4080,8 +4124,11 @@ STDMETHODIMP CoRayLib::TextFormat(
         VariantInit(&v);
         if ((pVars[i].vt & VT_TYPEMASK) == VT_BSTR) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_BSTR);
-            if (SUCCEEDED(hr))
-                c_args.append(_com_util::ConvertBSTRToString(v.bstrVal));
+            if (SUCCEEDED(hr)) {
+                char* lpsz = nullptr;
+                c_args.append(lpsz = _com_util::ConvertBSTRToString(v.bstrVal));
+                delete[] lpsz;
+            }
         }
         else if ((pVars[i].vt & VT_TYPEMASK) == VT_I2) {
             hr = VariantChangeType(&v, &pVars[i], 0, VT_I2);
@@ -4106,8 +4153,11 @@ STDMETHODIMP CoRayLib::TextFormat(
         else if ((pVars[i].vt & VT_TYPEMASK) == VT_VARIANT) {
             if ((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_BSTR) {
                 hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_BSTR);
-                if (SUCCEEDED(hr))
-                    c_args.append(_com_util::ConvertBSTRToString(v.bstrVal));
+                if (SUCCEEDED(hr)) {
+                    char* lpsz = nullptr;
+                    c_args.append(lpsz = _com_util::ConvertBSTRToString(v.bstrVal));
+                    delete[] lpsz;
+                }
             }
             else if ((pVars[i].pvarVal->vt & VT_TYPEMASK) == VT_I2) {
                 hr = VariantChangeType(&v, pVars[i].pvarVal, 0, VT_I2);
@@ -4136,13 +4186,16 @@ STDMETHODIMP CoRayLib::TextFormat(
     SafeArrayUnaccessData(args);
 
     char c_buffer[1000];
+    char* lpsz = nullptr;
 
     vsprintf_s(
         c_buffer,
         1000,
-        _com_util::ConvertBSTRToString(text),
+        lpsz = _com_util::ConvertBSTRToString(text),
         c_args.get_args()
     );
+
+    delete[] lpsz;
 
     *pRetVal = _com_util::ConvertStringToBSTR(c_buffer);
 
@@ -4160,13 +4213,17 @@ STDMETHODIMP CoRayLib::TextSubtext(
     if (!pRetVal)
         return E_POINTER;
     
+    char* lpsz = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextSubtext(
-            _com_util::ConvertBSTRToString(text),
+            lpsz = _com_util::ConvertBSTRToString(text),
             (int)position,
             (int)length
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4180,11 +4237,15 @@ STDMETHODIMP CoRayLib::TextRemoveSpaces(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextRemoveSpaces(
-            _com_util::ConvertBSTRToString(text)
+            lpsz = _com_util::ConvertBSTRToString(text)
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4204,13 +4265,21 @@ STDMETHODIMP CoRayLib::GetTextBetween(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+    char* lpsz3 = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::GetTextBetween(
-            _com_util::ConvertBSTRToString(text),
-            _com_util::ConvertBSTRToString(begin),
-            _com_util::ConvertBSTRToString(end)
+            lpsz1 = _com_util::ConvertBSTRToString(text),
+            lpsz2 = _com_util::ConvertBSTRToString(begin),
+            lpsz3 = _com_util::ConvertBSTRToString(end)
         )
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+    delete[] lpsz3;
 
     return S_OK;
 }
@@ -4230,13 +4299,21 @@ STDMETHODIMP CoRayLib::TextReplace(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+    char* lpsz3 = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextReplace(
-            _com_util::ConvertBSTRToString(text),
-            _com_util::ConvertBSTRToString(search),
-            _com_util::ConvertBSTRToString(replacement)
+            lpsz1 = _com_util::ConvertBSTRToString(text),
+            lpsz2 = _com_util::ConvertBSTRToString(search),
+            lpsz3 = _com_util::ConvertBSTRToString(replacement)
         )
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+    delete[] lpsz3;
 
     return S_OK;
 }
@@ -4256,19 +4333,26 @@ STDMETHODIMP CoRayLib::TextReplaceAlloc(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+    char* lpsz3 = nullptr;
     char* ptr = nullptr;
 
     *pRetVal = _com_util::ConvertStringToBSTR(
         ptr = WrRayLib::TextReplaceAlloc(
-            _com_util::ConvertBSTRToString(text),
-            _com_util::ConvertBSTRToString(search),
-            _com_util::ConvertBSTRToString(replacement)
+            lpsz1 = _com_util::ConvertBSTRToString(text),
+            lpsz2 = _com_util::ConvertBSTRToString(search),
+            lpsz3 = _com_util::ConvertBSTRToString(replacement)
         )
     );
 
     WrRayLib::MemFree(
         (void*)ptr
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+    delete[] lpsz3;
 
     return S_OK;
 }
@@ -4291,14 +4375,24 @@ STDMETHODIMP CoRayLib::TextReplaceBetween(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+    char* lpsz3 = nullptr;
+    char* lpsz4 = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextReplaceBetween(
-            _com_util::ConvertBSTRToString(text),
-            _com_util::ConvertBSTRToString(begin),
-            _com_util::ConvertBSTRToString(end),
-            _com_util::ConvertBSTRToString(replacement)
+            lpsz1 = _com_util::ConvertBSTRToString(text),
+            lpsz2 = _com_util::ConvertBSTRToString(begin),
+            lpsz3 = _com_util::ConvertBSTRToString(end),
+            lpsz4 = _com_util::ConvertBSTRToString(replacement)
         )
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+    delete[] lpsz3;
+    delete[] lpsz4;
 
     return S_OK;
 }
@@ -4321,20 +4415,29 @@ STDMETHODIMP CoRayLib::TextReplaceBetweenAlloc(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+    char* lpsz3 = nullptr;
+    char* lpsz4 = nullptr;
     char* ptr = nullptr;
 
     *pRetVal = _com_util::ConvertStringToBSTR(
         ptr = WrRayLib::TextReplaceBetweenAlloc(
-            _com_util::ConvertBSTRToString(text),
-            _com_util::ConvertBSTRToString(begin),
-            _com_util::ConvertBSTRToString(end),
-            _com_util::ConvertBSTRToString(replacement)
+            lpsz1 = _com_util::ConvertBSTRToString(text),
+            lpsz2 = _com_util::ConvertBSTRToString(begin),
+            lpsz3 = _com_util::ConvertBSTRToString(end),
+            lpsz4 = _com_util::ConvertBSTRToString(replacement)
         )
     );
 
     WrRayLib::MemFree(
         (void*)ptr
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+    delete[] lpsz3;
+    delete[] lpsz4;
 
     return S_OK;
 }
@@ -4352,14 +4455,20 @@ STDMETHODIMP CoRayLib::TextFindIndex(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+
     *pRetVal = (long)WrRayLib::TextFindIndex(
-        _com_util::ConvertBSTRToString(
+        lpsz1 = _com_util::ConvertBSTRToString(
             text
         ),
-        _com_util::ConvertBSTRToString(
+        lpsz2 = _com_util::ConvertBSTRToString(
             search
         )
     );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
 
     return S_OK;
 }
@@ -4373,13 +4482,17 @@ STDMETHODIMP CoRayLib::TextToUpper(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextToUpper(
-            _com_util::ConvertBSTRToString(
+            lpsz = _com_util::ConvertBSTRToString(
                 text
             )
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4392,14 +4505,18 @@ STDMETHODIMP CoRayLib::TextToLower(
         return E_POINTER;
     if (!pRetVal)
         return E_POINTER;
+    
+    char* lpsz = nullptr;
 
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextToLower(
-            _com_util::ConvertBSTRToString(
+            lpsz = _com_util::ConvertBSTRToString(
                 text
             )
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4413,13 +4530,17 @@ STDMETHODIMP CoRayLib::TextToPascal(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextToPascal(
-            _com_util::ConvertBSTRToString(
+            lpsz = _com_util::ConvertBSTRToString(
                 text
             )
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4433,13 +4554,17 @@ STDMETHODIMP CoRayLib::TextToSnake(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextToSnake(
-            _com_util::ConvertBSTRToString(
+            lpsz = _com_util::ConvertBSTRToString(
                 text
             )
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4453,13 +4578,17 @@ STDMETHODIMP CoRayLib::TextToCamel(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = _com_util::ConvertStringToBSTR(
         WrRayLib::TextToCamel(
-            _com_util::ConvertBSTRToString(
+            lpsz = _com_util::ConvertBSTRToString(
                 text
             )
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4473,11 +4602,15 @@ STDMETHODIMP CoRayLib::TextToInteger(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = (long)WrRayLib::TextToInteger(
-        _com_util::ConvertBSTRToString(
+        lpsz = _com_util::ConvertBSTRToString(
             text
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
@@ -4491,11 +4624,15 @@ STDMETHODIMP CoRayLib::TextToFloat(
     if (!pRetVal)
         return E_POINTER;
 
+    char* lpsz = nullptr;
+
     *pRetVal = WrRayLib::TextToFloat(
-        _com_util::ConvertBSTRToString(
+        lpsz = _com_util::ConvertBSTRToString(
             text
         )
     );
+
+    delete[] lpsz;
 
     return S_OK;
 }
