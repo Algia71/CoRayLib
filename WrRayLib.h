@@ -224,10 +224,61 @@ public:
 //	static bool SaveFileText(const char* fileName, const char* text);
 
 	// File access custom callbacks
+//	static void SetLoadFileDataCallback(LoadFileDataCallback callback);
+//	static void SetSaveFileDataCallback(SaveFileDataCallback callback);
+//	static void SetLoadFileTextCallback(LoadFileTextCallback callback);
+//	static void SetSaveFileTextCallback(SaveFileTextCallback callback);
+
+//	static int FileRename(const char* fileName, const char* fileRename);
+//	static int FileRemove(const char* fileName);
+//	static int FileCopy(const char* srcPath, const char* dstPath);
+//	static int FileMove(const char* srcPath, const char* dstPath);
+//	static int FileTextReplace(const char* fileName, const char* search, const char* replacement);
+//	static int FileTextFindIndex(const char* fileName, const char* search);
+//	static bool FileExists(const char* fileName);
+//	static bool DirectoryExists(const char* dirPath);
+//	static bool IsFileExtension(const char* fileName, const char* ext);
+//	static int GetFileLength(const char* fileName);
+//	static long GetFileModTime(const char* fileName);
+//	static const char* GetFileExtension(const char* fileName);
+//	static const char* GetFileName(const char* filePath);
+//	static const char* GetFileNameWithoutExt(const char* filePath);
+//	static const char* GetDirectoryPath(const char* filePath);
+//	static const char* GetPrevDirectoryPath(const char* dirPath);
+//	static const char* GetWorkingDirectory(void);
+//	static const char* GetApplicationDirectory(void);
+//	static int MakeDirectory(const char* dirPath);
+//	static bool ChangeDirectory(const char* dirPath);
+//	static bool IsPathFile(const char* path);
+//	static bool IsFileNameValid(const char* fileName);
+//	static FilePathList LoadDirectoryFiles(const char* dirPath);
+//	static FilePathList LoadDirectoryFilesEx(const char* basePath, const char* filter, bool scanSubdirs);
+//	static void UnloadDirectoryFiles(FilePathList files);
+//	static bool IsFileDropped(void);
+//	static FilePathList LoadDroppedFiles(void);
+//	static void UnloadDroppedFiles(FilePathList files);
+//	static unsigned int GetDirectoryFileCount(const char* dirPath);
+//	static unsigned int GetDirectoryFileCountEx(const char* basePath, const char* filter, bool scanSubdirs);
 
 	// Compression/Encoding functionality
+//	static unsigned char* CompressData(const unsigned char* data, int dataSize, int* compDataSize);
+//	static unsigned char* DecompressData(const unsigned char* compData, int compDataSize, int* dataSize);
+//	static char* EncodeDataBase64(const unsigned char* data, int dataSize, int* outputSize);
+//	static unsigned char* DecodeDataBase64(const char* text, int* outputSize);
+//	static unsigned int ComputeCRC32(unsigned char* data, int dataSize);
+//	static unsigned int* ComputeMD5(unsigned char* data, int dataSize);
+//	static unsigned int* ComputeSHA1(unsigned char* data, int dataSize);
+//	static unsigned int* ComputeSHA256(unsigned char* data, int dataSize);
 
 	// Automation events functionality
+//	static AutomationEventList LoadAutomationEventList(const char* fileName);
+//	static void UnloadAutomationEventList(AutomationEventList list);
+//	static bool ExportAutomationEventList(AutomationEventList list, const char* fileName);
+//	static void SetAutomationEventList(AutomationEventList* list);
+//	static void SetAutomationEventBaseFrame(int frame);
+//	static void StartAutomationEventRecording(void);
+//	static void StopAutomationEventRecording(void);
+//	static void PlayAutomationEvent(AutomationEvent event);
 
 	// Input-related functions: keyboard
 	static bool IsKeyPressed(int key);
