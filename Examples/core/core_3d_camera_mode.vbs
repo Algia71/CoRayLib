@@ -11,12 +11,14 @@ Sub Main
 	Set MAROON = raylib.CreateColor( 190, 33, 55, 255 )
 	Set DARKGRAY = raylib.CreateColor( 80, 80, 80, 255 )
 
-	Set camera = CreateObject("Raylib.Camera3D")
-	Set camera.position = raylib.CreateVector3( 0, 10, 10 )
-	Set camera.target = raylib.CreateVector3( 0, 0, 0 )
-	Set camera.up = raylib.CreateVector3( 0, 1, 0 )
-	camera.fovy = 45
-	camera.projection = CAMERA_PERSPECTIVE
+	Set camera = raylib.CreateCamera3D
+	With camera
+		Set .position = raylib.CreateVector3( 0, 10, 10 )
+		Set .target = raylib.CreateVector3( 0, 0, 0 )
+		Set .up = raylib.CreateVector3( 0, 1, 0 )
+		.fovy = 45
+		.projection = CAMERA_PERSPECTIVE
+	End With
 
 	Set cubePosition = raylib.CreateVector3( 0, 0, 0 )
 

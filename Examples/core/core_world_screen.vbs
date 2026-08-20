@@ -15,7 +15,7 @@ Sub Main
 
 	raylib.InitWindow screenWidth, screenHeight, "CoRayLib [core] example - world screen"
 
-	Set camera = CreateObject("Raylib.Camera3D")
+	Set camera = raylib.CreateCamera3D
 	With camera
 		Set .position = raylib.CreateVector3( 10, 10, 10 )
 		Set .target = raylib.CreateVector3( 0, 0, 0 )
