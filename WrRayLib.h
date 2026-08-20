@@ -390,11 +390,37 @@ public:
 	// Color/pixel related functions
 	static bool ColorIsEqual(WrRayLibColor col1, WrRayLibColor col2);
 	static WrRayLibColor Fade(WrRayLibColor color, float alpha);
+//	static int ColorToInt(Color color);
+//	static Vector4 ColorNormalize(Color color);
+//	static Color ColorFromNormalized(Vector4 normalized);
+//	static Vector3 ColorToHSV(Color color);
+//	static Color ColorFromHSV(float hue, float saturation, float value);
+//	static Color ColorTint(Color color, Color tint);
+//	static Color ColorBrightness(Color color, float factor);
+//	static Color ColorContrast(Color color, float contrast);
+//	static Color ColorAlpha(Color color, float alpha);
+//	static Color ColorAlphaBlend(Color dst, Color src, Color tint);
+//	static Color ColorLerp(Color color1, Color color2, float factor);
+//	static Color GetColor(unsigned int hexValue);
+//	static Color GetPixelColor(void* srcPtr, int format);
+//	static void SetPixelColor(void* dstPtr, Color color, int format);
+//	static int GetPixelDataSize(int width, int height, int format);
 
 
 	/* MODULE: RTEXT */
 
 	// Font loading/unloading functions
+//	static Font GetFontDefault(void);
+//	static Font LoadFont(const char* fileName);
+//	static Font LoadFontEx(const char* fileName, int fontSize, const int* codepoints, int codepointCount);
+//	static Font LoadFontFromImage(Image image, Color key, int firstChar);
+//	static Font LoadFontFromMemory(const char* fileType, const unsigned char* fileData, int dataSize, int fontSize, const int* codepoints, int codepointCount);
+//	static bool IsFontValid(Font font);
+//	static GlyphInfo* LoadFontData(const unsigned char* fileData, int dataSize, int fontSize, const int* codepoints, int codepointCount, int type, int* glyphCount);
+//	static Image GenImageFontAtlas(const GlyphInfo* glyphs, Rectangle** glyphRecs, int glyphCount, int fontSize, int padding, int packMethod);
+//	static void UnloadFontData(GlyphInfo* glyphs, int glyphCount);
+//	static void UnloadFont(Font font);
+//	static bool ExportFontAsCode(Font font, const char* fileName);
 
 	// Text drawing functions
 	static void DrawFPS(int posX, int posY);
@@ -486,16 +512,63 @@ public:
 //	static BoundingBox GetModelBoundingBox(Model model);
 
 	// Model drawing functions
+//	static void DrawModel(Model model, Vector3 position, float scale, Color tint);
+//	static void DrawModelEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+//	static void DrawModelWires(Model model, Vector3 position, float scale, Color tint);
+//	static void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+//	static void DrawBoundingBox(BoundingBox box, Color color);
+//	static void DrawBillboard(Camera camera, Texture2D texture, Vector3 position, float scale, Color tint);
+//	static void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector2 size, Color tint);
+//	static void DrawBillboardPro(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint);
 
 	// Mesh management functions
+//	static void UploadMesh(Mesh* mesh, bool dynamic);
+//	static void UpdateMeshBuffer(Mesh mesh, int index, const void* data, int dataSize, int offset);
+//	static void UnloadMesh(Mesh mesh);
+//	static void DrawMesh(Mesh mesh, Material material, Matrix transform);
+//	static void DrawMeshInstanced(Mesh mesh, Material material, const Matrix* transforms, int instances);
+//	static BoundingBox GetMeshBoundingBox(Mesh mesh);
+//	static void GenMeshTangents(Mesh* mesh);
+//	static bool ExportMesh(Mesh mesh, const char* fileName);
+//	static bool ExportMeshAsCode(Mesh mesh, const char* fileName);
 
 	// Mesh generation functions
+//	static Mesh GenMeshPoly(int sides, float radius);
+//	static Mesh GenMeshPlane(float width, float length, int resX, int resZ);
+//	static Mesh GenMeshCube(float width, float height, float length);
+//	static Mesh GenMeshSphere(float radius, int rings, int slices);
+//	static Mesh GenMeshHemiSphere(float radius, int rings, int slices);
+//	static Mesh GenMeshCylinder(float radius, float height, int slices);
+//	static Mesh GenMeshCone(float radius, float height, int slices);
+//	static Mesh GenMeshTorus(float radius, float size, int radSeg, int sides);
+//	static Mesh GenMeshKnot(float radius, float size, int radSeg, int sides);
+//	static Mesh GenMeshHeightmap(Image heightmap, Vector3 size);
+//	static Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize);
 
 	// Material loading/unloading functions
+//	static Material* LoadMaterials(const char* fileName, int* materialCount);
+//	static Material LoadMaterialDefault(void);
+//	static bool IsMaterialValid(Material material);
+//	static void UnloadMaterial(Material material);
+//	static void SetMaterialTexture(Material* material, int mapType, Texture2D texture);
+//	static void SetModelMeshMaterial(Model* model, int meshId, int materialId);
 
 	// Model animations loading/unloading functions
+//	static ModelAnimation* LoadModelAnimations(const char* fileName, int* animCount);
+//	static void UpdateModelAnimation(Model model, ModelAnimation anim, float frame);
+//	static void UpdateModelAnimationEx(Model model, ModelAnimation animA, float frameA, ModelAnimation animB, float frameB, float blend);
+//	static void UnloadModelAnimations(ModelAnimation* animations, int animCount);
+//	static bool IsModelAnimationValid(Model model, ModelAnimation anim);
 
 	// Collision detection functions
+//	static bool CheckCollisionSpheres(Vector3 center1, float radius1, Vector3 center2, float radius2);
+//	static bool CheckCollisionBoxes(BoundingBox box1, BoundingBox box2);
+//	static bool CheckCollisionBoxSphere(BoundingBox box, Vector3 center, float radius);
+//	static RayCollision GetRayCollisionSphere(Ray ray, Vector3 center, float radius);
+//	static RayCollision GetRayCollisionBox(Ray ray, BoundingBox box);
+//	static RayCollision GetRayCollisionMesh(Ray ray, Mesh mesh, Matrix transform);
+//	static RayCollision GetRayCollisionTriangle(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3);
+//	static RayCollision GetRayCollisionQuad(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4);
 
 
 	/* MODULE: RAUDIO */
