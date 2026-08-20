@@ -62,7 +62,7 @@ It should be simple: open the solution in Visual Studio, choose **Debug** or **R
 Copy `CoRayLib.dll` to a local directory (e.g. `C:\coraylib`), open a terminal with administrative privileges (e.g. **Windows PowerShell**) and then run the command `regsvr32 c:\coraylib\CoRayLib.dll` .
 
 ### ...test:
-Double click on one of the .vbs or .js scripts provided in the `Scripts` folder.  
+Double click on one of the .vbs or .js scripts provided in the `Examples` folder.  
 
 ### ...uninstall:
 Open a terminal with administrative privileges and run the command `regsvr32 /u c:\coraylib\CoRayLib.dll` . Then simply delete `CoRayLib.dll`. 
