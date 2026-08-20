@@ -1911,6 +1911,59 @@ float WrRayLib::TextToFloat(
 
 // Basic geometric 3D shapes drawing functions
 
+void WrRayLib::DrawLine3D(
+	WrRayLibVector3 startPos,
+	WrRayLibVector3 endPos,
+	WrRayLibColor color
+)
+{
+	::DrawLine3D(
+		wr2rl_vector3(startPos),
+		wr2rl_vector3(endPos),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawPoint3D(
+	WrRayLibVector3 position,
+	WrRayLibColor color
+)
+{
+	::DrawPoint3D(
+		wr2rl_vector3(position),
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCircle3D(
+	WrRayLibVector3 center,
+	float radius,
+	WrRayLibVector3 rotationAxis,
+	float rotationAngle,
+	WrRayLibColor color
+)
+{
+	::DrawCircle3D(
+		wr2rl_vector3(center),
+		radius,
+		wr2rl_vector3(rotationAxis),
+		rotationAngle,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawTriangle3D(
+	WrRayLibVector3 v1,
+	WrRayLibVector3 v2,
+	WrRayLibVector3 v3,
+	WrRayLibColor color
+)
+{
+	::DrawTriangle3D(
+		wr2rl_vector3(v1),
+		wr2rl_vector3(v2),
+		wr2rl_vector3(v3),
+		wr2rl_color(color)
+	);
+}
+
 void WrRayLib::DrawCube(
 	WrRayLibVector3 position,
 	float width,
@@ -1968,6 +2021,24 @@ void WrRayLib::DrawCubeWiresV(
 	);
 }
 
+void WrRayLib::DrawPlane(
+	WrRayLibVector3 centerPos,
+	WrRayLibVector2 size,
+	WrRayLibColor color
+)
+{
+	::DrawPlane(
+		wr2rl_vector3(
+			centerPos
+		),
+		wr2rl_vector2(
+			size
+		),
+		wr2rl_color(
+			color
+		)
+	);
+}
 void WrRayLib::DrawRay(
 	WrRayLibRay ray,
 	WrRayLibColor color

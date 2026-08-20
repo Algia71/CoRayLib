@@ -4223,6 +4223,150 @@ STDMETHODIMP CoRayLib::TextToFloat(
 // Module: RMODELS
 
 // Basic geometric 3D shapes drawing functions
+STDMETHODIMP CoRayLib::DrawLine3D(
+    IRayLibVector3* startPos,
+    IRayLibVector3* endPos,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_startPos = { 0 };
+    WrRayLibVector3 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawLine3D(
+        wr_startPos,
+        wr_endPos,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawPoint3D(
+    IRayLibVector3* position,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_position = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPoint3D(
+        wr_position,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCircle3D(
+    IRayLibVector3* center,
+    float radius,
+    IRayLibVector3* rotationAxis,
+    float rotationAngle,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!rotationAxis)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_center = { 0 };
+    WrRayLibVector3 wr_rotationAxis = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(rotationAxis, &wr_rotationAxis);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircle3D(
+        wr_center,
+        radius,
+        wr_rotationAxis,
+        rotationAngle,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawTriangle3D(
+    IRayLibVector3* v1,
+    IRayLibVector3* v2,
+    IRayLibVector3* v3,
+    IRayLibColor* color
+)
+{
+    if (!v1)
+        return E_POINTER;
+    if (!v2)
+        return E_POINTER;
+    if (!v3)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_v1 = { 0 };
+    WrRayLibVector3 wr_v2 = { 0 };
+    WrRayLibVector3 wr_v3 = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(v1, &wr_v1);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(v2, &wr_v2);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(v3, &wr_v3);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTriangle3D(
+        wr_v1,
+        wr_v2,
+        wr_v3,
+        wr_color
+    );
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::DrawCube(
     IRayLibVector3* position,
     float width,
@@ -4360,6 +4504,41 @@ STDMETHODIMP CoRayLib::DrawCubeWiresV(
     return hr;
 }
 
+STDMETHODIMP CoRayLib::DrawPlane(
+    IRayLibVector3* centerPos,
+    IRayLibVector2* size,
+    IRayLibColor* color
+)
+{
+    if (!centerPos)
+        return E_POINTER;
+    if (!size)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_centerPos = { 0 };
+    WrRayLibVector2 wr_size = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(centerPos, &wr_centerPos);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(size, &wr_size);
+    if (FAILED(hr)) return hr;
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawPlane(
+        wr_centerPos,
+        wr_size,
+        wr_color
+    );
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::DrawRay(
     IRayLibRay* ray,
     IRayLibColor* color

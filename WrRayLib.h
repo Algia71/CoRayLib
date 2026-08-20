@@ -456,10 +456,10 @@ public:
 	/* MODULE: RMODELS */
 
 	// Basic geometric 3D shapes drawing functions
-//	static void DrawLine3D(Vector3 startPos, Vector3 endPos, Color color);
-//	static void DrawPoint3D(Vector3 position, Color color);
-//	static void DrawCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color);
-//	static void DrawTriangle3D(Vector3 v1, Vector3 v2, Vector3 v3, Color color);
+	static void DrawLine3D(WrRayLibVector3 startPos, WrRayLibVector3 endPos, WrRayLibColor color);
+	static void DrawPoint3D(WrRayLibVector3 position, WrRayLibColor color);
+	static void DrawCircle3D(WrRayLibVector3 center, float radius, WrRayLibVector3 rotationAxis, float rotationAngle, WrRayLibColor color);
+	static void DrawTriangle3D(WrRayLibVector3 v1, WrRayLibVector3 v2, WrRayLibVector3 v3, WrRayLibColor color);
 //	static void DrawTriangleStrip3D(const Vector3* points, int pointCount, Color color);
 	static void DrawCube(WrRayLibVector3 position, float width, float height, float length, WrRayLibColor color);
 	static void DrawCubeV(WrRayLibVector3 position, WrRayLibVector3 size, WrRayLibColor color);
@@ -474,7 +474,7 @@ public:
 //	static void DrawCylinderWiresEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
 //	static void DrawCapsule(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
 //	static void DrawCapsuleWires(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color);
-//	static void DrawPlane(Vector3 centerPos, Vector2 size, Color color);
+	static void DrawPlane(WrRayLibVector3 centerPos, WrRayLibVector2 size, WrRayLibColor color);
 	static void DrawRay(WrRayLibRay ray, WrRayLibColor color);
 	static void DrawGrid(int slices, float spacing);
 

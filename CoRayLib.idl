@@ -500,11 +500,17 @@ interface IRayLib : IDispatch
     // Module: RMODELS
 
     // Basic geometric 3D shapes drawing functions
+    [id(3000)] HRESULT DrawLine3D([in] IRayLibVector3* startPos, [in] IRayLibVector3* endPos, [in] IRayLibColor* color);
+    [id(3001)] HRESULT DrawPoint3D([in] IRayLibVector3* position, [in] IRayLibColor* color);
+    [id(3002)] HRESULT DrawCircle3D([in] IRayLibVector3* center, [in] float radius, [in] IRayLibVector3* rotationAxis, [in] float rotationAngle, [in] IRayLibColor* color);
+    [id(3003)] HRESULT DrawTriangle3D([in] IRayLibVector3* v1, [in] IRayLibVector3* v2, [in] IRayLibVector3* v3, [in] IRayLibColor* color);
+
     [id(3005)] HRESULT DrawCube([in] IRayLibVector3* position, [in] float width, [in] float height, [in] float length, [in] IRayLibColor* color);
     [id(3006)] HRESULT DrawCubeV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
     [id(3007)] HRESULT DrawCubeWires([in] IRayLibVector3* position, [in] float width, [in] float height, [in] float length, [in] IRayLibColor* color);
     [id(3008)] HRESULT DrawCubeWiresV([in] IRayLibVector3* position, [in] IRayLibVector3* size, [in] IRayLibColor* color);
 
+    [id(3049)] HRESULT DrawPlane([in] IRayLibVector3* centerPos, [in] IRayLibVector2* size, [in] IRayLibColor* color);
     [id(3050)] HRESULT DrawRay([in] IRayLibRay* ray, [in] IRayLibColor* color);
     [id(3051)] HRESULT DrawGrid([in] long slices, [in] float spacing);
 

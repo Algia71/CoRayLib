@@ -934,6 +934,28 @@ public:
     // Module: RMODELS
 
     // Basic geometric 3D shapes drawing functions
+    STDMETHODIMP DrawLine3D(
+        IRayLibVector3* startPos,
+        IRayLibVector3* endPos,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawPoint3D(
+        IRayLibVector3* position,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCircle3D(
+        IRayLibVector3* center,
+        float radius,
+        IRayLibVector3* rotationAxis,
+        float rotationAngle,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawTriangle3D(
+        IRayLibVector3* v1,
+        IRayLibVector3* v2,
+        IRayLibVector3* v3,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawCube(
         IRayLibVector3* position,
         float width,
@@ -959,6 +981,11 @@ public:
         IRayLibColor* color
     ) override;
 
+    STDMETHODIMP DrawPlane(
+        IRayLibVector3* centerPos,
+        IRayLibVector2* size,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawRay(
         IRayLibRay* ray,
         IRayLibColor* color
