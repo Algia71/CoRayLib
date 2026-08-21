@@ -4567,12 +4567,417 @@ STDMETHODIMP CoRayLib::Fade(
         (LPVOID*)pRetVal
     );
 
-    if (SUCCEEDED(hr)) {
-        (*pRetVal)->put_r(retVal.r);
-        (*pRetVal)->put_g(retVal.g);
-        (*pRetVal)->put_b(retVal.b);
-        (*pRetVal)->put_a(retVal.a);
-    }
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorToInt(
+    IRayLibColor* color,
+    long* pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    *pRetVal = (long)WrRayLib::ColorToInt(
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorNormalize(
+    IRayLibColor* color,
+    IRayLibVector4** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector4 retVal = WrRayLib::ColorNormalize(
+        wr_color
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibVector4,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector4,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorFromNormalized(
+    IRayLibVector4* normalized,
+    IRayLibColor** pRetVal
+)
+{
+    if (!normalized)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector4 wr_normalized = { 0 };
+
+    hr = co2wr(normalized, &wr_normalized);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorFromNormalized(
+        wr_normalized
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorToHSV(
+    IRayLibColor* color,
+    IRayLibVector3** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector3 retVal = WrRayLib::ColorToHSV(
+        wr_color
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibVector3,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibVector3,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorFromHSV(
+    float hue,
+    float saturation,
+    float value,
+    IRayLibColor** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    WrRayLibColor retVal = WrRayLib::ColorFromHSV(
+        hue,
+        saturation,
+        value
+    );
+
+    HRESULT hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorTint(
+    IRayLibColor* color,
+    IRayLibColor* tint,
+    IRayLibColor** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(tint, &wr_tint);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorTint(
+        wr_color,
+        wr_tint
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorBrightness(
+    IRayLibColor* color,
+    float factor,
+    IRayLibColor** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorBrightness(
+        wr_color,
+        factor
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorContrast(
+    IRayLibColor* color,
+    float contrast,
+    IRayLibColor** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorContrast(
+        wr_color,
+        contrast
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorAlpha(
+    IRayLibColor* color,
+    float alpha,
+    IRayLibColor** pRetVal
+)
+{
+    if (!color)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorContrast(
+        wr_color,
+        alpha
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorAlphaBlend(
+    IRayLibColor* dst,
+    IRayLibColor* src,
+    IRayLibColor* tint,
+    IRayLibColor** pRetVal
+)
+{
+    if (!dst)
+        return E_POINTER;
+    if (!src)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_dst = { 0 };
+    WrRayLibColor wr_src = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(dst, &wr_dst);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(src, &wr_src);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(tint, &wr_tint);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorAlphaBlend(
+        wr_dst,
+        wr_src,
+        wr_tint
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::ColorLerp(
+    IRayLibColor* color1,
+    IRayLibColor* color2,
+    float factor,
+    IRayLibColor** pRetVal
+)
+{
+    if (!color1)
+        return E_POINTER;
+    if (!color2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibColor wr_color1 = { 0 };
+    WrRayLibColor wr_color2 = { 0 };
+
+    hr = co2wr(color1, &wr_color1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color2, &wr_color2);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibColor retVal = WrRayLib::ColorLerp(
+        wr_color1,
+        wr_color2,
+        factor
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&retVal, *pRetVal);
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetColor(
+    long hexValue,
+    IRayLibColor** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    WrRayLibColor wr_color = WrRayLib::GetColor(
+        (unsigned int)hexValue
+    );
+
+    HRESULT hr = CoCreateInstance(
+        CLSID_RayLibColor,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibColor,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr))
+        hr = wr2co(&wr_color, *pRetVal);
 
     return hr;
 }

@@ -2054,6 +2054,144 @@ WrRayLibColor WrRayLib::Fade(
 		)
 	);
 }
+int WrRayLib::ColorToInt(
+	WrRayLibColor color
+)
+{
+	return ::ColorToInt(
+		wr2rl_color(color)
+	);
+}
+WrRayLibVector4 WrRayLib::ColorNormalize(
+	WrRayLibColor color
+)
+{
+	return rl2wr_vector4(
+		::ColorNormalize(
+			wr2rl_color(color)
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorFromNormalized(
+	WrRayLibVector4 normalized
+)
+{
+	return rl2wr_color(
+		::ColorFromNormalized(
+			wr2rl_vector4(normalized)
+		)
+	);
+}
+WrRayLibVector3 WrRayLib::ColorToHSV(
+	WrRayLibColor color
+)
+{
+	return rl2wr_vector3(
+		::ColorToHSV(
+			wr2rl_color(color)
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorFromHSV(
+	float hue,
+	float saturation,
+	float value
+)
+{
+	return rl2wr_color(
+		::ColorFromHSV(
+			hue,
+			saturation,
+			value
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorTint(
+	WrRayLibColor color,
+	WrRayLibColor tint
+)
+{
+	return rl2wr_color(
+		::ColorTint(
+			wr2rl_color(color),
+			wr2rl_color(tint)
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorBrightness(
+	WrRayLibColor color,
+	float factor
+)
+{
+	return rl2wr_color(
+		::ColorBrightness(
+			wr2rl_color(color),
+			factor
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorContrast(
+	WrRayLibColor color,
+	float contrast
+)
+{
+	return rl2wr_color(
+		::ColorContrast(
+			wr2rl_color(color),
+			contrast
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorAlpha(
+	WrRayLibColor color,
+	float alpha
+)
+{
+	return rl2wr_color(
+		::ColorAlpha(
+			wr2rl_color(color),
+			alpha
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorAlphaBlend(
+	WrRayLibColor dst,
+	WrRayLibColor src,
+	WrRayLibColor tint
+)
+{
+	return rl2wr_color(
+		::ColorAlphaBlend(
+			wr2rl_color(dst),
+			wr2rl_color(src),
+			wr2rl_color(tint)
+		)
+	);
+}
+WrRayLibColor WrRayLib::ColorLerp(
+	WrRayLibColor color1,
+	WrRayLibColor color2,
+	float factor
+)
+{
+	return rl2wr_color(
+		::ColorLerp(
+			wr2rl_color(color1),
+			wr2rl_color(color2),
+			factor
+		)
+	);
+}
+WrRayLibColor WrRayLib::GetColor(
+	unsigned int hexValue
+)
+{
+	return rl2wr_color(
+		::GetColor(
+			hexValue
+		)
+	);
+}
 
 
 // Text drawing functions

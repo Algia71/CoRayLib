@@ -515,6 +515,18 @@ interface IRayLib : IDispatch
     // Color/pixel related functions
     [id(1200)] HRESULT ColorIsEqual([in] IRayLibColor* col1, [in] IRayLibColor* col2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(1201)] HRESULT Fade([in] IRayLibColor* color, [in] float alpha, [out, retval] IRayLibColor** pRetVal);
+    [id(1202)] HRESULT ColorToInt([in] IRayLibColor* color, [out, retval] long* pRetVal);
+    [id(1203)] HRESULT ColorNormalize([in] IRayLibColor* color, [out, retval] IRayLibVector4** pRetVal);
+    [id(1204)] HRESULT ColorFromNormalized([in] IRayLibVector4* normalized, [out, retval] IRayLibColor** pRetVal);
+    [id(1205)] HRESULT ColorToHSV([in] IRayLibColor* color, [out, retval] IRayLibVector3** pRetVal);
+    [id(1206)] HRESULT ColorFromHSV([in] float hue, [in] float saturation, [in] float value, [out, retval] IRayLibColor** pRetVal);
+    [id(1207)] HRESULT ColorTint([in] IRayLibColor* color, [in] IRayLibColor* tint, [out, retval] IRayLibColor** pRetVal);
+    [id(1208)] HRESULT ColorBrightness([in] IRayLibColor* color, [in] float factor, [out, retval] IRayLibColor** pRetVal);
+    [id(1209)] HRESULT ColorContrast([in] IRayLibColor* color, [in] float contrast, [out, retval] IRayLibColor** pRetVal);
+    [id(1210)] HRESULT ColorAlpha([in] IRayLibColor* color, [in] float alpha, [out, retval] IRayLibColor** pRetVal);
+    [id(1211)] HRESULT ColorAlphaBlend([in] IRayLibColor* dst, [in] IRayLibColor* src, [in] IRayLibColor* tint, [out, retval] IRayLibColor** pRetVal);
+    [id(1212)] HRESULT ColorLerp([in] IRayLibColor* color1, [in] IRayLibColor* color2, [in] float factor, [out, retval] IRayLibColor** pRetVal);
+    [id(1213)] HRESULT GetColor([in] long hexValue, [out, retval] IRayLibColor** pRetVal);
 
 
     //////////////////////////////////////////////

@@ -955,6 +955,64 @@ public:
         float alpha,
         IRayLibColor** pRetVal
     ) override;
+    STDMETHODIMP ColorToInt(
+        IRayLibColor* color,
+        long* pRetVal
+    ) override;
+    STDMETHODIMP ColorNormalize(
+        IRayLibColor* color,
+        IRayLibVector4** pRetVal
+    ) override;
+    STDMETHODIMP ColorFromNormalized(
+        IRayLibVector4* normalized,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorToHSV(
+        IRayLibColor* color,
+        IRayLibVector3** pRetVal
+    ) override;
+    STDMETHODIMP ColorFromHSV(
+        float hue,
+        float saturation,
+        float value,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorTint(
+        IRayLibColor* color,
+        IRayLibColor* tint,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorBrightness(
+        IRayLibColor* color,
+        float factor,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorContrast(
+        IRayLibColor* color,
+        float contrast,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorAlpha(
+        IRayLibColor* color,
+        float alpha,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorAlphaBlend(
+        IRayLibColor* dst,
+        IRayLibColor* src,
+        IRayLibColor* tint,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP ColorLerp(
+        IRayLibColor* color1,
+        IRayLibColor* color2,
+        float factor,
+        IRayLibColor** pRetVal
+    ) override;
+    STDMETHODIMP GetColor(
+        long hexValue,
+        IRayLibColor** pRetVal
+    ) override;
 
 
     //////////////////////////////////////////////
