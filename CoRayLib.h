@@ -595,6 +595,10 @@ public:
     //////////////////////////////////////////////
     // Module: RSHAPES
 
+    STDMETHODIMP GetShapesTextureRectangle(
+        IRayLibRectangle** pRetVal
+    ) override;
+
     // Basic shapes drawing functions
     STDMETHODIMP DrawPixel(
         long posX,
@@ -704,6 +708,24 @@ public:
         IRayLibVector2* center,
         float radiusH,
         float radiusV,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRing(
+        IRayLibVector2* center,
+        float innerRadius,
+        float outerRadius,
+        float startAngle,
+        float endAngle,
+        long segments,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawRingLines(
+        IRayLibVector2* center,
+        float innerRadius,
+        float outerRadius,
+        float startAngle,
+        float endAngle,
+        long segments,
         IRayLibColor* color
     ) override;
     STDMETHODIMP DrawRectangle(

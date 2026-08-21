@@ -445,6 +445,8 @@ interface IRayLib : IDispatch
     //////////////////////////////////////////////
     // Module: RSHAPES
 
+    [id(1002)] HRESULT GetShapesTextureRectangle([out, retval] IRayLibRectangle** pRetVal);
+
     // Basic shapes drawing functions
     [id(1010)] HRESULT DrawPixel([in] long posX, [in] long posY, [in] IRayLibColor* color);
     [id(1011)] HRESULT DrawPixelV([in] IRayLibVector2* position, [in] IRayLibColor* color);
@@ -466,6 +468,8 @@ interface IRayLib : IDispatch
     [id(1041)] HRESULT DrawEllipseV([in] IRayLibVector2* center, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
     [id(1042)] HRESULT DrawEllipseLines([in] long centerX, [in] long centerY, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
     [id(1043)] HRESULT DrawEllipseLinesV([in] IRayLibVector2* center, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
+    [id(1044)] HRESULT DrawRing([in] IRayLibVector2* center, [in] float innerRadius, [in] float outerRadius, [in] float startAngle, [in] float endAngle, [in] long segments, [in] IRayLibColor* color);
+    [id(1045)] HRESULT DrawRingLines([in] IRayLibVector2* center, [in] float innerRadius, [in] float outerRadius, [in] float startAngle, [in] float endAngle, [in] long segments, [in] IRayLibColor* color);
 
     [id(1050)] HRESULT DrawRectangle([in] long posX, [in] long posY, [in] long width, [in] long height, [in] IRayLibColor* color);
     [id(1051)] HRESULT DrawRectangleV([in] IRayLibVector2* position, [in] IRayLibVector2* size, [in] IRayLibColor* color);

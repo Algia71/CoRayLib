@@ -1219,6 +1219,18 @@ void WrRayLib::UpdateCameraPro(
 }
 
 
+/* MODULE: RSHAPES */
+
+WrRayLibRectangle WrRayLib::GetShapesTextureRectangle(
+	void
+)
+{
+	return rl2wr_rect(
+		::GetShapesTextureRectangle()
+	);
+}
+
+
 // Basic shapes drawing functions
 
 void WrRayLib::DrawPixel(
@@ -1478,7 +1490,46 @@ void WrRayLib::DrawEllipseLinesV(
 		wr2rl_color(color)
 	);
 }
-
+void WrRayLib::DrawRing(
+	WrRayLibVector2 center,
+	float innerRadius,
+	float outerRadius,
+	float startAngle,
+	float endAngle,
+	int segments,
+	WrRayLibColor color
+)
+{
+	::DrawRing(
+		wr2rl_vector2(center),
+		innerRadius,
+		outerRadius,
+		startAngle,
+		endAngle,
+		segments,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawRingLines(
+	WrRayLibVector2 center,
+	float innerRadius,
+	float outerRadius,
+	float startAngle,
+	float endAngle,
+	int segments,
+	WrRayLibColor color
+)
+{
+	::DrawRingLines(
+		wr2rl_vector2(center),
+		innerRadius,
+		outerRadius,
+		startAngle,
+		endAngle,
+		segments,
+		wr2rl_color(color)
+	);
+}
 void WrRayLib::DrawRectangle(
 	int posX,
 	int posY,

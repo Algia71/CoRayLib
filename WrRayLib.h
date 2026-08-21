@@ -5,29 +5,25 @@
 #define _WRRAYLIB_H
 
 
-typedef struct tagWrRayLibColor
-{
+typedef struct tagWrRayLibColor {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
 	unsigned char a;
 } WrRayLibColor;
 
-typedef struct tagWrRayLibVector2
-{
+typedef struct tagWrRayLibVector2 {
 	float x;
 	float y;
 } WrRayLibVector2;
 
-typedef struct tagWrRayLibVector3
-{
+typedef struct tagWrRayLibVector3 {
 	float x;
 	float y;
 	float z;
 } WrRayLibVector3;
 
-typedef struct tagWrRayLibVector4
-{
+typedef struct tagWrRayLibVector4 {
 	float x;
 	float y;
 	float z;
@@ -41,24 +37,21 @@ typedef struct tagWrRayLibMatrix {
 	float m3, m7, m11, m15;
 } WrRayLibMatrix;
 
-typedef struct tagWrRayLibRectangle
-{
+typedef struct tagWrRayLibRectangle {
 	float x;
 	float y;
 	float width;
 	float height;
 } WrRayLibRectangle;
 
-typedef struct tagWrRayLibCamera2D
-{
+typedef struct tagWrRayLibCamera2D {
 	WrRayLibVector2 offset;
 	WrRayLibVector2 target;
 	float rotation;
 	float zoom;
 } WrRayLibCamera2D;
 
-typedef struct tagWrRayLibCamera3D
-{
+typedef struct tagWrRayLibCamera3D {
 	WrRayLibVector3 position;
 	WrRayLibVector3 target;
 	WrRayLibVector3 up;
@@ -66,11 +59,19 @@ typedef struct tagWrRayLibCamera3D
 	int projection;
 } WrRayLibCamera3D;
 
-typedef struct tagWrRayLibRay
-{
+typedef struct tagWrRayLibRay {
 	WrRayLibVector3 position;
 	WrRayLibVector3 direction;
 } WrRayLibRay;
+
+typedef struct tagWrRayLibTexture {
+	unsigned int id;
+	int width;
+	int height;
+	int mipmaps;
+	int format;
+} WrRayLibTexture;
+
 
 class WrRayLib
 {
@@ -345,7 +346,7 @@ public:
 
 //	static void SetShapesTexture(Texture2D texture, Rectangle source);
 //	static Texture2D GetShapesTexture(void);
-//	static Rectangle GetShapesTextureRectangle(void);
+	static WrRayLibRectangle GetShapesTextureRectangle(void);
 
 	// Basic shapes drawing functions
 	static void DrawPixel(int posX, int posY, WrRayLibColor color);
@@ -367,8 +368,8 @@ public:
 	static void DrawEllipseV(WrRayLibVector2 center, float radiusH, float radiusV, WrRayLibColor color);
 	static void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, WrRayLibColor color);
 	static void DrawEllipseLinesV(WrRayLibVector2 center, float radiusH, float radiusV, WrRayLibColor color);
-//	static void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
-//	static void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, Color color);
+	static void DrawRing(WrRayLibVector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, WrRayLibColor color);
+	static void DrawRingLines(WrRayLibVector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, WrRayLibColor color);
 	static void DrawRectangle(int posX, int posY, int width, int height, WrRayLibColor color);
 	static void DrawRectangleV(WrRayLibVector2 position, WrRayLibVector2 size, WrRayLibColor color);
 	static void DrawRectangleRec(WrRayLibRectangle rec, WrRayLibColor color);

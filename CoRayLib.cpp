@@ -2629,6 +2629,34 @@ STDMETHODIMP CoRayLib::UpdateCameraPro(
 //////////////////////////////////////////////
 // Module: RSHAPES
 
+STDMETHODIMP CoRayLib::GetShapesTextureRectangle(
+    IRayLibRectangle** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    WrRayLibRectangle wr_rect = WrRayLib::GetShapesTextureRectangle();
+
+    HRESULT hr = CoCreateInstance(
+        CLSID_RayLibRectangle,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRectangle,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &wr_rect,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
+
+
 // Basic shapes drawing functions
 STDMETHODIMP CoRayLib::DrawPixel(
     long posX,
@@ -3169,6 +3197,78 @@ STDMETHODIMP CoRayLib::DrawEllipseLinesV(
         radiusH,
         radiusV,
         clr
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRing(
+    IRayLibVector2* center,
+    float innerRadius,
+    float outerRadius,
+    float startAngle,
+    float endAngle,
+    long segments,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_center = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRing(
+        wr_center,
+        innerRadius,
+        outerRadius,
+        startAngle,
+        endAngle,
+        (int)segments,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawRingLines(
+    IRayLibVector2* center,
+    float innerRadius,
+    float outerRadius,
+    float startAngle,
+    float endAngle,
+    long segments,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_center = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawRingLines(
+        wr_center,
+        innerRadius,
+        outerRadius,
+        startAngle,
+        endAngle,
+        (int)segments,
+        wr_color
     );
 
     return hr;
