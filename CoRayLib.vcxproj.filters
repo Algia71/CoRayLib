@@ -122,7 +122,6 @@
     <None Include="Examples\core\core_3d_camera_free.vbs">
       <Filter>Examples\core</Filter>
     </None>
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl">

@@ -172,7 +172,6 @@
     <None Include="Examples\core\core_window_should_close.vbs" />
     <None Include="Examples\Hello.js" />
     <None Include="Examples\Hello.vbs" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CoRayLib.idl" />
