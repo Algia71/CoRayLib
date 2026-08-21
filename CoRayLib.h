@@ -953,6 +953,16 @@ public:
         IRayLibRectangle** pRetVal
     ) override;
 
+    // Texture configuration functions
+    STDMETHODIMP SetTextureFilter(
+        IRayLibTexture* texture,
+        long filter
+    ) override;
+    STDMETHODIMP SetTextureWrap(
+        IRayLibTexture* texture,
+        long wrap
+    ) override;
+
     // Color/pixel related functions
     STDMETHODIMP ColorIsEqual(
         IRayLibColor* col1,

@@ -4602,6 +4602,53 @@ STDMETHODIMP CoRayLib::GetCollisionRec(
     return hr;
 }
 
+
+// Texture configuration functions
+
+STDMETHODIMP CoRayLib::SetTextureFilter(
+    IRayLibTexture* texture,
+    long filter
+)
+{
+    if (!texture)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::SetTextureFilter(
+        wr_texture,
+        (int)filter
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::SetTextureWrap(
+    IRayLibTexture* texture,
+    long wrap
+)
+{
+    if (!texture)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::SetTextureWrap(
+        wr_texture,
+        (int)wrap
+    );
+
+    return hr;
+}
+
+
 // Color/pixel related functions
 
 STDMETHODIMP CoRayLib::ColorIsEqual(

@@ -550,8 +550,8 @@ public:
 
 	// Texture configuration functions
 //	static void GenTextureMipmaps(Texture2D* texture);
-//	static void SetTextureFilter(Texture2D texture, int filter);
-//	static void SetTextureWrap(Texture2D texture, int wrap);
+	static void SetTextureFilter(WrRayLibTexture texture, int filter);
+	static void SetTextureWrap(WrRayLibTexture texture, int wrap);
 
 	// Texture drawing functions
 //	static void DrawTexture(Texture2D texture, int posX, int posY, Color tint);

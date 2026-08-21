@@ -2062,6 +2062,30 @@ WrRayLibRectangle WrRayLib::GetCollisionRec(
 }
 
 
+// Texture configuration functions
+
+void WrRayLib::SetTextureFilter(
+	WrRayLibTexture texture,
+	int filter
+)
+{
+	::SetTextureFilter(
+		wr2rl_texture(texture),
+		filter
+	);
+}
+void WrRayLib::SetTextureWrap(
+	WrRayLibTexture texture,
+	int wrap
+)
+{
+	::SetTextureWrap(
+		wr2rl_texture(texture),
+		wrap
+	);
+}
+
+
 // Color/pixel related functions
 
 bool WrRayLib::ColorIsEqual(

@@ -513,6 +513,9 @@ interface IRayLib : IDispatch
 
     [id(1100)] HRESULT GetCollisionRec([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] IRayLibRectangle** pRetVal);
 
+    // Texture configuration functions
+    [id(1191)] HRESULT SetTextureFilter([in] IRayLibTexture* texture, [in] long filter);
+    [id(1192)] HRESULT SetTextureWrap([in] IRayLibTexture* texture, [in] long wrap);
 
     // Color/pixel related functions
     [id(1200)] HRESULT ColorIsEqual([in] IRayLibColor* col1, [in] IRayLibColor* col2, [out, retval] VARIANT_BOOL* pRetVal);
