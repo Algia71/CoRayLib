@@ -578,6 +578,9 @@ interface IRayLib : IDispatch
     [id(3019)] HRESULT DrawRay([in] IRayLibRay* ray, [in] IRayLibColor* color);
     [id(3020)] HRESULT DrawGrid([in] long slices, [in] float spacing);
 
+    // Collision detection functions
+    [id(3900)] HRESULT CheckCollisionSpheres([in] IRayLibVector3* center1, [in] float radius1, [in] IRayLibVector3* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);
+
 
     //////////////////////////////////////////////
     // Module: RAUDIO

@@ -5952,6 +5952,46 @@ STDMETHODIMP CoRayLib::DrawGrid(
     return S_OK;
 }
 
+// Collision detection functions
+STDMETHODIMP CoRayLib::CheckCollisionSpheres(
+    IRayLibVector3* center1,
+    float radius1,
+    IRayLibVector3* center2,
+    float radius2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!center1)
+        return E_POINTER;
+    if (!center2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_center1 = { 0 };
+    WrRayLibVector3 wr_center2 = { 0 };
+
+    hr = co2wr(center1, &wr_center1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(center2, &wr_center2);
+    if (FAILED(hr)) return hr;
+
+    const bool retVal = WrRayLib::CheckCollisionSpheres(
+        wr_center1,
+        radius1,
+        wr_center2,
+        radius2
+    );
+
+    if (retVal)
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return hr;
+}
+
 
 //////////////////////////////////////////////
 // Module: RAUDIO

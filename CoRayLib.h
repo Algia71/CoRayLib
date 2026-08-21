@@ -1210,6 +1210,16 @@ public:
     ) override;
 
 
+    // Collision detection functions
+    STDMETHODIMP CheckCollisionSpheres(
+        IRayLibVector3* center1,
+        float radius1,
+        IRayLibVector3* center2,
+        float radius2,
+        VARIANT_BOOL* pRetVal
+    ) override;
+
+
     //////////////////////////////////////////////
     // Module: RAUDIO
 

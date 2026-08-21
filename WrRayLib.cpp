@@ -2586,6 +2586,24 @@ void WrRayLib::DrawGrid(
 }
 
 
+// Collision detection functions
+
+bool WrRayLib::CheckCollisionSpheres(
+	WrRayLibVector3 center1,
+	float radius1,
+	WrRayLibVector3 center2,
+	float radius2
+)
+{
+	return ::CheckCollisionSpheres(
+		wr2rl_vector3(center1),
+		radius1,
+		wr2rl_vector3(center2),
+		radius2
+	);
+}
+
+
 // Audio device management functions
 
 void WrRayLib::InitAudioDevice(
