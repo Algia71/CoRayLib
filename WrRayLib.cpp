@@ -1285,6 +1285,37 @@ void WrRayLib::DrawLineEx(
 		wr2rl_color(color)
 	);
 }
+
+void WrRayLib::DrawLineBezier(
+	WrRayLibVector2 startPos,
+	WrRayLibVector2 endPos,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawLineBezier(
+		wr2rl_vector2(startPos),
+		wr2rl_vector2(endPos),
+		thick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawLineDashed(
+	WrRayLibVector2 startPos,
+	WrRayLibVector2 endPos,
+	int dashSize,
+	int spaceSize,
+	WrRayLibColor color
+)
+{
+	::DrawLineDashed(
+		wr2rl_vector2(startPos),
+		wr2rl_vector2(endPos),
+		dashSize,
+		spaceSize,
+		wr2rl_color(color)
+	);
+}
 void WrRayLib::DrawCircle(
 	int centerX,
 	int centerY,

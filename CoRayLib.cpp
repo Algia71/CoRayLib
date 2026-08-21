@@ -2774,6 +2774,78 @@ STDMETHODIMP CoRayLib::DrawLineEx(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::DrawLineBezier(
+    IRayLibVector2* startPos,
+    IRayLibVector2* endPos,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_startPos = { 0 };
+    WrRayLibVector2 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawLineBezier(
+        wr_startPos,
+        wr_endPos,
+        thick,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawLineDashed(
+    IRayLibVector2* startPos,
+    IRayLibVector2* endPos,
+    long dashSize,
+    long spaceSize,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_startPos = { 0 };
+    WrRayLibVector2 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawLineDashed(
+        wr_startPos,
+        wr_endPos,
+        (int)dashSize,
+        (int)spaceSize,
+        wr_color
+    );
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::DrawCircle(
     long centerX,
     long centerY,
@@ -2797,7 +2869,7 @@ STDMETHODIMP CoRayLib::DrawCircle(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawCircleV(
     IRayLibVector2* center,

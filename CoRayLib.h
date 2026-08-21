@@ -623,6 +623,19 @@ public:
         float thick,
         IRayLibColor* color
     ) override;
+    STDMETHODIMP DrawLineBezier(
+        IRayLibVector2* startPos,
+        IRayLibVector2* endPos,
+        float thick,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawLineDashed(
+        IRayLibVector2* startPos,
+        IRayLibVector2* endPos,
+        long dashSize,
+        long spaceSize,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawCircle(
         long centerX,
         long centerY,

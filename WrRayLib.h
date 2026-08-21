@@ -354,8 +354,8 @@ public:
 	static void DrawLineV(WrRayLibVector2 startPos, WrRayLibVector2 endPos, WrRayLibColor color);
 	static void DrawLineEx(WrRayLibVector2 startPos, WrRayLibVector2 endPos, float thick, WrRayLibColor color);
 //	static void DrawLineStrip(const Vector2* points, int pointCount, Color color);
-//	static void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color);
-//	static void DrawLineDashed(Vector2 startPos, Vector2 endPos, int dashSize, int spaceSize, Color color);
+	static void DrawLineBezier(WrRayLibVector2 startPos, WrRayLibVector2 endPos, float thick, WrRayLibColor color);
+	static void DrawLineDashed(WrRayLibVector2 startPos, WrRayLibVector2 endPos, int dashSize, int spaceSize, WrRayLibColor color);
 	static void DrawCircle(int centerX, int centerY, float radius, WrRayLibColor color);
 	static void DrawCircleV(WrRayLibVector2 center, float radius, WrRayLibColor color);
 //	static void DrawCircleGradient(Vector2 center, float radius, Color inner, Color outer);

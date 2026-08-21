@@ -452,6 +452,8 @@ interface IRayLib : IDispatch
     [id(1013)] HRESULT DrawLineV([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] IRayLibColor* color);
     [id(1014)] HRESULT DrawLineEx([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] float thick, [in] IRayLibColor* color);
 
+    [id(1016)] HRESULT DrawLineBezier([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] float thick, [in] IRayLibColor* color);
+    [id(1017)] HRESULT DrawLineDashed([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] long dashSize, [in] long spaceSize, [in] IRayLibColor* color);
     [id(1020)] HRESULT DrawCircle([in] long centerX, [in] long centerY, [in] float radius, [in] IRayLibColor* color);
     [id(1021)] HRESULT DrawCircleV([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* color);
 
