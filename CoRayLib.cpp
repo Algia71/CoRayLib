@@ -513,6 +513,56 @@ inline HRESULT CoRayLib::wr2co(
 
     return hr;
 }
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibTexture* in,
+    IRayLibTexture* out
+)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_id((long)in->id);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_width((long)in->width);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_height((long)in->height);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_mipmaps((long)in->mipmaps);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_format((long)in->format);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibRenderTexture* in,
+    IRayLibRenderTexture* out
+)
+{
+    HRESULT hr = S_OK;
+
+    hr = out->put_id((long)in->id);
+    if (FAILED(hr)) return hr;
+
+    IRayLibTexture* v = NULL;
+
+    hr = out->get_texture(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->texture, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->get_depth(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->depth, v);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 
 
 CoRayLib::CoRayLib(HMODULE hModule)
@@ -2755,6 +2805,58 @@ STDMETHODIMP CoRayLib::UpdateCameraPro(
 //////////////////////////////////////////////
 // Module: RSHAPES
 
+STDMETHODIMP CoRayLib::SetShapesTexture(
+    IRayLibTexture* texture,
+    IRayLibRectangle* source
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!source)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+    WrRayLibRectangle wr_rect = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(source, &wr_rect);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::SetShapesTexture(
+        wr_texture,
+        wr_rect
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetShapesTexture(
+    IRayLibTexture** pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    WrRayLibTexture wr_texture = WrRayLib::GetShapesTexture();
+
+    HRESULT hr = CoCreateInstance(
+        CLSID_RayLibTexture,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibTexture,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &wr_texture,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::GetShapesTextureRectangle(
     IRayLibRectangle** pRetVal
 )
@@ -2805,7 +2907,7 @@ STDMETHODIMP CoRayLib::DrawPixel(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawPixelV(
     IRayLibVector2* position,

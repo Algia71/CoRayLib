@@ -204,6 +204,19 @@ static WrRayLibRay inline rl2wr_ray(
 	};
 }
 
+static WrRayLibTexture inline rl2wr_texture(
+	Texture2D texture
+)
+{
+	return {
+		texture.id,
+		texture.width,
+		texture.height,
+		texture.mipmaps,
+		texture.format
+	};
+}
+
 
 // Window-related functions
 
@@ -1259,6 +1272,25 @@ void WrRayLib::UpdateCameraPro(
 
 
 /* MODULE: RSHAPES */
+
+void WrRayLib::SetShapesTexture(
+	WrRayLibTexture texture,
+	WrRayLibRectangle source
+)
+{
+	::SetShapesTexture(
+		wr2rl_texture(texture),
+		wr2rl_rect(source)
+	);
+}
+WrRayLibTexture WrRayLib::GetShapesTexture(
+	void
+)
+{
+	return rl2wr_texture(
+		::GetShapesTexture()
+	);
+}
 
 WrRayLibRectangle WrRayLib::GetShapesTextureRectangle(
 	void

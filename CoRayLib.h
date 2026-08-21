@@ -32,6 +32,8 @@ class CoRayLib : IRayLib
     inline HRESULT wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out);
     inline HRESULT wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out);
     inline HRESULT wr2co(WrRayLibRay* in, IRayLibRay* out);
+    inline HRESULT wr2co(WrRayLibTexture* in, IRayLibTexture* out);
+    inline HRESULT wr2co(WrRayLibRenderTexture* in, IRayLibRenderTexture* out);
     inline HRESULT wr2co(WrRayLibMatrix* in, IRayLibMatrix* out);
 
 public:
@@ -604,6 +606,13 @@ public:
     //////////////////////////////////////////////
     // Module: RSHAPES
 
+    STDMETHODIMP SetShapesTexture(
+        IRayLibTexture* texture,
+        IRayLibRectangle* source
+    ) override;
+    STDMETHODIMP GetShapesTexture(
+        IRayLibTexture** pRetVal
+    ) override;
     STDMETHODIMP GetShapesTextureRectangle(
         IRayLibRectangle** pRetVal
     ) override;

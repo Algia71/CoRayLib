@@ -78,6 +78,24 @@ typedef struct tagWrRayLibRenderTexture {
 	WrRayLibTexture depth;
 } WrRayLibRenderTexture;
 
+typedef struct tagWrRayLibTransform {
+	WrRayLibVector3 translation;
+	tagWrRayLibVector4 rotation;
+	WrRayLibVector3 scale;
+} WrRayLibTransform;
+
+typedef struct tagWrRayLibRayCollision {
+	bool hit;
+	float distance;
+	WrRayLibVector3 point;
+	WrRayLibVector3 normal;
+} WrRayLibRayCollision;
+
+typedef struct tagWrRayLibBoundingBox {
+	WrRayLibVector3 min;
+	WrRayLibVector3 max;
+} WrRayLibBoundingBox;
+
 
 class WrRayLib
 {
@@ -350,8 +368,8 @@ public:
 
 	/* MODULE: RSHAPES */
 
-//	static void SetShapesTexture(Texture2D texture, Rectangle source);
-//	static Texture2D GetShapesTexture(void);
+	static void SetShapesTexture(WrRayLibTexture texture, WrRayLibRectangle source);
+	static WrRayLibTexture GetShapesTexture(void);
 	static WrRayLibRectangle GetShapesTextureRectangle(void);
 
 	// Basic shapes drawing functions

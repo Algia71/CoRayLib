@@ -447,6 +447,8 @@ interface IRayLib : IDispatch
     //////////////////////////////////////////////
     // Module: RSHAPES
 
+    [id(1000)] HRESULT SetShapesTexture([in] IRayLibTexture* texture, [in] IRayLibRectangle* source);
+    [id(1001)] HRESULT GetShapesTexture([out, retval] IRayLibTexture** pRetVal);
     [id(1002)] HRESULT GetShapesTextureRectangle([out, retval] IRayLibRectangle** pRetVal);
 
     // Basic shapes drawing functions
