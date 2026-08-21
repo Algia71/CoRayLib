@@ -2897,7 +2897,114 @@ STDMETHODIMP CoRayLib::DrawCircleV(
         clr
     );
 
-    return S_OK;
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCircleGradient(
+    IRayLibVector2* center,
+    float radius,
+    IRayLibColor* inner,
+    IRayLibColor* outer
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!inner)
+        return E_POINTER;
+    if (!outer)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_center = { 0 };
+    WrRayLibColor wr_inner = { 0 };
+    WrRayLibColor wr_outer = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(inner, &wr_inner);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(outer, &wr_outer);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircleGradient(
+        wr_center,
+        radius,
+        wr_inner,
+        wr_outer
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCircleSector(
+    IRayLibVector2* center,
+    float radius,
+    float startAngle,
+    float endAngle,
+    long segments,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_center = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircleSector(
+        wr_center,
+        radius,
+        startAngle,
+        endAngle,
+        (int)segments,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCircleSectorLines(
+    IRayLibVector2* center,
+    float radius,
+    float startAngle,
+    float endAngle,
+    long segments,
+    IRayLibColor* color
+)
+{
+    if (!center)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_center = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCircleSectorLines(
+        wr_center,
+        radius,
+        startAngle,
+        endAngle,
+        (int)segments,
+        wr_color
+    );
+
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawCircleLines(
     long centerX,
@@ -2922,7 +3029,7 @@ STDMETHODIMP CoRayLib::DrawCircleLines(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawCircleLinesV(
     IRayLibVector2* center,
@@ -2950,7 +3057,7 @@ STDMETHODIMP CoRayLib::DrawCircleLinesV(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawEllipse(
     long centerX,
@@ -2977,7 +3084,7 @@ STDMETHODIMP CoRayLib::DrawEllipse(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawEllipseV(
     IRayLibVector2* center,
@@ -3007,7 +3114,7 @@ STDMETHODIMP CoRayLib::DrawEllipseV(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawEllipseLines(
     long centerX,
@@ -3034,7 +3141,7 @@ STDMETHODIMP CoRayLib::DrawEllipseLines(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawEllipseLinesV(
     IRayLibVector2* center,
@@ -3064,7 +3171,7 @@ STDMETHODIMP CoRayLib::DrawEllipseLinesV(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawRectangle(
     long posX,
@@ -3091,7 +3198,7 @@ STDMETHODIMP CoRayLib::DrawRectangle(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawRectangleV(
     IRayLibVector2* position,
@@ -3124,7 +3231,7 @@ STDMETHODIMP CoRayLib::DrawRectangleV(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawRectangleRec(
     IRayLibRectangle* rec,
@@ -3150,7 +3257,7 @@ STDMETHODIMP CoRayLib::DrawRectangleRec(
         clr
     );
 
-    return S_OK;
+    return hr;
 }
 STDMETHODIMP CoRayLib::DrawRectanglePro(
     IRayLibRectangle* rec,

@@ -1342,7 +1342,56 @@ void WrRayLib::DrawCircleV(
 		wr2rl_color(color)
 	);
 }
-
+void WrRayLib::DrawCircleGradient(
+	WrRayLibVector2 center,
+	float radius,
+	WrRayLibColor inner,
+	WrRayLibColor outer
+)
+{
+	::DrawCircleGradient(
+		wr2rl_vector2(center),
+		radius,
+		wr2rl_color(inner),
+		wr2rl_color(outer)
+	);
+}
+void WrRayLib::DrawCircleSector(
+	WrRayLibVector2 center,
+	float radius,
+	float startAngle,
+	float endAngle,
+	int segments,
+	WrRayLibColor color
+)
+{
+	::DrawCircleSector(
+		wr2rl_vector2(center),
+		radius,
+		startAngle,
+		endAngle,
+		segments,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCircleSectorLines(
+	WrRayLibVector2 center,
+	float radius,
+	float startAngle,
+	float endAngle,
+	int segments,
+	WrRayLibColor color
+)
+{
+	::DrawCircleSectorLines(
+		wr2rl_vector2(center),
+		radius,
+		startAngle,
+		endAngle,
+		segments,
+		wr2rl_color(color)
+	);
+}
 void WrRayLib::DrawCircleLines(
 	int centerX,
 	int centerY,

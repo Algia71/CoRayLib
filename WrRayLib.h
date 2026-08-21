@@ -358,9 +358,9 @@ public:
 	static void DrawLineDashed(WrRayLibVector2 startPos, WrRayLibVector2 endPos, int dashSize, int spaceSize, WrRayLibColor color);
 	static void DrawCircle(int centerX, int centerY, float radius, WrRayLibColor color);
 	static void DrawCircleV(WrRayLibVector2 center, float radius, WrRayLibColor color);
-//	static void DrawCircleGradient(Vector2 center, float radius, Color inner, Color outer);
-//	static void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);
-//	static void DrawCircleSectorLines(Vector2 center, float radius, float startAngle, float endAngle, int segments, Color color);
+	static void DrawCircleGradient(WrRayLibVector2 center, float radius, WrRayLibColor inner, WrRayLibColor outer);
+	static void DrawCircleSector(WrRayLibVector2 center, float radius, float startAngle, float endAngle, int segments, WrRayLibColor color);
+	static void DrawCircleSectorLines(WrRayLibVector2 center, float radius, float startAngle, float endAngle, int segments, WrRayLibColor color);
 	static void DrawCircleLines(int centerX, int centerY, float radius, WrRayLibColor color);
 	static void DrawCircleLinesV(WrRayLibVector2 center, float radius, WrRayLibColor color);
 	static void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, WrRayLibColor color);

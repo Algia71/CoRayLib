@@ -456,9 +456,11 @@ interface IRayLib : IDispatch
     [id(1017)] HRESULT DrawLineDashed([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] long dashSize, [in] long spaceSize, [in] IRayLibColor* color);
     [id(1020)] HRESULT DrawCircle([in] long centerX, [in] long centerY, [in] float radius, [in] IRayLibColor* color);
     [id(1021)] HRESULT DrawCircleV([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* color);
-
-    [id(1030)] HRESULT DrawCircleLines([in] long centerX, [in] long centerY, [in] float radius, [in] IRayLibColor* color);
-    [id(1031)] HRESULT DrawCircleLinesV([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* color);
+    [id(1022)] HRESULT DrawCircleGradient([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* inner, [in] IRayLibColor* outer);
+    [id(1023)] HRESULT DrawCircleSector([in] IRayLibVector2* center, [in] float radius, [in] float startAngle, [in] float endAngle, [in] long segments, [in] IRayLibColor* color);
+    [id(1024)] HRESULT DrawCircleSectorLines([in] IRayLibVector2* center, [in] float radius, [in] float startAngle, [in] float endAngle, [in] long segments, [in] IRayLibColor* color);
+    [id(1025)] HRESULT DrawCircleLines([in] long centerX, [in] long centerY, [in] float radius, [in] IRayLibColor* color);
+    [id(1026)] HRESULT DrawCircleLinesV([in] IRayLibVector2* center, [in] float radius, [in] IRayLibColor* color);
 
     [id(1040)] HRESULT DrawEllipse([in] long centerX, [in] long centerY, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);
     [id(1041)] HRESULT DrawEllipseV([in] IRayLibVector2* center, [in] float radiusH, [in] float radiusV, [in] IRayLibColor* color);

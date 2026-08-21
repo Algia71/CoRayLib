@@ -647,6 +647,28 @@ public:
         float radius,
         IRayLibColor* color
     ) override;
+    STDMETHODIMP DrawCircleGradient(
+        IRayLibVector2* center,
+        float radius,
+        IRayLibColor* inner,
+        IRayLibColor* outer
+    ) override;
+    STDMETHODIMP DrawCircleSector(
+        IRayLibVector2* center,
+        float radius,
+        float startAngle,
+        float endAngle,
+        long segments,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCircleSectorLines(
+        IRayLibVector2* center,
+        float radius,
+        float startAngle,
+        float endAngle, 
+        long segments,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawCircleLines(
         long centerX,
         long centerY,
