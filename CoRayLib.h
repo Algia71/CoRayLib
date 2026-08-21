@@ -1042,7 +1042,38 @@ public:
         long slices,
         IRayLibColor* color
     ) override;
-
+    STDMETHODIMP DrawCylinder(
+        IRayLibVector3* position,
+        float radiusTop,
+        float radiusBottom,
+        float height,
+        long slices,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCylinderEx(
+        IRayLibVector3* startPos,
+        IRayLibVector3* endPos,
+        float startRadius,
+        float endRadius,
+        long sides,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCylinderWires(
+        IRayLibVector3* position,
+        float radiusTop,
+        float radiusBottom,
+        float height,
+        long slices,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawCylinderWiresEx(
+        IRayLibVector3* startPos,
+        IRayLibVector3* endPos,
+        float startRadius,
+        float endRadius,
+        long sides,
+        IRayLibColor* color
+    ) override;
     STDMETHODIMP DrawCapsule(
         IRayLibVector3* startPos,
         IRayLibVector3* endPos,

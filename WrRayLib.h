@@ -643,10 +643,10 @@ public:
 	static void DrawSphere(WrRayLibVector3 centerPos, float radius, WrRayLibColor color);
 	static void DrawSphereEx(WrRayLibVector3 centerPos, float radius, int rings, int slices, WrRayLibColor color);
 	static void DrawSphereWires(WrRayLibVector3 centerPos, float radius, int rings, int slices, WrRayLibColor color);
-//	static void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);
-//	static void DrawCylinderEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
-//	static void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color);
-//	static void DrawCylinderWiresEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color);
+	static void DrawCylinder(WrRayLibVector3 position, float radiusTop, float radiusBottom, float height, int slices, WrRayLibColor color);
+	static void DrawCylinderEx(WrRayLibVector3 startPos, WrRayLibVector3 endPos, float startRadius, float endRadius, int sides, WrRayLibColor color);
+	static void DrawCylinderWires(WrRayLibVector3 position, float radiusTop, float radiusBottom, float height, int slices, WrRayLibColor color);
+	static void DrawCylinderWiresEx(WrRayLibVector3 startPos, WrRayLibVector3 endPos, float startRadius, float endRadius, int sides, WrRayLibColor color);
 	static void DrawCapsule(WrRayLibVector3 startPos, WrRayLibVector3 endPos, float radius, int slices, int rings, WrRayLibColor color);
 	static void DrawCapsuleWires(WrRayLibVector3 startPos, WrRayLibVector3 endPos, float radius, int slices, int rings, WrRayLibColor color);
 	static void DrawPlane(WrRayLibVector3 centerPos, WrRayLibVector2 size, WrRayLibColor color);

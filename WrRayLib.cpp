@@ -2178,7 +2178,78 @@ void WrRayLib::DrawSphereWires(
 		wr2rl_color(color)
 	);
 }
-
+void WrRayLib::DrawCylinder(
+	WrRayLibVector3 position,
+	float radiusTop,
+	float radiusBottom,
+	float height,
+	int slices,
+	WrRayLibColor color
+)
+{
+	::DrawCylinder(
+		wr2rl_vector3(position),
+		radiusTop,
+		radiusBottom,
+		height,
+		slices,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCylinderEx(
+	WrRayLibVector3 startPos,
+	WrRayLibVector3 endPos,
+	float startRadius,
+	float endRadius,
+	int sides,
+	WrRayLibColor color
+)
+{
+	::DrawCylinderEx(
+		wr2rl_vector3(startPos),
+		wr2rl_vector3(endPos),
+		startRadius,
+		endRadius,
+		sides,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCylinderWires(
+	WrRayLibVector3 position,
+	float radiusTop,
+	float radiusBottom,
+	float height,
+	int slices,
+	WrRayLibColor color
+)
+{
+	::DrawCylinderWires(
+		wr2rl_vector3(position),
+		radiusTop,
+		radiusBottom,
+		height,
+		slices,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawCylinderWiresEx(
+	WrRayLibVector3 startPos,
+	WrRayLibVector3 endPos,
+	float startRadius,
+	float endRadius,
+	int sides,
+	WrRayLibColor color
+)
+{
+	::DrawCylinderWiresEx(
+		wr2rl_vector3(startPos),
+		wr2rl_vector3(endPos),
+		startRadius,
+		endRadius,
+		sides,
+		wr2rl_color(color)
+	);
+}
 void WrRayLib::DrawCapsule(
 	WrRayLibVector3 startPos,
 	WrRayLibVector3 endPos,

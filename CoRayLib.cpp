@@ -5017,7 +5017,152 @@ STDMETHODIMP CoRayLib::DrawSphereWires(
 
     return hr;
 }
+STDMETHODIMP CoRayLib::DrawCylinder(
+    IRayLibVector3* position,
+    float radiusTop,
+    float radiusBottom,
+    float height,
+    long slices,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
 
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_position = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCylinder(
+        wr_position,
+        radiusTop,
+        radiusBottom,
+        height,
+        (int)slices,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCylinderEx(
+    IRayLibVector3* startPos,
+    IRayLibVector3* endPos,
+    float startRadius,
+    float endRadius,
+    long sides,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_startPos = { 0 };
+    WrRayLibVector3 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCylinderEx(
+        wr_startPos,
+        wr_endPos,
+        startRadius,
+        endRadius,
+        (int)sides,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCylinderWires(
+    IRayLibVector3* position,
+    float radiusTop,
+    float radiusBottom,
+    float height,
+    long slices,
+    IRayLibColor* color
+)
+{
+    if (!position)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_position = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCylinderWires(
+        wr_position,
+        radiusTop,
+        radiusBottom,
+        height,
+        (int)slices,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawCylinderWiresEx(
+    IRayLibVector3* startPos,
+    IRayLibVector3* endPos,
+    float startRadius,
+    float endRadius,
+    long sides,
+    IRayLibColor* color
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector3 wr_startPos = { 0 };
+    WrRayLibVector3 wr_endPos = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawCylinderWiresEx(
+        wr_startPos,
+        wr_endPos,
+        startRadius,
+        endRadius,
+        (int)sides,
+        wr_color
+    );
+
+    return hr;
+}
 STDMETHODIMP CoRayLib::DrawCapsule(
     IRayLibVector3* startPos,
     IRayLibVector3* endPos,
