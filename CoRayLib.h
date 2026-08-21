@@ -21,6 +21,8 @@ class CoRayLib : IRayLib
     inline HRESULT co2wr(IRayLibCamera2D* in, WrRayLibCamera2D* out);
     inline HRESULT co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out);
     inline HRESULT co2wr(IRayLibRay* in, WrRayLibRay* out);
+    inline HRESULT co2wr(IRayLibTexture* in, WrRayLibTexture* out);
+    inline HRESULT co2wr(IRayLibRenderTexture* in, WrRayLibRenderTexture* out);
 
     inline HRESULT wr2co(WrRayLibColor* in, IRayLibColor* out);
     inline HRESULT wr2co(WrRayLibVector2* in, IRayLibVector2* out);
@@ -277,6 +279,13 @@ public:
     STDMETHODIMP EndMode3D(
         void
     ) override;
+    STDMETHODIMP BeginTextureMode(
+        IRayLibRenderTexture* target
+    ) override;
+    STDMETHODIMP EndTextureMode(
+        void
+    ) override;
+
     STDMETHODIMP BeginBlendMode(
         long mode
     ) override;

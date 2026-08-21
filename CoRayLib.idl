@@ -329,6 +329,8 @@ interface IRayLib : IDispatch
     [id(74)] HRESULT EndMode2D(void);
     [id(75)] HRESULT BeginMode3D([in] IRayLibCamera3D* camera);
     [id(76)] HRESULT EndMode3D(void);
+    [id(77)] HRESULT BeginTextureMode([in] IRayLibRenderTexture* target);
+    [id(78)] HRESULT EndTextureMode(void);
 
     [id(81)] HRESULT BeginBlendMode([in] long mode);
     [id(82)] HRESULT EndBlendMode(void);

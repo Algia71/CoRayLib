@@ -100,6 +100,30 @@ static inline Ray wr2rl_ray(
 	};
 }
 
+static inline Texture wr2rl_texture(
+	WrRayLibTexture texture
+)
+{
+	return {
+		texture.id,
+		texture.width,
+		texture.height,
+		texture.mipmaps,
+		texture.format
+	};
+}
+
+static inline RenderTexture wr2rl_render_texture(
+	WrRayLibRenderTexture render_texture
+)
+{
+	return {
+		render_texture.id,
+		wr2rl_texture(render_texture.texture),
+		wr2rl_texture(render_texture.depth)
+	};
+}
+
 static WrRayLibColor inline rl2wr_color(
 	Color color
 )
@@ -564,6 +588,21 @@ void WrRayLib::EndMode3D(
 {
 	::EndMode3D();
 }
+void WrRayLib::BeginTextureMode(
+	WrRayLibRenderTexture target
+)
+{
+	::BeginTextureMode(
+		wr2rl_render_texture(target)
+	);
+}
+void WrRayLib::EndTextureMode(
+	void
+)
+{
+	::EndTextureMode();
+}
+
 void WrRayLib::BeginBlendMode(
 	int mode
 )

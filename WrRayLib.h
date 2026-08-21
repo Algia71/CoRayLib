@@ -72,6 +72,12 @@ typedef struct tagWrRayLibTexture {
 	int format;
 } WrRayLibTexture;
 
+typedef struct tagWrRayLibRenderTexture {
+	unsigned int id;
+	WrRayLibTexture texture;
+	WrRayLibTexture depth;
+} WrRayLibRenderTexture;
+
 
 class WrRayLib
 {
@@ -146,8 +152,8 @@ public:
 	static void EndMode2D(void);
 	static void BeginMode3D(WrRayLibCamera3D camera);
 	static void EndMode3D(void);
-//	static void BeginTextureMode(RenderTexture2D target);
-//	static void EndTextureMode(void);
+	static void BeginTextureMode(WrRayLibRenderTexture target);
+	static void EndTextureMode(void);
 //	static void BeginShaderMode(Shader shader);
 //	static void EndShaderMode(void);
 	static void BeginBlendMode(int mode);

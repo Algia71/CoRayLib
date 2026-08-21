@@ -8,7 +8,10 @@
 #include "VarArgList.h"
 
 
-inline HRESULT CoRayLib::co2wr(IRayLibColor* in, WrRayLibColor* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibColor* in,
+    WrRayLibColor* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -32,7 +35,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibColor* in, WrRayLibColor* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::co2wr(IRayLibVector2* in, WrRayLibVector2* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibVector2* in,
+    WrRayLibVector2* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -48,7 +54,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibVector2* in, WrRayLibVector2* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::co2wr(IRayLibVector3* in, WrRayLibVector3* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibVector3* in,
+    WrRayLibVector3* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -68,7 +77,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibVector3* in, WrRayLibVector3* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::co2wr(IRayLibVector4* in, WrRayLibVector4* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibVector4* in,
+    WrRayLibVector4* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -92,7 +104,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibVector4* in, WrRayLibVector4* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::co2wr(IRayLibRectangle* in, WrRayLibRectangle* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibRectangle* in,
+    WrRayLibRectangle* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -116,7 +131,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibRectangle* in, WrRayLibRectangle* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::co2wr(IRayLibCamera2D* in, WrRayLibCamera2D* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibCamera2D* in,
+    WrRayLibCamera2D* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -144,7 +162,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibCamera2D* in, WrRayLibCamera2D* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibCamera3D* in,
+    WrRayLibCamera3D* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -178,7 +199,10 @@ inline HRESULT CoRayLib::co2wr(IRayLibCamera3D* in, WrRayLibCamera3D* out)
     return hr;
 }
 
-inline HRESULT CoRayLib::co2wr(IRayLibRay* in, WrRayLibRay* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibRay* in,
+    WrRayLibRay* out
+)
 {
     HRESULT hr = S_OK;
     *out = { 0 };
@@ -197,7 +221,58 @@ inline HRESULT CoRayLib::co2wr(IRayLibRay* in, WrRayLibRay* out)
     return hr;
 }
 
-inline HRESULT CoRayLib::wr2co(WrRayLibColor* in, IRayLibColor* out)
+inline HRESULT CoRayLib::co2wr(
+    IRayLibTexture* in,
+    WrRayLibTexture* out
+)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    long lelem = 0;
+
+    hr = in->get_id((long*)&out->id);
+    if (FAILED(hr)) return hr;
+    hr = in->get_width((long*)&out->width);
+    if (FAILED(hr)) return hr;
+    hr = in->get_height((long*)&out->height);
+    if (FAILED(hr)) return hr;
+    hr = in->get_mipmaps((long*)&out->mipmaps);
+    if (FAILED(hr)) return hr;
+    hr = in->get_format((long*)&out->format);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+inline HRESULT CoRayLib::co2wr(
+    IRayLibRenderTexture* in,
+    WrRayLibRenderTexture* out
+)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    long lelem = 0;
+    IRayLibTexture* telem = NULL;
+
+    hr = in->get_id((long*)&out->id);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_texture(&telem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(telem, &out->texture);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_depth(&telem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(telem, &out->depth);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
+
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibColor* in,
+    IRayLibColor* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -216,7 +291,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibColor* in, IRayLibColor* out)
     return hr;
 }
 
-inline HRESULT CoRayLib::wr2co(WrRayLibVector2* in, IRayLibVector2* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibVector2* in,
+    IRayLibVector2* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -229,7 +307,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibVector2* in, IRayLibVector2* out)
     return hr;
 }
 
-inline HRESULT CoRayLib::wr2co(WrRayLibVector3* in, IRayLibVector3* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibVector3* in,
+    IRayLibVector3* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -245,7 +326,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibVector3* in, IRayLibVector3* out)
     return hr;
 }
 
-inline HRESULT CoRayLib::wr2co(WrRayLibVector4* in, IRayLibVector4* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibVector4* in,
+    IRayLibVector4* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -264,7 +348,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibVector4* in, IRayLibVector4* out)
     return hr;
 }
 
-inline HRESULT CoRayLib::wr2co(WrRayLibRectangle* in, IRayLibRectangle* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibRectangle* in,
+    IRayLibRectangle* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -282,7 +369,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibRectangle* in, IRayLibRectangle* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibCamera2D* in,
+    IRayLibCamera2D* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -308,7 +398,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibCamera2D* in, IRayLibCamera2D* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibCamera3D* in,
+    IRayLibCamera3D* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -340,7 +433,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibCamera3D* in, IRayLibCamera3D* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::wr2co(WrRayLibRay* in, IRayLibRay* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibRay* in,
+    IRayLibRay* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -360,7 +456,10 @@ inline HRESULT CoRayLib::wr2co(WrRayLibRay* in, IRayLibRay* out)
 
     return hr;
 }
-inline HRESULT CoRayLib::wr2co(WrRayLibMatrix* in, IRayLibMatrix* out)
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibMatrix* in,
+    IRayLibMatrix* out
+)
 {
     HRESULT hr = S_OK;
 
@@ -1299,6 +1398,33 @@ STDMETHODIMP CoRayLib::EndMode3D(
 )
 {
     WrRayLib::EndMode3D();
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::BeginTextureMode(
+    IRayLibRenderTexture* target
+)
+{
+    if (!target)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRenderTexture wr_target = { 0 };
+
+    hr = co2wr(target, &wr_target);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::BeginTextureMode(
+        wr_target
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::EndTextureMode(
+    void
+)
+{
+    WrRayLib::EndTextureMode();
 
     return S_OK;
 }
