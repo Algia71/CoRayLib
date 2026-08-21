@@ -839,6 +839,45 @@ public:
         IRayLibColor* color
     ) override;
 
+    // Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+    STDMETHODIMP GetSplinePointLinear(
+        IRayLibVector2* startPos,
+        IRayLibVector2* endPos,
+        float t,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetSplinePointBasis(
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        IRayLibVector2* p3,
+        IRayLibVector2* p4,
+        float t,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetSplinePointCatmullRom(
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        IRayLibVector2* p3,
+        IRayLibVector2* p4,
+        float t,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetSplinePointBezierQuadratic(
+        IRayLibVector2* p1,
+        IRayLibVector2* c2,
+        IRayLibVector2* p3,
+        float t,
+        IRayLibVector2** pRetVal
+    ) override;
+    STDMETHODIMP GetSplinePointBezierCubic(
+        IRayLibVector2* p1,
+        IRayLibVector2* c2,
+        IRayLibVector2* c3,
+        IRayLibVector2* p4,
+        float t,
+        IRayLibVector2** pRetVal
+    ) override;
+
     // Basic shapes collision detection functions
     STDMETHODIMP CheckCollisionRecs(
         IRayLibRectangle* rec1,

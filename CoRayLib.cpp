@@ -3835,6 +3835,237 @@ STDMETHODIMP CoRayLib::DrawPolyLinesEx(
     return hr;
 }
 
+// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+STDMETHODIMP CoRayLib::GetSplinePointLinear(
+    IRayLibVector2* startPos,
+    IRayLibVector2* endPos,
+    float t,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!startPos)
+        return E_POINTER;
+    if (!endPos)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_startPos = { 0 };
+    WrRayLibVector2 wr_endPos = { 0 };
+
+    hr = co2wr(startPos, &wr_startPos);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(endPos, &wr_endPos);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetSplinePointLinear(
+        wr_startPos,
+        wr_endPos,
+        t
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetSplinePointBasis(
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    IRayLibVector2* p3,
+    IRayLibVector2* p4,
+    float t,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_p2 = { 0 };
+    WrRayLibVector2 wr_p3 = { 0 };
+    WrRayLibVector2 wr_p4 = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetSplinePointBasis(
+        wr_p1,
+        wr_p2,
+        wr_p3,
+        wr_p4,
+        t
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetSplinePointCatmullRom(
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    IRayLibVector2* p3,
+    IRayLibVector2* p4,
+    float t,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_p2 = { 0 };
+    WrRayLibVector2 wr_p3 = { 0 };
+    WrRayLibVector2 wr_p4 = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetSplinePointCatmullRom(
+        wr_p1,
+        wr_p2,
+        wr_p3,
+        wr_p4,
+        t
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetSplinePointBezierQuadratic(
+    IRayLibVector2* p1,
+    IRayLibVector2* c2,
+    IRayLibVector2* p3,
+    float t,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!c2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_c2 = { 0 };
+    WrRayLibVector2 wr_p3 = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(c2, &wr_c2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetSplinePointBezierQuadratic(
+        wr_p1,
+        wr_c2,
+        wr_p3,
+        t
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetSplinePointBezierCubic(
+    IRayLibVector2* p1,
+    IRayLibVector2* c2,
+    IRayLibVector2* c3,
+    IRayLibVector2* p4,
+    float t,
+    IRayLibVector2** pRetVal
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!c2)
+        return E_POINTER;
+    if (!c3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_c2 = { 0 };
+    WrRayLibVector2 wr_c3 = { 0 };
+    WrRayLibVector2 wr_p4 = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(c2, &wr_c2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(c3, &wr_c3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibVector2 retVal = WrRayLib::GetSplinePointBezierCubic(
+        wr_p1,
+        wr_c2,
+        wr_c3,
+        wr_p4,
+        t
+    );
+
+    hr = wr2co(
+        &retVal,
+        *pRetVal
+    );
+
+    return hr;
+}
+
 // Basic shapes collision detection functions
 STDMETHODIMP CoRayLib::CheckCollisionRecs(
     IRayLibRectangle* rec1,

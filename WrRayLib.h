@@ -403,11 +403,11 @@ public:
 //	static void DrawSplineSegmentBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float thick, Color color);
 
 	// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
-//	static Vector2 GetSplinePointLinear(Vector2 startPos, Vector2 endPos, float t);
-//	static Vector2 GetSplinePointBasis(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t);
-//	static Vector2 GetSplinePointCatmullRom(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float t);
-//	static Vector2 GetSplinePointBezierQuad(Vector2 p1, Vector2 c2, Vector2 p3, float t);
-//	static Vector2 GetSplinePointBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float t);
+	static WrRayLibVector2 GetSplinePointLinear(WrRayLibVector2 startPos, WrRayLibVector2 endPos, float t);
+	static WrRayLibVector2 GetSplinePointBasis(WrRayLibVector2 p1, WrRayLibVector2 p2, WrRayLibVector2 p3, WrRayLibVector2 p4, float t);
+	static WrRayLibVector2 GetSplinePointCatmullRom(WrRayLibVector2 p1, WrRayLibVector2 p2, WrRayLibVector2 p3, WrRayLibVector2 p4, float t);
+	static WrRayLibVector2 GetSplinePointBezierQuadratic(WrRayLibVector2 p1, WrRayLibVector2 c2, WrRayLibVector2 p3, float t);
+	static WrRayLibVector2 GetSplinePointBezierCubic(WrRayLibVector2 p1, WrRayLibVector2 c2, WrRayLibVector2 c3, WrRayLibVector2 p4, float t);
 
 	// Basic shapes collision detection functions
 	static bool CheckCollisionRecs(WrRayLibRectangle rec1, WrRayLibRectangle rec2);

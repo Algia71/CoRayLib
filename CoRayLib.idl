@@ -490,6 +490,13 @@ interface IRayLib : IDispatch
     [id(1071)] HRESULT DrawPolyLines([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
     [id(1072)] HRESULT DrawPolyLinesEx([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] float lineThick, [in] IRayLibColor* color);
 
+    // Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+    [id(1080)] HRESULT GetSplinePointLinear([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1081)] HRESULT GetSplinePointBasis([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1082)] HRESULT GetSplinePointCatmullRom([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1083)] HRESULT GetSplinePointBezierQuadratic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* p3, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1084)] HRESULT GetSplinePointBezierCubic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* c3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+
     // Basic shapes collision detection functions
     [id(1090)] HRESULT CheckCollisionRecs([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(1091)] HRESULT CheckCollisionCircles([in] IRayLibVector2* center1, [in] float radius1, [in] IRayLibVector2* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);

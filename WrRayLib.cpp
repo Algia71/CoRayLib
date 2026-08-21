@@ -1785,6 +1785,92 @@ void WrRayLib::DrawPolyLinesEx(
 	);
 }
 
+// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+WrRayLibVector2 WrRayLib::GetSplinePointLinear(
+	WrRayLibVector2 startPos,
+	WrRayLibVector2 endPos,
+	float t
+)
+{
+	return rl2wr_vector2(
+		::GetSplinePointLinear(
+			wr2rl_vector2(startPos),
+			wr2rl_vector2(endPos),
+			t
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetSplinePointBasis(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	WrRayLibVector2 p3,
+	WrRayLibVector2 p4,
+	float t
+)
+{
+	return rl2wr_vector2(
+		::GetSplinePointBasis(
+			wr2rl_vector2(p1),
+			wr2rl_vector2(p2),
+			wr2rl_vector2(p3),
+			wr2rl_vector2(p4),
+			t
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetSplinePointCatmullRom(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	WrRayLibVector2 p3,
+	WrRayLibVector2 p4,
+	float t
+)
+{
+	return rl2wr_vector2(
+		::GetSplinePointCatmullRom(
+			wr2rl_vector2(p1),
+			wr2rl_vector2(p2),
+			wr2rl_vector2(p3),
+			wr2rl_vector2(p4),
+			t
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetSplinePointBezierQuadratic(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 c2,
+	WrRayLibVector2 p3,
+	float t
+)
+{
+	return rl2wr_vector2(
+		::GetSplinePointBezierQuadratic(
+			wr2rl_vector2(p1),
+			wr2rl_vector2(c2),
+			wr2rl_vector2(p3),
+			t
+		)
+	);
+}
+WrRayLibVector2 WrRayLib::GetSplinePointBezierCubic(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 c2,
+	WrRayLibVector2 c3,
+	WrRayLibVector2 p4,
+	float t
+)
+{
+	return rl2wr_vector2(
+		::GetSplinePointBezierCubic(
+			wr2rl_vector2(p1),
+			wr2rl_vector2(c2),
+			wr2rl_vector2(c3),
+			wr2rl_vector2(p4),
+			t
+		)
+	);
+}
+
 // Basic shapes collision detection functions
 bool WrRayLib::CheckCollisionRecs(
 	WrRayLibRectangle rec1,
