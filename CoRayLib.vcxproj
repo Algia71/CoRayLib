@@ -144,6 +144,7 @@
     <ClCompile Include="CoRayLibColor.cpp" />
     <ClCompile Include="CoRayLibMatrix.cpp" />
     <ClCompile Include="CoRayLibRay.cpp" />
+    <ClCompile Include="CoRayLibRayCollision.cpp" />
     <ClCompile Include="CoRayLibRectangle.cpp" />
     <ClCompile Include="CoRayLibRenderTexture.cpp" />
     <ClCompile Include="CoRayLibTexture.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="CoRayLibColor.h" />
     <ClInclude Include="CoRayLibMatrix.h" />
     <ClInclude Include="CoRayLibRay.h" />
+    <ClInclude Include="CoRayLibRayCollision.h" />
     <ClInclude Include="CoRayLibRectangle.h" />
     <ClInclude Include="CoRayLibRenderTexture.h" />
     <ClInclude Include="CoRayLibTexture.h" />

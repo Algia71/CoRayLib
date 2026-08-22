@@ -21,6 +21,7 @@
 #include "CoRayLibCamera3D.h"
 #include "CoRayLibRay.h"
 #include "CoRayLibBoundingBox.h"
+#include "CoRayLibRayCollision.h"
 #include "reghelper.h"
 
 
@@ -49,23 +50,24 @@ typedef struct tagClassItem {
 } ClassItem;
 
 ClassItem classes[] = {
-    { L"RayLib",                 L"RayLib Class",                 CLSID_RayLib            },
-    { L"RayLib.Color",           L"RayLib.Color Class",           CLSID_RayLibColor       },
-    { L"RayLib.Vector2",         L"RayLib.Vector2 Class",         CLSID_RayLibVector2     },
-    { L"RayLib.Vector3",         L"RayLib.Vector3 Class",         CLSID_RayLibVector3     },
-    { L"RayLib.Vector4",         L"RayLib.Vector4 Class",         CLSID_RayLibVector4     },
-    { L"RayLib.Quaternion",      L"RayLib.Quaternion Class",      CLSID_RayLibQuaternion  },
-    { L"RayLib.Rectangle",       L"RayLib.Rectangle Class",       CLSID_RayLibRectangle   },
-    { L"RayLib.Texture",         L"RayLib.Texture Class",         CLSID_RayLibTexture     },
-    { L"RayLib.Texture2D",       L"RayLib.Texture2D Class",       CLSID_RayLibTexture2D   },
-    { L"RayLib.RenderTexture",   L"RayLib.RenderTexture Class",   CLSID_RayLibTexture     },
-    { L"RayLib.RenderTexture2D", L"RayLib.RenderTexture2D Class", CLSID_RayLibTexture     },
-    { L"RayLib.Matrix",          L"RayLib.Matrix Class",          CLSID_RayLibMatrix      },
-    { L"RayLib.Camera2D",        L"RayLib.Camera2D Class",        CLSID_RayLibCamera2D    },
-    { L"RayLib.Camera3D",        L"RayLib.Camera3D Class",        CLSID_RayLibCamera3D    },
-    { L"RayLib.Camera",          L"RayLib.Camera Class",          CLSID_RayLibCamera      },
-    { L"RayLib.Ray",             L"RayLib.Ray Class",             CLSID_RayLibRay         },
-    { L"RayLib.BoundingBox",     L"RayLib.BoundingBox Class",     CLSID_RayLibBoundingBox },
+    { L"RayLib",                 L"RayLib Class",                 CLSID_RayLib             },
+    { L"RayLib.Color",           L"RayLib.Color Class",           CLSID_RayLibColor        },
+    { L"RayLib.Vector2",         L"RayLib.Vector2 Class",         CLSID_RayLibVector2      },
+    { L"RayLib.Vector3",         L"RayLib.Vector3 Class",         CLSID_RayLibVector3      },
+    { L"RayLib.Vector4",         L"RayLib.Vector4 Class",         CLSID_RayLibVector4      },
+    { L"RayLib.Quaternion",      L"RayLib.Quaternion Class",      CLSID_RayLibQuaternion   },
+    { L"RayLib.Rectangle",       L"RayLib.Rectangle Class",       CLSID_RayLibRectangle    },
+    { L"RayLib.Texture",         L"RayLib.Texture Class",         CLSID_RayLibTexture      },
+    { L"RayLib.Texture2D",       L"RayLib.Texture2D Class",       CLSID_RayLibTexture2D    },
+    { L"RayLib.RenderTexture",   L"RayLib.RenderTexture Class",   CLSID_RayLibTexture      },
+    { L"RayLib.RenderTexture2D", L"RayLib.RenderTexture2D Class", CLSID_RayLibTexture      },
+    { L"RayLib.Matrix",          L"RayLib.Matrix Class",          CLSID_RayLibMatrix       },
+    { L"RayLib.Camera2D",        L"RayLib.Camera2D Class",        CLSID_RayLibCamera2D     },
+    { L"RayLib.Camera3D",        L"RayLib.Camera3D Class",        CLSID_RayLibCamera3D     },
+    { L"RayLib.Camera",          L"RayLib.Camera Class",          CLSID_RayLibCamera       },
+    { L"RayLib.Ray",             L"RayLib.Ray Class",             CLSID_RayLibRay          },
+    { L"RayLib.BoundingBox",     L"RayLib.BoundingBox Class",     CLSID_RayLibBoundingBox  },
+    { L"RayLib.RayCollision",    L"RayLib.RayCollision Class",    CLSID_RayLibRayCollision },
 };
 
 STDAPI DllGetClassObject(
@@ -131,6 +133,9 @@ STDAPI DllGetClassObject(
     }
     else if (rclsid == CLSID_RayLibBoundingBox) {
         pFactory = new (std::nothrow) TClassFactory<CoRayLibBoundingBox>(g_hModule, &g_cComponents, &g_cServerLocks);
+    }
+    else if (rclsid == CLSID_RayLibRayCollision) {
+        pFactory = new (std::nothrow) TClassFactory<CoRayLibRayCollision>(g_hModule, &g_cComponents, &g_cServerLocks);
     }
     else {
         return CLASS_E_CLASSNOTAVAILABLE;

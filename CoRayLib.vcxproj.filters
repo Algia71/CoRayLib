@@ -75,6 +75,9 @@
     <ClCompile Include="CoRayLibBoundingBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CoRayLibRayCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CoRayLib.def">
@@ -187,6 +190,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CoRayLibBoundingBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoRayLibRayCollision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
