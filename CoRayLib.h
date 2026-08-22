@@ -857,6 +857,45 @@ public:
         IRayLibColor* color
     ) override;
 
+    // Splines drawing functions
+    STDMETHODIMP DrawSplineSegmentLinear(
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        float thick,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawSplineSegmentBasis(
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        IRayLibVector2* p3,
+        IRayLibVector2* p4,
+        float thick,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawSplineSegmentCatmullRom(
+        IRayLibVector2* p1,
+        IRayLibVector2* p2,
+        IRayLibVector2* p3,
+        IRayLibVector2* p4,
+        float thick,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawSplineSegmentBezierQuadratic(
+        IRayLibVector2* p1,
+        IRayLibVector2* c2,
+        IRayLibVector2* p3,
+        float thick,
+        IRayLibColor* color
+    ) override;
+    STDMETHODIMP DrawSplineSegmentBezierCubic(
+        IRayLibVector2* p1,
+        IRayLibVector2* c2,
+        IRayLibVector2* c3,
+        IRayLibVector2* p4,
+        float thick,
+        IRayLibColor* color
+    ) override;
+
     // Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
     STDMETHODIMP GetSplinePointLinear(
         IRayLibVector2* startPos,

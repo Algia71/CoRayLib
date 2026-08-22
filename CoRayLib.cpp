@@ -4063,6 +4063,232 @@ STDMETHODIMP CoRayLib::DrawPolyLinesEx(
     return hr;
 }
 
+// Splines drawing functions
+STDMETHODIMP CoRayLib::DrawSplineSegmentLinear(
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_p2 = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSplineSegmentLinear(
+        wr_p1,
+        wr_p2,
+        thick,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawSplineSegmentBasis(
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    IRayLibVector2* p3,
+    IRayLibVector2* p4,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_p2 = { 0 };
+    WrRayLibVector2 wr_p3 = { 0 };
+    WrRayLibVector2 wr_p4 = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSplineSegmentBasis(
+        wr_p1,
+        wr_p2,
+        wr_p3,
+        wr_p4,
+        thick,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawSplineSegmentCatmullRom(
+    IRayLibVector2* p1,
+    IRayLibVector2* p2,
+    IRayLibVector2* p3,
+    IRayLibVector2* p4,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_p2 = { 0 };
+    WrRayLibVector2 wr_p3 = { 0 };
+    WrRayLibVector2 wr_p4 = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSplineSegmentCatmullRom(
+        wr_p1,
+        wr_p2,
+        wr_p3,
+        wr_p4,
+        thick,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawSplineSegmentBezierQuadratic(
+    IRayLibVector2* p1,
+    IRayLibVector2* c2,
+    IRayLibVector2* p3,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!c2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_c2 = { 0 };
+    WrRayLibVector2 wr_p3 = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(c2, &wr_c2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSplineSegmentBezierQuadratic(
+        wr_p1,
+        wr_c2,
+        wr_p3,
+        thick,
+        wr_color
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawSplineSegmentBezierCubic(
+    IRayLibVector2* p1,
+    IRayLibVector2* c2,
+    IRayLibVector2* c3,
+    IRayLibVector2* p4,
+    float thick,
+    IRayLibColor* color
+)
+{
+    if (!p1)
+        return E_POINTER;
+    if (!c2)
+        return E_POINTER;
+    if (!c3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!color)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibVector2 wr_p1 = { 0 };
+    WrRayLibVector2 wr_c2 = { 0 };
+    WrRayLibVector2 wr_c3 = { 0 };
+    WrRayLibVector2 wr_p4 = { 0 };
+    WrRayLibColor wr_color = { 0 };
+
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(c2, &wr_c2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(c3, &wr_c3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(color, &wr_color);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawSplineSegmentBezierCubic(
+        wr_p1,
+        wr_c2,
+        wr_c3,
+        wr_p4,
+        thick,
+        wr_color
+    );
+
+    return hr;
+}
+
 // Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
 STDMETHODIMP CoRayLib::GetSplinePointLinear(
     IRayLibVector2* startPos,

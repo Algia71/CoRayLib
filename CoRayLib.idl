@@ -494,24 +494,31 @@ interface IRayLib : IDispatch
     [id(1071)] HRESULT DrawPolyLines([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] IRayLibColor* color);
     [id(1072)] HRESULT DrawPolyLinesEx([in] IRayLibVector2* center, [in] long sides, [in] float radius, [in] float rotation, [in] float lineThick, [in] IRayLibColor* color);
 
+    // Splines drawing functions
+    [id(1085)] HRESULT DrawSplineSegmentLinear([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] float thick, [in] IRayLibColor* color);
+    [id(1086)] HRESULT DrawSplineSegmentBasis([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float thick, [in] IRayLibColor* color);
+    [id(1088)] HRESULT DrawSplineSegmentCatmullRom([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float thick, [in] IRayLibColor* color);
+    [id(1089)] HRESULT DrawSplineSegmentBezierQuadratic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* p3, [in] float thick, [in] IRayLibColor* color);
+    [id(1090)] HRESULT DrawSplineSegmentBezierCubic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* c3, [in] IRayLibVector2* p4, [in] float thick, [in] IRayLibColor* color);
+
     // Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
-    [id(1080)] HRESULT GetSplinePointLinear([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] float t, [out, retval] IRayLibVector2** pRetVal);
-    [id(1081)] HRESULT GetSplinePointBasis([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
-    [id(1082)] HRESULT GetSplinePointCatmullRom([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
-    [id(1083)] HRESULT GetSplinePointBezierQuadratic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* p3, [in] float t, [out, retval] IRayLibVector2** pRetVal);
-    [id(1084)] HRESULT GetSplinePointBezierCubic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* c3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1091)] HRESULT GetSplinePointLinear([in] IRayLibVector2* startPos, [in] IRayLibVector2* endPos, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1092)] HRESULT GetSplinePointBasis([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1093)] HRESULT GetSplinePointCatmullRom([in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1094)] HRESULT GetSplinePointBezierQuadratic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* p3, [in] float t, [out, retval] IRayLibVector2** pRetVal);
+    [id(1095)] HRESULT GetSplinePointBezierCubic([in] IRayLibVector2* p1, [in] IRayLibVector2* c2, [in] IRayLibVector2* c3, [in] IRayLibVector2* p4, [in] float t, [out, retval] IRayLibVector2** pRetVal);
 
     // Basic shapes collision detection functions
-    [id(1090)] HRESULT CheckCollisionRecs([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1091)] HRESULT CheckCollisionCircles([in] IRayLibVector2* center1, [in] float radius1, [in] IRayLibVector2* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1092)] HRESULT CheckCollisionCircleRec([in] IRayLibVector2* center, [in] float radius, [in] IRayLibRectangle* rec, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1093)] HRESULT CheckCollisionCircleLine([in] IRayLibVector2* center, [in] float radius, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1094)] HRESULT CheckCollisionPointRec([in] IRayLibVector2* point, [in] IRayLibRectangle* rec, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1095)] HRESULT CheckCollisionPointCircle([in] IRayLibVector2* point, [in] IRayLibVector2* center, [in] float radius, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1096)] HRESULT CheckCollisionPointTriangle([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [out, retval] VARIANT_BOOL* pRetVal);
-    [id(1097)] HRESULT CheckCollisionPointLine([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] long threshold, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1096)] HRESULT CheckCollisionRecs([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1097)] HRESULT CheckCollisionCircles([in] IRayLibVector2* center1, [in] float radius1, [in] IRayLibVector2* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1098)] HRESULT CheckCollisionCircleRec([in] IRayLibVector2* center, [in] float radius, [in] IRayLibRectangle* rec, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1099)] HRESULT CheckCollisionCircleLine([in] IRayLibVector2* center, [in] float radius, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1100)] HRESULT CheckCollisionPointRec([in] IRayLibVector2* point, [in] IRayLibRectangle* rec, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1101)] HRESULT CheckCollisionPointCircle([in] IRayLibVector2* point, [in] IRayLibVector2* center, [in] float radius, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1102)] HRESULT CheckCollisionPointTriangle([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] IRayLibVector2* p3, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1103)] HRESULT CheckCollisionPointLine([in] IRayLibVector2* point, [in] IRayLibVector2* p1, [in] IRayLibVector2* p2, [in] long threshold, [out, retval] VARIANT_BOOL* pRetVal);
 
-    [id(1100)] HRESULT GetCollisionRec([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] IRayLibRectangle** pRetVal);
+    [id(1105)] HRESULT GetCollisionRec([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] IRayLibRectangle** pRetVal);
 
     // Texture configuration functions
     [id(1191)] HRESULT SetTextureFilter([in] IRayLibTexture* texture, [in] long filter);

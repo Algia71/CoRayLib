@@ -420,11 +420,11 @@ public:
 //	static void DrawSplineCatmullRom(const Vector2* points, int pointCount, float thick, Color color);
 //	static void DrawSplineBezierQuadratic(const Vector2* points, int pointCount, float thick, Color color);
 //	static void DrawSplineBezierCubic(const Vector2* points, int pointCount, float thick, Color color);
-//	static void DrawSplineSegmentLinear(Vector2 p1, Vector2 p2, float thick, Color color);
-//	static void DrawSplineSegmentBasis(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float thick, Color color);
-//	static void DrawSplineSegmentCatmullRom(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, float thick, Color color);
-//	static void DrawSplineSegmentBezierQuadratic(Vector2 p1, Vector2 c2, Vector2 p3, float thick, Color color);
-//	static void DrawSplineSegmentBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float thick, Color color);
+	static void DrawSplineSegmentLinear(WrRayLibVector2 p1, WrRayLibVector2 p2, float thick, WrRayLibColor color);
+	static void DrawSplineSegmentBasis(WrRayLibVector2 p1, WrRayLibVector2 p2, WrRayLibVector2 p3, WrRayLibVector2 p4, float thick, WrRayLibColor color);
+	static void DrawSplineSegmentCatmullRom(WrRayLibVector2 p1, WrRayLibVector2 p2, WrRayLibVector2 p3, WrRayLibVector2 p4, float thick, WrRayLibColor color);
+	static void DrawSplineSegmentBezierQuadratic(WrRayLibVector2 p1, WrRayLibVector2 c2, WrRayLibVector2 p3, float thick, WrRayLibColor color);
+	static void DrawSplineSegmentBezierCubic(WrRayLibVector2 p1, WrRayLibVector2 c2, WrRayLibVector2 c3, WrRayLibVector2 p4, float thick, WrRayLibColor color);
 
 	// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
 	static WrRayLibVector2 GetSplinePointLinear(WrRayLibVector2 startPos, WrRayLibVector2 endPos, float t);

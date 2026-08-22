@@ -1856,7 +1856,97 @@ void WrRayLib::DrawPolyLinesEx(
 	);
 }
 
+
+// Splines drawing functions
+
+void WrRayLib::DrawSplineSegmentLinear(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawSplineSegmentLinear(
+		wr2rl_vector2(p1),
+		wr2rl_vector2(p2),
+		thick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawSplineSegmentBasis(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	WrRayLibVector2 p3,
+	WrRayLibVector2 p4,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawSplineSegmentBasis(
+		wr2rl_vector2(p1),
+		wr2rl_vector2(p2),
+		wr2rl_vector2(p3),
+		wr2rl_vector2(p4),
+		thick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawSplineSegmentCatmullRom(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 p2,
+	WrRayLibVector2 p3,
+	WrRayLibVector2 p4,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawSplineSegmentCatmullRom(
+		wr2rl_vector2(p1),
+		wr2rl_vector2(p2),
+		wr2rl_vector2(p3),
+		wr2rl_vector2(p4),
+		thick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawSplineSegmentBezierQuadratic(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 c2,
+	WrRayLibVector2 p3,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawSplineSegmentBezierQuadratic(
+		wr2rl_vector2(p1),
+		wr2rl_vector2(c2),
+		wr2rl_vector2(p3),
+		thick,
+		wr2rl_color(color)
+	);
+}
+void WrRayLib::DrawSplineSegmentBezierCubic(
+	WrRayLibVector2 p1,
+	WrRayLibVector2 c2,
+	WrRayLibVector2 c3,
+	WrRayLibVector2 p4,
+	float thick,
+	WrRayLibColor color
+)
+{
+	::DrawSplineSegmentBezierCubic(
+		wr2rl_vector2(p1),
+		wr2rl_vector2(c2),
+		wr2rl_vector2(c3),
+		wr2rl_vector2(p4),
+		thick,
+		wr2rl_color(color)
+	);
+}
+
+
 // Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+
 WrRayLibVector2 WrRayLib::GetSplinePointLinear(
 	WrRayLibVector2 startPos,
 	WrRayLibVector2 endPos,
