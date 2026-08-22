@@ -268,6 +268,27 @@ inline HRESULT CoRayLib::co2wr(
 
     return hr;
 }
+inline HRESULT CoRayLib::co2wr(
+    IRayLibBoundingBox* in,
+    WrRayLibBoundingBox* out
+)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    IRayLibVector3* elem = NULL;
+
+    hr = in->get_min(&elem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(elem, &out->min);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_max(&elem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(elem, &out->max);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 
 inline HRESULT CoRayLib::wr2co(
     WrRayLibColor* in,
@@ -6762,6 +6783,40 @@ STDMETHODIMP CoRayLib::CheckCollisionSpheres(
         radius1,
         wr_center2,
         radius2
+    );
+
+    if (retVal)
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::CheckCollisionBoxes(
+    IRayLibBoundingBox* box1,
+    IRayLibBoundingBox* box2,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!box1)
+        return E_POINTER;
+    if (!box2)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibBoundingBox wr_box1 = { 0 };
+    WrRayLibBoundingBox wr_box2 = { 0 };
+
+    hr = co2wr(box1, &wr_box1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(box2, &wr_box2);
+    if (FAILED(hr)) return hr;
+
+    const bool retVal = WrRayLib::CheckCollisionBoxes(
+        wr_box1,
+        wr_box2
     );
 
     if (retVal)

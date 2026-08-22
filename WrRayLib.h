@@ -736,7 +736,7 @@ public:
 
 	// Collision detection functions
 	static bool CheckCollisionSpheres(WrRayLibVector3 center1, float radius1, WrRayLibVector3 center2, float radius2);
-//	static bool CheckCollisionBoxes(BoundingBox box1, BoundingBox box2);
+	static bool CheckCollisionBoxes(WrRayLibBoundingBox box1, WrRayLibBoundingBox box2);
 //	static bool CheckCollisionBoxSphere(BoundingBox box, Vector3 center, float radius);
 //	static RayCollision GetRayCollisionSphere(Ray ray, Vector3 center, float radius);
 //	static RayCollision GetRayCollisionBox(Ray ray, BoundingBox box);

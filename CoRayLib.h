@@ -23,6 +23,7 @@ class CoRayLib : IRayLib
     inline HRESULT co2wr(IRayLibRay* in, WrRayLibRay* out);
     inline HRESULT co2wr(IRayLibTexture* in, WrRayLibTexture* out);
     inline HRESULT co2wr(IRayLibRenderTexture* in, WrRayLibRenderTexture* out);
+    inline HRESULT co2wr(IRayLibBoundingBox* in, WrRayLibBoundingBox* out);
 
     inline HRESULT wr2co(WrRayLibColor* in, IRayLibColor* out);
     inline HRESULT wr2co(WrRayLibVector2* in, IRayLibVector2* out);
@@ -34,6 +35,7 @@ class CoRayLib : IRayLib
     inline HRESULT wr2co(WrRayLibRay* in, IRayLibRay* out);
     inline HRESULT wr2co(WrRayLibTexture* in, IRayLibTexture* out);
     inline HRESULT wr2co(WrRayLibRenderTexture* in, IRayLibRenderTexture* out);
+    inline HRESULT wr2co(WrRayLibBoundingBox* in, IRayLibBoundingBox* out);
     inline HRESULT wr2co(WrRayLibMatrix* in, IRayLibMatrix* out);
 
 public:
@@ -1332,6 +1334,11 @@ public:
         float radius1,
         IRayLibVector3* center2,
         float radius2,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP CheckCollisionBoxes(
+        IRayLibBoundingBox* box1,
+        IRayLibBoundingBox* box2,
         VARIANT_BOOL* pRetVal
     ) override;
 

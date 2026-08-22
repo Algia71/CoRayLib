@@ -113,6 +113,16 @@ static inline Texture wr2rl_texture(
 	};
 }
 
+static inline BoundingBox wr2rl_bounding_box(
+	WrRayLibBoundingBox bounding_box
+)
+{
+	return {
+		wr2rl_vector3(bounding_box.min),
+		wr2rl_vector3(bounding_box.max)
+	};
+}
+
 static inline RenderTexture wr2rl_render_texture(
 	WrRayLibRenderTexture render_texture
 )
@@ -2884,6 +2894,16 @@ bool WrRayLib::CheckCollisionSpheres(
 		radius1,
 		wr2rl_vector3(center2),
 		radius2
+	);
+}
+bool WrRayLib::CheckCollisionBoxes(
+	WrRayLibBoundingBox box1,
+	WrRayLibBoundingBox box2
+)
+{
+	return ::CheckCollisionBoxes(
+		wr2rl_bounding_box(box1),
+		wr2rl_bounding_box(box2)
 	);
 }
 
