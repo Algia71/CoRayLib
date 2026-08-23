@@ -523,6 +523,9 @@ interface IRayLib : IDispatch
     // Texture loading functions
     [id(1180)] HRESULT LoadTexture([in] BSTR fileName, [out, retval] IRayLibTexture** pRetVal);
 
+    [id(1184)] HRESULT IsTextureValid([in] IRayLibTexture* texture, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(1185)] HRESULT UnloadTexture([in] IRayLibTexture* texture);
+
     // Texture configuration functions
     [id(1191)] HRESULT SetTextureFilter([in] IRayLibTexture* texture, [in] long filter);
     [id(1192)] HRESULT SetTextureWrap([in] IRayLibTexture* texture, [in] long wrap);

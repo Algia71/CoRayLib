@@ -541,8 +541,8 @@ public:
 //	static Texture2D LoadTextureFromImage(Image image);
 //	static TextureCubemap LoadTextureCubemap(Image image, int layout);
 //	static RenderTexture2D LoadRenderTexture(int width, int height);
-//	static bool IsTextureValid(Texture2D texture);
-//	static void UnloadTexture(Texture2D texture);
+	static bool IsTextureValid(WrRayLibTexture texture);
+	static void UnloadTexture(WrRayLibTexture texture);
 //	static bool IsRenderTextureValid(RenderTexture2D target);
 //	static void UnloadRenderTexture(RenderTexture2D target);
 //	static void UpdateTexture(Texture2D texture, const void* pixels);

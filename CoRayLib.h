@@ -999,6 +999,13 @@ public:
         BSTR fileName,
         IRayLibTexture** pRetVal
     ) override;
+    STDMETHODIMP IsTextureValid(
+        IRayLibTexture* texture,
+        VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP UnloadTexture(
+        IRayLibTexture* texture
+    ) override;
 
     // Texture configuration functions
     STDMETHODIMP SetTextureFilter(

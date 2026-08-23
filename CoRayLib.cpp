@@ -4887,6 +4887,52 @@ STDMETHODIMP CoRayLib::LoadTexture(
 
     return hr;
 }
+STDMETHODIMP CoRayLib::IsTextureValid(
+    IRayLibTexture* texture,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+
+    const bool retVal = WrRayLib::IsTextureValid(
+        wr_texture
+    );
+
+    if (retVal)
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::UnloadTexture(
+    IRayLibTexture* texture
+)
+{
+    if (!texture)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::UnloadTexture(
+        wr_texture
+    );
+
+    return hr;
+}
 
 
 // Texture configuration functions

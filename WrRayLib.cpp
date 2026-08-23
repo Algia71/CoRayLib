@@ -2174,6 +2174,22 @@ WrRayLibTexture WrRayLib::LoadTexture(
 		)
 	);
 }
+bool WrRayLib::IsTextureValid(
+	WrRayLibTexture texture
+)
+{
+	return ::IsTextureValid(
+		wr2rl_texture(texture)
+	);
+}
+void WrRayLib::UnloadTexture(
+	WrRayLibTexture texture
+)
+{
+	::UnloadTexture(
+		wr2rl_texture(texture)
+	);
+}
 
 
 // Texture configuration functions
