@@ -520,6 +520,9 @@ interface IRayLib : IDispatch
 
     [id(1105)] HRESULT GetCollisionRec([in] IRayLibRectangle* rec1, [in] IRayLibRectangle* rec2, [out, retval] IRayLibRectangle** pRetVal);
 
+    // Texture loading functions
+    [id(1180)] HRESULT LoadTexture([in] BSTR fileName, [out, retval] IRayLibTexture** pRetVal);
+
     // Texture configuration functions
     [id(1191)] HRESULT SetTextureFilter([in] IRayLibTexture* texture, [in] long filter);
     [id(1192)] HRESULT SetTextureWrap([in] IRayLibTexture* texture, [in] long wrap);

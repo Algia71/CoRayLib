@@ -2162,6 +2162,20 @@ WrRayLibRectangle WrRayLib::GetCollisionRec(
 }
 
 
+// Texture loading functions
+
+WrRayLibTexture WrRayLib::LoadTexture(
+	const char* fileName
+)
+{
+	return rl2wr_texture(
+		::LoadTexture(
+			fileName
+		)
+	);
+}
+
+
 // Texture configuration functions
 
 void WrRayLib::SetTextureFilter(

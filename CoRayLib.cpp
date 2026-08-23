@@ -4850,6 +4850,45 @@ STDMETHODIMP CoRayLib::GetCollisionRec(
 }
 
 
+// Texture loading functions
+
+STDMETHODIMP CoRayLib::LoadTexture(
+    BSTR fileName,
+    IRayLibTexture** pRetVal
+)
+{
+    if (!fileName)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    char* lpsz = nullptr;
+
+    WrRayLibTexture texture = WrRayLib::LoadTexture(
+        lpsz = _com_util::ConvertBSTRToString(fileName)
+    );
+
+    delete[] lpsz;
+
+    HRESULT hr = CoCreateInstance(
+        CLSID_RayLibTexture,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibTexture,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &texture,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
+
+
 // Texture configuration functions
 
 STDMETHODIMP CoRayLib::SetTextureFilter(

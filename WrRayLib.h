@@ -537,7 +537,7 @@ public:
 //	static void ImageDrawTextEx(Image* dst, Font font, const char* text, Vector2 position, float fontSize, float spacing, Color tint);
 
 	// Texture loading functions
-//	static Texture2D LoadTexture(const char* fileName);
+	static WrRayLibTexture LoadTexture(const char* fileName);
 //	static Texture2D LoadTextureFromImage(Image image);
 //	static TextureCubemap LoadTextureCubemap(Image image, int layout);
 //	static RenderTexture2D LoadRenderTexture(int width, int height);

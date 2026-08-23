@@ -994,6 +994,12 @@ public:
         IRayLibRectangle** pRetVal
     ) override;
 
+    // Texture loading functions
+    STDMETHODIMP LoadTexture(
+        BSTR fileName,
+        IRayLibTexture** pRetVal
+    ) override;
+
     // Texture configuration functions
     STDMETHODIMP SetTextureFilter(
         IRayLibTexture* texture,
