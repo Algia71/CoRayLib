@@ -2216,6 +2216,84 @@ void WrRayLib::SetTextureWrap(
 }
 
 
+// Texture drawing functions
+
+void WrRayLib::DrawTexture(
+	WrRayLibTexture texture,
+	int posX,
+	int posY,
+	WrRayLibColor tint
+)
+{
+	::DrawTexture(
+		wr2rl_texture(texture),
+		posX,
+		posY,
+		wr2rl_color(tint)
+	);
+}
+void WrRayLib::DrawTextureV(
+	WrRayLibTexture texture,
+	WrRayLibVector2 position,
+	WrRayLibColor tint
+)
+{
+	::DrawTextureV(
+		wr2rl_texture(texture),
+		wr2rl_vector2(position),
+		wr2rl_color(tint)
+	);
+}
+void WrRayLib::DrawTextureEx(
+	WrRayLibTexture texture,
+	WrRayLibVector2 position,
+	float rotation,
+	float scale,
+	WrRayLibColor tint
+)
+{
+	::DrawTextureEx(
+		wr2rl_texture(texture),
+		wr2rl_vector2(position),
+		rotation,
+		scale,
+		wr2rl_color(tint)
+	);
+}
+void WrRayLib::DrawTextureRec(
+	WrRayLibTexture texture,
+	WrRayLibRectangle source,
+	WrRayLibVector2 position,
+	WrRayLibColor tint
+)
+{
+	::DrawTextureRec(
+		wr2rl_texture(texture),
+		wr2rl_rect(source),
+		wr2rl_vector2(position),
+		wr2rl_color(tint)
+	);
+}
+void WrRayLib::DrawTexturePro(
+	WrRayLibTexture texture,
+	WrRayLibRectangle source,
+	WrRayLibRectangle dest,
+	WrRayLibVector2 origin,
+	float rotation,
+	WrRayLibColor tint
+)
+{
+	::DrawTexturePro(
+		wr2rl_texture(texture),
+		wr2rl_rect(source),
+		wr2rl_rect(dest),
+		wr2rl_vector2(origin),
+		rotation,
+		wr2rl_color(tint)
+	);
+}
+
+
 // Color/pixel related functions
 
 bool WrRayLib::ColorIsEqual(

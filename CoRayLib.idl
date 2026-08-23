@@ -530,6 +530,13 @@ interface IRayLib : IDispatch
     [id(1191)] HRESULT SetTextureFilter([in] IRayLibTexture* texture, [in] long filter);
     [id(1192)] HRESULT SetTextureWrap([in] IRayLibTexture* texture, [in] long wrap);
 
+    // Texture drawing functions
+    [id(1193)] HRESULT DrawTexture([in] IRayLibTexture* texture, [in] long posX, [in] long posY, [in] IRayLibColor* tint);
+    [id(1194)] HRESULT DrawTextureV([in] IRayLibTexture* texture, [in] IRayLibVector2* position, [in] IRayLibColor* tint);
+    [id(1195)] HRESULT DrawTextureEx([in] IRayLibTexture* texture, [in] IRayLibVector2* position, [in] float rotation, [in] float scale, [in] IRayLibColor* tint);
+    [id(1196)] HRESULT DrawTextureRec([in] IRayLibTexture* texture, [in] IRayLibRectangle* source, [in] IRayLibVector2* position, [in] IRayLibColor* tint);
+    [id(1197)] HRESULT DrawTexturePro([in] IRayLibTexture* texture, [in] IRayLibRectangle* source, [in] IRayLibRectangle* dest, [in] IRayLibVector2* origin, [in] float rotation, [in] IRayLibColor* tint);
+
     // Color/pixel related functions
     [id(1200)] HRESULT ColorIsEqual([in] IRayLibColor* col1, [in] IRayLibColor* col2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(1201)] HRESULT Fade([in] IRayLibColor* color, [in] float alpha, [out, retval] IRayLibColor** pRetVal);

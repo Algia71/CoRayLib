@@ -554,11 +554,11 @@ public:
 	static void SetTextureWrap(WrRayLibTexture texture, int wrap);
 
 	// Texture drawing functions
-//	static void DrawTexture(Texture2D texture, int posX, int posY, Color tint);
-//	static void DrawTextureV(Texture2D texture, Vector2 position, Color tint);
-//	static void DrawTextureEx(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
-//	static void DrawTextureRec(Texture2D texture, Rectangle source, Vector2 position, Color tint);
-//	static void DrawTexturePro(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float rotation, Color tint);
+	static void DrawTexture(WrRayLibTexture texture, int posX, int posY, WrRayLibColor tint);
+	static void DrawTextureV(WrRayLibTexture texture, WrRayLibVector2 position, WrRayLibColor tint);
+	static void DrawTextureEx(WrRayLibTexture texture, WrRayLibVector2 position, float rotation, float scale, WrRayLibColor tint);
+	static void DrawTextureRec(WrRayLibTexture texture, WrRayLibRectangle source, WrRayLibVector2 position, WrRayLibColor tint);
+	static void DrawTexturePro(WrRayLibTexture texture, WrRayLibRectangle source, WrRayLibRectangle dest, WrRayLibVector2 origin, float rotation, WrRayLibColor tint);
 //	static void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, Rectangle dest, Vector2 origin, float rotation, Color tint);
 
 	// Color/pixel related functions

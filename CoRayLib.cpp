@@ -4981,6 +4981,199 @@ STDMETHODIMP CoRayLib::SetTextureWrap(
 }
 
 
+// Texture drawing functions
+
+STDMETHODIMP CoRayLib::DrawTexture(
+    IRayLibTexture* texture,
+    long posX,
+    long posY,
+    IRayLibColor* tint
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(tint, &wr_tint);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTexture(
+        wr_texture,
+        posX,
+        posY,
+        wr_tint
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawTextureV(
+    IRayLibTexture* texture,
+    IRayLibVector2* position,
+    IRayLibColor* tint
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!position)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(tint, &wr_tint);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTextureV(
+        wr_texture,
+        wr_position,
+        wr_tint
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawTextureEx(
+    IRayLibTexture* texture,
+    IRayLibVector2* position,
+    float rotation,
+    float scale,
+    IRayLibColor* tint
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!position)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(tint, &wr_tint);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTextureEx(
+        wr_texture,
+        wr_position,
+        rotation,
+        scale,
+        wr_tint
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawTextureRec(
+    IRayLibTexture* texture,
+    IRayLibRectangle* source,
+    IRayLibVector2* position,
+    IRayLibColor* tint
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!source)
+        return E_POINTER;
+    if (!position)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+    WrRayLibRectangle wr_source = { 0 };
+    WrRayLibVector2 wr_position = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(source, &wr_source);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(position, &wr_position);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(tint, &wr_tint);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTextureRec(
+        wr_texture,
+        wr_source,
+        wr_position,
+        wr_tint
+    );
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::DrawTexturePro(
+    IRayLibTexture* texture,
+    IRayLibRectangle* source,
+    IRayLibRectangle* dest,
+    IRayLibVector2* origin,
+    float rotation,
+    IRayLibColor* tint
+)
+{
+    if (!texture)
+        return E_POINTER;
+    if (!source)
+        return E_POINTER;
+    if (!dest)
+        return E_POINTER;
+    if (!origin)
+        return E_POINTER;
+    if (!tint)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibTexture wr_texture = { 0 };
+    WrRayLibRectangle wr_source = { 0 };
+    WrRayLibRectangle wr_dest = { 0 };
+    WrRayLibVector2 wr_origin = { 0 };
+    WrRayLibColor wr_tint = { 0 };
+
+    hr = co2wr(texture, &wr_texture);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(source, &wr_source);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(dest, &wr_dest);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(dest, &wr_dest);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(origin, &wr_origin);
+    if (FAILED(hr)) return hr;
+
+    WrRayLib::DrawTexturePro(
+        wr_texture,
+        wr_source,
+        wr_dest,
+        wr_origin,
+        rotation,
+        wr_tint
+    );
+
+    return hr;
+}
+
+
 // Color/pixel related functions
 
 STDMETHODIMP CoRayLib::ColorIsEqual(

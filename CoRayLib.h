@@ -1017,6 +1017,40 @@ public:
         long wrap
     ) override;
 
+    // Texture drawing functions
+    STDMETHODIMP DrawTexture(
+        IRayLibTexture* texture,
+        long posX,
+        long posY,
+        IRayLibColor* tint
+    ) override;
+    STDMETHODIMP DrawTextureV(
+        IRayLibTexture* texture,
+        IRayLibVector2* position,
+        IRayLibColor* tint
+    ) override;
+    STDMETHODIMP DrawTextureEx(
+        IRayLibTexture* texture,
+        IRayLibVector2* position,
+        float rotation,
+        float scale,
+        IRayLibColor* tint
+    ) override;
+    STDMETHODIMP DrawTextureRec(
+        IRayLibTexture* texture,
+        IRayLibRectangle* source,
+        IRayLibVector2* position,
+        IRayLibColor* tint
+    ) override;
+    STDMETHODIMP DrawTexturePro(
+        IRayLibTexture* texture,
+        IRayLibRectangle* source,
+        IRayLibRectangle* dest,
+        IRayLibVector2* origin,
+        float rotation,
+        IRayLibColor* tint
+    ) override;
+
     // Color/pixel related functions
     STDMETHODIMP ColorIsEqual(
         IRayLibColor* col1,
