@@ -2906,6 +2906,18 @@ bool WrRayLib::CheckCollisionBoxes(
 		wr2rl_bounding_box(box2)
 	);
 }
+bool WrRayLib::CheckCollisionBoxSphere(
+	WrRayLibBoundingBox box,
+	WrRayLibVector3 center,
+	float radius
+)
+{
+	return ::CheckCollisionBoxSphere(
+		wr2rl_bounding_box(box),
+		wr2rl_vector3(center),
+		radius
+	);
+}
 
 
 // Audio device management functions

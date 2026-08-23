@@ -1341,6 +1341,12 @@ public:
         IRayLibBoundingBox* box2,
         VARIANT_BOOL* pRetVal
     ) override;
+    STDMETHODIMP CheckCollisionBoxSphere(
+        IRayLibBoundingBox* box,
+        IRayLibVector3* center,
+        float radius,
+        VARIANT_BOOL* pRetVal
+    ) override;
 
 
     //////////////////////////////////////////////

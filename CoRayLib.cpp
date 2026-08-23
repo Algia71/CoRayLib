@@ -6826,6 +6826,42 @@ STDMETHODIMP CoRayLib::CheckCollisionBoxes(
 
     return hr;
 }
+STDMETHODIMP CoRayLib::CheckCollisionBoxSphere(
+    IRayLibBoundingBox* box,
+    IRayLibVector3* center,
+    float radius,
+    VARIANT_BOOL* pRetVal
+)
+{
+    if (!box)
+        return E_POINTER;
+    if (!center)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibBoundingBox wr_box = { 0 };
+    WrRayLibVector3 wr_center = { 0 };
+
+    hr = co2wr(box, &wr_box);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+
+    const bool retVal = WrRayLib::CheckCollisionBoxSphere(
+        wr_box,
+        wr_center,
+        radius
+    );
+
+    if (retVal)
+        *pRetVal = VARIANT_TRUE;
+    else
+        *pRetVal = VARIANT_FALSE;
+
+    return hr;
+}
 
 
 //////////////////////////////////////////////

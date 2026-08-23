@@ -605,6 +605,7 @@ interface IRayLib : IDispatch
     // Collision detection functions
     [id(3900)] HRESULT CheckCollisionSpheres([in] IRayLibVector3* center1, [in] float radius1, [in] IRayLibVector3* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(3901)] HRESULT CheckCollisionBoxes([in] IRayLibBoundingBox* box1, [in] IRayLibBoundingBox* box2, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(3902)] HRESULT CheckCollisionBoxSphere([in] IRayLibBoundingBox* box, [in] IRayLibVector3* center, [in] float radius, [out, retval] VARIANT_BOOL* pRetVal);
 
 
     //////////////////////////////////////////////
