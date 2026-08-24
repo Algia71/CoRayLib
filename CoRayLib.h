@@ -1207,6 +1207,18 @@ public:
         BSTR replacement,
         BSTR* pRetVal
     ) override;
+    STDMETHODIMP TextInsert(
+        BSTR text,
+        BSTR insert,
+        long position,
+        BSTR* pRetVal
+    ) override;
+    STDMETHODIMP TextInsertAlloc(
+        BSTR text,
+        BSTR insert,
+        long position,
+        BSTR* pRetVal
+    ) override;
 
     STDMETHODIMP TextFindIndex(
         BSTR text,

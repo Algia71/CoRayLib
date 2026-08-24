@@ -578,6 +578,8 @@ interface IRayLib : IDispatch
     [id(2080)] HRESULT TextReplaceAlloc([in] BSTR text, [in] BSTR search, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
     [id(2081)] HRESULT TextReplaceBetween([in] BSTR text, [in] BSTR begin, [in] BSTR end, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
     [id(2082)] HRESULT TextReplaceBetweenAlloc([in] BSTR text, [in] BSTR begin, [in] BSTR end, [in] BSTR replacement, [out, retval] BSTR* pRetVal);
+    [id(2083)] HRESULT TextInsert([in] BSTR text, [in] BSTR insert, [in] long position, [out, retval] BSTR* pRetVal);
+    [id(2084)] HRESULT TextInsertAlloc([in] BSTR text, [in] BSTR insert, [in] long position, [out, retval] BSTR* pRetVal);
 
     [id(2090)] HRESULT TextFindIndex([in] BSTR text, [in] BSTR search, [out, retval] long* pRetVal);
     [id(2091)] HRESULT TextToUpper([in] BSTR text, [out, retval] BSTR* pRetVal);

@@ -6156,6 +6156,80 @@ STDMETHODIMP CoRayLib::TextReplaceBetweenAlloc(
 
     return S_OK;
 }
+STDMETHODIMP CoRayLib::TextInsert(
+    BSTR text,
+    BSTR insert,
+    long position,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!insert)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        WrRayLib::TextInsert(
+            lpsz1 = _com_util::ConvertBSTRToString(
+                text
+            ),
+            lpsz2 = _com_util::ConvertBSTRToString(
+                insert
+            ),
+            position
+        )
+    );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+
+    return S_OK;
+}
+STDMETHODIMP CoRayLib::TextInsertAlloc(
+    BSTR text,
+    BSTR insert,
+    long position,
+    BSTR* pRetVal
+)
+{
+    if (!text)
+        return E_POINTER;
+    if (!insert)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+
+    char* lpsz1 = nullptr;
+    char* lpsz2 = nullptr;
+    char* ptr = nullptr;
+
+    *pRetVal = _com_util::ConvertStringToBSTR(
+        ptr = WrRayLib::TextInsertAlloc(
+            lpsz1 = _com_util::ConvertBSTRToString(
+                text
+            ),
+            lpsz2 = _com_util::ConvertBSTRToString(
+                insert
+            ),
+            position
+        )
+    );
+
+    WrRayLib::MemFree(
+        (void*)ptr
+    );
+
+    delete[] lpsz1;
+    delete[] lpsz2;
+
+    return S_OK;
+}
 
 STDMETHODIMP CoRayLib::TextFindIndex(
     BSTR text,

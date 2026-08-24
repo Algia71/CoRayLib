@@ -2612,6 +2612,30 @@ char* WrRayLib::TextReplaceBetweenAlloc(
 		replacement
 	);
 }
+char* WrRayLib::TextInsert(
+	const char* text,
+	const char* insert,
+	int position
+)
+{
+	return ::TextInsert(
+		text,
+		insert,
+		position
+	);
+}
+char* WrRayLib::TextInsertAlloc(
+	const char* text,
+	const char* insert,
+	int position
+)
+{
+	return ::TextInsertAlloc(
+		text,
+		insert,
+		position
+	);
+}
 
 int WrRayLib::TextFindIndex(
 	const char* text,

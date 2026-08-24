@@ -638,8 +638,8 @@ public:
 	static char* TextReplaceAlloc(const char* text, const char* search, const char* replacement);
 	static char* TextReplaceBetween(const char* text, const char* begin, const char* end, const char* replacement);
 	static char* TextReplaceBetweenAlloc(const char* text, const char* begin, const char* end, const char* replacement);
-//	static char* TextInsert(const char* text, const char* insert, int position);
-//	static char* TextInsertAlloc(const char* text, const char* insert, int position);
+	static char* TextInsert(const char* text, const char* insert, int position);
+	static char* TextInsertAlloc(const char* text, const char* insert, int position);
 //	static char* TextJoin(char** textList, int count, const char* delimiter);
 //	static char** TextSplit(const char* text, char delimiter, int* count);
 //	static void TextAppend(char* text, const char* append, int* position);
