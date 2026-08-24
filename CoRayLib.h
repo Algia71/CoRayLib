@@ -1122,6 +1122,12 @@ public:
         long hexValue,
         IRayLibColor** pRetVal
     ) override;
+    STDMETHODIMP GetPixelDataSize(
+        long width,
+        long height,
+        long format,
+        long* pRetVal
+    ) override;
 
 
     //////////////////////////////////////////////

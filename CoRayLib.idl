@@ -553,6 +553,7 @@ interface IRayLib : IDispatch
     [id(1212)] HRESULT ColorLerp([in] IRayLibColor* color1, [in] IRayLibColor* color2, [in] float factor, [out, retval] IRayLibColor** pRetVal);
     [id(1213)] HRESULT GetColor([in] long hexValue, [out, retval] IRayLibColor** pRetVal);
 
+    [id(1216)] HRESULT GetPixelDataSize([in] long width, [in] long height, [in] long format, [out, retval] long* pRetVal);
 
     //////////////////////////////////////////////
     // Module: RTEXT

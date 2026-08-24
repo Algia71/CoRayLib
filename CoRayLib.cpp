@@ -5727,6 +5727,24 @@ STDMETHODIMP CoRayLib::GetColor(
 
     return hr;
 }
+STDMETHODIMP CoRayLib::GetPixelDataSize(
+    long width,
+    long height,
+    long format,
+    long* pRetVal
+)
+{
+    if (!pRetVal)
+        return E_POINTER;
+
+    *pRetVal = (long)WrRayLib::GetPixelDataSize(
+        (int)width,
+        (int)height,
+        (int)format
+    );
+
+    return S_OK;
+}
 
 
 //////////////////////////////////////////////

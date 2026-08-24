@@ -2468,6 +2468,18 @@ WrRayLibColor WrRayLib::GetColor(
 		)
 	);
 }
+int WrRayLib::GetPixelDataSize(
+	int width,
+	int height,
+	int format
+)
+{
+	return ::GetPixelDataSize(
+		width,
+		height,
+		format
+	);
+}
 
 
 // Text drawing functions

@@ -578,7 +578,7 @@ public:
 	static WrRayLibColor GetColor(unsigned int hexValue);
 //	static Color GetPixelColor(void* srcPtr, int format);
 //	static void SetPixelColor(void* dstPtr, Color color, int format);
-//	static int GetPixelDataSize(int width, int height, int format);
+	static int GetPixelDataSize(int width, int height, int format);
 
 
 	/* MODULE: RTEXT */
