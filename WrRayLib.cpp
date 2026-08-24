@@ -227,6 +227,18 @@ static WrRayLibTexture inline rl2wr_texture(
 	};
 }
 
+static WrRayLibRayCollision inline rl2wr_ray_collision(
+	RayCollision collision
+)
+{
+	return {
+		collision.hit,
+		collision.distance,
+		rl2wr_vector3(collision.point),
+		rl2wr_vector3(collision.normal)
+	};
+}
+
 
 // Window-related functions
 
@@ -3048,6 +3060,67 @@ bool WrRayLib::CheckCollisionBoxSphere(
 		wr2rl_bounding_box(box),
 		wr2rl_vector3(center),
 		radius
+	);
+}
+WrRayLibRayCollision WrRayLib::GetRayCollisionSphere(
+	WrRayLibRay ray,
+	WrRayLibVector3 center,
+	float radius
+)
+{
+	return rl2wr_ray_collision(
+		::GetRayCollisionSphere(
+			wr2rl_ray(ray),
+			wr2rl_vector3(center),
+			radius
+		)
+	);
+}
+WrRayLibRayCollision WrRayLib::GetRayCollisionBox(
+	WrRayLibRay ray,
+	WrRayLibBoundingBox box
+)
+{
+	return rl2wr_ray_collision(
+		::GetRayCollisionBox(
+			wr2rl_ray(ray),
+			wr2rl_bounding_box(box)
+		)
+	);
+}
+
+WrRayLibRayCollision WrRayLib::GetRayCollisionTriangle(
+	WrRayLibRay ray,
+	WrRayLibVector3 p1,
+	WrRayLibVector3 p2,
+	WrRayLibVector3 p3
+)
+{
+	return rl2wr_ray_collision(
+		::GetRayCollisionTriangle(
+			wr2rl_ray(ray),
+			wr2rl_vector3(p1),
+			wr2rl_vector3(p2),
+			wr2rl_vector3(p3)
+		)
+	);
+}
+WrRayLibRayCollision WrRayLib::GetRayCollisionQuad(
+	WrRayLibRay ray,
+	WrRayLibVector3 p1,
+	WrRayLibVector3 p2,
+	WrRayLibVector3 p3,
+	WrRayLibVector3 p4
+)
+{
+	return rl2wr_ray_collision(
+		::GetRayCollisionQuad(
+			wr2rl_ray(ray),
+			wr2rl_vector3(p1),
+			wr2rl_vector3(p2),
+			wr2rl_vector3(p3),
+			wr2rl_vector3(p4)
+		)
 	);
 }
 

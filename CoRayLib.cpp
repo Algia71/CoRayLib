@@ -289,6 +289,34 @@ inline HRESULT CoRayLib::co2wr(
 
     return hr;
 }
+inline HRESULT CoRayLib::co2wr(
+    IRayLibRayCollision* in,
+    WrRayLibRayCollision* out)
+{
+    HRESULT hr = S_OK;
+    *out = { 0 };
+    IRayLibVector3* elem = NULL;
+    VARIANT_BOOL belem = VARIANT_FALSE;
+
+    hr = in->get_hit(&belem);
+    if (FAILED(hr)) return hr;
+    out->hit = belem == VARIANT_TRUE;
+
+    hr = in->get_distance(&out->distance);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_point(&elem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(elem, &out->point);
+    if (FAILED(hr)) return hr;
+
+    hr = in->get_normal(&elem);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(elem, &out->normal);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 
 inline HRESULT CoRayLib::wr2co(
     WrRayLibColor* in,
@@ -584,7 +612,35 @@ inline HRESULT CoRayLib::wr2co(
 
     return hr;
 }
+inline HRESULT CoRayLib::wr2co(
+    WrRayLibRayCollision* in,
+    IRayLibRayCollision* out
+)
+{
+    HRESULT hr = S_OK;
 
+    hr = out->put_hit(in->hit ? VARIANT_TRUE : VARIANT_FALSE);
+    if (FAILED(hr)) return hr;
+
+    hr = out->put_distance(in->distance);
+    if (FAILED(hr)) return hr;
+
+    IRayLibVector3* v = NULL;
+
+    hr = out->get_point(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->point, v);
+    if (FAILED(hr)) return hr;
+
+    hr = out->get_normal(&v);
+    if (FAILED(hr)) return hr;
+
+    hr = wr2co(&in->normal, v);
+    if (FAILED(hr)) return hr;
+
+    return hr;
+}
 
 CoRayLib::CoRayLib(HMODULE hModule)
 {
@@ -1583,10 +1639,12 @@ STDMETHODIMP CoRayLib::GetScreenToWorldRay(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if(SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1629,10 +1687,12 @@ STDMETHODIMP CoRayLib::GetScreenToWorldRayEx(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1671,10 +1731,12 @@ STDMETHODIMP CoRayLib::GetWorldToScreen(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1717,10 +1779,12 @@ STDMETHODIMP CoRayLib::GetWorldToScreenEx(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1759,10 +1823,12 @@ STDMETHODIMP CoRayLib::GetWorldToScreen2D(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1801,10 +1867,12 @@ STDMETHODIMP CoRayLib::GetScreenToWorld2D(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1836,10 +1904,12 @@ STDMETHODIMP CoRayLib::GetCameraMatrix(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -1871,10 +1941,12 @@ STDMETHODIMP CoRayLib::GetCameraMatrix2D(
         (LPVOID*)pRetVal
     );
 
-    hr = wr2co(
-        &retVal,
-        *pRetVal
-    );
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }
@@ -7211,6 +7283,220 @@ STDMETHODIMP CoRayLib::CheckCollisionBoxSphere(
         *pRetVal = VARIANT_TRUE;
     else
         *pRetVal = VARIANT_FALSE;
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetRayCollisionSphere(
+    IRayLibRay* ray,
+    IRayLibVector3* center,
+    float radius,
+    IRayLibRayCollision** pRetVal
+)
+{
+    if (!ray)
+        return E_POINTER;
+    if (!center)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRay wr_ray = { 0 };
+    WrRayLibVector3 wr_center = { 0 };
+
+    hr = co2wr(ray, &wr_ray);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(center, &wr_center);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRayCollision retVal = WrRayLib::GetRayCollisionSphere(
+        wr_ray,
+        wr_center,
+        radius
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRayCollision,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRayCollision,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetRayCollisionBox(
+    IRayLibRay* ray,
+    IRayLibBoundingBox* box,
+    IRayLibRayCollision** pRetVal
+)
+{
+    if (!ray)
+        return E_POINTER;
+    if (!box)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRay wr_ray = { 0 };
+    WrRayLibBoundingBox wr_box = { 0 };
+
+    hr = co2wr(ray, &wr_ray);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(box, &wr_box);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRayCollision retVal = WrRayLib::GetRayCollisionBox(
+        wr_ray,
+        wr_box
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRayCollision,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRayCollision,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
+
+STDMETHODIMP CoRayLib::GetRayCollisionTriangle(
+    IRayLibRay* ray,
+    IRayLibVector3* p1,
+    IRayLibVector3* p2,
+    IRayLibVector3* p3,
+    IRayLibRayCollision** pRetVal
+)
+{
+    if (!ray)
+        return E_POINTER;
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRay wr_ray = { 0 };
+    WrRayLibVector3 wr_p1 = { 0 };
+    WrRayLibVector3 wr_p2 = { 0 };
+    WrRayLibVector3 wr_p3 = { 0 };
+
+    hr = co2wr(ray, &wr_ray);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRayCollision retVal = WrRayLib::GetRayCollisionTriangle(
+        wr_ray,
+        wr_p1,
+        wr_p2,
+        wr_p3
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRayCollision,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRayCollision,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
+
+    return hr;
+}
+STDMETHODIMP CoRayLib::GetRayCollisionQuad(
+    IRayLibRay* ray,
+    IRayLibVector3* p1,
+    IRayLibVector3* p2,
+    IRayLibVector3* p3,
+    IRayLibVector3* p4,
+    IRayLibRayCollision** pRetVal
+)
+{
+    if (!ray)
+        return E_POINTER;
+    if (!p1)
+        return E_POINTER;
+    if (!p2)
+        return E_POINTER;
+    if (!p3)
+        return E_POINTER;
+    if (!p4)
+        return E_POINTER;
+    if (!pRetVal)
+        return E_POINTER;
+
+    HRESULT hr = S_OK;
+    WrRayLibRay wr_ray = { 0 };
+    WrRayLibVector3 wr_p1 = { 0 };
+    WrRayLibVector3 wr_p2 = { 0 };
+    WrRayLibVector3 wr_p3 = { 0 };
+    WrRayLibVector3 wr_p4 = { 0 };
+
+    hr = co2wr(ray, &wr_ray);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p1, &wr_p1);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p2, &wr_p2);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p3, &wr_p3);
+    if (FAILED(hr)) return hr;
+    hr = co2wr(p4, &wr_p4);
+    if (FAILED(hr)) return hr;
+
+    WrRayLibRayCollision retVal = WrRayLib::GetRayCollisionQuad(
+        wr_ray,
+        wr_p1,
+        wr_p2,
+        wr_p3,
+        wr_p4
+    );
+
+    hr = CoCreateInstance(
+        CLSID_RayLibRayCollision,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IRayLibRayCollision,
+        (LPVOID*)pRetVal
+    );
+
+    if (SUCCEEDED(hr)) {
+        hr = wr2co(
+            &retVal,
+            *pRetVal
+        );
+    }
 
     return hr;
 }

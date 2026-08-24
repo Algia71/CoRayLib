@@ -24,6 +24,7 @@ class CoRayLib : IRayLib
     inline HRESULT co2wr(IRayLibTexture* in, WrRayLibTexture* out);
     inline HRESULT co2wr(IRayLibRenderTexture* in, WrRayLibRenderTexture* out);
     inline HRESULT co2wr(IRayLibBoundingBox* in, WrRayLibBoundingBox* out);
+    inline HRESULT co2wr(IRayLibRayCollision* in, WrRayLibRayCollision* out);
 
     inline HRESULT wr2co(WrRayLibColor* in, IRayLibColor* out);
     inline HRESULT wr2co(WrRayLibVector2* in, IRayLibVector2* out);
@@ -37,6 +38,7 @@ class CoRayLib : IRayLib
     inline HRESULT wr2co(WrRayLibRenderTexture* in, IRayLibRenderTexture* out);
     inline HRESULT wr2co(WrRayLibBoundingBox* in, IRayLibBoundingBox* out);
     inline HRESULT wr2co(WrRayLibMatrix* in, IRayLibMatrix* out);
+    inline HRESULT wr2co(WrRayLibRayCollision* in, IRayLibRayCollision* out);
 
 public:
     CoRayLib(HMODULE hModule);
@@ -1405,6 +1407,33 @@ public:
         IRayLibVector3* center,
         float radius,
         VARIANT_BOOL* pRetVal
+    ) override;
+    STDMETHODIMP GetRayCollisionSphere(
+        IRayLibRay* ray,
+        IRayLibVector3* center,
+        float radius,
+        IRayLibRayCollision** pRetVal
+    ) override;
+    STDMETHODIMP GetRayCollisionBox(
+        IRayLibRay* ray,
+        IRayLibBoundingBox* box,
+        IRayLibRayCollision** pRetVal
+    ) override;
+
+    STDMETHODIMP GetRayCollisionTriangle(
+        IRayLibRay* ray,
+        IRayLibVector3* p1,
+        IRayLibVector3* p2,
+        IRayLibVector3* p3,
+        IRayLibRayCollision** pRetVal
+    ) override;
+    STDMETHODIMP GetRayCollisionQuad(
+        IRayLibRay* ray,
+        IRayLibVector3* p1,
+        IRayLibVector3* p2,
+        IRayLibVector3* p3,
+        IRayLibVector3* p4,
+        IRayLibRayCollision** pRetVal
     ) override;
 
 

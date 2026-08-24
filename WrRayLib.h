@@ -738,11 +738,11 @@ public:
 	static bool CheckCollisionSpheres(WrRayLibVector3 center1, float radius1, WrRayLibVector3 center2, float radius2);
 	static bool CheckCollisionBoxes(WrRayLibBoundingBox box1, WrRayLibBoundingBox box2);
 	static bool CheckCollisionBoxSphere(WrRayLibBoundingBox box, WrRayLibVector3 center, float radius);
-//	static RayCollision GetRayCollisionSphere(Ray ray, Vector3 center, float radius);
-//	static RayCollision GetRayCollisionBox(Ray ray, BoundingBox box);
+	static WrRayLibRayCollision GetRayCollisionSphere(WrRayLibRay ray, WrRayLibVector3 center, float radius);
+	static WrRayLibRayCollision GetRayCollisionBox(WrRayLibRay ray, WrRayLibBoundingBox box);
 //	static RayCollision GetRayCollisionMesh(Ray ray, Mesh mesh, Matrix transform);
-//	static RayCollision GetRayCollisionTriangle(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3);
-//	static RayCollision GetRayCollisionQuad(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4);
+	static WrRayLibRayCollision GetRayCollisionTriangle(WrRayLibRay ray, WrRayLibVector3 p1, WrRayLibVector3 p2, WrRayLibVector3 p3);
+	static WrRayLibRayCollision GetRayCollisionQuad(WrRayLibRay ray, WrRayLibVector3 p1, WrRayLibVector3 p2, WrRayLibVector3 p3, WrRayLibVector3 p4);
 
 
 	/* MODULE: RAUDIO */

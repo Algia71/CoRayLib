@@ -621,6 +621,11 @@ interface IRayLib : IDispatch
     [id(3900)] HRESULT CheckCollisionSpheres([in] IRayLibVector3* center1, [in] float radius1, [in] IRayLibVector3* center2, [in] float radius2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(3901)] HRESULT CheckCollisionBoxes([in] IRayLibBoundingBox* box1, [in] IRayLibBoundingBox* box2, [out, retval] VARIANT_BOOL* pRetVal);
     [id(3902)] HRESULT CheckCollisionBoxSphere([in] IRayLibBoundingBox* box, [in] IRayLibVector3* center, [in] float radius, [out, retval] VARIANT_BOOL* pRetVal);
+    [id(3903)] HRESULT GetRayCollisionSphere([in] IRayLibRay* ray, [in] IRayLibVector3* center, [in] float radius, [out, retval] IRayLibRayCollision** pRetVal);
+    [id(3904)] HRESULT GetRayCollisionBox([in] IRayLibRay* ray, [in] IRayLibBoundingBox* box, [out, retval] IRayLibRayCollision** pRetVal);
+
+    [id(3906)] HRESULT GetRayCollisionTriangle([in] IRayLibRay* ray, [in] IRayLibVector3* p1, [in] IRayLibVector3* p2, [in] IRayLibVector3* p3, [out, retval] IRayLibRayCollision** pRetVal);
+    [id(3907)] HRESULT GetRayCollisionQuad([in] IRayLibRay* ray, [in] IRayLibVector3* p1, [in] IRayLibVector3* p2, [in] IRayLibVector3* p3, [in] IRayLibVector3* p4, [out, retval] IRayLibRayCollision** pRetVal);
 
 
     //////////////////////////////////////////////
