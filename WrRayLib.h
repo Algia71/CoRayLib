@@ -96,6 +96,15 @@ typedef struct tagWrRayLibBoundingBox {
 	WrRayLibVector3 max;
 } WrRayLibBoundingBox;
 
+typedef struct tagWrRayLibNPatchInfo {
+	WrRayLibRectangle source;
+	int left;
+	int top;
+	int right;
+	int bottom;
+	int layout;
+} WrRayLibNPatchInfo;
+
 
 class WrRayLib
 {

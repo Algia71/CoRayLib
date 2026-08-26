@@ -254,6 +254,28 @@ interface IRayLibRayCollision : IDispatch
 [
     object,
     dual,
+    uuid(12587F62-00D1-4537-AE4E-FF9504340FF0),
+    pointer_default(unique)
+]
+interface IRayLibNPatchInfo : IDispatch
+{
+    [id(1), propget] HRESULT source([out, retval] IRayLibRectangle** pval);
+    [id(1), propputref] HRESULT source([in] IRayLibRectangle* val);
+    [id(2), propget] HRESULT left([out, retval] long* pval);
+    [id(2), propput] HRESULT left([in] long val);
+    [id(3), propget] HRESULT top([out, retval] long* pval);
+    [id(3), propput] HRESULT top([in] long val);
+    [id(4), propget] HRESULT right([out, retval] long* pval);
+    [id(4), propput] HRESULT right([in] long val);
+    [id(5), propget] HRESULT bottom([out, retval] long* pval);
+    [id(5), propput] HRESULT bottom([in] long val);
+    [id(6), propget] HRESULT layout([out, retval] long* pval);
+    [id(6), propput] HRESULT layout([in] long val);
+}
+
+[
+    object,
+    dual,
     uuid(BA8623BB-26BE-4D50-94BE-067C1B6785AC),
     pointer_default(unique)
 ]
@@ -678,6 +700,7 @@ library RayLib
     interface IRayLibRenderTexture;
     interface IRayLibBoundingBox;
     interface IRayLibRayCollision;
+    interface IRayLibNPatchInfo;
 
     [
         uuid(8C02BF1F-FA49-4796-A634-FB591F749030),
@@ -830,6 +853,15 @@ library RayLib
         coclass RayLibRayCollision
     {
         [default] interface IRayLibRayCollision;
+    };
+
+    [
+        uuid(0CCA7050-E8D8-4153-9CFF-72D064B095EC),
+        helpstring("RayLib.NPatchInfo Class")
+    ]
+        coclass RayLibNPatchInfo
+    {
+        [default] interface IRayLibNPatchInfo;
     };
 
     [
